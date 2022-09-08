@@ -38,7 +38,7 @@ const Image = props => {
   }
 
   return (
-    <img
+    <Image
       className={clsx('image', classes.root, className)}
       alt={alt}
       src={src}

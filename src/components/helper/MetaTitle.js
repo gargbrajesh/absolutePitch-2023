@@ -8,7 +8,7 @@ export default function MetaTitle({ title, metaKeyWord, metaDescription }) {
         <meta name="keywords" content={metaKeyWord} />
         <meta name="description" content={metaDescription} />
         <meta
-          http-equiv="Content-Security-Policy"
+          httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         ></meta>
       </>

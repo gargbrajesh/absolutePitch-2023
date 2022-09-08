@@ -1,10 +1,10 @@
 import React from 'react';
-
+import Image from "next/image";
 const NoRecordFound = props => {
   return (
     <>
       <div className="no_record_found">
-        <img
+        <Image
           src="https://2.bp.blogspot.com/-SXNnmaKWILg/XoNVoMTrxgI/AAAAAAAAxnM/7TFptA1OMC8uk67JsG5PcwO_8fAuQTzkQCLcBGAsYHQ/s1600/giphy.gif"
           alt="%"
         />
