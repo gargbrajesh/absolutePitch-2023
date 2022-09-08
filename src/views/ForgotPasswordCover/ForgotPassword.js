@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ForgotPassword.module.css";
-import Logo from "./../../../public/assets/Images/logo/logo.png";
+import Logo from "../../../public/assets/Images/logo/logo.png";
 import Logo2 from "../../../public/assets/images/logo/logo2.png";
 import Grid from '@mui/material/Grid';
 import SignInBackground from "../../../public/musicalBg3.jpg"
