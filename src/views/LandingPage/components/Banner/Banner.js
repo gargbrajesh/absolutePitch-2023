@@ -35,9 +35,25 @@ const useStyles = makeStyles({
 });
 function Banner() {
   const classes = useStyles();
+  const [circleOne , setCircleOne]=useState([1,2,3,4,5,6,7,8,9,10,11,12]);
+  const [circleTwo , setCircleTwo]=useState([1,2,3,4,5,6,7,8,9,10,11,12]);
+  const [circleThree ,setCircleThree]=useState([1,2,3,4,5,6,7,8,9,10,11,12]);
+
+  const changeBackgroundC1=(ind,event)=>{
+    circleOne.map((value,index)=>{
+      console.log(ind +'sir ji'+ index);
+      if(ind===index){
+        event.target.style.backgroundColor = 'red';
+      }
+      else{
+        event.target.style.backgroundColor = 'blue';
+      }
+    })
+  }
   function changeHandler(c, index, event) {
-    if(index==1){
-      event.target.style.backgroundColor = 'red';
+    if(c == 'c1'){
+      changeBackgroundC1(index,event)
+      // event.target.style.backgroundColor = 'red';
     }
     else if(index==2){
         event.target.style.backgroundColor = 'red';
@@ -80,40 +96,40 @@ function Banner() {
 
         <ul className={styles.circle} >
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', '1', e) }}><button className={styles.btn}>+</button></div>
+            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 1, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', '2', e) }}><button className={styles.btn}>+</button></div>
+            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 2, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text} onClick={(e) => { changeHandler('c1', '3', e) }}><button className={styles.btn}>+</button></div>
+            <div className={styles.text} onClick={(e) => { changeHandler('c1', 3, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', '4', e) }}><button onClick={(e) => { changeHandler('c1', '4') }} className={styles.btn}>+</button></div>
+            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 4, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', '5', e) }}><button onClick={(e) => { changeHandler('c1', '5') }} className={styles.btn}>+</button></div>
+            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 5, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', '6', e) }}><button onClick={(e) => { changeHandler('c1', '6') }} className={styles.btn}>+</button></div>
+            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 6, e) }}><button  className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', '7', e) }}><button onClick={(e) => { changeHandler('c1', '7') }} className={styles.btn}>+</button></div>
+            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 7, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', '8', e) }}><button onClick={(e) => { changeHandler('c1', '8') }} className={styles.btn}>+</button></div>
+            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 8, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', '9', e) }}><button onClick={(e) => { changeHandler('c1', '9') }} className={styles.btn}>+</button></div>
+            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 9, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', '10', e) }}><button onClick={(e) => { changeHandler('c1', '10') }} className={styles.btn}>+</button></div>
+            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 10, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', '11', e) }}><button onClick={(e) => { changeHandler('c1', '11') }} className={styles.btn}>+</button></div>
+            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 11, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text} ><button onClick={(e) => { changeHandler('c1', '12', e) }} className={styles.btn}>+</button></div>
+            <div className={styles.text} ><button onClick={(e) => { changeHandler('c1', 12, e) }} className={styles.btn}>+</button></div>
           </li >
           {/* second circle start here */}
           <ul className={styles.circle2}>
