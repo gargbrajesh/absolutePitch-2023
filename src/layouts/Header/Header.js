@@ -11,7 +11,10 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { useRouter } from "next/router";
+import Image from "next/image";
 import { makeStyles } from '@mui/styles';
+import Logo from '../../../public/assets/images/LogoNew.png'
 const useStyles = makeStyles({
   root: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -23,10 +26,11 @@ const useStyles = makeStyles({
     padding: '0 30px',
   },
 });
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Sign Up', 'Log In', 'Forgot Password','Reset Password'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const Header = () => {
   const classes = useStyles();
+  const router = useRouter();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const handleOpenNavMenu = (event) => {
@@ -35,8 +39,30 @@ const Header = () => {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleCloseNavMenu = (index) => {
+    console.log(index);
+     
+    if(index==0){
+      router.push({
+        pathname: "/signup",
+      });
+    }
+    else if(index==1){
+      router.push({
+        pathname: "/signin",
+      });
+    }
+    else if(index==2){
+      router.push({
+        pathname: "/forgot-password",
+      });
+    }
+    else{
+      router.push({
+        pathname: "/reset-password",
+      });
+    }
+    
   };
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -47,24 +73,12 @@ const Header = () => {
       <div className={classes.header_container}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
+          <div
             component="a"
             href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
           >
-            LOGO
-          </Typography>
+            <Image src={Logo} alt='' width={80} height={40}/>
+          </div>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -90,13 +104,13 @@ const Header = () => {
                 horizontal: 'left',
               }}
               open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+              onClick={(e) => { handleCloseNavMenu(index) }}
               sx={{
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+              {pages.map((page,index) => (
+                <MenuItem key={page} onClick={(e) => { handleCloseNavMenu(key) }}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -122,10 +136,10 @@ const Header = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((page,index) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={(e) => { handleCloseNavMenu(index) }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}

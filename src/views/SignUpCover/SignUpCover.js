@@ -29,7 +29,7 @@ function NewSignUpCover() {
         <div className={styles.header_text}>
           <div className="row">
             <div className="col-sm-12 col-12 col-md-12">
-              <Image src={Logo} alt="Beatnik" className={styles.headingTag} />
+              <Image src={Logo2} alt="Beatnik" className={styles.headingTag} />
             </div>
           </div>
         </div>

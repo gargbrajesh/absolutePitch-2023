@@ -4,17 +4,23 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import styles from './circles.module.css';
 import Image from "next/image";
-import MusicBtn from '../../../../../public/assets/images/mainBtn.jpg'
+import Grid from '@mui/material/Grid';
+import MusicBtn from '../../../../../public/assets/images/mainBtn.jpg';
+import Mix from '../../../../../public/assets/images/Group1.png';
+import Tempo from '../../../../../public/assets/images/Group2.png';
+import Timer from '../../../../../public/assets/images/Group3.png';
+import Progress from '../../../../../public/assets/images/Group4.png';
 import { makeStyles } from '@mui/styles';
+import { Alert } from '@mui/material';
 const useStyles = makeStyles({
   mainCircle: {
-    padding: 10,
+    padding: '10px',
     background: '#903884',
     borderRadius: '50%',
     width: 405,
     height: 405,
-    marginTop: '5%',
-    marginLeft: '40%',
+    marginTop: '3%',
+    marginLeft: '40% !important',
   },
   layertwo: {
     // padding: 10,
@@ -30,103 +36,111 @@ const useStyles = makeStyles({
     fontSize: '0.6em',
   },
 
+  topButtonContainer: {
+    width: '30%',
+    marginTop: '5px',
+    marginLeft: '38%',
+    margin: '10px',
+
+  },
+  bottomButtonContainer: {
+    width: '30%',
+    marginTop: '22px',
+    marginLeft: '38%',
+
+  },
+  texRightSide: {
+    textAlign: 'right',
+    cursor:'pointer',
+  },
+  textLeftSide: {
+    
+    cursor:'pointer',
+  },
+  buttonCircle:{
+    padding: 5,
+    background: '#903884',
+    borderRadius: '50%',
+    width: 40,
+    height: 40,
+    marginLeft: '40%',
+    
+  }
 
 
 });
 function Banner() {
   const classes = useStyles();
-  const [circleOne , setCircleOne]=useState([1,2,3,4,5,6,7,8,9,10,11,12]);
-  const [circleTwo , setCircleTwo]=useState([1,2,3,4,5,6,7,8,9,10,11,12]);
-  const [circleThree ,setCircleThree]=useState([1,2,3,4,5,6,7,8,9,10,11,12]);
+  const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  const arryOne = ['c1', 'c2', 'c3', 1]
 
-  const changeBackgroundC1=(ind,event)=>{
-    circleOne.map((value,index)=>{
-      console.log(ind +'sir ji'+ index);
-      if(ind===index){
+  const changeBackgroundC1 = (c, ind, event) => {
+
+    circleOne.map((val, index) => {
+      if (arryOne[0] == c || arryOne[1] == c || arryOne[2] == c && ind == index) {
+
         event.target.style.backgroundColor = 'red';
-      }
-      else{
-        event.target.style.backgroundColor = 'blue';
       }
     })
-  }
-  function changeHandler(c, index, event) {
-    if(c == 'c1'){
-      changeBackgroundC1(index,event)
-      // event.target.style.backgroundColor = 'red';
-    }
-    else if(index==2){
-        event.target.style.backgroundColor = 'red';
-    }
-    else if(index==3){
-        event.target.style.backgroundColor = 'red';
-    }
-    else if(index==4){
-        event.target.style.backgroundColor = 'red';
-    }
-    else if(index==5){
-        event.target.style.backgroundColor = 'red';
-    }
-    else if(index==6){
-        event.target.style.backgroundColor = 'red';
-    }
-    else if(index==7){
-        event.target.style.backgroundColor = 'red';
-    }
-    else if(index==8){
-        event.target.style.backgroundColor = 'red';
-    }
-    else if(index==9){
-        event.target.style.backgroundColor = 'red';
-    }
-    else if(index==10){
-        event.target.style.backgroundColor = 'red';
-    }
-    else if(index==11){
-        event.target.style.backgroundColor = 'red';
-    }
-    else if(index==12){
-        event.target.style.backgroundColor = 'red';
-    }
+
+
 
   }
+  function changeHandler(c, ind, event) {
+    // console.log(c, ind)
+    circleOne.map((val, index) => {
+
+      if ('c1' == c || 'c2' == c || 'c3' == c && ind == index) {
+
+        event.target.style.backgroundColor = 'red';
+      }
+
+    });
+  }
+  function btnHandler(text) {
+    alert(text);
+  }
   return (
-    <>
+    <div div container>
+      <Grid container className={classes.topButtonContainer}>
+        <Grid item xs={6} className={classes.textLeftSide}><Image src={Mix} alt='' onClick={(e) => { btnHandler('Mix') }} width={70} height={70}/></Grid>
+        <Grid item xs={6} className={classes.texRightSide}><Image src={Tempo} alt='' onClick={(e) => { btnHandler('Tempo') }} width={70} height={70}/></Grid>
+      </Grid>
       <div className={classes.mainCircle}>
 
         <ul className={styles.circle} >
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 1, e) }}><button className={styles.btn}>+</button></div>
+            <div className={styles.text} onClick={(e) => { changeHandler('c1', 1, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 2, e) }}><button className={styles.btn}>+</button></div>
+            <div className={styles.text} onClick={(e) => { changeHandler('c1', 2, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
             <div className={styles.text} onClick={(e) => { changeHandler('c1', 3, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 4, e) }}><button className={styles.btn}>+</button></div>
+            <div className={styles.text} onClick={(e) => { changeHandler('c1', 4, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 5, e) }}><button className={styles.btn}>+</button></div>
+            <div className={styles.text} onClick={(e) => { changeHandler('c1', 5, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 6, e) }}><button  className={styles.btn}>+</button></div>
+            <div className={styles.text} onClick={(e) => { changeHandler('c1', 6, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 7, e) }}><button className={styles.btn}>+</button></div>
+            <div className={styles.text} onClick={(e) => { changeHandler('c1', 7, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 8, e) }}><button className={styles.btn}>+</button></div>
+            <div className={styles.text} onClick={(e) => { changeHandler('c1', 8, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 9, e) }}><button className={styles.btn}>+</button></div>
+            <div className={styles.text} onClick={(e) => { changeHandler('c1', 9, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 10, e) }}><button className={styles.btn}>+</button></div>
+            <div className={styles.text} onClick={(e) => { changeHandler('c1', 10, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
-            <div className={styles.text}  onClick={(e) => { changeHandler('c1', 11, e) }}><button className={styles.btn}>+</button></div>
+            <div className={styles.text} onClick={(e) => { changeHandler('c1', 11, e) }}><button className={styles.btn}>+</button></div>
           </li>
           <li className={styles.list}>
             <div className={styles.text} ><button onClick={(e) => { changeHandler('c1', 12, e) }} className={styles.btn}>+</button></div>
@@ -251,9 +265,12 @@ function Banner() {
             </ul>
           </ul>
         </ul>
-
       </div>
-    </>
+      <Grid container justify="flex-end" className={classes.bottomButtonContainer}>
+        <Grid item xs={6}><Image src={Timer} alt='' onClick={(e) => { btnHandler('Timer') }} className={classes.textLeftSide} width={70} height={70}/></Grid>
+        <Grid item xs={6} className={classes.texRightSide}><Image src={Progress} alt='' onClick={(e) => { btnHandler('Progress') }} width={70} height={70}/></Grid>
+      </Grid>
+    </div>
   );
 };
 export default Banner;

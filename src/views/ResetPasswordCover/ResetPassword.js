@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import styles from "./ForgotPassword.module.css";
+import styles from "./ResetPassword.module.css";
 import Logo from "./../../../public/assets/Images/logo/logo.png";
 import Logo2 from "../../../public/assets/images/logo/logo2.png";
 import Grid from '@mui/material/Grid';
 import SignInBackground from "../../../public/musicalBg3.jpg"
 import Image from "next/image";
-import SignInForm from "./components/ForgotForm";
+import SignInForm from "./components/ResetPasswordForm";
 // import Spinner from "components/organisms/Spinner";
 function SignInCover() {
   const [loading, setLoading] = useState(false);
@@ -19,13 +19,13 @@ function SignInCover() {
         style={{
           // background: `url(${SignInBackground})`,
           // backgroundRepeat: "no-repeat",
-          // background: '#50E0A9',
+          background: '#50E0A9',
         }}
         >
         <div className={styles.header_text}>
           <div className="row">
             <div className="col-sm-12 col-12 col-md-12">
-              <Image src={Logo} alt="Beatnik" className={styles.headingTag} />
+              <Image src={Logo2} alt="absolute" className={styles.headingTag} />
             </div>
           </div>
         </div>

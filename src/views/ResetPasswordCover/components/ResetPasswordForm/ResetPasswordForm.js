@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../../ForgotPassword.module.css";
+import styles from "../../ResetPassword.module.css";
 import Link from "next/link";
 // import { Button, TextField, makeStyles, Select } from "@material-ui/core";
 import { Button, TextField, Select, Paper, Grid } from "@mui/material";
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function SignInForm() {
   const classes = useStyles();
-  const [email, setEmail] = useState('""');
+  const [email, setEmail] = useState();
   const paperStyle = { padding: '2px 50px', height: '70vh', width: '90%', margin: 'auto', alignAtem: 'center', borderRadius: '5% 5% 0%  0%' }
   return (
     <Paper elevation={10} style={paperStyle} >
@@ -43,10 +43,11 @@ function SignInForm() {
           noValidate
           autoComplete="off"
         >
-          <Grid align='center'><h2>Forgot your Password?</h2>
-          <p>Enter your email to recover your password</p>
+          <Grid align='center'><h2>Reset the password</h2>
+          <p>Enter your new password</p>
           </Grid>
-          <div style={{ padding: '20px 20px' }}><TextField id="standard-basic" label="Email" variant="standard" style={{ width: '95%' }} /></div>
+          <div style={{ padding: '20px 20px' }}><TextField id="standard-basic" label="Password" variant="standard" style={{ width: '95%' }} type='password' /></div>
+          <div style={{ padding: '0px 20px' }}><TextField id="standard-basic" label="Confirm Password" variant="standard" style={{ width: '95%' }} type='password' /></div>
           
           <div style={{ padding: '20px' }}>
             <button className={styles.btn}>Send</button>
