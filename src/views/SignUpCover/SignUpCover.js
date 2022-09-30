@@ -1,57 +1,57 @@
 import React, { useState, useEffect } from "react";
 import styles from "./SignUpCover.module.css";
 import Link from "next/link";
-import Logo from "../../../public/assets/images/logo/logo.png";
-// import Logo2 from "../../../public/assets/images/logo/logo2.png";
 import Logo2 from "../../../public/assets/images/logo/logo2.png";
 import Grid from '@mui/material/Grid';
-import SignInBackground from "../../../public/bgImage.jpg"
 import Image from "next/image";
 import SignUPForm from "./components/SignUpForm/SignUpForm";
-// import MetaTitle from "components/helper/MetaTitle";
-// import Spinner from "components/organisms/Spinner";
+import { makeStyles } from '@mui/styles';
+import Header from "../../layouts/Header";
+import MusicVideo from '../WatchVideo'
+const useStyles = makeStyles({
+  root: {
+    position: 'relative',
+  },
+  containerBox: {
+    marginTop: '1px',
+    height: '95vh',
+    background: '#dee1e6',
+    // border:'2px solid green',
+
+  },
+  leftSection: {
+    background: 'rgb(63, 70, 82)',
+    justifyContent: 'center !important',
+    color: 'white',
+    padding: '34px 0px 0px 10px !important',
+  },
+  rightSection: {
+    background: 'rgb(63, 70, 82)',
+    justifyContent: 'center',
+    color: 'white',
+    padding: '30px 0px 0px 0px !important',
+
+  },
+});
 
 function NewSignUpCover() {
+  const classes = useStyles();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
   }, []);
   return (
-    <Grid container spacing={0}>
-      <Grid item xs={6}
-        className={styles.fleft}
-        style={{
-          // background: `url(${SignInBackground})`,
-          // backgroundRepeat: "no-repeat",
-          background: '#50E0A9',
-        }}
-        >
-        <div className={styles.header_text}>
-          <div className="row">
-            <div className="col-sm-12 col-12 col-md-12">
-              <Image src={Logo2} alt="Beatnik" className={styles.headingTag} />
-            </div>
-          </div>
-        </div>
-        <div className={styles.content_box}>
-          <div className="row">
-          </div>
-        </div>
+    <div className={classes.root}>
+      <Header />
+      <Grid container className={classes.containerBox}>
+        <Grid item md={6} xs={12} className={classes.leftSection}>
+          <MusicVideo />
+        </Grid>
+        <Grid item md={6} xs={12} className={classes.rightSection}>
+          <SignUPForm />
+        </Grid>
       </Grid>
-      <Grid item xs={6} style={{bordee:'2px solid red'}}>
-        <div className={styles.frightInner} style={{bordr:'2px solid red'}}>
-          <div className={styles.imageContainer}>
-            <Image src={Logo2} alt="" />
-          </div>
-        </div>
-
-        <div className={styles.right_content_container}>
-       
-            <SignUPForm />
-            
-        </div>
-      </Grid>
-    </Grid>
+    </div>
   );
 }
 

@@ -25,6 +25,10 @@ const useStyles = makeStyles({
     height: 48,
     padding: '0 30px',
   },
+  header_container:{
+    background:'#004958 !important',
+    // background:'#EDAEC0 !important',
+  }
 });
 const pages = ['Sign Up', 'Log In', 'Forgot Password','Reset Password'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -39,6 +43,13 @@ const Header = () => {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
+
+  const LogoClick = () => {
+    router.push({
+      pathname: "/",
+    });
+  }
+
   const handleCloseNavMenu = (index) => {
     console.log(index);
      
@@ -62,7 +73,6 @@ const Header = () => {
         pathname: "/reset-password",
       });
     }
-    
   };
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -76,8 +86,9 @@ const Header = () => {
           <div
             component="a"
             href="/"
+            
           >
-            <Image src={Logo} alt='' width={80} height={40}/>
+            <Image src={Logo} alt='' width={80} height={40} onClick={LogoClick} styles={{cursor:'pointer'}}/>
           </div>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -132,6 +143,7 @@ const Header = () => {
               color: 'inherit',
               textDecoration: 'none',
             }}
+            
           >
             LOGO
           </Typography>
