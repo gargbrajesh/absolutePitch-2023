@@ -8,6 +8,9 @@ const useStyles = makeStyles({
         position: 'relative',
     },
     videoCard: {
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center',
         background: '#333 !important',
         borderRadius: '10px',
         padding: '20px',
@@ -18,7 +21,7 @@ const useStyles = makeStyles({
 const WatchVideo = () => {
     const classes = useStyles();
     return (
-        <Grid container>
+        <Grid container spacing={2}>
             <Grid item xs={12} md={12} className={classes.videoCard}>
                 <Image src={MusicImg} alt='...' width={600} height={450} />
             </Grid>

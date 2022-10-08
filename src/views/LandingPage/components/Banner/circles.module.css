@@ -151,7 +151,7 @@
     text-align: center;
     transform: skewY(60deg) rotate(15deg);
     padding-top: 5px;
-    font-size: 26px;
+    font-size: 20px !important;
     font-family: 'Roboto';
     font-style: normal;
 }
@@ -347,4 +347,8 @@
 
 .list:nth-child(12) .textThird {
     background: #5a8898;
+}
+.select{
+    background: #041e4e;
+    color: white;
 }
