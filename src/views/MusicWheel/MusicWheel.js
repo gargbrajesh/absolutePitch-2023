@@ -182,15 +182,12 @@ const MusicWheel = (prop) => {
 
     function changeHandler(c, ind, event) {
 
-
         if (c == 'c1' || c == 'c2' || c == 'c3') {
             if (ind != 0) {
                 var node = event.target.style.backgroundColor = '#0082cf';
                 event.target.style.color = 'white';
                 console.log(c, ind, event);
-
             }
-
         }
     }
     function btnHandler(text) {
