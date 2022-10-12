@@ -9,6 +9,7 @@ import Tempo from '../../../public/assets/images/tempo4x.png';
 import Timer from '../../../public/assets/images/timer4x.png';
 import Progress from '../../../public/assets/images/progress4x.png';
 import Image from "next/image";
+
 const useStyles = makeStyles({
     root: {
         position: 'relative',
@@ -166,28 +167,28 @@ const useStyles = makeStyles({
         height: '80vh',
     },
 
-select:{
-    background:'#0082cf',
-    color:'white',
-}
+    select: {
+        background: '#0082cf',
+        color: 'white',
+    }
 });
-const MusicWheel = () => {
+const MusicWheel = (prop) => {
     const classes = useStyles();
     const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     const arryOne = ['c1', 'c2', 'c3']
     let flag = 0;
 
 
-    
+
     function changeHandler(c, ind, event) {
 
 
         if (c == 'c1' || c == 'c2' || c == 'c3') {
-            if (ind !=0) {
-              var node =  event.target.style.backgroundColor = '#0082cf';
+            if (ind != 0) {
+                var node = event.target.style.backgroundColor = '#0082cf';
                 event.target.style.color = 'white';
                 console.log(c, ind, event);
-              
+
             }
 
         }
@@ -195,6 +196,44 @@ const MusicWheel = () => {
     function btnHandler(text) {
         alert(text);
     }
+
+    // function musicStore() {
+    //     var myHeaders = new Headers();
+    //     myHeaders.append("Accept", "application/json");
+    //     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    //     myHeaders.append("Cookie", "PHPSESSID=ckmj4nc6enk1u3e0rle62m3l64");
+
+    //     var urlencoded = new URLSearchParams();
+
+    //     urlencoded.append("songs", "1");
+    //     urlencoded.append("song_title", "");
+    //     urlencoded.append("groups", "");
+    //     urlencoded.append("no_of_images", "");
+    //     urlencoded.append("duration", "");
+    //     urlencoded.append("intensity", "");
+    //     urlencoded.append("tempo", "");
+    //     urlencoded.append("image_type", "");
+
+    //     var requestOptions = {
+    //         method: 'POST',
+    //         headers: myHeaders,
+    //         body: urlencoded,
+    //         redirect: 'follow'
+    //     };
+
+    //     fetch("http://43.205.228.115/development/absolute/appdata/webservice.php", requestOptions)
+    //         .then(response => response.json())
+    //         .then((responseJson) => {
+               
+    //             if (responseJson != '') {
+    //                 // setMessage(responseJson.result.message);
+    //                 console.log(responseJson.data[1].song_name);
+    //             } else {
+    //                 // setMessageTrue(responseJson.result.message);
+    //                 alert(responseJson.result);
+    //             }
+    //         });
+    // }
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} md={12} className={classes.circleCard}>
@@ -355,7 +394,7 @@ const MusicWheel = () => {
                                         <li className={styles.list} style={{ borderBottom: '10px solid white' }}>
                                         </li >
                                     </ul>
-                                    <div className={classes.circle6}><Image src={MusicBtn} alt="" /></div>
+                                    <div className={classes.circle6}><Image src={MusicBtn} alt="" onClick={(e) => { prop.parentFunction()}} /></div>
                                 </div>
                             </ul>
                         </ul>
