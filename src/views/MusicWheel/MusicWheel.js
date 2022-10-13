@@ -20,11 +20,27 @@ const useStyles = makeStyles({
         width: '300px',
         height: '300px',
         display: 'flex',
-        // margin:'5px',
+       
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: '125px',
         marginTop: '-25px',
+        '@media (min-width: 1280px) and (max-width:1680px)': {
+            marginLeft: '235px',
+            marginTop: '100px',
+        },
+        '@media (min-width: 600px) and (max-width:768px)': {
+            marginLeft: '30%',
+            marginTop: '100px',
+        },
+        '@media (min-width: 380px) and (max-width:425px)': {
+            marginLeft: '8%',
+            marginTop: '20%',
+        },
+        '@media (max-width:375px)': {
+            marginLeft: '3%',
+            marginTop: '20%',
+        }
 
     },
     layertwo: {
@@ -136,7 +152,20 @@ const useStyles = makeStyles({
 
         marginTop: '-5px',
 
-
+        '@media (min-width: 1280px) and (max-width:1680px)': {
+            marginTop: '130px',
+        },
+        '@media (min-width: 600px) and (max-width:768px)': {
+          
+            marginTop: '70px',
+        },
+        '@media (min-width: 380px) and (max-width:425px)': {
+           
+            marginTop: '90px',
+        },
+        '@media (max-width:375px)': { 
+            marginTop: '90px',
+        },
     },
     texRightSide: {
         textAlign: 'right',
@@ -159,12 +188,26 @@ const useStyles = makeStyles({
     circleCard: {
         // display:'flex',
         // alignItems:'center',
-        // justifyContent:'center',
+        // boxShadow: "6px 4px 2px #403b3bd9",
         background: '#333 !important',
         borderRadius: '10px',
         padding: '20px',
         margin: '15px 15px 15px 25px !important',
         height: '80vh',
+        '@media (min-width: 1280px) and (max-width:1680px)': {
+
+        },
+        '@media (min-width: 600px) and (max-width:768px)': {
+          
+            margin: '25px 15px 15px 25px !important',
+        },
+        '@media (min-width: 380px) and (max-width:425px)': {
+           
+            margin: '25px 15px 15px 25px !important',
+        },
+         '@media (max-width:375px)': { 
+            margin: '25px 15px 15px 25px !important',
+        },
     },
 
     select: {
@@ -221,7 +264,7 @@ const MusicWheel = (prop) => {
     //     fetch("http://43.205.228.115/development/absolute/appdata/webservice.php", requestOptions)
     //         .then(response => response.json())
     //         .then((responseJson) => {
-               
+
     //             if (responseJson != '') {
     //                 // setMessage(responseJson.result.message);
     //                 console.log(responseJson.data[1].song_name);
@@ -391,7 +434,7 @@ const MusicWheel = (prop) => {
                                         <li className={styles.list} style={{ borderBottom: '10px solid white' }}>
                                         </li >
                                     </ul>
-                                    <div className={classes.circle6}><Image src={MusicBtn} alt="" onClick={(e) => { prop.parentFunction()}} /></div>
+                                    <div className={classes.circle6}><Image src={MusicBtn} alt="" onClick={(e) => { prop.parentFunction() }} /></div>
                                 </div>
                             </ul>
                         </ul>

@@ -17,15 +17,32 @@ const useStyles = makeStyles({
         background: '#333 !important',
         borderRadius: '10px',
         padding: '20px',
-        margin: '15px 15px 15px 25px !important',
+        // boxShadow: "6px 4px 2px #403b3bd9",
+        // margin: '25px 15px 15px 25px !important',
         height: '80vh',
+        '@media (min-width: 770px) and (max-width:1024px)': {
+            margin: '15px 15px 15px 35px !important',
+        },
+        '@media (min-width: 600px) and (max-width:768px)': {
+            margin: '15px 15px 15px 28px !important',
+            height: '40vh',
+        },
+        '@media (min-width: 380px) and (max-width:425px)': {
+            margin: '15px 15px 15px 28px !important',
+            height: '40vh',
+        },
+        '@media (max-width:375px)': {
+            margin: '15px 15px 15px 28px !important',
+            height: '40vh',
+        }
+
     },
     videoplayer: {
         width: '80%',
         height: '60%',
     }
 });
-const WatchVideo = (prop) => {
+const VideoPlayer = (prop) => {
     const [song, setSong] = useState()
     console.log(prop.musicData);
     const classes = useStyles();
@@ -33,11 +50,11 @@ const WatchVideo = (prop) => {
         <Grid container spacing={2}>
             <Grid item xs={12} md={12} className={classes.videoCard}>
 
-               <Image src={MusicImg} alt='...'  width={750}/>
+                <ReactPlayer controls url='https://www.youtube.com/watch?v=B7FMTo-WkbI'  width="100%" height="95%" />
 
             </Grid>
         </Grid>
     )
 }
 
-export default WatchVideo;
+export default VideoPlayer;

@@ -4,6 +4,7 @@ import { Grid } from '@mui/material'
 import { Banner } from "./components";
 import MusicWheel from "../MusicWheel/MusicWheel";
 import WatchVideo from "../WatchVideo/WatchVideo";
+import VideoPlayer from "../VideoPlayer/videoPlayer";
 import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles({
   root: {
@@ -12,19 +13,53 @@ const useStyles = makeStyles({
   containerBox: {
     marginTop: '1px',
     height: '95vh',
-    background: '#dee1e6',
+    background: '#808d8dcf',
+    '@media (min-width: 770px) and (max-width:1024px)': {
+      height: '90vh',
+    },
+    '@media (min-width: 600px) and (max-width:768px)': {
+      height: '125vh',
+    },
+    '@media (min-width: 380px) and (max-width:425px)': {
+
+      height: '125vh',
+    },
+    '@media (max-width:375px)': {
+
+      height: '125vh',
+    }
   },
   leftSection: {
-    background: 'rgb(63, 70, 82)',
+    // background: 'rgb(63, 70, 82)',
     justifyContent: 'center !important',
     color: 'white',
-    padding: '34px 0px 0px 10px !important',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
   },
   rightSection: {
-    background: 'rgb(63, 70, 82)',
+    // background: 'rgb(63, 70, 82)',
     justifyContent: 'center',
     color: 'white',
-    padding: '30px 0px 0px 0px !important',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    padding: '0px 10px',
+    '@media (min-width: 770px) and (max-width:1024px)': {
+      padding: '0px',
+    },
+    '@media (min-width: 600px) and (max-width:768px)': {
+      padding: '0px',
+    },
+    '@media (min-width: 380px) and (max-width:425px)': {
+
+      padding: '0px',
+    },
+    '@media (max-width:375px)': {
+      padding: '0px',
+    }
 
   },
 });
@@ -32,7 +67,7 @@ const LandingPage = () => {
 
   const [data, setData] = useState()
 
-  function helloBk() {
+  function dataHouse() {
 
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -62,14 +97,14 @@ const LandingPage = () => {
       .then((responseJson) => {
 
         if (responseJson != '') {
-          setData(responseJson);
+          console.log(responseJson);
           var dataSong = responseJson.data[1].song_name;
           setData(dataSong);
         } else {
           alert('error in response');
         }
       });
-   
+
   }
   const classes = useStyles();
   return (
@@ -77,10 +112,10 @@ const LandingPage = () => {
       <Header />
       <Grid container className={classes.containerBox}>
         <Grid item md={6} xs={12} className={classes.leftSection}>
-          <MusicWheel parentFunction={helloBk} />
+          <MusicWheel parentFunction={dataHouse} />
         </Grid>
         <Grid item md={6} xs={12} className={classes.rightSection}>
-          <WatchVideo musicData={data} />
+          <VideoPlayer musicData={data} />
         </Grid>
       </Grid>
       {/* <Banner /> */}
