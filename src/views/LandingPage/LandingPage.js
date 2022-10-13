@@ -92,7 +92,7 @@ const LandingPage = () => {
       redirect: 'follow'
     };
 
-    fetch("http://43.205.228.115/development/absolute/appdata/webservice.php", requestOptions)
+    fetch("http://3.109.132.173/development/absolute/appdata/webservice.php", requestOptions)
       .then(response => response.json())
       .then((responseJson) => {
 
@@ -118,7 +118,6 @@ const LandingPage = () => {
           <VideoPlayer musicData={data} />
         </Grid>
       </Grid>
-      {/* <Banner /> */}
     </div>
   );
 };

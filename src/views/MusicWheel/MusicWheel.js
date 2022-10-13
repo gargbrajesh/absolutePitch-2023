@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material'
-import React from 'react';
+import React ,{useState} from 'react';
 import styles from './circles.module.css';
 import { makeStyles } from '@mui/styles';
 // import MusicBtn from '../../../../public/assets/images/mainBtn.jpg';
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
         width: '300px',
         height: '300px',
         display: 'flex',
-       
+
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: '125px',
@@ -156,14 +156,14 @@ const useStyles = makeStyles({
             marginTop: '130px',
         },
         '@media (min-width: 600px) and (max-width:768px)': {
-          
+
             marginTop: '70px',
         },
         '@media (min-width: 380px) and (max-width:425px)': {
-           
+
             marginTop: '90px',
         },
-        '@media (max-width:375px)': { 
+        '@media (max-width:375px)': {
             marginTop: '90px',
         },
     },
@@ -198,14 +198,14 @@ const useStyles = makeStyles({
 
         },
         '@media (min-width: 600px) and (max-width:768px)': {
-          
+
             margin: '25px 15px 15px 25px !important',
         },
         '@media (min-width: 380px) and (max-width:425px)': {
-           
+
             margin: '25px 15px 15px 25px !important',
         },
-         '@media (max-width:375px)': { 
+        '@media (max-width:375px)': {
             margin: '25px 15px 15px 25px !important',
         },
     },
@@ -216,6 +216,7 @@ const useStyles = makeStyles({
     }
 });
 const MusicWheel = (prop) => {
+  
     const classes = useStyles();
     const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     const arryOne = ['c1', 'c2', 'c3']
@@ -224,12 +225,12 @@ const MusicWheel = (prop) => {
 
 
     function changeHandler(c, ind, event) {
-
+       
         if (c == 'c1' || c == 'c2' || c == 'c3') {
             if (ind != 0) {
                 var node = event.target.style.backgroundColor = '#0082cf';
                 event.target.style.color = 'white';
-                console.log(c, ind, event);
+               
             }
         }
     }
@@ -284,7 +285,7 @@ const MusicWheel = (prop) => {
                 <div className={classes.mainCircle}>
                     <ul className={classes.circle} >
                         <li className={styles.list}>
-                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 1, e) }}>+</div>
+                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 1, e) }} >+</div>
                         </li>
                         <li className={styles.list} >
                             <div className={styles.text} onClick={(e) => { changeHandler('c1', 2, e) }}>+</div>
@@ -322,7 +323,7 @@ const MusicWheel = (prop) => {
                         {/* second circle start here */}
                         <ul className={classes.circle2}>
                             <li className={styles.list}>
-                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '1', e) }}>-</div>
+                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '1', e) }} >-</div>
                             </li>
                             <li className={styles.list}>
                                 <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '2', e) }}>-</div>

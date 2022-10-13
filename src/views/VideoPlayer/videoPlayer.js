@@ -37,10 +37,6 @@ const useStyles = makeStyles({
         }
 
     },
-    videoplayer: {
-        width: '80%',
-        height: '60%',
-    }
 });
 const VideoPlayer = (prop) => {
     const [song, setSong] = useState()
