@@ -24,6 +24,7 @@ const useStyles = makeStyles({
     color: 'white',
     height: 48,
     padding: '0 30px',
+    
   },
   header_container:{
     background:'#004958 !important',
@@ -79,7 +80,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <div className={classes.header_container}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -127,7 +128,7 @@ const Header = () => {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -146,7 +147,7 @@ const Header = () => {
             
           >
             LOGO
-          </Typography>
+          </Typography> */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page,index) => (
               <Button

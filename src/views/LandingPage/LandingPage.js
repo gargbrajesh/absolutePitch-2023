@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Header from "../../layouts/Header";
 import { Grid } from '@mui/material'
-import { Banner } from "./components";
-import MusicWheel from "../MusicWheel/MusicWheel";
+import MusicWheel from "./components/MusicWheel/MusicWheel";
 import WatchVideo from "../WatchVideo/WatchVideo";
-import VideoPlayer from "../VideoPlayer/videoPlayer";
+import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
 import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles({
   root: {
@@ -98,8 +97,9 @@ const LandingPage = () => {
 
         if (responseJson != '') {
           console.log(responseJson);
-          var dataSong = responseJson.data[1].song_name;
+          var dataSong = responseJson.data[0].song_url;
           setData(dataSong);
+          console.log(dataSong);
         } else {
           alert('error in response');
         }

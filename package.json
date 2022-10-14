@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start -p ${PORT:=3000}",
+    "build": "next build && next export",
+    "prettier": "prettier --write '**/*.{js,css,html}'",
+    "clear-all": "rimraf ./.cache ./.next ./node_modules"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",

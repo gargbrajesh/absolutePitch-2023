@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Grid } from '@mui/material'
 import { makeStyles } from '@mui/styles';
 import Image from "next/image";
-import MusicImg from '../../../public/assets/images/musicImg.gif';
+import MusicImg from '../../../../../public/assets/images/musicImg.gif';
 import ReactPlayer from 'react-player';
 // import { ReactVideo } from "reactjs-media";
 
@@ -40,14 +40,17 @@ const useStyles = makeStyles({
 });
 const VideoPlayer = (prop) => {
     const [song, setSong] = useState()
-    console.log(prop.musicData);
+    
+   var music = prop.musicData;
+    console.log('prop.musicData',prop.musicData);
+  
     const classes = useStyles();
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} md={12} className={classes.videoCard}>
-
-                <ReactPlayer controls url='https://www.youtube.com/watch?v=B7FMTo-WkbI'  width="100%" height="95%" />
-
+                {prop.musicData ? <ReactPlayer controls url='' width="100%" height="95%" />
+            :<ReactPlayer controls url="https://www.youtube.com/watch?v=o1OQFwpwwNU" width="100%" height="95%" />    
+            }
             </Grid>
         </Grid>
     )

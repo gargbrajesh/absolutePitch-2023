@@ -3,11 +3,11 @@ import React ,{useState} from 'react';
 import styles from './circles.module.css';
 import { makeStyles } from '@mui/styles';
 // import MusicBtn from '../../../../public/assets/images/mainBtn.jpg';
-import MusicBtn from '../../../public/assets/images/mainBtn.jpg';
-import Mix from '../../../public/assets/images/mix4x.png';
-import Tempo from '../../../public/assets/images/tempo4x.png';
-import Timer from '../../../public/assets/images/timer4x.png';
-import Progress from '../../../public/assets/images/progress4x.png';
+import MusicBtn from '../../../../../public/assets/images/mainBtn.jpg';
+import Mix from '../../../../../public/assets/images/mix4x.png';
+import Tempo from '../../../../../public/assets/images/tempo4x.png';
+import Timer from '../../../../../public/assets/images/timer4x.png';
+import Progress from '../../../../../public/assets/images/progress4x.png';
 import Image from "next/image";
 
 const useStyles = makeStyles({

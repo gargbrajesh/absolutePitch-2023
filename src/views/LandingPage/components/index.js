@@ -1,1 +1,2 @@
-export { default as Banner } from './Banner';
+export {default as MusicWheel} from './MusicWheel';
+export {default as VideoPlayer} from './VideoPlayer';
