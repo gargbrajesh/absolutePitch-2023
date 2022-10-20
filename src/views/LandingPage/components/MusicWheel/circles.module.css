@@ -354,3 +354,8 @@
 .list:nth-child(12) .textThird {
     background: #5a8898;
 }
+
+.bluebg{
+    background: #0082cf !important;
+    color: #FFFFFF;
+}

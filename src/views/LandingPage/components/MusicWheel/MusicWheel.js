@@ -9,6 +9,7 @@ import Tempo from '../../../../../public/assets/images/tempo4x.png';
 import Timer from '../../../../../public/assets/images/timer4x.png';
 import Progress from '../../../../../public/assets/images/progress4x.png';
 import Image from "next/image";
+import DropDown from '../../../../components/organisms/Dropdown/index';
 
 const useStyles = makeStyles({
     root: {
@@ -216,26 +217,42 @@ const useStyles = makeStyles({
     }
 });
 const MusicWheel = (prop) => {
+
+    const [nord, setNord] = useState({'c1':[],'c2':[],'c3':[]})
+
   
     const classes = useStyles();
     const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    const tempData = {'All':'all','Calm':'calm','Lively':'lively','Mellow':'mellow','Moderate':'moderate'}
+
     const arryOne = ['c1', 'c2', 'c3']
-    let flag = 0;
+    const data = {'c1':['+','+','+','+','+','+','+','+','+','+','+','+'],
+                'c2':['-','-','-','-','-','-','-','-','-','-','-','-'],
+                'c3':['C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#','A', 'A#', 'B', 'C ']
+               }
 
 
-
-    function changeHandler(c, ind, event) {
-       
-        if (c == 'c1' || c == 'c2' || c == 'c3') {
-            if (ind != 0) {
-                var node = event.target.style.backgroundColor = '#0082cf';
-                event.target.style.color = 'white';
-               
+    function changeHandler(c, ind,event) {
+       console.log("event is", event, circleOne)
+       const temp = {...nord}
+       const count = [...temp['c1'], ...temp['c2'], ...temp['c3']]?.length || 0
+        if (['c1','c2','c3'].includes(c)) {
+            if (temp[c].indexOf(ind)==-1 && count <3){
+                temp[c].push(ind)
+                setNord(temp)
+            }
+            else if(temp[c].indexOf(ind)>-1 ){
+                const nordIndex = temp[c].indexOf(ind);
+                temp[c].splice(nordIndex,1)
+                setNord(temp)
             }
         }
     }
     function btnHandler(text) {
         alert(text);
+    }
+    function handleDropDownChange(value){
+        console.log(value)
     }
 
     // function musicStore() {
@@ -262,7 +279,7 @@ const MusicWheel = (prop) => {
     //         redirect: 'follow'
     //     };
 
-    //     fetch("http://43.205.228.115/development/absolute/appdata/webservice.php", requestOptions)
+    //     fetch("http://3.109.132.173/development/absolute/appdata/webservice.php", requestOptions)
     //         .then(response => response.json())
     //         .then((responseJson) => {
 
@@ -279,123 +296,33 @@ const MusicWheel = (prop) => {
         <Grid container spacing={2}>
             <Grid item xs={12} md={12} className={classes.circleCard}>
                 <Grid container className={classes.topButtonContainer}>
-                    <Grid item xs={6} className={classes.textLeftSide}><Image src={Mix} alt='' onClick={(e) => { btnHandler('Mix') }} width={70} height={70} /></Grid>
+                    <Grid item xs={6} className={classes.textLeftSide}><Image src={Mix} alt='' onClick={(e) => { btnHandler('Mix') }} width={70} height={70} />
+                    <DropDown label="tempo" data={tempData} onChange={handleDropDownChange} />
+                    </Grid>
                     <Grid item xs={6} className={classes.texRightSide}><Image src={Tempo} alt='' onClick={(e) => { btnHandler('Tempo') }} width={70} height={70} /></Grid>
                 </Grid>
                 <div className={classes.mainCircle}>
                     <ul className={classes.circle} >
-                        <li className={styles.list}>
-                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 1, e) }} >+</div>
-                        </li>
-                        <li className={styles.list} >
-                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 2, e) }}>+</div>
-                        </li>
-                        <li className={styles.list}>
-                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 3, e) }}>+</div>
-                        </li>
-                        <li className={styles.list}>
-                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 4, e) }}>+</div>
-                        </li>
-                        <li className={styles.list}>
-                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 5, e) }}>+</div>
-                        </li>
-                        <li className={styles.list}>
-                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 6, e) }}>+</div>
-                        </li>
-                        <li className={styles.list}>
-                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 7, e) }}>+</div>
-                        </li>
-                        <li className={styles.list}>
-                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 8, e) }}>+</div>
-                        </li>
-                        <li className={styles.list}>
-                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 9, e) }}>+</div>
-                        </li>
-                        <li className={styles.list}>
-                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 10, e) }}>+</div>
-                        </li>
-                        <li className={styles.list}>
-                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 11, e) }}>+</div>
-                        </li>
-                        <li className={styles.list}>
-                            <div className={styles.text} onClick={(e) => { changeHandler('c1', 12, e) }}>+</div>
-                        </li >
+                        {data['c1'].map((val,ind)=>
+                            <li className={styles.list}> 
+                            <div className={`${styles.text} ${ nord['c1'].includes(ind) ? styles.bluebg: ''}`} onClick={(e)=>changeHandler('c1', ind,e) }>{val}</div>
+                            </li>
+                            )}
+
                         {/* second circle start here */}
                         <ul className={classes.circle2}>
-                            <li className={styles.list}>
-                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '1', e) }} >-</div>
-                            </li>
-                            <li className={styles.list}>
-                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '2', e) }}>-</div>
-                            </li>
-                            <li className={styles.list}>
-                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '3', e) }}>-</div>
-                            </li>
-                            <li className={styles.list}>
-                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '4', e) }}>-</div>
-                            </li>
-                            <li className={styles.list}>
-                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '5', e) }}>-</div>
-                            </li>
-                            <li className={styles.list}>
-                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '6', e) }}>-</div>
-                            </li>
-                            <li className={styles.list}>
-                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '7', e) }}>-</div>
-                            </li>
-                            <li className={styles.list}>
-                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '8', e) }}>-</div>
-                            </li>
-                            <li className={styles.list}>
-                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '9', e) }}>-</div>
-                            </li>
-                            <li className={styles.list}>
-                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '10', e) }}>-</div>
-                            </li>
-                            <li className={styles.list}>
-                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '11', e) }}>-</div>
-                            </li>
-                            <li className={styles.list}>
-                                <div className={styles.textTwo} onClick={(e) => { changeHandler('c2', '12', e) }}>-</div>
-                            </li >
+                                {data['c2'].map((val,ind)=>
+                                    <li className={styles.list}> 
+                                    <div className={`${styles.textTwo} ${ nord['c2'].includes(ind) ? styles.bluebg: ''}`} onClick={(e) => changeHandler('c2', ind, e) }>{val} { nord['c2'].includes(val)}</div>
+                                </li>
+                                )}
                             {/* third circle start herr */}
-                            <ul className={classes.circle3}>
-                                <li className={styles.list}>
-                                    <div className={styles.textThird} onClick={(e) => { changeHandler('c3', '1', e) }}>C#</div>
-                                </li>
-                                <li className={styles.list}>
-                                    <div className={styles.textThird} onClick={(e) => { changeHandler('c3', '2', e) }}>D</div>
-                                </li>
-                                <li className={styles.list}>
-                                    <div className={styles.textThird} onClick={(e) => { changeHandler('c3', '3', e) }}>D#</div>
-                                </li>
-                                <li className={styles.list}>
-                                    <div className={styles.textThird} onClick={(e) => { changeHandler('c3', '4', e) }}>E</div>
-                                </li>
-                                <li className={styles.list}>
-                                    <div className={styles.textThird} onClick={(e) => { changeHandler('c3', '5', e) }}>F</div>
-                                </li>
-                                <li className={styles.list}>
-                                    <div className={styles.textThird} onClick={(e) => { changeHandler('c3', '6', e) }}>F#</div>
-                                </li>
-                                <li className={styles.list}>
-                                    <div className={styles.textThird} onClick={(e) => { changeHandler('c3', '7', e) }}>G</div>
-                                </li>
-                                <li className={styles.list}>
-                                    <div className={styles.textThird} onClick={(e) => { changeHandler('c3', '8', e) }}>G#</div>
-                                </li>
-                                <li className={styles.list}>
-                                    <div className={styles.textThird} onClick={(e) => { changeHandler('c3', '9', e) }}>A</div>
-                                </li>
-                                <li className={styles.list}>
-                                    <div className={styles.textThird} onClick={(e) => { changeHandler('c3', '10', e) }}>A#</div>
-                                </li>
-                                <li className={styles.list}>
-                                    <div className={styles.textThird} onClick={(e) => { changeHandler('c3', '11', e) }}>B</div>
-                                </li>
-                                <li className={styles.list}>
-                                    <div className={styles.textThird} onClick={(e) => { changeHandler('c3', '12', e) }}>C</div>
-                                </li>
+                        <ul className={classes.circle3}>
+                            {data['c3'].map((val,ind)=>
+                                <li className={styles.list}> 
+                                <div className={`${styles.textThird} ${ nord['c3'].includes(ind) ? styles.bluebg: ''}`} onClick={(e) => changeHandler('c3', ind, e) }>{val}</div>
+                            </li>
+                            )}
 
                                 <div className={classes.circle4}>
                                     <ul className={classes.circle5}>
