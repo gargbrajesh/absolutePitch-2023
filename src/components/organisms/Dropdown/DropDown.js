@@ -9,8 +9,8 @@ const DropDown = (props)  => {
   const [value, setValue] = React.useState('');
   const data = props.data
 
-  const handleChange = (event) => {
-    props.onChange(event.target.value)
+  const handleChange = (event, type) => {
+    props.onChange(event.target.value, type)
     setValue(event.target.value);
   };
 
@@ -22,7 +22,7 @@ const DropDown = (props)  => {
           labelId={props.label + 'dropdown-label'}
           id={props.label + 'dropdown'}
           value={value}
-          onChange={handleChange}
+          onChange={(e)=>handleChange(e,props.label)}
         >
             {Object.keys(data).map((val,ind)=>
                <MenuItem value={data[val]}>{val}</MenuItem>

@@ -221,12 +221,14 @@ const MusicWheel = (prop) => {
     const [nord, setNord] = useState({'c1':[],'c2':[],'c3':[]})
     const [songsData, setSongsData] = useState([])
     const [tempo, SetTempo] = useState('')
+    const [intensity, SetIntensity] = useState('')
     const [nordData, setNordData] = useState('')
 
   
     const classes = useStyles();
     const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    const tempData = {'All':'all','Calm':'calm','Lively':'lively','Mellow':'mellow','Moderate':'moderate'}
+    const tempData = {'None':'','Calm':'calm','Lively':'lively','Mellow':'mellow','Moderate':'moderate'}
+    const intensityData = {'None':'','HI':'hi','LI':'li','MI':'mi'}
 
     const arryOne = ['c1', 'c2', 'c3']
     const data = {'c1':['+','+','+','+','+','+','+','+','+','+','+','+'],
@@ -264,11 +266,17 @@ const MusicWheel = (prop) => {
     function btnHandler(text) {
         alert(text);
     }
-    function handleDropDownChange(value){
+    function handleDropDownChange(value,type){
         if (value != ''){
-            SetTempo(value)
+            if (type=="Tempo"){
+                SetTempo(value)
+            }
+            if (type=="Intensity"){
+                SetIntensity(value)
+            }
+            
         }
-        console.log(value)
+        console.log(value,type)
     }
 
     function getNord(){
@@ -318,7 +326,7 @@ const MusicWheel = (prop) => {
         urlencoded.append("groups", "");
         urlencoded.append("no_of_images", "");
         urlencoded.append("duration", "");
-        urlencoded.append("intensity", "");
+        urlencoded.append("intensity", intensity);
         urlencoded.append("tempo", tempo);
         urlencoded.append("image_type", "");
      
@@ -351,7 +359,8 @@ const MusicWheel = (prop) => {
             <Grid item xs={12} md={12} className={classes.circleCard}>
                 <Grid container className={classes.topButtonContainer}>
                     <Grid item xs={6} className={classes.textLeftSide}><Image src={Mix} alt='' onClick={(e) => { btnHandler('Mix') }} width={70} height={70} />
-                    <DropDown label="tempo" data={tempData} onChange={handleDropDownChange} />
+                    <DropDown label="Tempo" data={tempData} onChange={handleDropDownChange} />
+                    <DropDown label="Intensity" data={intensityData} onChange={handleDropDownChange} />
                     </Grid>
                     <Grid item xs={6} className={classes.texRightSide}><Image src={Tempo} alt='' onClick={(e) => { btnHandler('Tempo') }} width={70} height={70} /></Grid>
                 </Grid>
