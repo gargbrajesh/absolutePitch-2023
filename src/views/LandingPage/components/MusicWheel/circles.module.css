@@ -359,3 +359,7 @@
     background: #0082cf !important;
     color: #FFFFFF;
 }
+
+.songsWrapper ul li{
+    color:black;
+}

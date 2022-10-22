@@ -219,6 +219,9 @@ const useStyles = makeStyles({
 const MusicWheel = (prop) => {
 
     const [nord, setNord] = useState({'c1':[],'c2':[],'c3':[]})
+    const [songsData, setSongsData] = useState([])
+    const [tempo, SetTempo] = useState('')
+    const [nordData, setNordData] = useState('')
 
   
     const classes = useStyles();
@@ -230,6 +233,8 @@ const MusicWheel = (prop) => {
                 'c2':['-','-','-','-','-','-','-','-','-','-','-','-'],
                 'c3':['C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#','A', 'A#', 'B', 'C ']
                }
+    const nordMap = {'+':'M', '-':'m','#':'b'}
+        
 
 
     function changeHandler(c, ind,event) {
@@ -240,11 +245,19 @@ const MusicWheel = (prop) => {
             if (temp[c].indexOf(ind)==-1 && count <3){
                 temp[c].push(ind)
                 setNord(temp)
+                
+                setNordData(nordData+data[c][ind])
+                console.log("dd",nordData)
             }
             else if(temp[c].indexOf(ind)>-1 ){
                 const nordIndex = temp[c].indexOf(ind);
                 temp[c].splice(nordIndex,1)
                 setNord(temp)
+                console.log("popo",nordData,data[c][nordIndex],data[c][ind])
+                const final_node = nordData.replace(data[c][ind],'')
+                console.log("final_node",final_node)
+                setNordData(final_node)
+
             }
         }
     }
@@ -252,46 +265,87 @@ const MusicWheel = (prop) => {
         alert(text);
     }
     function handleDropDownChange(value){
+        if (value != ''){
+            SetTempo(value)
+        }
         console.log(value)
     }
 
-    // function musicStore() {
-    //     var myHeaders = new Headers();
-    //     myHeaders.append("Accept", "application/json");
-    //     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-    //     myHeaders.append("Cookie", "PHPSESSID=ckmj4nc6enk1u3e0rle62m3l64");
+    function getNord(){
+        // let str = ''
+        // if (nord['c1'].length>0){
+        //     nord['c1'].map((val)=>
+        //     str += nordMap[data['c1'][val]]
+        //     )
+        // }
+        // if (nord['c2'].length>0){
+        //     nord['c2'].map((val)=>
+        //     str += nordMap[data['c2'][val]]
+        //     )
+        // }
+        // if (nord['c3'].length>0){
+        //     nord['c3'].map((val)=>
+        //     str += nordMap[data['c3'][val]]
+        //     )
+        // }
+        console.log("nordData",nordData)
+        let str = nordData
+        for (let val of nordData){
+            if (nordMap[val]){
+                str = nordData.replace(val,nordMap[val])
+                // console.log("final",final_str)
+                // str +=final_str
+            }
+        }
+       console.log("str", str)
+        return str;
+    }
 
-    //     var urlencoded = new URLSearchParams();
+    function fetchSongsData() {
+        var myHeaders = new Headers();
+        myHeaders.append("Accept", "application/json");
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        myHeaders.append("Cookie", "PHPSESSID=ckmj4nc6enk1u3e0rle62m3l64");
 
-    //     urlencoded.append("songs", "1");
-    //     urlencoded.append("song_title", "");
-    //     urlencoded.append("groups", "");
-    //     urlencoded.append("no_of_images", "");
-    //     urlencoded.append("duration", "");
-    //     urlencoded.append("intensity", "");
-    //     urlencoded.append("tempo", "");
-    //     urlencoded.append("image_type", "");
+        
+        const nord_or_cord = getNord()
+        console.log("sggs",nord_or_cord)
+        var urlencoded = new URLSearchParams();
+    
+        urlencoded.append("songs", "1");
+        urlencoded.append("note_or_cord", nord_or_cord);
+        urlencoded.append("song_title", "");
+        urlencoded.append("groups", "");
+        urlencoded.append("no_of_images", "");
+        urlencoded.append("duration", "");
+        urlencoded.append("intensity", "");
+        urlencoded.append("tempo", tempo);
+        urlencoded.append("image_type", "");
+     
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: urlencoded,
+          redirect: 'follow'
+        };
+    
+        fetch("http://3.109.132.173/development/absolute/appdata/webservice.php", requestOptions)
+          .then(response => response.json())
+          .then((responseJson) => {
+    
+            if (responseJson != '') {
+              console.log(responseJson);
+            //   var dataSong = responseJson.data[0];
+              setSongsData(responseJson.data);
+            //   console.log(dataSong);
+            } else {
+              alert('error in response');
+            }
+          });
+    
+      }
 
-    //     var requestOptions = {
-    //         method: 'POST',
-    //         headers: myHeaders,
-    //         body: urlencoded,
-    //         redirect: 'follow'
-    //     };
-
-    //     fetch("http://3.109.132.173/development/absolute/appdata/webservice.php", requestOptions)
-    //         .then(response => response.json())
-    //         .then((responseJson) => {
-
-    //             if (responseJson != '') {
-    //                 // setMessage(responseJson.result.message);
-    //                 console.log(responseJson.data[1].song_name);
-    //             } else {
-    //                 // setMessageTrue(responseJson.result.message);
-    //                 alert(responseJson.result);
-    //             }
-    //         });
-    // }
+    
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} md={12} className={classes.circleCard}>
@@ -362,10 +416,20 @@ const MusicWheel = (prop) => {
                                         <li className={styles.list} style={{ borderBottom: '10px solid white' }}>
                                         </li >
                                     </ul>
-                                    <div className={classes.circle6}><Image src={MusicBtn} alt="" onClick={(e) => { prop.parentFunction() }} /></div>
+                                    <div className={classes.circle6}><Image src={MusicBtn} alt="" onClick={(e) => { fetchSongsData() }} /></div>
                                 </div>
                             </ul>
                         </ul>
+                    </ul>
+                </div>
+                <div className={styles.songsWrapper}>
+                    <ul>
+                        {songsData && songsData.length>0?
+                        songsData.slice(0,10).map((val,ind)=>
+                            <li>{val['song_name']}</li>
+                        ): 'No Songs Found'}
+                   
+                        <li></li>
                     </ul>
                 </div>
                 <Grid container justify="flex-end" className={classes.bottomButtonContainer}>
