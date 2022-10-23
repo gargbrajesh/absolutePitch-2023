@@ -435,7 +435,7 @@ const MusicWheel = (prop) => {
                     <ul>
                         {songsData && songsData.length>0?
                         songsData.slice(0,10).map((val,ind)=>
-                            <li>{val['song_name']}</li>
+                            <li key={'songs' + ind}>{val['song_name']}</li>
                         ): 'No Songs Found'}
                    
                         <li></li>
