@@ -367,7 +367,7 @@ const MusicWheel = (prop) => {
                 <div className={classes.mainCircle}>
                     <ul className={classes.circle} >
                         {data['c1'].map((val,ind)=>
-                            <li key={ind} className={styles.list}> 
+                            <li key={classes.circle + '-' + ind} className={styles.list}> 
                             <div className={`${styles.text} ${ nord['c1'].includes(ind) ? styles.bluebg: ''}`} onClick={(e)=>changeHandler('c1', ind,e) }>{val}</div>
                             </li>
                             )}
@@ -375,14 +375,14 @@ const MusicWheel = (prop) => {
                         {/* second circle start here */}
                         <ul className={classes.circle2}>
                                 {data['c2'].map((val,ind)=>
-                                    <li key={ind} className={styles.list}> 
+                                    <li key={classes.circle2 + '-' + ind} className={styles.list}> 
                                     <div className={`${styles.textTwo} ${ nord['c2'].includes(ind) ? styles.bluebg: ''}`} onClick={(e) => changeHandler('c2', ind, e) }>{val} { nord['c2'].includes(val)}</div>
                                 </li>
                                 )}
                             {/* third circle start herr */}
                         <ul className={classes.circle3}>
                             {data['c3'].map((val,ind)=>
-                                <li key={ind} className={styles.list}> 
+                                <li key={classes.circle3 + '-' + ind} className={styles.list}> 
                                 <div className={`${styles.textThird} ${ nord['c3'].includes(ind) ? styles.bluebg: ''}`} onClick={(e) => changeHandler('c3', ind, e) }>{val}</div>
                             </li>
                             )}
