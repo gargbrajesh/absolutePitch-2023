@@ -25,7 +25,7 @@ const DropDown = (props)  => {
           onChange={(e)=>handleChange(e,props.label)}
         >
             {Object.keys(data).map((val,ind)=>
-               <MenuItem value={data[val]}>{val}</MenuItem>
+               <MenuItem key={ind} value={data[val]}>{val}</MenuItem>
             )}
         </Select>
       </FormControl>
