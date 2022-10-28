@@ -10,6 +10,7 @@ import Timer from '../../../../../public/assets/images/timer4x.png';
 import Progress from '../../../../../public/assets/images/progress4x.png';
 import Image from "next/image";
 import DropDown from '../../../../components/organisms/Dropdown/index';
+import { Label } from '@mui/icons-material';
 
 const useStyles = makeStyles({
     root: {
@@ -223,12 +224,18 @@ const MusicWheel = (prop) => {
     const [tempo, SetTempo] = useState('')
     const [intensity, SetIntensity] = useState('')
     const [nordData, setNordData] = useState('')
+    const [tempoIndex, setTempoIndex] = useState(0)
+    const [intensityIndex, setIntensityIndex] = useState(0)
+    
 
   
     const classes = useStyles();
     const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     const tempData = {'None':'','Calm':'calm','Lively':'lively','Mellow':'mellow','Moderate':'moderate'}
     const intensityData = {'None':'','HI':'hi','LI':'li','MI':'mi'}
+    const tempoData = ['','Calm','Lively', 'Mellow', 'Moderate']
+    const intensityData1 = ['','HI','LI','MI']
+
 
     const arryOne = ['c1', 'c2', 'c3']
     const data = {'c1':['+','+','+','+','+','+','+','+','+','+','+','+'],
@@ -263,8 +270,29 @@ const MusicWheel = (prop) => {
             }
         }
     }
-    function btnHandler(text) {
-        alert(text);
+    function btnHandler(type) {
+        if (type=="Tempo"){
+        // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
+
+             if (tempoIndex==tempoData.length-1){
+                setTempoIndex(0)
+             }
+             else{
+                setTempoIndex(tempoIndex+1)
+             }
+        }
+        if (type=="Intensity"){
+            // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
+    
+                 if (intensityIndex==intensityData1.length-1){
+                    setIntensityIndex(0)
+                 }
+                 else{
+                    setIntensityIndex(intensityIndex+1)
+                 }
+            }
+            fetchSongsData()
+      
     }
     function handleDropDownChange(value,type){
         if (value != ''){
@@ -274,28 +302,12 @@ const MusicWheel = (prop) => {
             if (type=="Intensity"){
                 SetIntensity(value)
             }
-            
         }
+        
         console.log(value,type)
     }
 
     function getNord(){
-        // let str = ''
-        // if (nord['c1'].length>0){
-        //     nord['c1'].map((val)=>
-        //     str += nordMap[data['c1'][val]]
-        //     )
-        // }
-        // if (nord['c2'].length>0){
-        //     nord['c2'].map((val)=>
-        //     str += nordMap[data['c2'][val]]
-        //     )
-        // }
-        // if (nord['c3'].length>0){
-        //     nord['c3'].map((val)=>
-        //     str += nordMap[data['c3'][val]]
-        //     )
-        // }
         console.log("nordData",nordData)
         let str = nordData
         for (let val of nordData){
@@ -317,7 +329,7 @@ const MusicWheel = (prop) => {
 
         
         const nord_or_cord = getNord()
-        console.log("sggs",nord_or_cord)
+        console.log("sggs", tempoIndex, tempoData[tempoIndex])
         var urlencoded = new URLSearchParams();
     
         urlencoded.append("songs", "1");
@@ -326,8 +338,8 @@ const MusicWheel = (prop) => {
         urlencoded.append("groups", "");
         urlencoded.append("no_of_images", "");
         urlencoded.append("duration", "");
-        urlencoded.append("intensity", intensity);
-        urlencoded.append("tempo", tempo);
+        urlencoded.append("intensity", intensityData1[intensityIndex]);
+        urlencoded.append("tempo",  tempoData[tempoIndex]);
         urlencoded.append("image_type", "");
      
         var requestOptions = {
@@ -358,11 +370,16 @@ const MusicWheel = (prop) => {
         <Grid container spacing={2}>
             <Grid item xs={12} md={12} className={classes.circleCard}>
                 <Grid container className={classes.topButtonContainer}>
-                    <Grid item xs={6} className={classes.textLeftSide}><Image src={Mix} alt='' onClick={(e) => { btnHandler('Mix') }} width={70} height={70} />
-                    <DropDown label="Tempo" data={tempData} onChange={handleDropDownChange} />
-                    <DropDown label="Intensity" data={intensityData} onChange={handleDropDownChange} />
+                    <Grid item xs={6} className={classes.textLeftSide}>
+                        <Image src={Mix} alt='' onClick={(e) => { btnHandler('Intensity') }} width={70} height={70} />
+                        <label>{intensityData1[intensityIndex]} </label>
+                    {/* <DropDown label="Tempo" data={tempData} onChange={handleDropDownChange} />
+                    <DropDown label="Intensity" data={intensityData} onChange={handleDropDownChange} /> */}
                     </Grid>
-                    <Grid item xs={6} className={classes.texRightSide}><Image src={Tempo} alt='' onClick={(e) => { btnHandler('Tempo') }} width={70} height={70} /></Grid>
+                    <Grid item xs={6} className={classes.texRightSide}>
+                        <Image src={Tempo} alt='' onClick={(e) => { btnHandler('Tempo') }} width={70} height={70} />
+                        <label>{tempoData[tempoIndex]}</label>
+                        </Grid>
                 </Grid>
                 <div className={classes.mainCircle}>
                     <ul className={classes.circle} >
