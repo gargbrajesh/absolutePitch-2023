@@ -362,4 +362,6 @@
 
 .songsWrapper ul li{
     color:black;
+    list-style: none;
+    direction: none;
 }
