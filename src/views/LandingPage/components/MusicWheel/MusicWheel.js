@@ -217,7 +217,7 @@ const useStyles = makeStyles({
         color: 'white',
     }
 });
-const MusicWheel = (prop) => {
+const MusicWheel = (props) => {
 
     const [nord, setNord] = useState({'c1':[],'c2':[],'c3':[]})
     const [songsData, setSongsData] = useState([])
@@ -270,7 +270,7 @@ const MusicWheel = (prop) => {
             }
         }
     }
-    function btnHandler(type) {
+    async function btnHandler(type) {
         if (type=="Tempo"){
         // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
 
@@ -291,7 +291,7 @@ const MusicWheel = (prop) => {
                     setIntensityIndex(intensityIndex+1)
                  }
             }
-            fetchSongsData()
+           await fetchSongsData()
       
     }
     function handleDropDownChange(value,type){
@@ -319,6 +319,11 @@ const MusicWheel = (prop) => {
         }
        console.log("str", str)
         return str;
+    }
+
+    function handleClickSong(song_data){
+        console.log("file name", song_data)
+        props.handleSong(song_data)
     }
 
     function fetchSongsData() {
@@ -354,7 +359,7 @@ const MusicWheel = (prop) => {
           .then((responseJson) => {
     
             if (responseJson != '') {
-              console.log(responseJson);
+              console.log("response",responseJson);
             //   var dataSong = responseJson.data[0];
               setSongsData(responseJson.data);
             //   console.log(dataSong);
@@ -373,8 +378,8 @@ const MusicWheel = (prop) => {
                     <Grid item xs={6} className={classes.textLeftSide}>
                         <Image src={Mix} alt='' onClick={(e) => { btnHandler('Intensity') }} width={70} height={70} />
                         <label>{intensityData1[intensityIndex]} </label>
-                    {/* <DropDown label="Tempo" data={tempData} onChange={handleDropDownChange} />
-                    <DropDown label="Intensity" data={intensityData} onChange={handleDropDownChange} /> */}
+                    <DropDown label="Tempo" data={tempData} onChange={handleDropDownChange} />
+                    <DropDown label="Intensity" data={intensityData} onChange={handleDropDownChange} />
                     </Grid>
                     <Grid item xs={6} className={classes.texRightSide}>
                         <Image src={Tempo} alt='' onClick={(e) => { btnHandler('Tempo') }} width={70} height={70} />
@@ -452,10 +457,10 @@ const MusicWheel = (prop) => {
                     <ul>
                         {songsData && songsData.length>0?
                         songsData.slice(0,10).map((val,ind)=>
-                            <li key={'songs' + ind}>{val['song_name']}</li>
+                            <li key={'songs' + ind} onClick={()=>handleClickSong(val)}>{val['song_name']}</li>
                         ): 'No Songs Found'}
                    
-                        <li></li>
+                        <li></li>)
                     </ul>
                 </div>
                 <Grid container justify="flex-end" className={classes.bottomButtonContainer}>

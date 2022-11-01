@@ -41,14 +41,14 @@ const useStyles = makeStyles({
 const VideoPlayer = (prop) => {
     const [song, setSong] = useState()
     
-   var music = prop.musicData;
+   const music = prop.musicData ? prop.musicData['song_url']:'';
     console.log('prop.musicData',prop.musicData);
   
     const classes = useStyles();
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} md={12} className={classes.videoCard}>
-                {prop.musicData ? <ReactPlayer controls url='' width="100%" height="95%" />
+                {prop.musicData ? <ReactPlayer controls url={music} width="100%" height="95%" />
             :<ReactPlayer controls url="https://www.youtube.com/watch?v=o1OQFwpwwNU" width="100%" height="95%" />    
             }
             </Grid>

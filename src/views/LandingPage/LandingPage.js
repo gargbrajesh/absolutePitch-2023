@@ -66,53 +66,19 @@ const LandingPage = () => {
 
   const [data, setData] = useState()
 
-  function dataHouse() {
 
-    var myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json");
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-    myHeaders.append("Cookie", "PHPSESSID=ckmj4nc6enk1u3e0rle62m3l64");
-
-    var urlencoded = new URLSearchParams();
-
-    urlencoded.append("songs", "1");
-    urlencoded.append("song_title", "");
-    urlencoded.append("groups", "");
-    urlencoded.append("no_of_images", "");
-    urlencoded.append("duration", "");
-    urlencoded.append("intensity", "");
-    urlencoded.append("tempo", "");
-    urlencoded.append("image_type", "");
-
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: urlencoded,
-      redirect: 'follow'
-    };
-
-    fetch("http://3.109.132.173/development/absolute/appdata/webservice.php", requestOptions)
-      .then(response => response.json())
-      .then((responseJson) => {
-
-        if (responseJson != '') {
-          console.log(responseJson);
-          var dataSong = responseJson.data[0].song_url;
-          setData(dataSong);
-          console.log(dataSong);
-        } else {
-          alert('error in response');
-        }
-      });
-
+  function handleSong(data){
+    console.log("songd",data)
+    setData(data)
   }
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <Header />
       <Grid container className={classes.containerBox}>
         <Grid item md={6} xs={12} className={classes.leftSection}>
-          <MusicWheel parentFunction={dataHouse} />
+          <MusicWheel handleSong={handleSong}/>
         </Grid>
         <Grid item md={6} xs={12} className={classes.rightSection}>
           <VideoPlayer musicData={data} />
