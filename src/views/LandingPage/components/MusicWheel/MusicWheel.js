@@ -471,7 +471,7 @@ const MusicWheel = (props) => {
     };
 
     fetch(
-      "http://3.109.132.173/development/absolute/appdata/webservice.php",
+      "https://mylatinhome.com/absolute/appdata/webservice.php",
       requestOptions
     )
       .then((response) => response.json())
