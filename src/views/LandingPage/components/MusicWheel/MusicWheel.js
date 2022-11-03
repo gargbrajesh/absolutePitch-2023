@@ -9,6 +9,8 @@ import Tempo from "../../../../../public/assets/images/tempo4x.png";
 import Timer from "../../../../../public/assets/images/timer4x.png";
 import Piano from "../../../../../public/assets/images/piano2.jpg";
 import PianoKey from "../../../../../public/assets/images/key_notes.png";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
 import Progress from "../../../../../public/assets/images/progress4x.png";
 import Image from "next/image";
 import DropDown from "../../../../components/organisms/Dropdown/index";
@@ -133,7 +135,7 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     listStyle: "none",
     overflow: "hidden",
-    background: "#FFFFFF",
+    background: "#333333",
     marginTop: "15%",
     marginLeft: "15%",
     border: "2px solid #903884",
@@ -270,11 +272,24 @@ const useStyles = makeStyles({
   paperStyle: {
     marginTop:'10px',
     width: "98%",
-    padding: "5px 0px 0px 20px",
+    padding: "5px 20px 0px 20px",
     lineHeight: "30px",
     marginLeft: "1.5%",
     height: "150px",
     overflow: "scroll",
+    // justifyContent:'center',
+    // alignItems:'center',
+    // display:'flex',
+    background: "radial-gradient(#18b0a0 70%, #000)",
+  },
+  playerBtn: {
+    cursor: "pointer",
+    "&:hover": {
+      color: "yellow",
+    },
+    '&:active':{
+      color:'blue',
+    }
   },
 });
 const MusicWheel = (props) => {
@@ -285,7 +300,7 @@ const MusicWheel = (props) => {
   const [nordData, setNordData] = useState("");
   const [tempoIndex, setTempoIndex] = useState(0);
   const [intensityIndex, setIntensityIndex] = useState(0);
-
+  const [play, setPlay] = useState(false);
   const classes = useStyles();
   const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const tempData = {
@@ -421,6 +436,14 @@ const MusicWheel = (props) => {
   }
 
   function fetchSongsData() {
+
+    if(play !=false){
+      setPlay(false);
+    }
+    else{
+      setPlay(true);
+    }
+
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -615,13 +638,17 @@ const MusicWheel = (props) => {
                         ></li>
                       </ul>
                       <div className={classes.circle6}>
-                        <Image
-                          src={MusicBtn}
-                          alt=""
+                      {play ? <PauseCircleOutlineIcon
                           onClick={(e) => {
                             fetchSongsData();
                           }}
-                        />
+                          className={classes.playerBtn}
+                        /> : <PlayCircleOutlineIcon
+                          onClick={(e) => {
+                            fetchSongsData();
+                          }}
+                          className={classes.playerBtn}
+                        />}
                       </div>
                     </div>
                   </ul>
