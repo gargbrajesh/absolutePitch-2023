@@ -359,17 +359,17 @@
 }
 
 .songsWrapper ul li {
-  color: #fff;
+  color: #000;
   list-style: none;
   direction: none;
-  padding-left: 20px;
+  padding-left: 10px;
   justify-content: center;
 }
 .songsWrapper ul li:hover {
-  color: rgb(94, 19, 214);
+  color: #fff;
   cursor: pointer;
   border-radius: 20px;
   padding-left: 20px;
-  background: gray;
-  width: 85%;
+  background: #18b0a0;
+  width: 90%;
 }

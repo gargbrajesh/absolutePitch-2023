@@ -48,7 +48,8 @@ const VideoPlayer = (prop) => {
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} md={12} className={classes.videoCard}>
-                {prop.musicData ? <ReactPlayer controls url={music} width="100%" height="95%" />
+                {prop.musicData ? <ReactPlayer  controls url={music} width="100%" height="95%"  playing={true} 
+    loop={true}  />
             :<ReactPlayer controls url="https://www.youtube.com/watch?v=o1OQFwpwwNU" width="100%" height="95%" />    
             }
             </Grid>

@@ -233,6 +233,7 @@ const useStyles = makeStyles({
     fontWeight: "500",
     width: "50%",
     padding: "3px",
+    cursor:'pointer',
   },
 
   tempoBtnContainer: {
@@ -277,10 +278,7 @@ const useStyles = makeStyles({
     marginLeft: "1.5%",
     height: "150px",
     overflow: "scroll",
-    // justifyContent:'center',
-    // alignItems:'center',
-    // display:'flex',
-    background: "radial-gradient(#18b0a0 70%, #000)",
+    // boxShadow: 'inset 0 0 10px black',
   },
   playerBtn: {
     cursor: "pointer",
@@ -300,6 +298,7 @@ const MusicWheel = (props) => {
   const [nordData, setNordData] = useState("");
   const [tempoIndex, setTempoIndex] = useState(0);
   const [intensityIndex, setIntensityIndex] = useState(0);
+  const [imageTypeIndex, setImageTypeIndex] = useState(0);
   const [play, setPlay] = useState(false);
   const classes = useStyles();
   const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -313,7 +312,7 @@ const MusicWheel = (props) => {
   const intensityData = { None: "", HI: "hi", LI: "li", MI: "mi" };
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData1 = ["", "HI", "LI", "MI"];
-
+  const imageTypeData = ["", "Keys", "Letter", "Staff"];
 //   const arryOne = ["c1", "c2", "c3"];
 //   const data = {
 //     c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
@@ -400,6 +399,18 @@ const MusicWheel = (props) => {
                     targetBtn.style.color = "#fff";
                  }
             }
+
+            if (type=="ImageType"){
+              // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
+      
+                   if (imageTypeIndex == imageTypeData.length-1){
+                    setImageTypeIndex(0)
+                   }
+                   else{
+                    setImageTypeIndex(imageTypeIndex+1)
+                     
+                   }
+              }
            await fetchSongsData()
       
     }
@@ -437,12 +448,12 @@ const MusicWheel = (props) => {
 
   function fetchSongsData() {
 
-    if(play !=false){
-      setPlay(false);
-    }
-    else{
-      setPlay(true);
-    }
+    // if(play !=false){
+    //   setPlay(false);
+    // }
+    // else{
+    //   setPlay(true);
+    // }
 
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -461,7 +472,7 @@ const MusicWheel = (props) => {
     urlencoded.append("duration", "");
     urlencoded.append("intensity", intensityData1[intensityIndex]);
     urlencoded.append("tempo", tempoData[tempoIndex]);
-    urlencoded.append("image_type", "");
+    urlencoded.append("image_type", imageTypeData[imageTypeIndex]);
 
     var requestOptions = {
       method: "POST",
@@ -498,7 +509,9 @@ const MusicWheel = (props) => {
             className={classes.topButtonContainer}
             style={{}}
           >
-            <button className={classes.topButtons}>B</button>
+            <button className={classes.topButtons}  onClick={(e) => {
+                btnHandler("ImageType", e);
+              }}>{imageTypeData[imageTypeIndex] ? imageTypeData[imageTypeIndex] : 'B'}</button>
           </Grid>
           <Grid item xs={4} md={4} className={classes.topButtonContainer1}>
             <button >
@@ -638,7 +651,7 @@ const MusicWheel = (props) => {
                         ></li>
                       </ul>
                       <div className={classes.circle6}>
-                      {play ? <PauseCircleOutlineIcon
+                      {/* {play ? <PauseCircleOutlineIcon
                           onClick={(e) => {
                             fetchSongsData();
                           }}
@@ -648,7 +661,13 @@ const MusicWheel = (props) => {
                             fetchSongsData();
                           }}
                           className={classes.playerBtn}
-                        />}
+                        />} */}
+                        <PlayCircleOutlineIcon
+                          onClick={(e) => {
+                            fetchSongsData();
+                          }}
+                          className={classes.playerBtn}
+                        />
                       </div>
                     </div>
                   </ul>
