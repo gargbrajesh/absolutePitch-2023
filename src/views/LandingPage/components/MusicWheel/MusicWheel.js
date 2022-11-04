@@ -299,6 +299,7 @@ const MusicWheel = (props) => {
   const [tempoIndex, setTempoIndex] = useState(0);
   const [intensityIndex, setIntensityIndex] = useState(0);
   const [imageTypeIndex, setImageTypeIndex] = useState(0);
+  const [durationDataIndex, setDurationDataIndex] = useState(0);
   const [play, setPlay] = useState(false);
   const classes = useStyles();
   const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -313,6 +314,7 @@ const MusicWheel = (props) => {
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData1 = ["", "HI", "LI", "MI"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
+  const durationData = ['','104','105','106','107','108','109','120','121','125','126','127','128','129','135','139',,'141','145','147','150','151','155','156','160','167','169','170','173','177','178','178','178','178','179','181','182','183','184','178','184','185','191','192','193','194','195','196','198','199','200','202','203','204','206','207','208','209','210','211','212','213','213','214','215','216','217','218','220','222','223','225','226','231','233','234','235','236','237','238','240','241','242','243','244','245','246','247','248','249','250','251','252','253','254','256','259','261','263','265','278','280','285','288','300']
 //   const arryOne = ["c1", "c2", "c3"];
 //   const data = {
 //     c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
@@ -411,7 +413,18 @@ const MusicWheel = (props) => {
                      
                    }
               }
-           await fetchSongsData()
+              if (type=="Duration"){
+                // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
+        
+                     if (durationDataIndex == durationData.length-1){
+                      setDurationDataIndex(0)
+                     }
+                     else{
+                      setDurationDataIndex(durationDataIndex  +1)
+                       
+                     }
+                }
+          //  await fetchSongsData()
       
     }
     function handleDropDownChange(value,type){
@@ -469,7 +482,7 @@ const MusicWheel = (props) => {
     urlencoded.append("song_title", "");
     urlencoded.append("groups", "");
     urlencoded.append("no_of_images", "");
-    urlencoded.append("duration", "");
+    urlencoded.append("duration", durationData[durationDataIndex]);
     urlencoded.append("intensity", intensityData1[intensityIndex]);
     urlencoded.append("tempo", tempoData[tempoIndex]);
     urlencoded.append("image_type", imageTypeData[imageTypeIndex]);
@@ -542,10 +555,10 @@ const MusicWheel = (props) => {
             <button
               className={classes.tempoBtnBottom}
               onClick={(e) => {
-                btnHandler("Timer", e);
+                btnHandler("Duration", e);
               }}
             >
-              {tempoData[tempoIndex] ? "TIMER" : "TIMER"}
+              {durationData[durationDataIndex] ? durationData[durationDataIndex] : "Duration"}
             </button>
           </Grid>
           <Grid item xs={8} className={classes.wheelContianer}>
