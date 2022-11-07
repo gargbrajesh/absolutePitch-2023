@@ -208,22 +208,22 @@ const useStyles = makeStyles({
     color: "white",
   },
   topButtonContainer: {
-    marginTop:'10px',
-    marginBottom:'10px',
+    marginTop: "10px",
+    marginBottom: "10px",
     justifyContent: "left",
     alignItems: "left",
     display: "flex",
   },
   topButtonContainer1: {
-    marginTop:'10px',
-    marginBottom:'10px',
+    marginTop: "10px",
+    marginBottom: "10px",
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
   },
   topButtonContainer2: {
-    marginTop:'10px',
-    marginBottom:'10px',
+    marginTop: "10px",
+    marginBottom: "10px",
     justifyContent: "right",
     alignItems: "right",
     display: "flex",
@@ -233,7 +233,10 @@ const useStyles = makeStyles({
     fontWeight: "500",
     width: "50%",
     padding: "3px",
-    cursor:'pointer',
+    cursor: "pointer",
+    "&:hover": {
+      boxShadow: "0 0 5px 5px green",
+    },
   },
 
   tempoBtnContainer: {
@@ -271,7 +274,7 @@ const useStyles = makeStyles({
     cursor: "pointer",
   },
   paperStyle: {
-    marginTop:'10px',
+    marginTop: "10px",
     width: "98%",
     padding: "5px 20px 0px 20px",
     lineHeight: "30px",
@@ -285,9 +288,16 @@ const useStyles = makeStyles({
     "&:hover": {
       color: "yellow",
     },
-    '&:active':{
-      color:'blue',
-    }
+    "&:active": {
+      color: "blue",
+    },
+  },
+  btnPiano: {
+    cursor: "pointer",
+    "&:hover": {
+      boxShadow: "0 0 5px 5px green",
+      cursor:'pointer',
+    },
   },
 });
 const MusicWheel = (props) => {
@@ -314,136 +324,206 @@ const MusicWheel = (props) => {
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData1 = ["", "HI", "LI", "MI"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
-  const durationData = ['','104','105','106','107','108','109','120','121','125','126','127','128','129','135','139',,'141','145','147','150','151','155','156','160','167','169','170','173','177','178','178','178','178','179','181','182','183','184','178','184','185','191','192','193','194','195','196','198','199','200','202','203','204','206','207','208','209','210','211','212','213','213','214','215','216','217','218','220','222','223','225','226','231','233','234','235','236','237','238','240','241','242','243','244','245','246','247','248','249','250','251','252','253','254','256','259','261','263','265','278','280','285','288','300']
-//   const arryOne = ["c1", "c2", "c3"];
-//   const data = {
-//     c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
-//     c2: ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-//     c3: ["C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C "],
-//   };
-//   const nordMap = { "+": "M", "-": "m", "#": "b" };
+  const durationData = [
+    "",
+    "104",
+    "105",
+    "106",
+    "107",
+    "108",
+    "109",
+    "120",
+    "121",
+    "125",
+    "126",
+    "127",
+    "128",
+    "129",
+    "135",
+    "139",
+    ,
+    "141",
+    "145",
+    "147",
+    "150",
+    "151",
+    "155",
+    "156",
+    "160",
+    "167",
+    "169",
+    "170",
+    "173",
+    "177",
+    "178",
+    "178",
+    "178",
+    "178",
+    "179",
+    "181",
+    "182",
+    "183",
+    "184",
+    "178",
+    "184",
+    "185",
+    "191",
+    "192",
+    "193",
+    "194",
+    "195",
+    "196",
+    "198",
+    "199",
+    "200",
+    "202",
+    "203",
+    "204",
+    "206",
+    "207",
+    "208",
+    "209",
+    "210",
+    "211",
+    "212",
+    "213",
+    "213",
+    "214",
+    "215",
+    "216",
+    "217",
+    "218",
+    "220",
+    "222",
+    "223",
+    "225",
+    "226",
+    "231",
+    "233",
+    "234",
+    "235",
+    "236",
+    "237",
+    "238",
+    "240",
+    "241",
+    "242",
+    "243",
+    "244",
+    "245",
+    "246",
+    "247",
+    "248",
+    "249",
+    "250",
+    "251",
+    "252",
+    "253",
+    "254",
+    "256",
+    "259",
+    "261",
+    "263",
+    "265",
+    "278",
+    "280",
+    "285",
+    "288",
+    "300",
+  ];
+ 
+  const arryOne = ["c1", "c2", "c3"];
+  const data = {
+    c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
+    c2: ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    c3: ["C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C "],
+  };
+  const nordMap = { "+": "M", "-": "m", "#": "b" };
 
-//   function changeHandler(c, ind, event) {
-//     console.log("event is", event, circleOne);
-//     const temp = { ...nord };
-//     const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
-//     if (["c1", "c2", "c3"].includes(c)) {
-//       if (temp[c].indexOf(ind) == -1 && count < 3) {
-//         temp[c].push(ind);
-//         setNord(temp);
-//         setNordData(nordData + data[c][ind]);
-//         console.log("dd", nordData);
-//       } else if (temp[c].indexOf(ind) > -1) {
-//         const nordIndex = temp[c].indexOf(ind);
-//         temp[c].splice(nordIndex, 1);
-//         setNord(temp);
-//         console.log("popo", nordData, data[c][nordIndex], data[c][ind]);
-//         const final_node = nordData.replace(data[c][ind], "");
-//         console.log("final_node", final_node);
-        // setNordData(final_node);
+  function changeHandler(c, ind, event) {
+    console.log("event is", event, circleOne);
+    const temp = { ...nord };
+    const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
+    if (["c1", "c2", "c3"].includes(c)) {
+      if (temp[c].indexOf(ind) == -1 && count < 3) {
+        temp[c].push(ind);
+        setNord(temp);
 
-    const arryOne = ['c1', 'c2', 'c3']
-    const data = {'c1':['+','+','+','+','+','+','+','+','+','+','+','+'],
-                'c2':['-','-','-','-','-','-','-','-','-','-','-','-'],
-                'c3':['C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#','A', 'A#', 'B', 'C ']
-               }
-    const nordMap = {'+':'M', '-':'m','#':'b'}
-        
-
-
-    function changeHandler(c, ind,event) {
-       console.log("event is", event, circleOne)
-       const temp = {...nord}
-       const count = [...temp['c1'], ...temp['c2'], ...temp['c3']]?.length || 0
-        if (['c1','c2','c3'].includes(c)) {
-            if (temp[c].indexOf(ind)==-1 && count <3){
-                temp[c].push(ind)
-                setNord(temp)
-                
-                setNordData(nordData+data[c][ind])
-                console.log("dd",nordData)
-            }
-            else if(temp[c].indexOf(ind)>-1 ){
-                const nordIndex = temp[c].indexOf(ind);
-                temp[c].splice(nordIndex,1)
-                setNord(temp)
-                console.log("popo",nordData,data[c][nordIndex],data[c][ind])
-                const final_node = nordData.replace(data[c][ind],'')
-                console.log("final_node",final_node)
-                setNordData(final_node)
-
-            }
-        }
+        setNordData(nordData + data[c][ind]);
+        console.log("dd", nordData);
+      } else if (temp[c].indexOf(ind) > -1) {
+        const nordIndex = temp[c].indexOf(ind);
+        temp[c].splice(nordIndex, 1);
+        setNord(temp);
+        console.log("popo", nordData, data[c][nordIndex], data[c][ind]);
+        const final_node = nordData.replace(data[c][ind], "");
+        console.log("final_node", final_node);
+        setNordData(final_node);
+      }
     }
-    async function btnHandler(type,e) {
-        var targetBtn = e.target;
-        if (type=="Tempo"){
-        // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
+  }
+  async function btnHandler(type, e) {
+    var targetBtn = e.target;
+    if (type == "Tempo") {
+      // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
 
-             if (tempoIndex==tempoData.length-1){
-                setTempoIndex(0)
-             }
-             else{
-                setTempoIndex(tempoIndex+1)
-                targetBtn.style.background = "radial-gradient(green 40%, #000)";
-                targetBtn.style.color = "#fff";
-             }
-        }
-        if (type=="Intensity"){
-            // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
-    
-                 if (intensityIndex==intensityData1.length-1){
-                    setIntensityIndex(0)
-                 }
-                 else{
-                    setIntensityIndex(intensityIndex+1)
-                    targetBtn.style.background = "radial-gradient(blue 40%, #000)";
-                    targetBtn.style.color = "#fff";
-                 }
-            }
-
-            if (type=="ImageType"){
-              // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
-      
-                   if (imageTypeIndex == imageTypeData.length-1){
-                    setImageTypeIndex(0)
-                   }
-                   else{
-                    setImageTypeIndex(imageTypeIndex+1)
-                     
-                   }
-              }
-              if (type=="Duration"){
-                // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
-        
-                     if (durationDataIndex == durationData.length-1){
-                      setDurationDataIndex(0)
-                     }
-                     else{
-                      setDurationDataIndex(durationDataIndex  +1)
-                       
-                     }
-                }
-          //  await fetchSongsData()
-      
+      if (tempoIndex == tempoData.length - 1) {
+        setTempoIndex(0);
+      } else {
+        setTempoIndex(tempoIndex + 1);
+        targetBtn.style.background = "radial-gradient(green 40%, #000)";
+        targetBtn.style.color = "#fff";
+      }
     }
-    function handleDropDownChange(value,type){
-        if (value != ''){
-            if (type=="Tempo"){
-                SetTempo(value)
-            }
-            if (type=="Intensity"){
-                SetIntensity(value)
-            }
-        }
-        
-        console.log(value,type)
+    if (type == "Intensity") {
+      // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
+
+      if (intensityIndex == intensityData1.length - 1) {
+        setIntensityIndex(0);
+      } else {
+        setIntensityIndex(intensityIndex + 1);
+        targetBtn.style.background = "radial-gradient(blue 40%, #000)";
+        targetBtn.style.color = "#fff";
+      }
     }
 
-    function handleClickSong(song_data){
-        console.log("file name", song_data)
-        props.handleSong(song_data)
+    if (type == "Keys") {
+      setImageTypeIndex(type);
     }
+    if (type == "Letter") {
+      setImageTypeIndex(type);
+    }
+    if (type == "Staff") {
+      setImageTypeIndex(type);
+    }
+    if (type == "Duration") {
+      // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
+
+      if (durationDataIndex == durationData.length - 1) {
+        setDurationDataIndex(0);
+      } else {
+        setDurationDataIndex(durationDataIndex + 1);
+      }
+    }
+    //  await fetchSongsData()
+  }
+  function handleDropDownChange(value, type) {
+    if (value != "") {
+      if (type == "Tempo") {
+        SetTempo(value);
+      }
+      if (type == "Intensity") {
+        SetIntensity(value);
+      }
+    }
+
+    console.log(value, type);
+  }
+
+  function handleClickSong(song_data) {
+    console.log("file name", song_data);
+    props.handleSong(song_data);
+  }
 
   function getNord() {
     console.log("nordData", nordData);
@@ -460,7 +540,6 @@ const MusicWheel = (props) => {
   }
 
   function fetchSongsData() {
-
     // if(play !=false){
     //   setPlay(false);
     // }
@@ -485,7 +564,7 @@ const MusicWheel = (props) => {
     urlencoded.append("duration", durationData[durationDataIndex]);
     urlencoded.append("intensity", intensityData1[intensityIndex]);
     urlencoded.append("tempo", tempoData[tempoIndex]);
-    urlencoded.append("image_type", imageTypeData[imageTypeIndex]);
+    urlencoded.append("image_type", imageTypeIndex);
 
     var requestOptions = {
       method: "POST",
@@ -522,17 +601,34 @@ const MusicWheel = (props) => {
             className={classes.topButtonContainer}
             style={{}}
           >
-            <button className={classes.topButtons}  onClick={(e) => {
-                btnHandler("ImageType", e);
-              }}>{imageTypeData[imageTypeIndex] ? imageTypeData[imageTypeIndex] : 'B'}</button>
+            <button
+              className={classes.topButtons}
+              onClick={(e) => {
+                btnHandler("Keys", e);
+              }}
+            >
+              {true
+                ? "B"
+                : "B"}
+            </button>
           </Grid>
           <Grid item xs={4} md={4} className={classes.topButtonContainer1}>
-            <button >
+            <button
+              className={classes.btnPiano}
+              onClick={(e) => {
+                btnHandler("Letter", e);
+              }}
+            >
               <Image src={PianoKey} alt=".." width={120} height={35} />
             </button>
           </Grid>
           <Grid item xs={4} md={4} className={classes.topButtonContainer2}>
-            <button>
+            <button
+              className={classes.btnPiano}
+              onClick={(e) => {
+                btnHandler("Staff", e);
+              }}
+            >
               {" "}
               <button>
                 <Image src={Piano} alt=".." width={100} height={30} />
@@ -558,7 +654,9 @@ const MusicWheel = (props) => {
                 btnHandler("Duration", e);
               }}
             >
-              {durationData[durationDataIndex] ? durationData[durationDataIndex] : "Duration"}
+              {durationData[durationDataIndex]
+                ? durationData[durationDataIndex]
+                : "Duration"}
             </button>
           </Grid>
           <Grid item xs={8} className={classes.wheelContianer}>
@@ -664,7 +762,7 @@ const MusicWheel = (props) => {
                         ></li>
                       </ul>
                       <div className={classes.circle6}>
-                      {/* {play ? <PauseCircleOutlineIcon
+                        {/* {play ? <PauseCircleOutlineIcon
                           onClick={(e) => {
                             fetchSongsData();
                           }}
@@ -713,11 +811,15 @@ const MusicWheel = (props) => {
           <Paper elevation={3} className={classes.paperStyle}>
             <ul>
               {songsData && songsData.length > 0
-                ? songsData
-                    .slice(0, 10)
-                    .map((val, ind) => (
-                      <li key={"songs" + ind} onClick={()=>handleClickSong(val)}> * {val["song_name"]} </li>
-                    ))
+                ? songsData.slice(0, 10).map((val, ind) => (
+                    <li
+                      key={"songs" + ind}
+                      onClick={() => handleClickSong(val)}
+                    >
+                      {" "}
+                      * {val["song_name"]}{" "}
+                    </li>
+                  ))
                 : "No Songs Found"}
 
               <li></li>
@@ -726,6 +828,6 @@ const MusicWheel = (props) => {
         </div>
       </Grid>
     </Grid>
-  )
+  );
 };
 export default MusicWheel;
