@@ -440,7 +440,7 @@ const MusicWheel = (props) => {
     c3: ["C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C "],
   };
   const nordMap = { "+": "M", "-": "m", "#": "b" };
-
+const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://mylatinhome.com/absolute/note-sound/Am.wav','https://mylatinhome.com/absolute/note-sound/Ab.wav']
   function changeHandler(c, ind, event) {
     console.log("event is", event, circleOne);
     const temp = { ...nord };
@@ -542,14 +542,31 @@ const MusicWheel = (props) => {
     console.log("str", str);
     return str;
   }
-
+  var i = 0;
   function playAudio(noteType, e) {
    
-   
+  
     if (noteType == "c3") {
-      new Audio(`http://mrclan.com/fastdl/tfc/sound/b.wav`).play();
-      // audio.play();
+     
+      if(i == 0){
+        new Audio(`https://mylatinhome.com/absolute/note-sound/A.wav`).play();
+        console.log(i)
+      }
+      if(i == 1){
+        new Audio(`https://mylatinhome.com/absolute/note-sound/Ab.wav`).play();
+        console.log(i)
+      }
+      if(i == 2){
+        new Audio(`https://mylatinhome.com/absolute/note-sound/Ab.wav`).play();
+        console.log(i)
+      }
+      if(i== 3){
+        i=-1;
+      }
+      i = i+1;
+    
     }
+   
   }
   function fetchSongsData() {
     // if(play !=false){
@@ -567,7 +584,6 @@ const MusicWheel = (props) => {
     const nord_or_cord = getNord();
     console.log("sggs", tempoIndex, tempoData[tempoIndex]);
     var urlencoded = new URLSearchParams();
-
     urlencoded.append("songs", "1");
     urlencoded.append("note_or_cord", nord_or_cord);
     urlencoded.append("song_title", "");
@@ -593,9 +609,9 @@ const MusicWheel = (props) => {
       .then((responseJson) => {
         if (responseJson != "") {
           console.log(responseJson);
-          //   var dataSong = responseJson.data[0];
+         
           setSongsData(responseJson.data);
-          //   console.log(dataSong);
+         
         } else {
           alert("error in response");
         }
@@ -809,8 +825,9 @@ const MusicWheel = (props) => {
             </button>
             <button
               className={classes.tempoBtnBottom}
+             
               onClick={(e) => {
-                btnHandler("Progress", e);
+                btnHandler("Intensity", e);
               }}
             >
               {intensityData1[intensityIndex] ? "PROGRESS" : "PROGRESS"}
