@@ -7,6 +7,7 @@ import MusicBtn from "../../../../../public/assets/images/mainBtn.jpg";
 import Mix from "../../../../../public/assets/images/mix4x.png";
 import Tempo from "../../../../../public/assets/images/tempo4x.png";
 import Timer from "../../../../../public/assets/images/timer4x.png";
+
 import Piano from "../../../../../public/assets/images/piano2.jpg";
 import PianoKey from "../../../../../public/assets/images/key_notes.png";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
@@ -296,7 +297,7 @@ const useStyles = makeStyles({
     cursor: "pointer",
     "&:hover": {
       boxShadow: "0 0 5px 5px green",
-      cursor:'pointer',
+      cursor: "pointer",
     },
   },
 });
@@ -431,7 +432,7 @@ const MusicWheel = (props) => {
     "288",
     "300",
   ];
- 
+
   const arryOne = ["c1", "c2", "c3"];
   const data = {
     c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
@@ -473,6 +474,7 @@ const MusicWheel = (props) => {
         setTempoIndex(tempoIndex + 1);
         targetBtn.style.background = "radial-gradient(green 40%, #000)";
         targetBtn.style.color = "#fff";
+        targetBtn.style.border = "1px solid blue";
       }
     }
     if (type == "Intensity") {
@@ -503,6 +505,8 @@ const MusicWheel = (props) => {
         setDurationDataIndex(0);
       } else {
         setDurationDataIndex(durationDataIndex + 1);
+        targetBtn.style.background = "radial-gradient(yellow 40%, #000)";
+        targetBtn.style.border = "1px solid blue";
       }
     }
     //  await fetchSongsData()
@@ -539,6 +543,14 @@ const MusicWheel = (props) => {
     return str;
   }
 
+  function playAudio(noteType, e) {
+   
+   
+    if (noteType == "c3") {
+      new Audio(`http://mrclan.com/fastdl/tfc/sound/b.wav`).play();
+      // audio.play();
+    }
+  }
   function fetchSongsData() {
     // if(play !=false){
     //   setPlay(false);
@@ -604,19 +616,17 @@ const MusicWheel = (props) => {
             <button
               className={classes.topButtons}
               onClick={(e) => {
-                btnHandler("Keys", e);
+                btnHandler("Letter", e);
               }}
             >
-              {true
-                ? "B"
-                : "B"}
+              {true ? "B" : "B"}
             </button>
           </Grid>
           <Grid item xs={4} md={4} className={classes.topButtonContainer1}>
             <button
               className={classes.btnPiano}
               onClick={(e) => {
-                btnHandler("Letter", e);
+                btnHandler("Staff", e);
               }}
             >
               <Image src={PianoKey} alt=".." width={120} height={35} />
@@ -626,7 +636,7 @@ const MusicWheel = (props) => {
             <button
               className={classes.btnPiano}
               onClick={(e) => {
-                btnHandler("Staff", e);
+                btnHandler("Keys", e);
               }}
             >
               {" "}
@@ -715,64 +725,65 @@ const MusicWheel = (props) => {
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid black" }}
+                          onClick={(e) => playAudio("c3", e)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid white" }}
+                          onClick={(e) => playAudio("c3", e)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid black" }}
+                          onClick={(e) => playAudio("c3", ind, e)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid white" }}
+                          onClick={(e) => playAudio("c3", e)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid black" }}
+                          onClick={(e) => playAudio("c3", e)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid white" }}
+                          onClick={(e) => playAudio("c3", e)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid black" }}
+                          onClick={(e) => playAudio("c3", e)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid white" }}
+                          onClick={(e) => playAudio("c3", e)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid black" }}
+                          onClick={(e) => playAudio("c3", e)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid white" }}
+                          onClick={(e) => playAudio("c3", e)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid black" }}
+                          onClick={(e) => playAudio("c3", e)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid white" }}
+                          onClick={(e) => playAudio("c3", e)}
                         ></li>
                       </ul>
                       <div className={classes.circle6}>
-                        {/* {play ? <PauseCircleOutlineIcon
-                          onClick={(e) => {
-                            fetchSongsData();
-                          }}
-                          className={classes.playerBtn}
-                        /> : <PlayCircleOutlineIcon
-                          onClick={(e) => {
-                            fetchSongsData();
-                          }}
-                          className={classes.playerBtn}
-                        />} */}
                         <PlayCircleOutlineIcon
                           onClick={(e) => {
                             fetchSongsData();
