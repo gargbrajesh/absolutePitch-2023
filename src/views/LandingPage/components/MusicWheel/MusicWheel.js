@@ -449,8 +449,8 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
       if (temp[c].indexOf(ind) == -1 && count < 3) {
         temp[c].push(ind);
         setNord(temp);
-
-        setNordData(nordData + data[c][ind]);
+        // setNordData(nordData + data[c][ind]);
+        setNordData(nordData + data[c][ind] + ',');
         console.log("dd", nordData);
       } else if (temp[c].indexOf(ind) > -1) {
         const nordIndex = temp[c].indexOf(ind);
@@ -491,12 +491,16 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
 
     if (type == "Keys") {
       setImageTypeIndex(type);
+      await fetchSongsData();
+      
     }
     if (type == "Letter") {
       setImageTypeIndex(type);
+      await fetchSongsData();
     }
     if (type == "Staff") {
       setImageTypeIndex(type);
+      await fetchSongsData();
     }
     if (type == "Duration") {
       // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
@@ -532,14 +536,17 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
   function getNord() {
     console.log("nordData", nordData);
     let str = nordData;
+    var str2 = nordData;
     for (let val of nordData) {
       if (nordMap[val]) {
         str = nordData.replace(val, nordMap[val]);
+       
         // console.log("final",final_str)
-        // str +=final_str
+        str2 += nordMap[val] + ',';
       }
     }
     console.log("str", str);
+    console.log("str2...", str2);
     return str;
   }
   var i = 0;
@@ -593,6 +600,7 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
     urlencoded.append("intensity", intensityData1[intensityIndex]);
     urlencoded.append("tempo", tempoData[tempoIndex]);
     urlencoded.append("image_type", imageTypeIndex);
+    urlencoded.append("package", intensityData1[intensityIndex]);
 
     var requestOptions = {
       method: "POST",
