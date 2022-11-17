@@ -1,4 +1,4 @@
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, Button } from "@mui/material";
 import React, { useState } from "react";
 import styles from "./circles.module.css";
 import { makeStyles } from "@mui/styles";
@@ -230,13 +230,23 @@ const useStyles = makeStyles({
     display: "flex",
   },
   topButtons: {
-    fontSize: "25px",
+    fontSize: "20px",
     fontWeight: "500",
     width: "50%",
-    padding: "3px",
+    padding: "2px",
     cursor: "pointer",
     "&:hover": {
       boxShadow: "0 0 5px 5px green",
+    },
+    "&:active": {
+      border: "2px solid red",
+    },
+    "&.Mui-selected": {},
+    "&.Mui-focusVisible": {
+      border: "3px solid #F2A42A !important",
+    },
+    ":focus": {
+      border: "3px solid #F2A42A",
     },
   },
 
@@ -300,6 +310,13 @@ const useStyles = makeStyles({
       cursor: "pointer",
     },
   },
+  resetBtn: {
+    alignItem: "center",
+    textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    cursor: "pointer",
+  },
 });
 const MusicWheel = (props) => {
   const [nord, setNord] = useState({ c1: [], c2: [], c3: [] });
@@ -309,7 +326,8 @@ const MusicWheel = (props) => {
   const [nordData, setNordData] = useState("");
   const [tempoIndex, setTempoIndex] = useState(0);
   const [intensityIndex, setIntensityIndex] = useState(0);
-  const [imageTypeIndex, setImageTypeIndex] = useState(0);
+  const [packageIndex, setPackageIndex] = useState(0);
+  const [imageTypeIndex, setImageTypeIndex] = useState("");
   const [durationDataIndex, setDurationDataIndex] = useState(0);
   const [play, setPlay] = useState(false);
   const classes = useStyles();
@@ -323,7 +341,7 @@ const MusicWheel = (props) => {
   };
   const intensityData = { None: "", HI: "hi", LI: "li", MI: "mi" };
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
-  const intensityData1 = ["", "HI", "LI", "MI"];
+  const intensityData1 = ["","HI", "LI", "MI"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
   const durationData = [
     "",
@@ -342,7 +360,6 @@ const MusicWheel = (props) => {
     "129",
     "135",
     "139",
-    ,
     "141",
     "145",
     "147",
@@ -437,10 +454,14 @@ const MusicWheel = (props) => {
   const data = {
     c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
     c2: ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-    c3: ["C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C "],
+    c3: ["C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C"],
   };
   const nordMap = { "+": "M", "-": "m", "#": "b" };
-const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://mylatinhome.com/absolute/note-sound/Am.wav','https://mylatinhome.com/absolute/note-sound/Ab.wav']
+  const soundData = [
+    "https://mylatinhome.com/absolute/note-sound/A.wav",
+    "https://mylatinhome.com/absolute/note-sound/Am.wav",
+    "https://mylatinhome.com/absolute/note-sound/Ab.wav",
+  ];
   function changeHandler(c, ind, event) {
     console.log("event is", event, circleOne);
     const temp = { ...nord };
@@ -449,8 +470,8 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
       if (temp[c].indexOf(ind) == -1 && count < 3) {
         temp[c].push(ind);
         setNord(temp);
-        // setNordData(nordData + data[c][ind]);
-        setNordData(nordData + data[c][ind] + ',');
+        setNordData(nordData + data[c][ind]);
+        // setNordData(nordData + data[c][ind] + ",");
         console.log("dd", nordData);
       } else if (temp[c].indexOf(ind) > -1) {
         const nordIndex = temp[c].indexOf(ind);
@@ -489,16 +510,25 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
       }
     }
 
+    if (type == "P") {
+      setPackageIndex(type);
+    }
+
     if (type == "Keys") {
+      alert("Keys");
+      targetBtn.style.border = "2px solid blue";
       setImageTypeIndex(type);
       await fetchSongsData();
-      
     }
     if (type == "Letter") {
+      alert("Letter");
+      targetBtn.style.border = "2px solid blue";
       setImageTypeIndex(type);
       await fetchSongsData();
     }
     if (type == "Staff") {
+      alert("Staff");
+      targetBtn.style.border = "2px solid blue";
       setImageTypeIndex(type);
       await fetchSongsData();
     }
@@ -513,7 +543,7 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
         targetBtn.style.border = "1px solid blue";
       }
     }
-    //  await fetchSongsData()
+    await fetchSongsData();
   }
   function handleDropDownChange(value, type) {
     if (value != "") {
@@ -540,9 +570,9 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
     for (let val of nordData) {
       if (nordMap[val]) {
         str = nordData.replace(val, nordMap[val]);
-       
+
         // console.log("final",final_str)
-        str2 += nordMap[val] + ',';
+        str2 += nordMap[val] + ",";
       }
     }
     console.log("str", str);
@@ -551,30 +581,29 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
   }
   var i = 0;
   function playAudio(noteType, e) {
-   
-  
     if (noteType == "c3") {
-     
-      if(i == 0){
+      if (i == 0) {
         new Audio(`https://mylatinhome.com/absolute/note-sound/A.wav`).play();
-        console.log(i)
+        console.log(i);
       }
-      if(i == 1){
+      if (i == 1) {
         new Audio(`https://mylatinhome.com/absolute/note-sound/Ab.wav`).play();
-        console.log(i)
+        console.log(i);
       }
-      if(i == 2){
+      if (i == 2) {
         new Audio(`https://mylatinhome.com/absolute/note-sound/Ab.wav`).play();
-        console.log(i)
+        console.log(i);
       }
-      if(i== 3){
-        i=-1;
+      if (i == 3) {
+        i = -1;
       }
-      i = i+1;
-    
+      i = i + 1;
     }
-   
   }
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   function fetchSongsData() {
     // if(play !=false){
     //   setPlay(false);
@@ -600,7 +629,7 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
     urlencoded.append("intensity", intensityData1[intensityIndex]);
     urlencoded.append("tempo", tempoData[tempoIndex]);
     urlencoded.append("image_type", imageTypeIndex);
-    urlencoded.append("package", intensityData1[intensityIndex]);
+    urlencoded.append("package", packageIndex);
 
     var requestOptions = {
       method: "POST",
@@ -617,9 +646,8 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
       .then((responseJson) => {
         if (responseJson != "") {
           console.log(responseJson);
-         
+
           setSongsData(responseJson.data);
-         
         } else {
           alert("error in response");
         }
@@ -629,6 +657,9 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={12} className={classes.circleCard}>
+        <div className={classes.resetBtn}>
+          <button onClick={refreshPage}>Reset</button>
+        </div>
         <Grid container spacing={2}>
           <Grid
             item
@@ -637,37 +668,38 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
             className={classes.topButtonContainer}
             style={{}}
           >
-            <button
+            <Button
               className={classes.topButtons}
               onClick={(e) => {
                 btnHandler("Letter", e);
               }}
+              style={{ background: "#fff" }}
             >
               {true ? "B" : "B"}
-            </button>
+            </Button>
           </Grid>
           <Grid item xs={4} md={4} className={classes.topButtonContainer1}>
-            <button
+            <Button
               className={classes.btnPiano}
               onClick={(e) => {
                 btnHandler("Staff", e);
               }}
+              style={{ background: "#fff" }}
             >
               <Image src={PianoKey} alt=".." width={120} height={35} />
-            </button>
+            </Button>
           </Grid>
           <Grid item xs={4} md={4} className={classes.topButtonContainer2}>
-            <button
+            <Button
               className={classes.btnPiano}
               onClick={(e) => {
                 btnHandler("Keys", e);
               }}
+              style={{ background: "#fff" }}
             >
               {" "}
-              <button>
-                <Image src={Piano} alt=".." width={100} height={30} />
-              </button>
-            </button>
+              <Image src={Piano} alt=".." width={100} height={30} />
+            </Button>
           </Grid>
         </Grid>
         <Grid container>
@@ -675,12 +707,10 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
             <button
               className={classes.tempoBtnTop}
               onClick={(e) => {
-                btnHandler("Intensity", e);
+                btnHandler("P", e);
               }}
             >
-              {intensityData1[intensityIndex]
-                ? intensityData1[intensityIndex]
-                : "MIX"}
+              P
             </button>
             <button
               className={classes.tempoBtnBottom}
@@ -833,12 +863,13 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
             </button>
             <button
               className={classes.tempoBtnBottom}
-             
               onClick={(e) => {
                 btnHandler("Intensity", e);
               }}
             >
-              {intensityData1[intensityIndex] ? "PROGRESS" : "PROGRESS"}
+              {intensityData1[intensityIndex]
+                ? intensityData1[intensityIndex]
+                : "Mix"}
             </button>
           </Grid>
         </Grid>
@@ -848,9 +879,11 @@ const soundData =['https://mylatinhome.com/absolute/note-sound/A.wav','https://m
             <ul>
               {songsData && songsData.length > 0
                 ? songsData.slice(0, 10).map((val, ind) => (
+                
                     <li
                       key={"songs" + ind}
                       onClick={() => handleClickSong(val)}
+                     
                     >
                       {" "}
                       * {val["song_name"]}{" "}
