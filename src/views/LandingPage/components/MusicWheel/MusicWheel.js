@@ -31,23 +31,23 @@ const useStyles = makeStyles({
 
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: "125px",
+    // marginLeft: "125px",
     marginTop: "-25px",
     "@media (min-width: 1280px) and (max-width:1680px)": {
       // marginLeft: '235px',
       // marginTop: '100px',
     },
     "@media (min-width: 600px) and (max-width:768px)": {
-      marginLeft: "30%",
-      marginTop: "100px",
+      // marginLeft: "30%",
+      // marginTop: "100px",
     },
     "@media (min-width: 380px) and (max-width:425px)": {
-      marginLeft: "8%",
-      marginTop: "20%",
+      // marginLeft: "8%",
+      // marginTop: "20%",
     },
     "@media (max-width:375px)": {
-      marginLeft: "3%",
-      marginTop: "20%",
+      // marginLeft: "3%",
+      // marginTop: "20%",
     },
   },
   layertwo: {
@@ -262,6 +262,7 @@ const useStyles = makeStyles({
   wheelContianer: {
     alignItems: "center",
     display: "flex",
+    justifyContent:'center',
   },
 
   tempoBtnTop: {

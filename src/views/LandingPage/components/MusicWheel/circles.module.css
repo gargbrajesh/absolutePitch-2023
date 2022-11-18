@@ -382,7 +382,7 @@
   width: 90%;
 }
 .listStyleDisable:hover {
-  pointer-events: none;
+  /* pointer-events: none; */
   border-radius: 20px;
   padding-left: 20px;
   opacity: 0.6;
