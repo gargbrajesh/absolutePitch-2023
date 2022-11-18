@@ -481,62 +481,68 @@ const MusicWheel = (props) => {
     }
   }
   async function btnHandler(type, e) {
-    var targetBtn = e.target;
-    if (type == "Tempo") {
-      // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
-
-      if (tempoIndex == tempoData.length - 1) {
-        setTempoIndex(0);
-      } else {
-        setTempoIndex(tempoIndex + 1);
-        targetBtn.style.background = "radial-gradient(green 40%, #000)";
-        targetBtn.style.color = "#fff";
+    if(imageTypeIndex =="" && type !='Letter'){
+ alert('Please select any ImageType Key')
+    }
+    else{
+      var targetBtn = e.target;
+      if (type == "Tempo") {
+        // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
+  
+        if (tempoIndex == tempoData.length - 1) {
+          setTempoIndex(0);
+        } else {
+          setTempoIndex(tempoIndex + 1);
+          targetBtn.style.background = "radial-gradient(green 40%, #000)";
+          targetBtn.style.color = "#fff";
+          targetBtn.style.border = "1px solid blue";
+        }
+      }
+      if (type == "Intensity") {
+        // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
+  
+        if (intensityIndex == intensityData.length - 1) {
+          setIntensityIndex(0);
+        } else {
+          setIntensityIndex(intensityIndex + 1);
+          targetBtn.style.background = "radial-gradient(blue 40%, #000)";
+          targetBtn.style.color = "#fff";
+        }
+      }
+  
+      if (type == "P") {
+        setPackageIndex(type);
+        targetBtn.style.background = "radial-gradient(#df783d 40%, #000)";
         targetBtn.style.border = "1px solid blue";
       }
-    }
-    if (type == "Intensity") {
-      // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
-
-      if (intensityIndex == intensityData.length - 1) {
-        setIntensityIndex(0);
-      } else {
-        setIntensityIndex(intensityIndex + 1);
-        targetBtn.style.background = "radial-gradient(blue 40%, #000)";
-        targetBtn.style.color = "#fff";
+  
+      if (type == "Keys") {
+        targetBtn.style.border = "2px solid blue";
+        setImageTypeIndex(type);
+        await fetchSongsData(type);
+      }
+      if (type == "Letter") {
+        targetBtn.style.border = "2px solid blue";
+        setImageTypeIndex(type);
+        await fetchSongsData(type);
+      }
+      if (type == "Staff") {
+        targetBtn.style.border = "2px solid blue";
+        setImageTypeIndex(type);
+        await fetchSongsData(type);
+      }
+      if (type == "Duration") {
+  
+        if (durationDataIndex == durationData.length - 1) {
+          setDurationDataIndex(0);
+        } else {
+          setDurationDataIndex(durationDataIndex + 1);
+          targetBtn.style.background = "radial-gradient(yellow 40%, #000)";
+          targetBtn.style.border = "1px solid blue";
+        }
       }
     }
-
-    if (type == "P") {
-      setPackageIndex(type);
-      targetBtn.style.background = "radial-gradient(#df783d 40%, #000)";
-      targetBtn.style.border = "1px solid blue";
-    }
-
-    if (type == "Keys") {
-      targetBtn.style.border = "2px solid blue";
-      setImageTypeIndex(type);
-      await fetchSongsData(type);
-    }
-    if (type == "Letter") {
-      targetBtn.style.border = "2px solid blue";
-      setImageTypeIndex(type);
-      await fetchSongsData(type);
-    }
-    if (type == "Staff") {
-      targetBtn.style.border = "2px solid blue";
-      setImageTypeIndex(type);
-      await fetchSongsData(type);
-    }
-    if (type == "Duration") {
-
-      if (durationDataIndex == durationData.length - 1) {
-        setDurationDataIndex(0);
-      } else {
-        setDurationDataIndex(durationDataIndex + 1);
-        targetBtn.style.background = "radial-gradient(yellow 40%, #000)";
-        targetBtn.style.border = "1px solid blue";
-      }
-    }
+    
     
   }
 
