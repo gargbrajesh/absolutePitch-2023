@@ -326,13 +326,14 @@ const MusicWheel = (props) => {
   const [songsData, setSongsData] = useState([]);
   const [tempo, SetTempo] = useState("");
   const [intensity, SetIntensity] = useState("");
-  const [nordData, setNordData] = useState("");
+  const [nordData, setNordData] = useState([]);
   const [tempoIndex, setTempoIndex] = useState(0);
   const [intensityIndex, setIntensityIndex] = useState(0);
   const [packageIndex, setPackageIndex] = useState(0);
   const [imageTypeIndex, setImageTypeIndex] = useState("");
   const [durationDataIndex, setDurationDataIndex] = useState(0);
   const [play, setPlay] = useState(false);
+  const [index, setIndex] = useState(0)
   const classes = useStyles();
   const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   
@@ -462,21 +463,44 @@ const MusicWheel = (props) => {
     console.log("event is", event, circleOne);
     const temp = { ...nord };
     const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
+    // if (c=="c1"){
+
+    // }
     if (["c1", "c2", "c3"].includes(c)) {
       if (temp[c].indexOf(ind) == -1 && count < 3) {
+
         temp[c].push(ind);
+        setIndex(ind)
         setNord(temp);
-        setNordData(nordData + data[c][ind]);
+        if (c=="c1" || c=="c2"){
+          var nordData2 =  data['c3'][ind] + data[c][ind]
+        }
+        else{
+          var nordData2 =  data[c][ind]
+          console.log("nordData2",nordData2)
+
+        }
+        console.log("before", nordData, nordData2);
+
+        setNordData([...nordData,nordData2]);
         // setNordData(nordData + data[c][ind] + ",");
         console.log("dd", nordData);
       } else if (temp[c].indexOf(ind) > -1) {
         const nordIndex = temp[c].indexOf(ind);
         temp[c].splice(nordIndex, 1);
         setNord(temp);
-        console.log("popo", nordData, data[c][nordIndex], data[c][ind]);
-        const final_node = nordData.replace(data[c][ind], "");
-        console.log("final_node", final_node);
-        setNordData(final_node);
+        console.log("else", nordData);
+
+        // console.log("popo", nordData, data[c][nordIndex], data[c][ind]);
+        if (c=="c1" || c=="c2"){
+        var nordIndex1 = nordData.indexOf(data['c3'][ind] + data[c][ind]);
+        } 
+        else{
+        var nordIndex1 = nordData.indexOf(data[c][ind]);
+        }
+        nordData.splice(nordIndex1,1);
+
+        setNordData(nordData);
       }
     }
   }
@@ -552,19 +576,26 @@ const MusicWheel = (props) => {
   }
 
   function getNord() {
-    let str = nordData;
+    
     var str2 = nordData;
-    for (let val of nordData) {
-      if (nordMap[val]) {
-        str = nordData.replace(val, nordMap[val]);
+    let final_result = []
+    for (let i=0;i<nordData.length;i++){
+      let str = nordData[i];
 
-        // console.log("final",final_str)
-        str2 += nordMap[val] + ",";
+      for (let val of nordData[i]) {
+        if (nordMap[val]) {
+          str = nordData[i].replace(val, nordMap[val]);
+  
+          // console.log("final",final_str)
+          str2 += nordMap[val] + ",";
+          
+        }
       }
+      final_result.push(str)
     }
-    console.log("str", str);
-    console.log("str2...", str2);
-    return str;
+    
+    console.log("final_result",final_result)
+    return final_result;
   }
   var i = 0;
   function playAudio(noteType, e) {
@@ -873,7 +904,7 @@ const MusicWheel = (props) => {
           <Paper elevation={3} className={classes.paperStyle}>
             <ul>
               {songsData && songsData.length > 0
-                ? songsData.slice(0, 10).map((val, ind) =>
+                ? songsData.slice(0, 20).map((val, ind) =>
                     val["song_name"].includes("_P.") ? (
                       <li
                         key={"songs" + ind}
