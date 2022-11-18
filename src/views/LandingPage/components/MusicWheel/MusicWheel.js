@@ -594,7 +594,7 @@ const MusicWheel = (props) => {
     alert('Please purchase this song');
   }
 
-  function fetchSongsData(imageType) {
+  function fetchSongsData(imageType=imageTypeIndex) {
     // if(play !=false){
     //   setPlay(false);
     // }
