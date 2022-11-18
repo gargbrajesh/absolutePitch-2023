@@ -334,16 +334,9 @@ const MusicWheel = (props) => {
   const [play, setPlay] = useState(false);
   const classes = useStyles();
   const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const tempData = {
-    None: "",
-    Calm: "calm",
-    Lively: "lively",
-    Mellow: "mellow",
-    Moderate: "moderate",
-  };
-  const intensityData = { None: "", HI: "hi", LI: "li", MI: "mi" };
+  
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
-  const intensityData1 = ["", "HI", "LI", "MI"];
+  const intensityData = ["", "HI", "LI", "MI"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
   const durationData = [
     "",
@@ -503,7 +496,7 @@ const MusicWheel = (props) => {
     if (type == "Intensity") {
       // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
 
-      if (intensityIndex == intensityData1.length - 1) {
+      if (intensityIndex == intensityData.length - 1) {
         setIntensityIndex(0);
       } else {
         setIntensityIndex(intensityIndex + 1);
@@ -519,25 +512,21 @@ const MusicWheel = (props) => {
     }
 
     if (type == "Keys") {
-      alert("Keys");
       targetBtn.style.border = "2px solid blue";
       setImageTypeIndex(type);
-      await fetchSongsData();
+      await fetchSongsData(type);
     }
     if (type == "Letter") {
-      alert("Letter");
       targetBtn.style.border = "2px solid blue";
       setImageTypeIndex(type);
-      await fetchSongsData();
+      await fetchSongsData(type);
     }
     if (type == "Staff") {
-      alert("Staff");
       targetBtn.style.border = "2px solid blue";
       setImageTypeIndex(type);
-      await fetchSongsData();
+      await fetchSongsData(type);
     }
     if (type == "Duration") {
-      // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
 
       if (durationDataIndex == durationData.length - 1) {
         setDurationDataIndex(0);
@@ -547,19 +536,7 @@ const MusicWheel = (props) => {
         targetBtn.style.border = "1px solid blue";
       }
     }
-    await fetchSongsData();
-  }
-  function handleDropDownChange(value, type) {
-    if (value != "") {
-      if (type == "Tempo") {
-        SetTempo(value);
-      }
-      if (type == "Intensity") {
-        SetIntensity(value);
-      }
-    }
-
-    console.log(value, type);
+    
   }
 
   function handleClickSong(song_data) {
@@ -568,7 +545,6 @@ const MusicWheel = (props) => {
   }
 
   function getNord() {
-    console.log("nordData", nordData);
     let str = nordData;
     var str2 = nordData;
     for (let val of nordData) {
@@ -618,7 +594,7 @@ const MusicWheel = (props) => {
     alert('Please purchase this song');
   }
 
-  function fetchSongsData() {
+  function fetchSongsData(imageType) {
     // if(play !=false){
     //   setPlay(false);
     // }
@@ -632,7 +608,6 @@ const MusicWheel = (props) => {
     myHeaders.append("Cookie", "PHPSESSID=ckmj4nc6enk1u3e0rle62m3l64");
 
     const nord_or_cord = getNord();
-    console.log("sggs", tempoIndex, tempoData[tempoIndex]);
     var urlencoded = new URLSearchParams();
     urlencoded.append("songs", "1");
     urlencoded.append("note_or_cord", nord_or_cord);
@@ -640,9 +615,9 @@ const MusicWheel = (props) => {
     urlencoded.append("groups", "");
     urlencoded.append("no_of_images", "");
     urlencoded.append("duration", durationData[durationDataIndex]);
-    urlencoded.append("intensity", intensityData1[intensityIndex]);
+    urlencoded.append("intensity", intensityData[intensityIndex]);
     urlencoded.append("tempo", tempoData[tempoIndex]);
-    urlencoded.append("image_type", imageTypeIndex);
+    urlencoded.append("image_type", imageType);
     urlencoded.append("package", packageIndex);
 
     var requestOptions = {
@@ -659,7 +634,7 @@ const MusicWheel = (props) => {
       .then((response) => response.json())
       .then((responseJson) => {
         if (responseJson != "") {
-          console.log(responseJson);
+          console.log("res",responseJson);
 
           setSongsData(responseJson.data);
         } else {
@@ -667,7 +642,6 @@ const MusicWheel = (props) => {
         }
       });
   }
-
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={12} className={classes.circleCard}>
@@ -881,8 +855,8 @@ const MusicWheel = (props) => {
                 btnHandler("Intensity", e);
               }}
             >
-              {intensityData1[intensityIndex]
-                ? intensityData1[intensityIndex]
+              {intensityData[intensityIndex]
+                ? intensityData[intensityIndex]
                 : "Mix"}
             </button>
           </Grid>
