@@ -16,6 +16,7 @@ import Progress from "../../../../../public/assets/images/progress4x.png";
 import Image from "next/image";
 import DropDown from "../../../../components/organisms/Dropdown/index";
 import { Label } from "@mui/icons-material";
+import { style } from "@mui/system";
 
 const useStyles = makeStyles({
   root: {
@@ -317,6 +318,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     cursor: "pointer",
   },
+  premiumList: { pointerEvents: "none", opacity: "0.6", background: "gray" },
 });
 const MusicWheel = (props) => {
   const [nord, setNord] = useState({ c1: [], c2: [], c3: [] });
@@ -341,7 +343,7 @@ const MusicWheel = (props) => {
   };
   const intensityData = { None: "", HI: "hi", LI: "li", MI: "mi" };
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
-  const intensityData1 = ["","HI", "LI", "MI"];
+  const intensityData1 = ["", "HI", "LI", "MI"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
   const durationData = [
     "",
@@ -449,7 +451,7 @@ const MusicWheel = (props) => {
     "288",
     "300",
   ];
-
+  var stylesList = { background: "gary", borderRadius: "20px", width: "80%" };
   const arryOne = ["c1", "c2", "c3"];
   const data = {
     c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
@@ -512,6 +514,8 @@ const MusicWheel = (props) => {
 
     if (type == "P") {
       setPackageIndex(type);
+      targetBtn.style.background = "radial-gradient(#df783d 40%, #000)";
+      targetBtn.style.border = "1px solid blue";
     }
 
     if (type == "Keys") {
@@ -602,6 +606,16 @@ const MusicWheel = (props) => {
   }
   function refreshPage() {
     window.location.reload(false);
+  }
+  function show() {
+    // function show(id, e)
+    // var list = document.getElementById(id).innerHTML;
+    // var item = list.includes("_P.");
+    // var targetItem = e.target;
+    // item ? (targetItem.style.background = "gray") : "";
+
+    //  targetItem.style.background = 'gray';
+    alert('Please purchase this song');
   }
 
   function fetchSongsData() {
@@ -878,17 +892,30 @@ const MusicWheel = (props) => {
           <Paper elevation={3} className={classes.paperStyle}>
             <ul>
               {songsData && songsData.length > 0
-                ? songsData.slice(0, 10).map((val, ind) => (
-                
-                    <li
-                      key={"songs" + ind}
-                      onClick={() => handleClickSong(val)}
-                     
-                    >
-                      {" "}
-                      * {val["song_name"]}{" "}
-                    </li>
-                  ))
+                ? songsData.slice(0, 10).map((val, ind) =>
+                    val["song_name"].includes("_P.") ? (
+                      <li
+                        key={"songs" + ind}
+                        // onClick={() => handleClickSong(val)}
+                        onClick={() => alert('purches it')}
+                        id={ind}
+                        className={styles.listStyleDisable}
+                      >
+                        {" "}
+                        * {val["song_name"]}{" "}
+                      </li>
+                    ) : (
+                      <li
+                        key={"songs" + ind}
+                        onClick={() => handleClickSong(val)}
+                        // onMouseEnter={(e) => show(ind, e)}
+                        className={styles.liststyle}
+                      >
+                        {" "}
+                        * {val["song_name"]}{" "}
+                      </li>
+                    )
+                  )
                 : "No Songs Found"}
 
               <li></li>

@@ -365,11 +365,27 @@
   padding-left: 10px;
   justify-content: center;
 }
-.songsWrapper ul li:hover {
+/* .songsWrapper ul li:hover {
   color: #fff;
   cursor: pointer;
   border-radius: 20px;
   padding-left: 20px;
   background: #18b0a0;
+  width: 90%;
+} */
+.liststyle:hover {
+  color: #fff;
+  cursor: pointer;
+  border-radius: 20px;
+  padding-left: 20px;
+  background: #18b0a0;
+  width: 90%;
+}
+.listStyleDisable:hover {
+  pointer-events: none;
+  border-radius: 20px;
+  padding-left: 20px;
+  opacity: 0.6;
+  background: gray;
   width: 90%;
 }
