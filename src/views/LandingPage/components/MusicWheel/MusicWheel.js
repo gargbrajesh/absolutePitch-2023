@@ -505,7 +505,7 @@ const MusicWheel = (props) => {
     }
   }
   async function btnHandler(type, e) {
-    if(imageTypeIndex =="" && type !='Letter'){
+    if(imageTypeIndex =="" && type !='Letter' && type !='Staff' && type !='Keys'){
  alert('Please select any ImageType Key')
     }
     else{
@@ -909,7 +909,7 @@ const MusicWheel = (props) => {
                       <li
                         key={"songs" + ind}
                         // onClick={() => handleClickSong(val)}
-                        onClick={() => alert('purches it')}
+                        onClick={() => alert('You need to purchase the membership')}
                         id={ind}
                         className={styles.listStyleDisable}
                       >
