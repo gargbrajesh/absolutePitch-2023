@@ -30,7 +30,6 @@ const useStyles = makeStyles({
     width: "300px",
     height: "300px",
     display: "flex",
-
     justifyContent: "center",
     alignItems: "center",
     // marginLeft: "125px",
@@ -336,9 +335,10 @@ const MusicWheel = (props) => {
   const [durationDataIndex, setDurationDataIndex] = useState(0);
   const [play, setPlay] = useState(false);
   const [index, setIndex] = useState(0);
+  const [counter, setCounter] = useState(0);
   const classes = useStyles();
   const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const [changeBg, setChngeBg] = useState("");
+  const [changeBg, setChangeBg] = useState("");
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData = ["", "HI", "LI", "MI"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
@@ -449,7 +449,7 @@ const MusicWheel = (props) => {
     "300",
   ];
 
-  const arryOne = ["c1", "c2", "c3"];
+  const arryOne = ["c3", "c2", "c1"];
   const data = {
     c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
     c2: ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
@@ -595,34 +595,50 @@ const MusicWheel = (props) => {
 
   var i = 0;
 
-  // for get nord  on click button click
+  // for get nord  on button click
 
-  var counter = 0;
+  // var counter = 0;
+  let nordArray = [];
   function playAudio(noteType, e, ind) {
-    alert(ind);
+    
     if (counter == 0) {
+      nordArray.push(data["c3"][ind])
       if (data["c3"][ind]) {
         var nrd = data["c3"][ind];
-
+          
         console.log(nrd, "nrd........", counter);
+        changeHandler("c3", ind)
+       
+        new Audio(`https://mylatinhome.com/absolute/note-sound/A.wav`).play();
       }
     }
-    if (counter == 1) {
+    else if (counter == 1) {
       if (data["c2"][ind]) {
         var nrd2 = data["c2"][ind];
-
+       
         console.log(nrd2, "nrd2........", counter);
+        changeHandler("c2", ind)
+        changeHandler("c3", ind)
+        new Audio(`https://mylatinhome.com/absolute/note-sound/Ab.wav`).play();
       }
     }
-    if (counter == 2) {
+    else if (counter == 2) {
       if (data["c1"][ind]) {
         var nrd3 = data["c1"][ind];
-
+       
         console.log(nrd3, "nrd3........", counter);
+        changeHandler("c1", ind,)
+        changeHandler("c2", ind,)
+        new Audio(`https://mylatinhome.com/absolute/note-sound/Ab.wav`).play();
       }
     }
+    else{
+      counter = -1;
+      changeHandler("c1", ind);
+    }
 
-    counter = counter + 1;
+    // counter = counter + 1;
+    setCounter(++counter);
 
     // if (noteType == "A#") {
     //   if (i == 0) {
@@ -644,6 +660,7 @@ const MusicWheel = (props) => {
     //   i = i + 1;
     // }
   }
+
   function refreshPage() {
     window.location.reload(false);
   }
@@ -825,7 +842,9 @@ const MusicWheel = (props) => {
                             nord["c3"].includes(ind) ? styles.bluebg : ""
                           }`}
                           onClick={(e) => changeHandler("c3", ind, e)}
+                        
                         >
+                       
                           {val}
                         </div>
                       </li>
