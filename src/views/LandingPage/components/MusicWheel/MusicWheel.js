@@ -1,5 +1,7 @@
 import { Grid, Paper, Button } from "@mui/material";
 import React, { useState } from "react";
+import '../../../../../utils/data';
+// import useStyles from '../../../../../utils/style';
 import styles from "./circles.module.css";
 import { makeStyles } from "@mui/styles";
 // import MusicBtn from '../../../../public/assets/images/mainBtn.jpg';
@@ -262,7 +264,7 @@ const useStyles = makeStyles({
   wheelContianer: {
     alignItems: "center",
     display: "flex",
-    justifyContent:'center',
+    justifyContent: "center",
   },
 
   tempoBtnTop: {
@@ -333,10 +335,10 @@ const MusicWheel = (props) => {
   const [imageTypeIndex, setImageTypeIndex] = useState("");
   const [durationDataIndex, setDurationDataIndex] = useState(0);
   const [play, setPlay] = useState(false);
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(0);
   const classes = useStyles();
   const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  
+  const [changeBg, setChngeBg] = useState("");
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData = ["", "HI", "LI", "MI"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
@@ -446,7 +448,7 @@ const MusicWheel = (props) => {
     "288",
     "300",
   ];
-  var stylesList = { background: "gary", borderRadius: "20px", width: "80%" };
+
   const arryOne = ["c1", "c2", "c3"];
   const data = {
     c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
@@ -468,21 +470,18 @@ const MusicWheel = (props) => {
     // }
     if (["c1", "c2", "c3"].includes(c)) {
       if (temp[c].indexOf(ind) == -1 && count < 3) {
-
         temp[c].push(ind);
-        setIndex(ind)
+        setIndex(ind);
         setNord(temp);
-        if (c=="c1" || c=="c2"){
-          var nordData2 =  data['c3'][ind] + data[c][ind]
-        }
-        else{
-          var nordData2 =  data[c][ind]
-          console.log("nordData2",nordData2)
-
+        if (c == "c1" || c == "c2") {
+          var nordData2 = data["c3"][ind] + data[c][ind];
+        } else {
+          var nordData2 = data[c][ind];
+          console.log("nordData2", nordData2);
         }
         console.log("before", nordData, nordData2);
 
-        setNordData([...nordData,nordData2]);
+        setNordData([...nordData, nordData2]);
         // setNordData(nordData + data[c][ind] + ",");
         console.log("dd", nordData);
       } else if (temp[c].indexOf(ind) > -1) {
@@ -492,27 +491,29 @@ const MusicWheel = (props) => {
         console.log("else", nordData);
 
         // console.log("popo", nordData, data[c][nordIndex], data[c][ind]);
-        if (c=="c1" || c=="c2"){
-        var nordIndex1 = nordData.indexOf(data['c3'][ind] + data[c][ind]);
-        } 
-        else{
-        var nordIndex1 = nordData.indexOf(data[c][ind]);
+        if (c == "c1" || c == "c2") {
+          var nordIndex1 = nordData.indexOf(data["c3"][ind] + data[c][ind]);
+        } else {
+          var nordIndex1 = nordData.indexOf(data[c][ind]);
         }
-        nordData.splice(nordIndex1,1);
-
+        nordData.splice(nordIndex1, 1);
         setNordData(nordData);
       }
     }
   }
   async function btnHandler(type, e) {
-    if(imageTypeIndex =="" && type !='Letter' && type !='Staff' && type !='Keys'){
- alert('Please select any ImageType Key')
-    }
-    else{
+    if (
+      imageTypeIndex == "" &&
+      type != "Letter" &&
+      type != "Staff" &&
+      type != "Keys"
+    ) {
+      alert("Please select any ImageType Key");
+    } else {
       var targetBtn = e.target;
       if (type == "Tempo") {
         // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
-  
+
         if (tempoIndex == tempoData.length - 1) {
           setTempoIndex(0);
         } else {
@@ -524,7 +525,7 @@ const MusicWheel = (props) => {
       }
       if (type == "Intensity") {
         // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
-  
+
         if (intensityIndex == intensityData.length - 1) {
           setIntensityIndex(0);
         } else {
@@ -533,13 +534,13 @@ const MusicWheel = (props) => {
           targetBtn.style.color = "#fff";
         }
       }
-  
+
       if (type == "P") {
         setPackageIndex(type);
         targetBtn.style.background = "radial-gradient(#df783d 40%, #000)";
         targetBtn.style.border = "1px solid blue";
       }
-  
+
       if (type == "Keys") {
         targetBtn.style.border = "2px solid blue";
         setImageTypeIndex(type);
@@ -556,7 +557,6 @@ const MusicWheel = (props) => {
         await fetchSongsData(type);
       }
       if (type == "Duration") {
-  
         if (durationDataIndex == durationData.length - 1) {
           setDurationDataIndex(0);
         } else {
@@ -566,8 +566,6 @@ const MusicWheel = (props) => {
         }
       }
     }
-    
-    
   }
 
   function handleClickSong(song_data) {
@@ -576,47 +574,75 @@ const MusicWheel = (props) => {
   }
 
   function getNord() {
-    
     var str2 = nordData;
-    let final_result = []
-    for (let i=0;i<nordData.length;i++){
+    let final_result = [];
+    for (let i = 0; i < nordData.length; i++) {
       let str = nordData[i];
 
       for (let val of nordData[i]) {
         if (nordMap[val]) {
           str = nordData[i].replace(val, nordMap[val]);
-  
           // console.log("final",final_str)
           str2 += nordMap[val] + ",";
-          
         }
       }
-      final_result.push(str)
+      final_result.push(str);
     }
-    
-    console.log("final_result",final_result)
+
+    console.log("final_result", final_result);
     return final_result;
   }
+
   var i = 0;
-  function playAudio(noteType, e) {
-    if (noteType == "c3") {
-      if (i == 0) {
-        new Audio(`https://mylatinhome.com/absolute/note-sound/A.wav`).play();
-        console.log(i);
+
+  // for get nord  on click button click
+
+  var counter = 0;
+  function playAudio(noteType, e, ind) {
+    alert(ind);
+    if (counter == 0) {
+      if (data["c3"][ind]) {
+        var nrd = data["c3"][ind];
+
+        console.log(nrd, "nrd........", counter);
       }
-      if (i == 1) {
-        new Audio(`https://mylatinhome.com/absolute/note-sound/Ab.wav`).play();
-        console.log(i);
-      }
-      if (i == 2) {
-        new Audio(`https://mylatinhome.com/absolute/note-sound/Ab.wav`).play();
-        console.log(i);
-      }
-      if (i == 3) {
-        i = -1;
-      }
-      i = i + 1;
     }
+    if (counter == 1) {
+      if (data["c2"][ind]) {
+        var nrd2 = data["c2"][ind];
+
+        console.log(nrd2, "nrd2........", counter);
+      }
+    }
+    if (counter == 2) {
+      if (data["c1"][ind]) {
+        var nrd3 = data["c1"][ind];
+
+        console.log(nrd3, "nrd3........", counter);
+      }
+    }
+
+    counter = counter + 1;
+
+    // if (noteType == "A#") {
+    //   if (i == 0) {
+    //     new Audio(`https://mylatinhome.com/absolute/note-sound/A.wav`).play();
+    //     console.log(i);
+
+    //   }
+    //   if (i == 1) {
+    //     new Audio(`https://mylatinhome.com/absolute/note-sound/Ab.wav`).play();
+    //     console.log(i);
+    //   }
+    //   if (i == 2) {
+    //     new Audio(`https://mylatinhome.com/absolute/note-sound/Ab.wav`).play();
+    //     console.log(i);
+    //   }
+    //   if (i == 3) {
+    //     i = -1;
+    //   }
+    //   i = i + 1;
+    // }
   }
   function refreshPage() {
     window.location.reload(false);
@@ -629,10 +655,10 @@ const MusicWheel = (props) => {
     // item ? (targetItem.style.background = "gray") : "";
 
     //  targetItem.style.background = 'gray';
-    alert('Please purchase this song');
+    alert("Please purchase this song");
   }
 
-  function fetchSongsData(imageType=imageTypeIndex) {
+  function fetchSongsData(imageType = imageTypeIndex) {
     // if(play !=false){
     //   setPlay(false);
     // }
@@ -672,7 +698,7 @@ const MusicWheel = (props) => {
       .then((response) => response.json())
       .then((responseJson) => {
         if (responseJson != "") {
-          console.log("res",responseJson);
+          console.log("res", responseJson);
 
           setSongsData(responseJson.data);
         } else {
@@ -745,7 +771,12 @@ const MusicWheel = (props) => {
               }}
             >
               {durationData[durationDataIndex]
-                ? durationData[durationDataIndex]
+                ? durationData[durationDataIndex] <= 120
+                  ? "short"
+                  : durationData[durationDataIndex] <= 240 &&
+                    durationData[durationDataIndex] >= 121
+                  ? "Medium"
+                  : "Long"
                 : "Duration"}
             </button>
           </Grid>
@@ -805,62 +836,62 @@ const MusicWheel = (props) => {
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid black" }}
-                          onClick={(e) => playAudio("c3", e)}
+                          onClick={(e) => playAudio("F", e, 4)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid white" }}
-                          onClick={(e) => playAudio("c3", e)}
+                          onClick={(e) => playAudio("F#", e, 5)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid black" }}
-                          onClick={(e) => playAudio("c3", ind, e)}
+                          onClick={(e) => playAudio("G", ind, e, 6)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid white" }}
-                          onClick={(e) => playAudio("c3", e)}
+                          onClick={(e) => playAudio("G#", e, 7)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid black" }}
-                          onClick={(e) => playAudio("c3", e)}
+                          onClick={(e) => playAudio("A", e, 8)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid white" }}
-                          onClick={(e) => playAudio("c3", e)}
+                          onClick={(e) => playAudio("A#", e, 9)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid black" }}
-                          onClick={(e) => playAudio("c3", e)}
+                          onClick={(e) => playAudio("B", e, 10)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid white" }}
-                          onClick={(e) => playAudio("c3", e)}
+                          onClick={(e) => playAudio("C", e, 11)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid black" }}
-                          onClick={(e) => playAudio("c3", e)}
+                          onClick={(e) => playAudio("C#", e, 0)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid white" }}
-                          onClick={(e) => playAudio("c3", e)}
+                          onClick={(e) => playAudio("D", e, 1)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid black" }}
-                          onClick={(e) => playAudio("c3", e)}
+                          onClick={(e) => playAudio("D#", e, 2)}
                         ></li>
                         <li
                           className={styles.list}
                           style={{ borderBottom: "10px solid white" }}
-                          onClick={(e) => playAudio("c3", e)}
+                          onClick={(e) => playAudio("E", e, 3)}
                         ></li>
                       </ul>
                       <div className={classes.circle6}>
@@ -909,7 +940,9 @@ const MusicWheel = (props) => {
                       <li
                         key={"songs" + ind}
                         // onClick={() => handleClickSong(val)}
-                        onClick={() => alert('You need to purchase the membership')}
+                        onClick={() =>
+                          alert("You need to purchase the membership")
+                        }
                         id={ind}
                         className={styles.listStyleDisable}
                       >
