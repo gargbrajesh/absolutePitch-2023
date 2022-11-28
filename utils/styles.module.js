@@ -15,15 +15,13 @@ const useStyles = makeStyles({
   },
 
   mainCircle: {
-    // background: '#903884 !important',
-    // borderRadius: '50%',
+    
     width: "350px",
     height: "350px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    // marginLeft: "125px",
-    // marginTop: "-25px",
+   
     "@media (min-width: 1280px) and (max-width:1680px)": {
       // marginLeft: '235px',
       // marginTop: '100px',
@@ -59,10 +57,7 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     listStyle: "none",
     overflow: "hidden",
-    // zIndex: "99",
-    /* margin-top: 3%,
-            margin-left: 3%, */
-    // transform: 'rotate(50deg)'
+    
   },
 
   circle2: {
@@ -98,8 +93,7 @@ const useStyles = makeStyles({
   },
 
   circle4: {
-    // marginTop: "26%",
-    // marginLeft: "26%",
+   
     width: "60px",
     height: "60px",
     borderRadius: "50%",
@@ -183,13 +177,10 @@ const useStyles = makeStyles({
     marginLeft: "40%",
   },
   circleCard: {
-    // display:'flex',
-    // alignItems:'center',
-    // boxShadow: "6px 4px 2px #403b3bd9",
+   
     background: "#333 !important",
     borderRadius: "10px",
-    // padding: "20px",
-    // margin: "15px 15px 15px 25px !important",
+   
     height: "80vh",
     "@media (min-width: 1280px) and (max-width:1680px)": {},
     "@media (min-width: 600px) and (max-width:768px)": {
@@ -207,13 +198,7 @@ const useStyles = makeStyles({
     background: "#0082cf",
     color: "white",
   },
-  // topButtonContainer: {
-  //   marginTop: "10px",
-  //   marginBottom: "10px",
-  //   justifyContent: "left",
-  //   alignItems: "left",
-  //   display: "flex",
-  // },
+ 
   topButtonContainer1: {
     marginTop: "10px",
     marginBottom: "10px",
