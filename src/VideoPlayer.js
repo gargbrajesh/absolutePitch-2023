@@ -14,8 +14,7 @@ const useStyles = makeStyles({
     borderRadius: "10px",
     padding: "20px",
   
-    // boxShadow: "6px 4px 2px #403b3bd9",
-    // margin: '25px 15px 15px 25px !important',
+   
     height: "80vh",
     "@media (min-width: 770px) and (max-width:1024px)": {
       margin: "15px 15px 15px 35px !important",
