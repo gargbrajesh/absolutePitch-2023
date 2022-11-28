@@ -1,10 +1,14 @@
-import React, { Component } from "react";
-import { LandingPage } from "../src/views";
-import WithLayout from "../src/WithLayout";
-import Main from "../src/layouts/Main";
-const LandingPageView = () => {
+import Head from "next/head";
+import Image from "next/image";
+import Layout from "../components/Layout";
+import styles from "../styles/Home.module.css";
+import LandingPage from "../src/LandingPage";
+export default function Home() {
   return (
-    <LandingPage/>  )
-};
-
-export default LandingPageView;
+    <Layout>
+      <div>
+       <LandingPage/>
+      </div>
+    </Layout>
+  );
+}
