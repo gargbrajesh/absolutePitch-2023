@@ -18,6 +18,7 @@ function MusicWheel(props) {
   const [intensityIndex, setIntensityIndex] = useState(0);
   const [packageIndex, setPackageIndex] = useState(0);
   const [imageTypeIndex, setImageTypeIndex] = useState("");
+  const [imageTypeActive, setImageTypeActive] = useState(false);
   const [durationDataIndex, setDurationDataIndex] = useState(0);
   const [play, setPlay] = useState(false);
   const [index, setIndex] = useState(0);
@@ -187,7 +188,7 @@ function MusicWheel(props) {
       }
     }
   }
-  async function btnHandler(type, e) {
+  async function btnHandler(type, e, ind) {
     if (
       imageTypeIndex == "" &&
       type != "Letter" &&
@@ -228,17 +229,17 @@ function MusicWheel(props) {
       }
 
       if (type == "Keys") {
-        targetBtn.style.border = "2px solid blue";
         setImageTypeIndex(type);
+        toggleActiveStyle(ind);
         await fetchSongsData(type);
       }
       if (type == "Letter") {
-        targetBtn.style.border = "2px solid blue";
         setImageTypeIndex(type);
+        toggleActiveStyle(ind);
         await fetchSongsData(type);
       }
       if (type == "Staff") {
-        targetBtn.style.border = "2px solid blue";
+        toggleActiveStyle(ind);
         setImageTypeIndex(type);
         await fetchSongsData(type);
       }
@@ -251,6 +252,21 @@ function MusicWheel(props) {
           targetBtn.style.border = "1px solid blue";
         }
       }
+    }
+  }
+
+  function toggleActiveStyle(ind) {
+    if (ind == 1) {
+      setImageTypeActive(ind);
+      console.log(imageTypeActive);
+    } else if (ind == 2) {
+      setImageTypeActive(ind);
+      console.log(imageTypeActive);
+    } else if (ind == 3) {
+      setImageTypeActive(ind);
+      console.log(imageTypeActive);
+    } else {
+      setImageTypeActive(false);
     }
   }
 
@@ -290,29 +306,22 @@ function MusicWheel(props) {
       nordArray.push(data["c3"][ind]);
       if (data["c3"][ind]) {
         var nrd = data["c3"][ind];
-
-        console.log(nrd, "nrd........", counter);
         changeHandler("c3", ind);
-
-        new Audio(`https://mylatinhome.com/absolute/note-sound/A.wav`).play();
+        new Audio(soundData[counter]).play();
       }
     } else if (counter == 1) {
       if (data["c2"][ind]) {
         var nrd2 = data["c2"][ind];
-
-        console.log(nrd2, "nrd2........", counter);
         changeHandler("c2", ind);
         changeHandler("c3", ind);
-        new Audio(`https://mylatinhome.com/absolute/note-sound/Ab.wav`).play();
+        new Audio(soundData[counter]).play();
       }
     } else if (counter == 2) {
       if (data["c1"][ind]) {
         var nrd3 = data["c1"][ind];
-
-        console.log(nrd3, "nrd3........", counter);
         changeHandler("c1", ind);
         changeHandler("c2", ind);
-        new Audio(`https://mylatinhome.com/absolute/note-sound/Ab.wav`).play();
+        new Audio(soundData[counter]).play();
       }
     } else {
       counter = -1;
@@ -346,17 +355,6 @@ function MusicWheel(props) {
   function refreshPage() {
     window.location.reload(false);
   }
-  function show() {
-    // function show(id, e)
-    // var list = document.getElementById(id).innerHTML;
-    // var item = list.includes("_P.");
-    // var targetItem = e.target;
-    // item ? (targetItem.style.background = "gray") : "";
-
-    //  targetItem.style.background = 'gray';
-    alert("Please purchase this song");
-  }
-
   function fetchSongsData(imageType = imageTypeIndex) {
     // if(play !=false){
     //   setPlay(false);
@@ -407,64 +405,83 @@ function MusicWheel(props) {
   }
   return (
     <div className={classes.circleCard}>
-      <Grid
-        container
-        spacing={2}
-        className = {classes.topButtonContainer}
-      >
+      <Grid container spacing={2} className={classes.topButtonContainer}>
         <Grid item xs={3} md={3}>
-          <button className={classes.topButtons}
-          onClick={(e) => {
-            btnHandler("Letter", e);
-          }}
-          style={{ background: "#fff" }}>B</button>
+          <button
+            className={`${
+              imageTypeActive == "1" ? classes.activeKey : classes.topButtons
+            }`}
+            onClick={(e) => {
+              btnHandler("Letter", e, 1);
+            }}
+          >
+            B
+          </button>
         </Grid>
         <Grid item xs={3} md={3}>
-          <button className={classes.topButtons}
-          onClick={(e) => {
-            btnHandler("Staff", e);
-          }}
-          style={{ background: "#fff" }}>Staff</button>
+          <button
+            className={`${
+              imageTypeActive == "2" ? classes.activeKey : classes.topButtons
+            }`}
+            onClick={(e) => {
+              btnHandler("Staff", e, 2);
+            }}
+          >
+            Staff
+          </button>
         </Grid>
         <Grid item xs={3} md={3}>
-          <button  className={classes.topButtons}
-          onClick={(e) => {
-            btnHandler("Keys", e);
-          }}
-          style={{ background: "#fff" }}>Kyes</button>
+          <button
+            className={`${
+              imageTypeActive == "3" ? classes.activeKey : classes.topButtons
+            }`}
+            onClick={(e) => {
+              btnHandler("Keys", e, 3);
+            }}
+          >
+            Kyes
+          </button>
         </Grid>
         <Grid item xs={3} md={3}>
-          <button className={classes.topButtons}>Reset</button>
+          <button
+            className={classes.topButtons}
+            onClick={(e) => {
+              refreshPage();
+            }}
+          >
+            Reset
+          </button>
         </Grid>
       </Grid>
       <Grid container spacing={1}>
         <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
-          <button className={classes.tempoBtnTop}
-          onClick={(e) => {
-            btnHandler("P", e);
-          }}>P</button>
-          <button className={classes.tempoBtnBottom}  onClick={(e) => {
-            btnHandler("Duration", e);
-          }}>  {durationData[durationDataIndex]
-            ? durationData[durationDataIndex] <= 120
-              ? "short"
-              : durationData[durationDataIndex] <= 240 &&
-                durationData[durationDataIndex] >= 121
-              ? "Medium"
-              : "Long"
-            : "Duration"}</button>
-        </Grid>
-        <Grid
-          item
-          xs={8}
-          md={8}
-         
-          className={classes.wheelContianer}
-        >
-          <div
-            className={classes.mainCircle}
-           
+          <button
+            className={classes.tempoBtnTop}
+            onClick={(e) => {
+              btnHandler("P", e);
+            }}
           >
+            P
+          </button>
+          <button
+            className={classes.tempoBtnBottom}
+            onClick={(e) => {
+              btnHandler("Duration", e);
+            }}
+          >
+            {" "}
+            {durationData[durationDataIndex]
+              ? durationData[durationDataIndex] <= 120
+                ? "short"
+                : durationData[durationDataIndex] <= 240 &&
+                  durationData[durationDataIndex] >= 121
+                ? "Medium"
+                : "Long"
+              : "Duration"}
+          </button>
+        </Grid>
+        <Grid item xs={8} md={8} className={classes.wheelContianer}>
+          <div className={classes.mainCircle}>
             <ul className="circle">
               {data["c1"].map((val, ind) => (
                 <li key={classes.circle + "-" + ind} className={styles.li}>
@@ -508,21 +525,20 @@ function MusicWheel(props) {
                 ))}
 
                 <div className={classes.circle4}>
-                <ul>
-               
-                {circleOne.map((val, ind) => (
-                  <li key={classes.circle3 + "-" + ind} className={styles.list} style={{background:"black",borderRadius:'50%'}}>
-                    <div
-                      className={`${styles.textFour}`
-                       }
-                      onClick={(e) => playAudio(data["c3"][ind],e,ind)}
-                    >
-                     
-                    </div>
-                  </li>
-                ))}
-              
-</ul>
+                  <ul>
+                    {circleOne.map((val, ind) => (
+                      <li
+                        key={classes.circle3 + "-" + ind}
+                        className={styles.list}
+                        style={{ background: "black", borderRadius: "50%" }}
+                      >
+                        <div
+                          className={`${styles.textFour}`}
+                          onClick={(e) => playAudio(data["c3"][ind], e, ind)}
+                        ></div>
+                      </li>
+                    ))}
+                  </ul>
                   <p className={classes.circle6}>
                     <PlayCircleOutlineIcon
                       onClick={(e) => {
@@ -537,51 +553,60 @@ function MusicWheel(props) {
           </div>
         </Grid>
         <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
-          <button className={classes.tempoBtnTop}  onClick={(e) => {
-            btnHandler("Tempo", e);
-          }}>  {tempoData[tempoIndex] ? tempoData[tempoIndex] : "TEMPO"}</button>
-          <button className={classes.tempoBtnBottom}  onClick={(e) => {
-            btnHandler("Intensity", e);
-          }}> {intensityData[intensityIndex]
-            ? intensityData[intensityIndex]
-            : "Mix"}</button>
+          <button
+            className={classes.tempoBtnTop}
+            onClick={(e) => {
+              btnHandler("Tempo", e);
+            }}
+          >
+            {" "}
+            {tempoData[tempoIndex] ? tempoData[tempoIndex] : "TEMPO"}
+          </button>
+          <button
+            className={classes.tempoBtnBottom}
+            onClick={(e) => {
+              btnHandler("Intensity", e);
+            }}
+          >
+            {" "}
+            {intensityData[intensityIndex]
+              ? intensityData[intensityIndex]
+              : "Mix"}
+          </button>
         </Grid>
       </Grid>
       <div className={styles.songsWrapper}>
-      <Paper elevation={3} className={classes.paperStyle}>
-        <div>
-          {songsData && songsData.length > 0
-            ? songsData.slice(0, 20).map((val, ind) =>
-                val["song_name"].includes("_P.") ? (
-                  <p
-                    key={"songs" + ind}
-                   
-                    onClick={() =>
-                      alert("You need to purchase the membership")
-                    }
-                    id={ind}
-                    className={styles.listStyleDisable}
-                  >
-                    {" "}
-                    * {val["song_name"]}{" "}
-                  </p>
-                ) : (
-                  <p
-                    key={"songs" + ind}
-                    onClick={() => handleClickSong(val)}
-                   
-                    className={styles.liststyle}
-                  >
-                    {" "}
-                    * {val["song_name"]}{" "}
-                  </p>
+        <Paper elevation={3} className={classes.paperStyle}>
+          <div>
+            {songsData && songsData.length > 0
+              ? songsData.slice(0, 20).map((val, ind) =>
+                  val["song_name"].includes("_P.") ? (
+                    <p
+                      key={"songs" + ind}
+                      onClick={() =>
+                        alert("You need to purchase the membership")
+                      }
+                      id={ind}
+                      className={styles.listStyleDisable}
+                    >
+                      {" "}
+                      * {val["song_name"]}{" "}
+                    </p>
+                  ) : (
+                    <p
+                      key={"songs" + ind}
+                      onClick={() => handleClickSong(val)}
+                      className={styles.liststyle}
+                    >
+                      {" "}
+                      * {val["song_name"]}{" "}
+                    </p>
+                  )
                 )
-              )
-            : "No Songs Found"}
-
-        </div>
-      </Paper>
-    </div>
+              : "No Songs Found"}
+          </div>
+        </Paper>
+      </div>
     </div>
   );
 }

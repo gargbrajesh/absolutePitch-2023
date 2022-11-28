@@ -205,6 +205,8 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
+    textAlign:'center',
+    padding:'0px 10px'
   },
   topButtonContainer2: {
     marginTop: "10px",
@@ -216,23 +218,39 @@ const useStyles = makeStyles({
   topButtons: {
     fontSize: "16px",
     fontWeight: "500",
-    width: "70%",
+    width: "90%",
     padding: "2px",
     cursor: "pointer",
     padding: "10px",
+    justifyContent:'center',
+    alignContent:'center',
+    display:'flex',
+    background:'#fff',
     transform: "rotate(-30deg) skew(25deg) tanslate(20px,-15px)",
     "&:hover": {
       border: "2px solid lightblue",
       transform: `rotate(-30deg) skew(25deg) tanslate(20px,-15px)`,
       boxShadow: "-10px 10px 10px gray",
     },
-    "&:before": {
-      transform: "0.5s",
-      transform: "rotate(20deg)skewY(-45deg)",
-    },
-    "&:after": {
-      transform: "0.5s",
-      transform: "rotate(10deg)skewX(-45deg)",
+  },
+
+  activeKey: {
+    fontSize: "16px",
+    fontWeight: "500",
+    width: "90%",
+    padding: "2px",
+    cursor: "pointer",
+    padding: "10px",
+    justifyContent:'center',
+    alignContent:'center',
+    display:'flex',
+    background:'blue',
+    color:'white',
+    transform: "rotate(-30deg) skew(25deg) tanslate(20px,-15px)",
+    "&:hover": {
+      border: "2px solid lightblue",
+      transform: `rotate(-30deg) skew(25deg) tanslate(20px,-15px)`,
+      boxShadow: "-10px 10px 10px gray",
     },
   },
 
