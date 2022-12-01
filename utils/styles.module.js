@@ -226,14 +226,30 @@ const useStyles = makeStyles({
     alignContent:'center',
     display:'flex',
     background:'#fff',
-    transform: "rotate(-30deg) skew(25deg) tanslate(20px,-15px)",
     "&:hover": {
       border: "2px solid lightblue",
       transform: `rotate(-30deg) skew(25deg) tanslate(20px,-15px)`,
       boxShadow: "-10px 10px 10px gray",
     },
   },
-
+  resetButtons: {
+    fontSize: "16px",
+    fontWeight: "500",
+    width: "90%",
+    padding: "2px",
+    cursor: "pointer",
+    padding: "10px",
+    justifyContent:'center',
+    alignContent:'center',
+    display:'flex',
+    background:'#82E3F4',
+    color:'white',
+    "&:hover": {
+      border: "2px solid lightblue",
+      transform: `rotate(-30deg) skew(25deg) tanslate(20px,-15px)`,
+      boxShadow: "-10px 10px 10px gray",
+    },
+  },
   activeKey: {
     fontSize: "16px",
     fontWeight: "500",
@@ -318,6 +334,7 @@ const useStyles = makeStyles({
   playerBtn: {
     cursor: "pointer",
     fontSize: "25px",
+    color:'white',
     "&:hover": {
       color: "yellow",
     },

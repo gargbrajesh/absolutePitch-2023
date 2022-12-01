@@ -149,6 +149,11 @@ function MusicWheel(props) {
     "https://mylatinhome.com/absolute/note-sound/Ab.wav",
   ];
   function changeHandler(c, ind, event) {
+    if (
+      imageTypeIndex == ""
+    ) {
+      alert("Please select any ImageType Key");
+    } else {
     console.log("event is", event, circleOne);
     const temp = { ...nord };
     const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
@@ -187,6 +192,7 @@ function MusicWheel(props) {
         setNordData(nordData);
       }
     }
+  }
   }
   async function btnHandler(type, e, ind) {
     if (
@@ -415,7 +421,7 @@ function MusicWheel(props) {
               btnHandler("Letter", e, 1);
             }}
           >
-            B
+            Letters
           </button>
         </Grid>
         <Grid item xs={3} md={3}>
@@ -439,12 +445,12 @@ function MusicWheel(props) {
               btnHandler("Keys", e, 3);
             }}
           >
-            Kyes
+            Keys
           </button>
         </Grid>
         <Grid item xs={3} md={3}>
           <button
-            className={classes.topButtons}
+            className={classes.resetButtons}
             onClick={(e) => {
               refreshPage();
             }}
