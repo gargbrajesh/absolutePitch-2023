@@ -3,8 +3,8 @@ import { Grid } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import ReactPlayer from "react-player";
 import dynamic from 'next/dynamic';
-import 'shaka-player/dist/controls.css';
-const ShakaPlayer = dynamic(() => import('shaka-player-react'), { ssr: false });
+// import 'shaka-player/dist/controls.css';
+// const ShakaPlayer = dynamic(() => import('shaka-player-react'), { ssr: false });
 
 const useStyles = makeStyles({
   root: {
