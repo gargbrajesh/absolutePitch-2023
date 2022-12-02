@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Grid } from "@material-ui/core";
 import MusicWheel from "./MusicWheel";
 import VideoPlayer from "./VideoPlayer";
@@ -69,11 +69,12 @@ function LandingPage() {
     console.log("songd",data)
     setData(data)
   }
+  
   const classes = useStyles();
   return (
     <Grid container spacing={4}  className={classes.containerBox}>
-      <Grid item xs={6}><MusicWheel handleSong={handleSong}/></Grid>
-      <Grid item xs={6}><VideoPlayer musicData={data}/></Grid>
+      <Grid item xs={12} md={6}><MusicWheel handleSong={handleSong}/></Grid>
+      <Grid item xs={12} md={6}><VideoPlayer musicData={data}/></Grid>
     </Grid>
   );
 }

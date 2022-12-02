@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import ReactPlayer from "react-player";
+import dynamic from 'next/dynamic';
+import 'shaka-player/dist/controls.css';
+const ShakaPlayer = dynamic(() => import('shaka-player-react'), { ssr: false });
+
 const useStyles = makeStyles({
   root: {
     position: "relative",
@@ -53,12 +57,17 @@ function VideoPlayer(prop) {
               playing={true}
               loop={true}
             />
+
+            // <ShakaPlayer autoPlay src={music}   width="100%"
+            // height="95%" />
           ) : (
             <ReactPlayer
               controls
-              url="https://www.youtube.com/watch?v=o1OQFwpwwNU"
+              url = "https://www.youtube.com/watch?v=GBYs4y1BtGg"
               width="100%"
               height="95%"
+              playing={true}
+              loop={true}
             />
           )}
         </Grid>

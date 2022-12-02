@@ -150,13 +150,13 @@
 }
 .textThird {
     position: absolute;
-    left: -94%;
+    left: -98%;
     width: 200%;
     height: 200%;
     text-align: center;
     transform: skewY(60deg) rotate(12deg);
     padding-top: 5px;
-    font-size: 16px !important;
+    font-size: 14px !important;
     font-family: "Roboto";
     font-style: normal;
     color: #000;
@@ -372,9 +372,17 @@
     background: #5a8898;
   }
 
-
-
+  .list .textFour {
+    
+    background: whitesmoke;
+  }
+  .list .textFour:hover {
+    
+    background: rgb(88, 47, 224);
+  }
+/* 
   .list:first-child .textFour {
+    
     background: #b1760f;
   }
   .list:nth-child(2) .textFour {
@@ -419,7 +427,7 @@
   
   .list:nth-child(12) .textFour {
     background: rgba(78, 77, 18, 0.9);
-  }
+  } */
   
   .bluebg {
     background: #0082cf !important;
@@ -447,14 +455,14 @@
     color: #fff;
     cursor: pointer;
     border-radius: 20px;
-    /* padding-left: 10px; */
+   
     background: #18b0a0;
     font-size: 14px;
     width: 95%;
   }
   .listStyleDisable:hover {
     margin: 0;
-    /* pointer-events: n one; */
+    
     border-radius: 20px;
    
     opacity: 0.6;
