@@ -477,7 +477,9 @@ function MusicWheel(props) {
         if (responseJson != "") {
           console.log("res", responseJson);
 
+          
           setSongsData(responseJson.data);
+          handleClickSong(responseJson.data[0],0)
           setTotalSongs(responseJson.data.length);
         } else {
           alert("error in response");
@@ -684,7 +686,7 @@ function MusicWheel(props) {
           </div>
           <div>
             {songsData && songsData.length > 0
-              ? songsData.slice(0, 20).map((val, ind) =>
+              ? songsData.map((val, ind) =>
                   val["song_name"].includes("_P.") ? (
                     <p
                       key={"songs" + ind}
@@ -695,7 +697,7 @@ function MusicWheel(props) {
                       className={styles.listStyleDisable}
                     >
                       {" "}
-                      * {val["song_name"]}{" "}
+                      * {val["song_title"]}{" "}
                     </p>
                   ) : (
                     <p
@@ -703,7 +705,7 @@ function MusicWheel(props) {
                       onClick={() => handleClickSong(val, ind)}
                       className={styles.liststyle}
                     >
-                      * {val["song_name"]}{" "}
+                      * {val["song_title"]}{" "}
                     </p>
                   )
                 )

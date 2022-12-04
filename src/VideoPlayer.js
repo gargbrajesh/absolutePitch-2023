@@ -55,7 +55,6 @@ function VideoPlayer(prop) {
               width="100%"
               height="95%"
               playing={true}
-              loop={true}
             />
 
             // <ShakaPlayer autoPlay src={music}   width="100%"
