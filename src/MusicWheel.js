@@ -22,6 +22,7 @@ function MusicWheel(props) {
   const [durationDataIndex, setDurationDataIndex] = useState(0);
   const [totalSongs, setTotalSongs] = useState(0);
   const [playSongposition, setPlaySongposition] = useState(0);
+  const [nordIndex111, setNordIndex111] = useState(0)
   let [counter, setCounter] = useState(0);
   let [lastInd, setLastInd] = useState(-1);
   const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -153,28 +154,24 @@ function MusicWheel(props) {
     if (imageTypeIndex == "") {
       alert("Please select any ImageType Key");
     } else {
-      console.log("event is", event, circleOne);
       const temp = { ...nord };
       const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
-      // if (c=="c1"){
 
-      // }
       if (["c1", "c2", "c3"].includes(c)) {
         if (temp[c].indexOf(ind) == -1 && count < 3) {
-          temp[c].push(ind);
-          // setIndex(ind);
-          setNord(temp);
-          if (c == "c1" || c == "c2") {
-            var nordData2 = data["c3"][ind] + data[c][ind];
-          } else {
-            var nordData2 = data[c][ind];
-            console.log("nordData2", nordData2);
-          }
-          console.log("before", nordData, nordData2);
 
-          setNordData([...nordData, nordData2]);
-          // setNordData(nordData + data[c][ind] + ",");
-          console.log("dd", nordData);
+          if (((count>=1) && (ind==nordIndex111)) || (count<1)){
+            temp[c].push(ind);
+            setNord(temp);
+            if (c == "c1" || c == "c2") {
+              var nordData2 = data["c3"][ind] + data[c][ind];
+            } else {
+              var nordData2 = data[c][ind];
+            }
+            setNordIndex111(ind)
+            setNordData([...nordData, nordData2]);
+          }
+          
         } else if (temp[c].indexOf(ind) > -1) {
           const nordIndex = temp[c].indexOf(ind);
           temp[c].splice(nordIndex, 1);
@@ -278,14 +275,17 @@ function MusicWheel(props) {
     }
   }
 
-  function handleClickSong(song_data, ind) {
-    console.log("file name", song_data);
+  function handleClickSong(songsData, ind) {
+    console.log("songsData",songsData,ind)
+    props.handleSong(songsData, ind);
+    const current_song = songsData[ind]
+    console.log("file name",current_song);
+
     setPlaySongposition(++ind);
-    props.handleSong(song_data);
 
     // code for highlight nord on selected song click , start here
 
-    let nordLetter = song_data["song_name"].split("_")[0];
+    let nordLetter = current_song["song_name"].split("_")[0];
     if (
       nordLetter == "Ab" ||
       nordLetter == "Bb" ||
@@ -479,7 +479,7 @@ function MusicWheel(props) {
 
           
           setSongsData(responseJson.data);
-          handleClickSong(responseJson.data[0],0)
+          handleClickSong(responseJson.data,0)
           setTotalSongs(responseJson.data.length);
         } else {
           alert("error in response");
@@ -702,7 +702,7 @@ function MusicWheel(props) {
                   ) : (
                     <p
                       key={"songs" + ind}
-                      onClick={() => handleClickSong(val, ind)}
+                      onClick={() => handleClickSong(songsData, ind)}
                       className={styles.liststyle}
                     >
                       * {val["song_title"]}{" "}

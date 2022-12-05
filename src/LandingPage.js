@@ -63,18 +63,21 @@ const useStyles = makeStyles({
 });
 function LandingPage() {
   const [data, setData] = useState()
+  const [index, setIndex] = useState()
 
 
-  function handleSong(data){
-    console.log("songd",data)
-    setData(data)
+  function handleSong(songsData, ind){
+    console.log("songd", ind, songsData[ind])
+
+    setData(songsData)
+    setIndex(ind)
   }
   
   const classes = useStyles();
   return (
     <Grid container spacing={4}  className={classes.containerBox}>
       <Grid item xs={12} md={6}><MusicWheel handleSong={handleSong}/></Grid>
-      <Grid item xs={12} md={6}><VideoPlayer musicData={data}/></Grid>
+      <Grid item xs={12} md={6}><VideoPlayer handleSong={handleSong} musicData={data} musicIndex={index}/></Grid>
     </Grid>
   );
 }
