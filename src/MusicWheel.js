@@ -1,5 +1,5 @@
 import { Grid, Paper, Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useStyles from "../utils/styles.module";
 import styles from "./style.module.css";
 // import dataBase from "../utils/data";
@@ -20,10 +20,11 @@ function MusicWheel(props) {
   const [imageTypeIndex, setImageTypeIndex] = useState("");
   const [imageTypeActive, setImageTypeActive] = useState(false);
   const [durationDataIndex, setDurationDataIndex] = useState(0);
-  const [play, setPlay] = useState(false);
-  const [index, setIndex] = useState(0);
+  const [totalSongs, setTotalSongs] = useState(0);
+  const [playSongposition, setPlaySongposition] = useState(0);
+  const [nordIndex111, setNordIndex111] = useState(0)
   let [counter, setCounter] = useState(0);
-
+  let [lastInd, setLastInd] = useState(-1);
   const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const [changeBg, setChangeBg] = useState("");
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
@@ -148,51 +149,46 @@ function MusicWheel(props) {
     "https://mylatinhome.com/absolute/note-sound/Am.wav",
     "https://mylatinhome.com/absolute/note-sound/Ab.wav",
   ];
+  // let lastInd = -1;
   function changeHandler(c, ind, event) {
-    if (
-      imageTypeIndex == ""
-    ) {
+    if (imageTypeIndex == "") {
       alert("Please select any ImageType Key");
     } else {
-    console.log("event is", event, circleOne);
-    const temp = { ...nord };
-    const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
-    // if (c=="c1"){
+      const temp = { ...nord };
+      const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
 
-    // }
-    if (["c1", "c2", "c3"].includes(c)) {
-      if (temp[c].indexOf(ind) == -1 && count < 3) {
-        temp[c].push(ind);
-        setIndex(ind);
-        setNord(temp);
-        if (c == "c1" || c == "c2") {
-          var nordData2 = data["c3"][ind] + data[c][ind];
-        } else {
-          var nordData2 = data[c][ind];
-          console.log("nordData2", nordData2);
+      if (["c1", "c2", "c3"].includes(c)) {
+        if (temp[c].indexOf(ind) == -1 && count < 3) {
+
+          if (((count>=1) && (ind==nordIndex111)) || (count<1)){
+            temp[c].push(ind);
+            setNord(temp);
+            if (c == "c1" || c == "c2") {
+              var nordData2 = data["c3"][ind] + data[c][ind];
+            } else {
+              var nordData2 = data[c][ind];
+            }
+            setNordIndex111(ind)
+            setNordData([...nordData, nordData2]);
+          }
+          
+        } else if (temp[c].indexOf(ind) > -1) {
+          const nordIndex = temp[c].indexOf(ind);
+          temp[c].splice(nordIndex, 1);
+          setNord(temp);
+          console.log("else", nordData);
+
+          // console.log("popo", nordData, data[c][nordIndex], data[c][ind]);
+          if (c == "c1" || c == "c2") {
+            var nordIndex1 = nordData.indexOf(data["c3"][ind] + data[c][ind]);
+          } else {
+            var nordIndex1 = nordData.indexOf(data[c][ind]);
+          }
+          nordData.splice(nordIndex1, 1);
+          setNordData(nordData);
         }
-        console.log("before", nordData, nordData2);
-
-        setNordData([...nordData, nordData2]);
-        // setNordData(nordData + data[c][ind] + ",");
-        console.log("dd", nordData);
-      } else if (temp[c].indexOf(ind) > -1) {
-        const nordIndex = temp[c].indexOf(ind);
-        temp[c].splice(nordIndex, 1);
-        setNord(temp);
-        console.log("else", nordData);
-
-        // console.log("popo", nordData, data[c][nordIndex], data[c][ind]);
-        if (c == "c1" || c == "c2") {
-          var nordIndex1 = nordData.indexOf(data["c3"][ind] + data[c][ind]);
-        } else {
-          var nordIndex1 = nordData.indexOf(data[c][ind]);
-        }
-        nordData.splice(nordIndex1, 1);
-        setNordData(nordData);
       }
     }
-  }
   }
   async function btnHandler(type, e, ind) {
     if (
@@ -259,6 +255,8 @@ function MusicWheel(props) {
         }
       }
     }
+    // setTotalSongs(data.length)
+    // console.log(songsData.length,'....totalso...');
   }
 
   function toggleActiveStyle(ind) {
@@ -276,9 +274,84 @@ function MusicWheel(props) {
     }
   }
 
-  function handleClickSong(song_data) {
-    console.log("file name", song_data);
-    props.handleSong(song_data);
+  function handleClickSong(songsData, ind) {
+    console.log("songsData",songsData,ind)
+    props.handleSong(songsData, ind);
+    const current_song = songsData[ind]
+    console.log("file name",current_song);
+
+    setPlaySongposition(++ind);
+
+    // code for highlight nord on selected song click , start here
+
+    let nordLetter = current_song["song_name"].split("_")[0];
+    if (
+      nordLetter == "Ab" ||
+      nordLetter == "Bb" ||
+      nordLetter == "Cb" ||
+      nordLetter == "Db" ||
+      nordLetter == "Eb" ||
+      nordLetter == "Fb" ||
+      nordLetter == "Gb"
+    ) {
+      nordLetter = nordLetter.charAt(0);
+    } else if (
+      nordLetter == "Am" ||
+      nordLetter == "Bm" ||
+      nordLetter == "Cm" ||
+      nordLetter == "Dm" ||
+      nordLetter == "Em" ||
+      nordLetter == "Fm" ||
+      nordLetter == "Gm"
+    ) {
+      nordLetter = nordLetter.charAt(0);
+    } else if (
+      nordLetter == "AM" ||
+      nordLetter == "BM" ||
+      nordLetter == "CM" ||
+      nordLetter == "DM" ||
+      nordLetter == "EM" ||
+      nordLetter == "FM" ||
+      nordLetter == "GM"
+    ) {
+      nordLetter = nordLetter.charAt(0);
+    } else if (
+      nordLetter == "Abm" ||
+      nordLetter == "Bbm" ||
+      nordLetter == "Cbm" ||
+      nordLetter == "Dbm" ||
+      nordLetter == "Ebm" ||
+      nordLetter == "Fbm" ||
+      nordLetter == "Gbm"
+    ) {
+      nordLetter = nordLetter.charAt(0);
+    } else if (
+      nordLetter == "AbM" ||
+      nordLetter == "BbM" ||
+      nordLetter == "CbM" ||
+      nordLetter == "DbM" ||
+      nordLetter == "EbM" ||
+      nordLetter == "FbM" ||
+      nordLetter == "GbM"
+    ) {
+      nordLetter = nordLetter.charAt(0);
+    }
+
+    console.log(nordLetter, "....nordLetter");
+    let index = data["c3"].indexOf(nordLetter);
+
+    if (lastInd > -1) {
+      changeHandler("c3", lastInd);
+    }
+
+    changeHandler("c3", index);
+    console.log(lastInd, ".....lastInd");
+    console.log(index, ".....index");
+    setLastInd(index);
+
+    console.log(lastInd, ".....lastInd");
+
+    //end here
   }
 
   function getNord() {
@@ -403,7 +476,10 @@ function MusicWheel(props) {
         if (responseJson != "") {
           console.log("res", responseJson);
 
+          
           setSongsData(responseJson.data);
+          handleClickSong(responseJson.data,0)
+          setTotalSongs(responseJson.data.length);
         } else {
           alert("error in response");
         }
@@ -469,6 +545,13 @@ function MusicWheel(props) {
           >
             P
           </button>
+          {/*<button
+           style={{marginTop:"180px"}}
+           className={classes.tempoBtnTop}
+        
+         >
+         {playSongposition}/{totalSongs}
+         </button>*/}
           <button
             className={classes.tempoBtnBottom}
             onClick={(e) => {
@@ -583,9 +666,26 @@ function MusicWheel(props) {
       </Grid>
       <div className={styles.songsWrapper}>
         <Paper elevation={3} className={classes.paperStyle}>
+          <div
+            style={{
+              width: "80px",
+              height: "50px",
+              borderRadius: "5%",
+              background: "#333333",
+              textAlign: "center",
+              alignItems: "center",
+              textAlign: "center",
+              justifyContent: "center",
+              display: "flex",
+            }}
+          >
+            <p style={{ color: "#fff" }}>
+              {playSongposition}/{totalSongs}
+            </p>
+          </div>
           <div>
             {songsData && songsData.length > 0
-              ? songsData.slice(0, 20).map((val, ind) =>
+              ? songsData.map((val, ind) =>
                   val["song_name"].includes("_P.") ? (
                     <p
                       key={"songs" + ind}
@@ -596,16 +696,15 @@ function MusicWheel(props) {
                       className={styles.listStyleDisable}
                     >
                       {" "}
-                      * {val["song_name"]}{" "}
+                      * {val["song_title"]}{" "}
                     </p>
                   ) : (
                     <p
                       key={"songs" + ind}
-                      onClick={() => handleClickSong(val)}
+                      onClick={() => handleClickSong(songsData, ind)}
                       className={styles.liststyle}
                     >
-                      {" "}
-                      * {val["song_name"]}{" "}
+                      * {val["song_title"]}{" "}
                     </p>
                   )
                 )
