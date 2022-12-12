@@ -153,41 +153,9 @@ function MusicWheel(props) {
   function changeHandler(c, ind, event) {
     if (imageTypeIndex == "") {
       alert("Please select any ImageType Key");
-    } else {
-      const temp = { ...nord };
-      const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
-
-      if (["c1", "c2", "c3"].includes(c)) {
-        if (temp[c].indexOf(ind) == -1 && count < 3) {
-
-          if (((count>=1) && (ind==nordIndex111)) || (count<1)){
-            temp[c].push(ind);
-            setNord(temp);
-            if (c == "c1" || c == "c2") {
-              var nordData2 = data["c3"][ind] + data[c][ind];
-            } else {
-              var nordData2 = data[c][ind];
-            }
-            setNordIndex111(ind)
-            setNordData([...nordData, nordData2]);
-          }
-          
-        } else if (temp[c].indexOf(ind) > -1) {
-          const nordIndex = temp[c].indexOf(ind);
-          temp[c].splice(nordIndex, 1);
-          setNord(temp);
-          console.log("else", nordData);
-
-          // console.log("popo", nordData, data[c][nordIndex], data[c][ind]);
-          if (c == "c1" || c == "c2") {
-            var nordIndex1 = nordData.indexOf(data["c3"][ind] + data[c][ind]);
-          } else {
-            var nordIndex1 = nordData.indexOf(data[c][ind]);
-          }
-          nordData.splice(nordIndex1, 1);
-          setNordData(nordData);
-        }
-      }
+    } 
+    else {
+     <h3>hi absolute pitch</h3>
     }
   }
   async function btnHandler(type, e, ind) {
