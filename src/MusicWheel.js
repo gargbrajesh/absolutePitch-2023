@@ -284,11 +284,16 @@ function MusicWheel(props) {
     }
   }
 
+  useEffect(()=>{
+    btnHandler("Letter", '', 1);
+  },[])
   function handleClickSong(songsData, ind) {
     console.log("songsData",songsData,ind)
     props.handleSong(songsData, ind);
     const current_song = songsData[ind]
     console.log("file name",current_song);
+    const selected_nord = current_song['note_or_cord']
+    selected_nord_array = selected_nord.split('')
 
     setPlaySongposition(++ind);
 
