@@ -5,6 +5,7 @@ import styles from "./style.module.css";
 // import dataBase from "../utils/data";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import "./style.module.css";
+import excludeVariablesFromRoot from "@mui/material/styles/excludeVariablesFromRoot";
 
 function MusicWheel(props) {
   const classes = useStyles();
@@ -152,7 +153,7 @@ function MusicWheel(props) {
   // let lastInd = -1;
   function changeHandler(c, ind, event) {
     if (imageTypeIndex == "") {
-      alert("Please select any ImageType Key");
+      alert("Please seect any ImageType Key");
     } else {
       const temp = { ...nord };
       const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
@@ -231,6 +232,8 @@ function MusicWheel(props) {
           setIntensityIndex(intensityIndex + 1);
           targetBtn.style.background = "radial-gradient(blue 40%, #000)";
           targetBtn.style.color = "#fff";
+          setNord({ c1: [], c2: [], c3: [] })
+          setNordData([])
         }
       }
 
@@ -262,6 +265,8 @@ function MusicWheel(props) {
           setDurationDataIndex(durationDataIndex + 1);
           targetBtn.style.background = "radial-gradient(yellow 40%, #000)";
           targetBtn.style.border = "1px solid blue";
+          setNord({ c1: [], c2: [], c3: [] })
+          setNordData([])
         }
       }
     }
@@ -292,8 +297,25 @@ function MusicWheel(props) {
     props.handleSong(songsData, ind);
     const current_song = songsData[ind]
     console.log("file name",current_song);
-    const selected_nord = current_song['note_or_cord']
-    selected_nord_array = selected_nord.split('')
+    var selected_nord = current_song['note_or_cord']
+    // selected_nord_array = selected_nord.split('')
+    const last_nord = selected_nord[selected_nord.length-1]
+    console.log("last_nord",last_nord)
+    // if (last_nord != 'm' && last_nord != 'M') {
+    //   // getnord("c3",4)
+    //   console.log("last_nord.length>1",last_nord.length,last_nord.length>1)
+
+    //   if (selected_nord.length>1){
+    //     selected_nord = selected_nord.replace('b', '#');
+    //       console.log("selected_nord",selected_nord)
+    //   }
+    //   const selecetd_index = data['c3'].indexOf(selected_nord);
+    //   console.log("selecetd_index",selecetd_index,selected_nord)
+    //   setNord({ 'c1': [], 'c2': [], 'c3': [selecetd_index] })
+    //   console.log("nord is",nord)
+
+    // } 
+    // else if(last_nord)
 
     setPlaySongposition(++ind);
 
