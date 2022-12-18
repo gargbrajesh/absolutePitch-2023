@@ -153,9 +153,46 @@ function MusicWheel(props) {
   function changeHandler(c, ind, event) {
     if (imageTypeIndex == "") {
       alert("Please select any ImageType Key");
-    } 
-    else {
-     <h3>hi absolute pitch</h3>
+    } else {
+      const temp = { ...nord };
+      const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
+
+      if (["c1", "c2", "c3"].includes(c)) {
+        if (temp[c].indexOf(ind) == -1 && count < 3) {
+
+          if (((count>=1) && (ind==nordIndex111)) || (count<1)){
+            temp[c].push(ind);
+            setNord(temp);
+            if (c == "c1" || c == "c2") {
+              var nordData2 = data["c3"][ind] + data[c][ind];
+            } else {
+              var nordData2 = data[c][ind];
+            }
+            setNordIndex111(ind)
+            setNordData([...nordData, nordData2]);
+          }
+          
+        } else if (temp[c].indexOf(ind) > -1) {
+          const nordIndex = temp[c].indexOf(ind);
+          temp[c].splice(nordIndex, 1);
+          setNord(temp);
+          console.log("else", nordData);
+
+          // console.log("popo", nordData, data[c][nordIndex], data[c][ind]);
+          if (c == "c1" || c == "c2") {
+            var nordIndex1 = nordData.indexOf(data["c3"][ind] + data[c][ind]);
+          } else {
+            var nordIndex1 = nordData.indexOf(data[c][ind]);
+          }
+          nordData.splice(nordIndex1, 1);
+          setNordData(nordData);
+        }
+        setTempoIndex(0)
+        setDurationDataIndex(0);
+        setIntensityIndex(0);
+
+
+      }
     }
   }
   async function btnHandler(type, e, ind) {
@@ -175,10 +212,15 @@ function MusicWheel(props) {
           setTempoIndex(0);
         } else {
           setTempoIndex(tempoIndex + 1);
+
           targetBtn.style.background = "radial-gradient(green 40%, #000)";
           targetBtn.style.color = "#fff";
           targetBtn.style.border = "1px solid blue";
+        setNord({ c1: [], c2: [], c3: [] })
+        setNordData([])
+// console.log("hhhhh")
         }
+
       }
       if (type == "Intensity") {
         // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
@@ -252,78 +294,79 @@ function MusicWheel(props) {
 
     // code for highlight nord on selected song click , start here
 
-    let nordLetter = current_song["song_name"].split("_")[0];
-    if (
-      nordLetter == "Ab" ||
-      nordLetter == "Bb" ||
-      nordLetter == "Cb" ||
-      nordLetter == "Db" ||
-      nordLetter == "Eb" ||
-      nordLetter == "Fb" ||
-      nordLetter == "Gb"
-    ) {
-      nordLetter = nordLetter.charAt(0);
-    } else if (
-      nordLetter == "Am" ||
-      nordLetter == "Bm" ||
-      nordLetter == "Cm" ||
-      nordLetter == "Dm" ||
-      nordLetter == "Em" ||
-      nordLetter == "Fm" ||
-      nordLetter == "Gm"
-    ) {
-      nordLetter = nordLetter.charAt(0);
-    } else if (
-      nordLetter == "AM" ||
-      nordLetter == "BM" ||
-      nordLetter == "CM" ||
-      nordLetter == "DM" ||
-      nordLetter == "EM" ||
-      nordLetter == "FM" ||
-      nordLetter == "GM"
-    ) {
-      nordLetter = nordLetter.charAt(0);
-    } else if (
-      nordLetter == "Abm" ||
-      nordLetter == "Bbm" ||
-      nordLetter == "Cbm" ||
-      nordLetter == "Dbm" ||
-      nordLetter == "Ebm" ||
-      nordLetter == "Fbm" ||
-      nordLetter == "Gbm"
-    ) {
-      nordLetter = nordLetter.charAt(0);
-    } else if (
-      nordLetter == "AbM" ||
-      nordLetter == "BbM" ||
-      nordLetter == "CbM" ||
-      nordLetter == "DbM" ||
-      nordLetter == "EbM" ||
-      nordLetter == "FbM" ||
-      nordLetter == "GbM"
-    ) {
-      nordLetter = nordLetter.charAt(0);
-    }
+    // let nordLetter = current_song["song_name"].split("_")[0];
+    // if (
+    //   nordLetter == "Ab" ||
+    //   nordLetter == "Bb" ||
+    //   nordLetter == "Cb" ||
+    //   nordLetter == "Db" ||
+    //   nordLetter == "Eb" ||
+    //   nordLetter == "Fb" ||
+    //   nordLetter == "Gb"
+    // ) {
+    //   nordLetter = nordLetter.charAt(0);
+    // } else if (
+    //   nordLetter == "Am" ||
+    //   nordLetter == "Bm" ||
+    //   nordLetter == "Cm" ||
+    //   nordLetter == "Dm" ||
+    //   nordLetter == "Em" ||
+    //   nordLetter == "Fm" ||
+    //   nordLetter == "Gm"
+    // ) {
+    //   nordLetter = nordLetter.charAt(0);
+    // } else if (
+    //   nordLetter == "AM" ||
+    //   nordLetter == "BM" ||
+    //   nordLetter == "CM" ||
+    //   nordLetter == "DM" ||
+    //   nordLetter == "EM" ||
+    //   nordLetter == "FM" ||
+    //   nordLetter == "GM"
+    // ) {
+    //   nordLetter = nordLetter.charAt(0);
+    // } else if (
+    //   nordLetter == "Abm" ||
+    //   nordLetter == "Bbm" ||
+    //   nordLetter == "Cbm" ||
+    //   nordLetter == "Dbm" ||
+    //   nordLetter == "Ebm" ||
+    //   nordLetter == "Fbm" ||
+    //   nordLetter == "Gbm"
+    // ) {
+    //   nordLetter = nordLetter.charAt(0);
+    // } else if (
+    //   nordLetter == "AbM" ||
+    //   nordLetter == "BbM" ||
+    //   nordLetter == "CbM" ||
+    //   nordLetter == "DbM" ||
+    //   nordLetter == "EbM" ||
+    //   nordLetter == "FbM" ||
+    //   nordLetter == "GbM"
+    // ) {
+    //   nordLetter = nordLetter.charAt(0);
+    // }
 
-    console.log(nordLetter, "....nordLetter");
-    let index = data["c3"].indexOf(nordLetter);
+    // console.log(nordLetter, "....nordLetter");
+    // let index = data["c3"].indexOf(nordLetter);
 
-    if (lastInd > -1) {
-      changeHandler("c3", lastInd);
-    }
+    // if (lastInd > -1) {
+    //   changeHandler("c3", lastInd);
+    // }
 
-    changeHandler("c3", index);
-    console.log(lastInd, ".....lastInd");
-    console.log(index, ".....index");
-    setLastInd(index);
+    // changeHandler("c3", index);
+    // console.log(lastInd, ".....lastInd");
+    // console.log(index, ".....index");
+    // setLastInd(index);
 
-    console.log(lastInd, ".....lastInd");
+    // console.log(lastInd, ".....lastInd");
 
     //end here
   }
 
   function getNord() {
     var str2 = nordData;
+    console.log("nordDatanordData",nordData)
     let final_result = [];
     for (let i = 0; i < nordData.length; i++) {
       let str = nordData[i];
@@ -409,6 +452,7 @@ function MusicWheel(props) {
     // else{
     //   setPlay(true);
     // }
+    console.log("setNord",nord)
 
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -422,9 +466,18 @@ function MusicWheel(props) {
     urlencoded.append("song_title", "");
     urlencoded.append("groups", "");
     urlencoded.append("no_of_images", "");
-    urlencoded.append("duration", durationData[durationDataIndex]);
-    urlencoded.append("intensity", intensityData[intensityIndex]);
-    urlencoded.append("tempo", tempoData[tempoIndex]);
+    // if (nord_or_cord){
+      // console.log("nord_or_cord",)
+      urlencoded.append("duration", '');
+      urlencoded.append("intensity", '');
+      urlencoded.append("tempo", '');
+    // }
+    // else{
+      urlencoded.append("duration", durationData[durationDataIndex]);
+      urlencoded.append("intensity", intensityData[intensityIndex]);
+      urlencoded.append("tempo", tempoData[tempoIndex]);
+    // }
+    
     urlencoded.append("image_type", imageType);
     urlencoded.append("package", packageIndex);
 
