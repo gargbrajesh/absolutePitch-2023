@@ -5,7 +5,7 @@ import styles from "./style.module.css";
 // import dataBase from "../utils/data";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import "./style.module.css";
-import excludeVariablesFromRoot from "@mui/material/styles/excludeVariablesFromRoot";
+// import excludeVariablesFromRoot from "@mui/material/styles/excludeVariablesFromRoot";
 
 function MusicWheel(props) {
   const classes = useStyles();
@@ -676,7 +676,7 @@ function MusicWheel(props) {
                       </li>
                     ))}
                   </ul>
-                  <p className={classes.circle6} style={{backgroundImage:`url('https://mylatinhome.com/image_play/Group%202.png')`}}>
+                  <p className={classes.circle6}>
                     <PlayCircleOutlineIcon
                       onClick={(e) => {
                         fetchSongsData();
