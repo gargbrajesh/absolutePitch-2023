@@ -208,15 +208,14 @@ function MusicWheel(props) {
         } else {
           setTempoIndex(tempoIndex + 1);
 
-          targetBtn.style.background = "radial-gradient(green 40%, #000)";
-          targetBtn.style.color = "#fff";
-          targetBtn.style.border = "1px solid blue";
+          // targetBtn.style.background = "radial-gradient(green 40%, #000)";
+          // targetBtn.style.color = "#fff";
+          // targetBtn.style.border = "1px solid blue";
           setNord({ c1: [], c2: [], c3: [] })
           setNordData([])
          
           setNord({ c1: [], c2: [], c3: [] });
           setNordData([]);
-          // console.log("hhhhh")
         }
       }
       if (type == "Intensity") {
@@ -294,19 +293,7 @@ function MusicWheel(props) {
 
       } 
       else if(last_nord=='m'){
-        selected_nord = selected_nord.slice(0,selected_nord.length-1)
-    console.log("songsData", songsData, ind);
-    props.handleSong(songsData, ind);
-    const current_song = songsData[ind];
-    console.log("file name", current_song);
-    var selected_nord = current_song["note_or_cord"];
-    // selected_nord_array = selected_nord.split('')
-    const last_nord = selected_nord[selected_nord.length - 1];
-    console.log("last_nord", last_nord);
-    // if (last_nord != 'm' && last_nord != 'M') {
-    //   // getnord("c3",4)
-    //   console.log("last_nord.length>1",last_nord.length,last_nord.length>1)
-
+        selected_nord = selected_nord.slice(0,selected_nord.length-1)  
         if (selected_nord.length>1){
           selected_nord = selected_nord.replace('b', '#');
         }
@@ -321,8 +308,7 @@ function MusicWheel(props) {
       }
       const selecetd_index = data['c3'].indexOf(selected_nord);
       setHighlightedNord({ 'c1': [selecetd_index], 'c2': [], 'c3': [] })
-    // }
-    // else if(last_nord)
+    
 
     }
   }
@@ -425,18 +411,6 @@ function MusicWheel(props) {
     urlencoded.append("duration", durationData[durationDataIndex]);
     urlencoded.append("intensity", intensityData[intensityIndex]);
     urlencoded.append("tempo", tempoData[tempoIndex]);
-    
-    // if (nord_or_cord){
-    // console.log("nord_or_cord",)
-    urlencoded.append("duration", "");
-    urlencoded.append("intensity", "");
-    urlencoded.append("tempo", "");
-    // }
-    // else{
-    urlencoded.append("duration", durationData[durationDataIndex]);
-    urlencoded.append("intensity", intensityData[intensityIndex]);
-    urlencoded.append("tempo", tempoData[tempoIndex]);
-    // }
 
     urlencoded.append("image_type", imageType);
     urlencoded.append("package", packageIndex);
@@ -459,21 +433,12 @@ function MusicWheel(props) {
           setSongsData(responseJson.data);
           for(let i=0 ; i <= responseJson.data.length;i++)
           {
-            console.log(responseJson.data[i].song_name.includes("_P."));
             if(!(responseJson.data[i].song_name.includes("_P.")))
             {
               handleClickSong(responseJson.data, i);
-              console.log(i,'index...')
                break;
             }
-            // else{
-            //   handleClickSong(responseJson.data, i);
-            //   console.log(i,'not premium index...')
-
-            // }
-           
           }
-          // handleClickSong(responseJson.data, 0);
           setTotalSongs(responseJson.data.length);
         } else {
           alert("error in response");
