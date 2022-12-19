@@ -99,7 +99,10 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     listStyle: "none",
     overflow: "hidden",
-    background: "#041e4e",
+    // background: "#041e4e",
+    backgroundImage:`url('https://mylatinhome.com/image_play/Group%202.png')`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
     position: "absolute",
     border: "2px solid",
     display: "flex",
@@ -114,7 +117,7 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     listStyle: "none",
     overflow: "hidden",
-    background: "#584c6c",
+    // background: "#584c6c",
     position: "absolute",
     border: "none",
     /* margin-bottom: 50px, */
@@ -124,13 +127,14 @@ const useStyles = makeStyles({
   },
 
   circle6: {
-    width: "25px",
-    border: "2px solid #903884",
-    height: "25px",
+    width: "35px",
+    // border: "2px solid #903884",
+    height: "35px",
     /* padding: 18px 18px; */
+    display:'flex',
     overflow: "hidden",
     position: "absolute",
-    background: " #333333",
+    // background: " #333333",
     listStyle: "none",
     /* margin-top: 10%; */
     textAlign: "center",
@@ -302,6 +306,31 @@ const useStyles = makeStyles({
     fontSize: "12px",
     cursor: "pointer",
   },
+  tempoBtnTopActive: {
+    position: "absolute",
+    width: "80px",
+    height: "80px",
+    borderRadius: "50%",
+    top: "0",
+    background: "radial-gradient(#df783d 40%, #000)",
+    fontSize: "12px",
+    cursor: "pointer",
+    border : "1px solid blue",
+  },
+  tempoActive: {
+    position: "absolute",
+    width: "80px",
+    height: "80px",
+    borderRadius: "50%",
+    top: "0",
+   
+   background : "radial-gradient(green 40%, #000)",
+    color :"#fff",
+   
+    fontSize: "12px",
+    cursor: "pointer",
+    border : "1px solid blue",
+  },
   tempoBtnBottom: {
     position: "absolute",
     justifyContent: "flex-end",
@@ -312,6 +341,18 @@ const useStyles = makeStyles({
     background: "radial-gradient(#FFF 40%, #000)",
     fontSize: "12px",
     cursor: "pointer",
+  },
+  tempoBtnBottomActive: {
+    position: "absolute",
+    justifyContent: "flex-end",
+    width: "80px",
+    height: "80px",
+    borderRadius: "50%",
+    bottom: "0",
+    background: "radial-gradient(yellow 40%, #000)",
+    fontSize: "12px",
+    cursor: "pointer",
+    border : "1px solid blue",
   },
   paperStyle: {
     marginTop: "10px",
@@ -333,7 +374,8 @@ const useStyles = makeStyles({
   },
   playerBtn: {
     cursor: "pointer",
-    fontSize: "25px",
+    fontSize: "38px",
+    position:'absolute',
     color:'white',
     "&:hover": {
       color: "yellow",
