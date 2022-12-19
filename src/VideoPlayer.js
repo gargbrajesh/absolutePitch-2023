@@ -41,9 +41,16 @@ function VideoPlayer(prop) {
   const [song, setSong] = useState();
 
   const music = prop.musicData ? prop.musicData[prop.musicIndex]["song_url"] : "";
+  
 
   function playNextSong(){
     prop.handleSong(prop.musicData, prop.musicIndex+1)
+
+    // if(!(prop.musicData[prop.musicIndex+1]["song_url"].includes("_P.")))
+    // {
+    //   prop.handleSong(prop.musicData, prop.musicIndex)
+    //   console.log(prop.musicIndex+1,'next index .....')
+    // }
 
   }
   console.log("prop.musicData", prop.musicData);
