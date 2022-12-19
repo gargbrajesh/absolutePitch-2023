@@ -11,6 +11,7 @@ function MusicWheel(props) {
   const classes = useStyles();
 
   const [nord, setNord] = useState({ c1: [], c2: [], c3: [] });
+  const [highlightedNord, setHighlightedNord] = useState({ c1: [], c2: [], c3: [] });
   const [songsData, setSongsData] = useState([]);
   const [tempo, SetTempo] = useState("");
   const [intensity, SetIntensity] = useState("");
@@ -152,12 +153,12 @@ function MusicWheel(props) {
   ];
   // let lastInd = -1;
   function changeHandler(c, ind, event) {
+
     if (imageTypeIndex == "") {
       alert("Please seect any ImageType Key");
     } else {
       const temp = { ...nord };
       const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
-
       if (["c1", "c2", "c3"].includes(c)) {
         if (temp[c].indexOf(ind) == -1 && count < 3) {
 
@@ -177,9 +178,7 @@ function MusicWheel(props) {
           const nordIndex = temp[c].indexOf(ind);
           temp[c].splice(nordIndex, 1);
           setNord(temp);
-          console.log("else", nordData);
 
-          // console.log("popo", nordData, data[c][nordIndex], data[c][ind]);
           if (c == "c1" || c == "c2") {
             var nordIndex1 = nordData.indexOf(data["c3"][ind] + data[c][ind]);
           } else {
@@ -207,7 +206,6 @@ function MusicWheel(props) {
     } else {
       var targetBtn = e.target;
       if (type == "Tempo") {
-        // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
 
         if (tempoIndex == tempoData.length - 1) {
           setTempoIndex(0);
@@ -217,14 +215,12 @@ function MusicWheel(props) {
           targetBtn.style.background = "radial-gradient(green 40%, #000)";
           targetBtn.style.color = "#fff";
           targetBtn.style.border = "1px solid blue";
-        setNord({ c1: [], c2: [], c3: [] })
-        setNordData([])
-// console.log("hhhhh")
+          setNord({ c1: [], c2: [], c3: [] })
+          setNordData([])
         }
 
       }
       if (type == "Intensity") {
-        // console.log("sggs", tempoIndex,tempoData, tempoData.length, tempoData[tempoIndex])
 
         if (intensityIndex == intensityData.length - 1) {
           setIntensityIndex(0);
@@ -271,19 +267,15 @@ function MusicWheel(props) {
       }
     }
     // setTotalSongs(data.length)
-    // console.log(songsData.length,'....totalso...');
   }
 
   function toggleActiveStyle(ind) {
     if (ind == 1) {
       setImageTypeActive(ind);
-      console.log(imageTypeActive);
     } else if (ind == 2) {
       setImageTypeActive(ind);
-      console.log(imageTypeActive);
     } else if (ind == 3) {
       setImageTypeActive(ind);
-      console.log(imageTypeActive);
     } else {
       setImageTypeActive(false);
     }
@@ -293,107 +285,46 @@ function MusicWheel(props) {
     btnHandler("Letter", '', 1);
   },[])
   function handleClickSong(songsData, ind) {
-    console.log("songsData",songsData,ind)
-    props.handleSong(songsData, ind);
-    const current_song = songsData[ind]
-    console.log("file name",current_song);
-    var selected_nord = current_song['note_or_cord']
-    // selected_nord_array = selected_nord.split('')
-    const last_nord = selected_nord[selected_nord.length-1]
-    console.log("last_nord",last_nord)
-    // if (last_nord != 'm' && last_nord != 'M') {
-    //   // getnord("c3",4)
-    //   console.log("last_nord.length>1",last_nord.length,last_nord.length>1)
+    if (songsData.length>0){
 
-    //   if (selected_nord.length>1){
-    //     selected_nord = selected_nord.replace('b', '#');
-    //       console.log("selected_nord",selected_nord)
-    //   }
-    //   const selecetd_index = data['c3'].indexOf(selected_nord);
-    //   console.log("selecetd_index",selecetd_index,selected_nord)
-    //   setNord({ 'c1': [], 'c2': [], 'c3': [selecetd_index] })
-    //   console.log("nord is",nord)
+      props.handleSong(songsData, ind);
+      const current_song = songsData[ind]
+      let selected_nord = current_song['note_or_cord']
+      const last_nord = selected_nord[selected_nord.length-1]
+      if (last_nord != 'm' && last_nord != 'M') {
 
-    // } 
-    // else if(last_nord)
+        if (selected_nord.length>1){
+          selected_nord = selected_nord.replace('b', '#');
+        }
+        const selecetd_index = data['c3'].indexOf(selected_nord);
+        setHighlightedNord({ 'c1': [], 'c2': [], 'c3': [selecetd_index] })
 
+      } 
+      else if(last_nord=='m'){
+        selected_nord = selected_nord.slice(0,selected_nord.length-1)
+
+        if (selected_nord.length>1){
+          selected_nord = selected_nord.replace('b', '#');
+        }
+      const selecetd_index = data['c3'].indexOf(selected_nord);
+      setHighlightedNord({ 'c1': [], 'c2': [selecetd_index], 'c3': [] })
+    }
+    else if(last_nord=='M'){
+      selected_nord = selected_nord.slice(0,selected_nord.length-1)
+
+      if (selected_nord.length>1){
+        selected_nord = selected_nord.replace('b', '#');
+      }
+      const selecetd_index = data['c3'].indexOf(selected_nord);
+      setHighlightedNord({ 'c1': [selecetd_index], 'c2': [], 'c3': [] })
+
+    }
+  }
     setPlaySongposition(++ind);
-
-    // code for highlight nord on selected song click , start here
-
-    // let nordLetter = current_song["song_name"].split("_")[0];
-    // if (
-    //   nordLetter == "Ab" ||
-    //   nordLetter == "Bb" ||
-    //   nordLetter == "Cb" ||
-    //   nordLetter == "Db" ||
-    //   nordLetter == "Eb" ||
-    //   nordLetter == "Fb" ||
-    //   nordLetter == "Gb"
-    // ) {
-    //   nordLetter = nordLetter.charAt(0);
-    // } else if (
-    //   nordLetter == "Am" ||
-    //   nordLetter == "Bm" ||
-    //   nordLetter == "Cm" ||
-    //   nordLetter == "Dm" ||
-    //   nordLetter == "Em" ||
-    //   nordLetter == "Fm" ||
-    //   nordLetter == "Gm"
-    // ) {
-    //   nordLetter = nordLetter.charAt(0);
-    // } else if (
-    //   nordLetter == "AM" ||
-    //   nordLetter == "BM" ||
-    //   nordLetter == "CM" ||
-    //   nordLetter == "DM" ||
-    //   nordLetter == "EM" ||
-    //   nordLetter == "FM" ||
-    //   nordLetter == "GM"
-    // ) {
-    //   nordLetter = nordLetter.charAt(0);
-    // } else if (
-    //   nordLetter == "Abm" ||
-    //   nordLetter == "Bbm" ||
-    //   nordLetter == "Cbm" ||
-    //   nordLetter == "Dbm" ||
-    //   nordLetter == "Ebm" ||
-    //   nordLetter == "Fbm" ||
-    //   nordLetter == "Gbm"
-    // ) {
-    //   nordLetter = nordLetter.charAt(0);
-    // } else if (
-    //   nordLetter == "AbM" ||
-    //   nordLetter == "BbM" ||
-    //   nordLetter == "CbM" ||
-    //   nordLetter == "DbM" ||
-    //   nordLetter == "EbM" ||
-    //   nordLetter == "FbM" ||
-    //   nordLetter == "GbM"
-    // ) {
-    //   nordLetter = nordLetter.charAt(0);
-    // }
-
-    // console.log(nordLetter, "....nordLetter");
-    // let index = data["c3"].indexOf(nordLetter);
-
-    // if (lastInd > -1) {
-    //   changeHandler("c3", lastInd);
-    // }
-
-    // changeHandler("c3", index);
-    // console.log(lastInd, ".....lastInd");
-    // console.log(index, ".....index");
-    // setLastInd(index);
-
-    // console.log(lastInd, ".....lastInd");
-
-    //end here
   }
 
   function getNord() {
     var str2 = nordData;
-    console.log("nordDatanordData",nordData)
     let final_result = [];
     for (let i = 0; i < nordData.length; i++) {
       let str = nordData[i];
@@ -401,14 +332,12 @@ function MusicWheel(props) {
       for (let val of nordData[i]) {
         if (nordMap[val]) {
           str = nordData[i].replace(val, nordMap[val]);
-          // console.log("final",final_str)
           str2 += nordMap[val] + ",";
         }
       }
       final_result.push(str);
     }
 
-    console.log("final_result", final_result);
     return final_result;
   }
 
@@ -473,13 +402,7 @@ function MusicWheel(props) {
     window.location.reload(false);
   }
   function fetchSongsData(imageType = imageTypeIndex) {
-    // if(play !=false){
-    //   setPlay(false);
-    // }
-    // else{
-    //   setPlay(true);
-    // }
-    console.log("setNord",nord)
+    
 
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -493,17 +416,9 @@ function MusicWheel(props) {
     urlencoded.append("song_title", "");
     urlencoded.append("groups", "");
     urlencoded.append("no_of_images", "");
-    // if (nord_or_cord){
-      // console.log("nord_or_cord",)
-      urlencoded.append("duration", '');
-      urlencoded.append("intensity", '');
-      urlencoded.append("tempo", '');
-    // }
-    // else{
-      urlencoded.append("duration", durationData[durationDataIndex]);
-      urlencoded.append("intensity", intensityData[intensityIndex]);
-      urlencoded.append("tempo", tempoData[tempoIndex]);
-    // }
+    urlencoded.append("duration", durationData[durationDataIndex]);
+    urlencoded.append("intensity", intensityData[intensityIndex]);
+    urlencoded.append("tempo", tempoData[tempoIndex]);
     
     urlencoded.append("image_type", imageType);
     urlencoded.append("package", packageIndex);
@@ -522,8 +437,6 @@ function MusicWheel(props) {
       .then((response) => response.json())
       .then((responseJson) => {
         if (responseJson != "") {
-          console.log("res", responseJson);
-
           
           setSongsData(responseJson.data);
           handleClickSong(responseJson.data,0)
@@ -625,7 +538,9 @@ function MusicWheel(props) {
                   <div
                     className={`${styles.text} ${
                       nord["c1"].includes(ind) ? styles.bluebg : ""
-                    }`}
+                    }  ${
+                      highlightedNord["c1"].includes(ind) ? styles.greenbg : ""
+                    }` }
                     onClick={(e) => changeHandler("c1", ind, e)}
                   >
                     {val}
@@ -639,6 +554,8 @@ function MusicWheel(props) {
                     <div
                       className={`${styles.textTwo} ${
                         nord["c2"].includes(ind) ? styles.bluebg : ""
+                      } ${
+                        highlightedNord["c2"].includes(ind) ? styles.greenbg : ""
                       }`}
                       onClick={(e) => changeHandler("c2", ind, e)}
                     >
@@ -653,6 +570,8 @@ function MusicWheel(props) {
                     <div
                       className={`${styles.textThird} ${
                         nord["c3"].includes(ind) ? styles.bluebg : ""
+                      } ${
+                        highlightedNord["c3"].includes(ind) ? styles.greenbg : ""
                       }`}
                       onClick={(e) => changeHandler("c3", ind, e)}
                     >
