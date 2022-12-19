@@ -654,12 +654,13 @@ function MusicWheel(props) {
                       </li>
                     ))}
                   </ul>
-                  <p className={classes.circle6}>
+                  <p className={classes.circle6} style={{backgroundImage:`url('https://mylatinhome.com/image_play/Group%202.png')`}}>
                     <PlayCircleOutlineIcon
                       onClick={(e) => {
                         fetchSongsData();
                       }}
                       className={classes.playerBtn}
+                      
                     />
                   </p>
                 </div>
