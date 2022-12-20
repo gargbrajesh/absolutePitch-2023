@@ -306,7 +306,7 @@ const useStyles = makeStyles({
     fontSize: "12px",
     cursor: "pointer",
   },
-  tempoBtnTopActive: {
+  packageBtnActive: {
     position: "absolute",
     width: "80px",
     height: "80px",
@@ -323,10 +323,8 @@ const useStyles = makeStyles({
     height: "80px",
     borderRadius: "50%",
     top: "0",
-   
    background : "radial-gradient(green 40%, #000)",
     color :"#fff",
-   
     fontSize: "12px",
     cursor: "pointer",
     border : "1px solid blue",

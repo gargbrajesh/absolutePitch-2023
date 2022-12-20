@@ -68,7 +68,6 @@ function LandingPage() {
 
   function handleSong(songsData, ind){
     console.log("songd", ind, songsData[ind])
-
     setData(songsData)
     setIndex(ind)
   }
