@@ -44,13 +44,13 @@ function VideoPlayer(prop) {
   
 
   function playNextSong(){
-    prop.handleSong(prop.musicData, prop.musicIndex+1)
+    // prop.handleSong(prop.musicData, prop.musicIndex+1)
 
-    // if(!(prop.musicData[prop.musicIndex+1]["song_url"].includes("_P.")))
-    // {
-    //   prop.handleSong(prop.musicData, prop.musicIndex)
-    //   console.log(prop.musicIndex+1,'next index .....')
-    // }
+    if(!(prop.musicData[prop.musicIndex+1]["song_url"].includes("_P.")))
+    {
+      prop.handleSong(prop.musicData, prop.musicIndex+1)
+      console.log(prop.musicIndex+1,'next index .....')
+    }
 
   }
   console.log("prop.musicData", prop.musicData);
