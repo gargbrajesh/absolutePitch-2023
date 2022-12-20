@@ -433,7 +433,10 @@
     background: #0082cf !important;
     color: #ffffff;
   }
-  
+  .greenbg{
+    background: green !important;
+    color: #ffffff;
+  }
   .songsWrapper  {
    display: flex;
    align-items: center;
