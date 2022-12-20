@@ -18,7 +18,7 @@ function MusicWheel(props) {
   const [nordData, setNordData] = useState([]);
   const [tempoIndex, setTempoIndex] = useState(0);
   const [intensityIndex, setIntensityIndex] = useState(0);
-  const [packageDataIndex, setPackageDataIndex] = useState();
+  const [packageDataIndex, setPackageDataIndex] = useState(0);
   const [imageTypeIndex, setImageTypeIndex] = useState("");
   const [imageTypeActive, setImageTypeActive] = useState(false);
   const [durationDataIndex, setDurationDataIndex] = useState(0);
@@ -31,8 +31,8 @@ function MusicWheel(props) {
   const [changeBg, setChangeBg] = useState("");
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData = ["", "HI", "LI", "MI"];
-  const packageData = ["", "F", "P"];
-  const packageName =["", "Classic", "Premium"];
+  const packageData = ["F", "P"];
+  const packageName =["","Premium"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
   const durationData = [
     "",
@@ -245,15 +245,16 @@ function MusicWheel(props) {
 
 
       if (type == "Keys") {
-        setImageTypeIndex(type);
-        toggleActiveStyle(ind);
-        await fetchSongsData(type);
-      }
-      if (type == "Letter") {
-alert('You need to purchase the membership');
+        alert('You need to purchase the membership');
         // setImageTypeIndex(type);
         // toggleActiveStyle(ind);
         // await fetchSongsData(type);
+      }
+      if (type == "Letter") {
+
+        setImageTypeIndex(type);
+        toggleActiveStyle(ind);
+        await fetchSongsData(type);
       }
       if (type == "Staff") {
         alert('You need to purchase the membership');
@@ -523,7 +524,7 @@ alert('You need to purchase the membership');
             }}
           >
             {" "}
-            {packageName[packageDataIndex] ? packageName[packageDataIndex] : "Mix"}
+            {packageName[packageDataIndex] ? packageName[packageDataIndex] : "Classic"}
           </button>
 
           <button
