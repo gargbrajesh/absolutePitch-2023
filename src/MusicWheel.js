@@ -18,7 +18,7 @@ function MusicWheel(props) {
   const [nordData, setNordData] = useState([]);
   const [tempoIndex, setTempoIndex] = useState(0);
   const [intensityIndex, setIntensityIndex] = useState(0);
-  const [packageDataIndex, setPackageDataIndex] = useState(1);
+  const [packageDataIndex, setPackageDataIndex] = useState();
   const [imageTypeIndex, setImageTypeIndex] = useState("");
   const [imageTypeActive, setImageTypeActive] = useState(false);
   const [durationDataIndex, setDurationDataIndex] = useState(0);
@@ -250,14 +250,16 @@ function MusicWheel(props) {
         await fetchSongsData(type);
       }
       if (type == "Letter") {
-        setImageTypeIndex(type);
-        toggleActiveStyle(ind);
-        await fetchSongsData(type);
+alert('You need to purchase the membership');
+        // setImageTypeIndex(type);
+        // toggleActiveStyle(ind);
+        // await fetchSongsData(type);
       }
       if (type == "Staff") {
-        toggleActiveStyle(ind);
-        setImageTypeIndex(type);
-        await fetchSongsData(type);
+        alert('You need to purchase the membership');
+        // toggleActiveStyle(ind);
+        // setImageTypeIndex(type);
+        // await fetchSongsData(type);
       }
       if (type == "Duration") {
         if (durationDataIndex == durationData.length - 1) {
