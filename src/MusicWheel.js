@@ -210,12 +210,6 @@ function MusicWheel(props) {
           setTempoIndex(0);
         } else {
           setTempoIndex(tempoIndex + 1);
-
-          // targetBtn.style.background = "radial-gradient(green 40%, #000)";
-          // targetBtn.style.color = "#fff";
-          // targetBtn.style.border = "1px solid blue";
-          // setNord({ c1: [], c2: [], c3: [] })
-          // setNordData([])
          
           setNord({ c1: [], c2: [], c3: [] });
           setNordData([]);
@@ -242,8 +236,7 @@ function MusicWheel(props) {
           setNordData([]);
         }
       }
-
-
+      
       if (type == "Keys") {
         setImageTypeIndex(type);
         toggleActiveStyle(ind);
@@ -269,7 +262,6 @@ function MusicWheel(props) {
         }
       }
     //}
-    // setTotalSongs(data.length)
   }
 
   function toggleActiveStyle(ind) {
@@ -285,15 +277,23 @@ function MusicWheel(props) {
   }
 
   useEffect(() => {
-    // btnHandler("Letter", "", 1);
-    // fetchFreeSongsData();
-    
-  }, []);
+    if(props.musicIndex>=0){
+      highlightNord(props.musicData, props.musicIndex)
+    }
+  },[props.musicIndex]);
+
+
   function handleClickSong(songsData, ind) {
+    console.log("hello")
     if (songsData.length>0){
 
       props.handleSong(songsData, ind);
-      const current_song = songsData[ind]
+  }
+    setPlaySongposition(++ind);
+  }
+ 
+  function highlightNord(songsData, ind){
+    const current_song = songsData[ind]
       let selected_nord = current_song['note_or_cord']
       const last_nord = selected_nord[selected_nord.length-1]
       if (last_nord != 'm' && last_nord != 'M') {
@@ -321,11 +321,7 @@ function MusicWheel(props) {
       }
       const selecetd_index = data['c3'].indexOf(selected_nord);
       setHighlightedNord({ 'c1': [selecetd_index], 'c2': [], 'c3': [] })
-    
-
     }
-  }
-    setPlaySongposition(++ind);
   }
 
   function getNord() {
@@ -349,8 +345,6 @@ function MusicWheel(props) {
   var i = 0;
 
   // for get nord  on button click
-
-  // var counter = 0;
 
   function playAudio(noteType, e, ind) {
     if (counter == 0) {
@@ -458,7 +452,6 @@ function MusicWheel(props) {
         }
       });
   }
- 
   return (
     <div className={classes.circleCard}>
       <Grid container spacing={2} className={classes.topButtonContainer}>
