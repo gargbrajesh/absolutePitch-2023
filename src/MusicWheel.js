@@ -243,7 +243,6 @@ function MusicWheel(props) {
         }
       }
 
-
       if (type == "Keys") {
         alert('You need to purchase the membership');
         // setImageTypeIndex(type);
@@ -324,8 +323,6 @@ function MusicWheel(props) {
       }
       const selecetd_index = data['c3'].indexOf(selected_nord);
       setHighlightedNord({ 'c1': [selecetd_index], 'c2': [], 'c3': [] })
-    
-
     }
   }
     setPlaySongposition(++ind);
@@ -345,7 +342,6 @@ function MusicWheel(props) {
       }
       final_result.push(str);
     }
-
     return final_result;
   }
 
@@ -381,7 +377,6 @@ function MusicWheel(props) {
       counter = -1;
       changeHandler("c1", ind);
     }
-
     // counter = counter + 1;
     setCounter(++counter);
 
@@ -603,7 +598,7 @@ function MusicWheel(props) {
                         key={classes.circle3 + "-" + ind}
                         className={styles.list}
                         style={{ background: "black", borderRadius: "50%" }}
-                      >
+                       >
                         <div
                           className={`${styles.textFour}`}
                           onClick={(e) => playAudio(data["c3"][ind], e, ind)}
