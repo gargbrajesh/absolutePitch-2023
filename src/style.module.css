@@ -430,11 +430,11 @@
   } */
   
   .bluebg {
-    background: #0082cf !important;
+    background: #000 !important;
     color: #ffffff;
   }
   .greenbg{
-    background: green !important;
+    background: #000 !important;
     color: #ffffff;
   }
   .songsWrapper  {
