@@ -1,8 +1,9 @@
 import React, { useState ,useEffect} from "react";
 import { Grid } from "@material-ui/core";
-import MusicWheel from "./MusicWheel";
+import MusicWheel from "./MusicWheel3";
 import VideoPlayer from "./VideoPlayer";
 import { makeStyles } from "@material-ui/core";
+
 const useStyles = makeStyles({
   root: {
     position: 'relative',

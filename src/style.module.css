@@ -177,6 +177,7 @@
     color: #000;
     cursor: pointer;
   }
+  .listBg { background:'black';}
   
 .li:first-child {
     -webkit-transform: rotate(0deg) skewY(-60deg);
@@ -376,6 +377,30 @@
     
     background: whitesmoke;
   }
+  .list:nth-child(1) .textFour {
+    
+    background: black;
+  }
+  .list:nth-child(3) .textFour {
+    
+    background: black;
+  }
+  .list:nth-child(6) .textFour {
+    
+    background: black;
+  }
+  .list:nth-child(8) .textFour {
+    
+    background: black;
+  }
+  .list:nth-child(10) .textFour {
+    
+    background: black;
+  }
+  .list:nth-child(12) .textFour {
+    
+    background: whitesmoke;
+  }
   .list .textFour:hover {
     
     background: rgb(88, 47, 224);
@@ -453,15 +478,33 @@
     font-size: 14px;
     justify-content: center;
   }
+
   .liststyle:hover {
     margin: 0;
     color: #fff;
     cursor: pointer;
-    border-radius: 20px;
+    /* border-radius: 20px; */
    
     background: #18b0a0;
     font-size: 14px;
-    width: 95%;
+    width: 80%;
+  }
+  .liststyle {
+    margin: 0;
+    color: #000000;
+    cursor: pointer;
+    border-bottom: 1px solid #CACACA;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    /* border-color: #CACACA; */
+    line-height: 25px;
+    margin-left: 50px;
+    padding-left: 20px !important;
+    background: #EEEEEE;
+   
+    width: 80%;
   }
   .listStyleDisable:hover {
     margin: 0;

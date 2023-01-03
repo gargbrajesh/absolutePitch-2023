@@ -91,8 +91,8 @@ const useStyles = makeStyles({
   },
 
   circle4: {
-    width: "60px",
-    height: "60px",
+    width: "120px",
+    height: "120px",
     borderRadius: "50%",
     listStyle: "none",
     overflow: "hidden",
@@ -124,9 +124,12 @@ const useStyles = makeStyles({
   },
 
   circle6: {
-    width: "35px",
-    // border: "2px solid #903884",
-    height: "35px",
+    // width: "35px",
+   
+    // height: "35px",
+    width: "50px",
+   background:'#b20ca4',
+    height: "50px",
     /* padding: 18px 18px; */
     display: "flex",
     overflow: "hidden",
@@ -144,7 +147,7 @@ const useStyles = makeStyles({
     verticalAlign: "super",
     fontSize: "0.6em",
   },
-
+  listBg :{ background:'black'},
   bottomButtonContainer: {
     marginTop: "-5px",
 
@@ -596,9 +599,10 @@ const useStyles = makeStyles({
   },
   playerBtn: {
     cursor: "pointer",
-    fontSize: "38px",
+    fontSize: "70px",
     position: "absolute",
-    color: "white",
+    color: "#fff",
+    borderRadius:'5px',
     "&:hover": {
       color: "yellow",
     },

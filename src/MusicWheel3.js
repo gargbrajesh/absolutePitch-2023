@@ -1,10 +1,16 @@
 import { Grid, Paper, Button } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
-import useStyles from "../utils/styles.module";
+import useStyles from "../utils/styles.module2";
 import styles from "./style.module.css";
-
+import Image from "next/image";
+import staff from "../public/assets/images/staff.jpg";
+import keys from "../public/assets/images/keys.jpg";
+import playBtn from "../public/assets/images/playBtn.jpg";
+import bottomRight from "../public/assets/images/bottomRight.jpg";
 // import dataBase from "../utils/data";
+import LabelIcon from "@mui/icons-material/Label";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import "./style.module.css";
 // import excludeVariablesFromRoot from "@mui/material/styles/excludeVariablesFromRoot";
 
@@ -32,7 +38,7 @@ function MusicWheel(props) {
   const [nordIndex111, setNordIndex111] = useState(0);
   let [counter, setCounter] = useState(0);
   let [lastInd, setLastInd] = useState(-1);
-  const [allImageCount , setAllImageCount] =  useState(0);
+  const [allImageCount, setAllImageCount] = useState(0);
   const [imageCount, setImageCount] = useState(0);
   const [duration, setDuration] = useState(0);
   const [totalSeconds, setTotalSeconds] = useState(0);
@@ -42,7 +48,7 @@ function MusicWheel(props) {
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData = ["", "HI", "LI", "MI"];
   const packageData = ["F", "P", "", ""];
-  const packageName = ["Mix", "Premium", "Original", "All"];
+  const packageName = ["Mix", "Premium", "Original"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
   const durationData = [
     "",
@@ -235,6 +241,7 @@ function MusicWheel(props) {
         setNord({ c1: [], c2: [], c3: [] });
         setNordData([]);
       }
+      console.log(packageDataIndex,'...packageDataIndex');
     }
     if (type == "Intensity") {
       if (intensityIndex == intensityData.length - 1) {
@@ -289,7 +296,7 @@ function MusicWheel(props) {
 
   function secondsToHms(Seconds) {
     let d = Number(Seconds);
-console.log(Seconds,'...Secondss')
+    console.log(Seconds, "...Secondss");
     var m = Math.floor((d % 3600) / 60);
     var s = Math.floor((d % 3600) % 60);
 
@@ -327,14 +334,13 @@ console.log(Seconds,'...Secondss')
   }, [props.musicIndex]);
 
   function handleClickSong(songsData, ind) {
-
     if (songsData.length > 0) {
       setImageCount(songsData[ind].no_of_images);
-      console.log(imageCount,'...images');
+      console.log(imageCount, "...images");
       setDuration(songsData[ind].duration);
       props.handleSong(songsData, ind);
     }
-   
+
     setPlaySongposition(++ind);
     secondsToHms(duration);
   }
@@ -458,7 +464,7 @@ console.log(Seconds,'...Secondss')
             if (!responseJson.data[i].song_name.includes("_P.")) {
               console.log(responseJson.data[i], "songdata.....");
               handleClickSong(responseJson.data, i);
-              console.log(responseJson.data[i].duration,'....durrrrr..')
+              console.log(responseJson.data[i].duration, "....durrrrr..");
               // setDuration(responseJson.data[i].duration);
               break;
             }
@@ -481,7 +487,7 @@ console.log(Seconds,'...Secondss')
               btnHandler("Letter", e, 1);
             }}
           >
-            Letters
+           A Ab B Bb
           </button>
         </Grid>
         <Grid item xs={3} md={3}>
@@ -493,7 +499,7 @@ console.log(Seconds,'...Secondss')
               btnHandler("Staff", e, 2);
             }}
           >
-            Staff
+           <Image src = {staff} alt = 'alt' height={22}/>
           </button>
         </Grid>
         <Grid item xs={3} md={3}>
@@ -505,7 +511,8 @@ console.log(Seconds,'...Secondss')
               btnHandler("Keys", e, 3);
             }}
           >
-            Keys
+            <Image src = {keys} alt = 'alt'height={40} style={{maxWidth:'100%',
+maxHeight:'100%',}}/>
           </button>
         </Grid>
         <Grid item xs={3} md={3}>
@@ -523,37 +530,76 @@ console.log(Seconds,'...Secondss')
         <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
           <button
             className={`${classes.tempoBtnTop} ${
-              packageDataIndex > 0 ? classes.packageBtnActive : ""
+              packageDataIndex > 0 ? "" : ""
             }`}
             onClick={(e) => {
               btnHandler("Package", e);
             }}
           >
-            {" "}
-            {packageName[packageDataIndex]
+            <LabelIcon
+              className={`${classes.iconDesign} ${
+                packageDataIndex > 0 ? classes.iconDesignActive : ""
+              }`}
+            />
+            <p className={`${classes.leftBtnTextOne} ${packageDataIndex == 1 ? classes.leftBtnTextActive : ''}`}>{packageName[packageDataIndex]
               ? packageName[packageDataIndex]
-              : "Classic"}
+              : "Classic"}</p>
+            <p className={classes.leftBtnTextTwo}>{packageName[packageDataIndex]
+              ? packageName[packageDataIndex]
+              : "Classic"}</p>
+            <p className={`${classes.AllBtnText3} ${packageDataIndex == 2 ? classes.leftBtnTextActive : ''}`}>{packageName[packageDataIndex]
+              ? packageName[packageDataIndex]
+              : "Classic"}</p>
           </button>
-          <div className={classes.timerBox}>
-            {remainingTime}/{totalSeconds}
+
+          <div className={classes.imageCount}>
+            <p> {remainingTime}</p>
+            <p style={{ borderTop: "1px solid #7B7B7B", paddingTop: "10px" }}>
+              {" "}
+              {totalSeconds}
+            </p>
           </div>
+          {/* <div className={classes.timerBox}>
+           /{totalSeconds}
+          </div> */}
           <button
-            className={`${classes.tempoBtnBottom} ${
-              durationDataIndex > 0 ? classes.tempoBtnBottomActive : ""
+            className={`${classes.tempoNewBtnBottom} ${
+              durationDataIndex > 0 ? "" : ""
             }`}
             onClick={(e) => {
               btnHandler("Duration", e);
             }}
           >
             {" "}
-            {durationData[durationDataIndex]
+            <LabelIcon
+              className={`${classes.iconDesign} ${
+                durationDataIndex > 0 ? classes.iconDesignActive : ""
+              }`}
+            />
+            <p className={classes.leftBtnTextOne}> {durationData[durationDataIndex]
               ? durationData[durationDataIndex] <= 120
                 ? "short"
                 : durationData[durationDataIndex] <= 240 &&
                   durationData[durationDataIndex] >= 121
                 ? "Medium"
                 : "Long"
-              : "Duration"}
+              : "Duration"}</p>
+            <p className={classes.leftBtnTextTwo}> {durationData[durationDataIndex]
+              ? durationData[durationDataIndex] <= 120
+                ? "short"
+                : durationData[durationDataIndex] <= 240 &&
+                  durationData[durationDataIndex] >= 121
+                ? "Medium"
+                : "Long"
+              : "Duration"}</p>
+            <p className={classes.AllBtnText3}> {durationData[durationDataIndex]
+              ? durationData[durationDataIndex] <= 120
+                ? "short"
+                : durationData[durationDataIndex] <= 240 &&
+                  durationData[durationDataIndex] >= 121
+                ? "Medium"
+                : "Long"
+              : "Duration"}</p>
           </button>
         </Grid>
         <Grid item xs={8} md={8} className={classes.wheelContianer}>
@@ -592,6 +638,7 @@ console.log(Seconds,'...Secondss')
                   </li>
                 ))}
               </ul>
+    
               <ul className="circle3">
                 {data["c3"].map((val, ind) => (
                   <li key={classes.circle3 + "-" + ind} className={styles.list}>
@@ -615,8 +662,8 @@ console.log(Seconds,'...Secondss')
                     {circleOne.map((val, ind) => (
                       <li
                         key={classes.circle3 + "-" + ind}
-                        className={styles.list}
-                        style={{ background: "black", borderRadius: "50%" }}
+                        className={`${styles.list} ${ ind == 2 ? classes.listBg : ''}`}
+                        // style={{ background: "black",}}
                       >
                         <div
                           className={`${styles.textFour}`}
@@ -626,12 +673,14 @@ console.log(Seconds,'...Secondss')
                     ))}
                   </ul>
                   <p className={classes.circle6}>
-                    <PlayCircleOutlineIcon
+                    <ArrowRightIcon
                       onClick={(e) => {
                         fetchSongsData();
                       }}
                       className={classes.playerBtn}
+                      
                     />
+                    {/* <Image src = {playBtn}  className={classes.playerBtn} alt = 'alt'/> */}
                   </p>
                 </div>
               </ul>
@@ -640,30 +689,51 @@ console.log(Seconds,'...Secondss')
         </Grid>
         <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
           <button
-            className={`${classes.tempoBtnTop} ${
-              tempoIndex > 0 ? classes.tempoActive : ""
-            }`}
+            className={`${classes.tempoBtnNew} ${tempoIndex > 0 ? "" : ""}`}
             onClick={(e) => {
               btnHandler("Tempo", e);
             }}
           >
-            {" "}
-            {tempoData[tempoIndex] ? tempoData[tempoIndex] : "TEMPO"}
+            <LabelIcon
+              className={`${classes.iconDesign} ${
+                tempoIndex > 0 ? classes.iconDesignActive : ""
+              }`}
+            />
+
+            <p className={classes.RightBtnTextOne}> {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}</p>
+            <p className={classes.RightBtnTextTwo}> {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}</p>
+            <p className={classes.AllBtnText3}> {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}</p>
           </button>
 
-          <div className={classes.imageCount}>{allImageCount}</div>
+          <div className={classes.imageCount}>
+            <p>11</p>
+            <p style={{ borderTop: "1px solid #7B7B7B", paddingTop: "10px" }}>
+              {" "}
+              {allImageCount}
+            </p>
+          </div>
           <button
-            className={`${classes.tempoBtnBottom} ${
-              intensityIndex > 0 ? classes.tempoBtnBottomActive : ""
+            className={`${classes.IntensityBtnNew} ${
+              intensityIndex > 0 ? "classes.IntensityBtnNewActive" : ""
             }`}
             onClick={(e) => {
               btnHandler("Intensity", e);
             }}
           >
-            {" "}
-            {intensityData[intensityIndex]
+            <LabelIcon
+              className={`${classes.iconDesign} ${
+                intensityIndex > 0 ? classes.iconDesignActive : ""
+              }`}
+            />
+            <p className={classes.RightBtnTextOne}> {intensityData[intensityIndex]
               ? intensityData[intensityIndex]
-              : "Intensity"}
+              : "Intensity"}</p>
+            <p className={classes.RightBtnTextTwo}> {intensityData[intensityIndex]
+              ? intensityData[intensityIndex]
+              : "Intensity"}</p>
+            <p className={classes.AllBtnText3}> {intensityData[intensityIndex]
+              ? intensityData[intensityIndex]
+              : "Intensity"}</p>
           </button>
         </Grid>
       </Grid>
@@ -671,20 +741,21 @@ console.log(Seconds,'...Secondss')
         <Paper elevation={3} className={classes.paperStyle}>
           <div
             style={{
-              width: "80px",
+              // width: "80px",
               height: "50px",
               borderRadius: "5%",
-              background: "#333333",
-              textAlign: "center",
+              // background: "#333333",
+              // textAlign: "center",
               alignItems: "center",
-              textAlign: "center",
-              justifyContent: "center",
+              // textAlign: "center",
+              // justifyContent: "center",
               display: "flex",
             }}
           >
-            <p style={{ color: "#fff" }}>
+            <p style={{ color: "#fff",width: "70px", background: "#333333",textAlign: "center", }}>
               {playSongposition}/{totalSongs}
             </p>
+            <p>Number Of Cue</p>
           </div>
           <div>
             {songsData && songsData.length > 0
