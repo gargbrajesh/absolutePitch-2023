@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     padding: "20px",
   
    
-    height: "80vh",
+    height: "120vh",
     "@media (min-width: 770px) and (max-width:1024px)": {
       margin: "15px 15px 15px 35px !important",
     },

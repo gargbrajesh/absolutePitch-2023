@@ -5,12 +5,13 @@ import styles from "./style.module.css";
 import Image from "next/image";
 import staff from "../public/assets/images/staff.jpg";
 import keys from "../public/assets/images/keys.jpg";
-import playBtn from "../public/assets/images/playBtn.jpg";
+import playBtn from "../public/assets/images/playerBtn.jpg";
 import bottomRight from "../public/assets/images/bottomRight.jpg";
+import nl2br from 'react-nl2br';
 // import dataBase from "../utils/data";
 import LabelIcon from "@mui/icons-material/Label";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import "./style.module.css";
 // import excludeVariablesFromRoot from "@mui/material/styles/excludeVariablesFromRoot";
 
@@ -41,6 +42,9 @@ function MusicWheel(props) {
   const [allImageCount, setAllImageCount] = useState(0);
   const [imageCount, setImageCount] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [songTitle, setSongTitle] = useState('Title');
+  const [composer, setComposer] = useState('composer');
+  const [songNote, setSongNote] = useState('Note');
   const [totalSeconds, setTotalSeconds] = useState(0);
   const [remainingTime, setRemainingTime] = useState(0);
   const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -162,9 +166,9 @@ function MusicWheel(props) {
   let nordArray = [];
   const arryOne = ["c3", "c2", "c1"];
   const data = {
-    c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
-    c2: ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-    c3: ["C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C"],
+    c1: ["M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M"],
+    c2: ["m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"],
+    c3: ["C#\nDb", "D", "D#\nEb", "E", "F", "F#\nGb", "G", "G#\nAb", "A", "A#\nBb", "B", "C"],
   };
   const nordMap = { "+": "M", "-": "m", "#": "b" };
   const soundData = [
@@ -241,7 +245,7 @@ function MusicWheel(props) {
         setNord({ c1: [], c2: [], c3: [] });
         setNordData([]);
       }
-      console.log(packageDataIndex,'...packageDataIndex');
+      console.log(packageDataIndex, "...packageDataIndex");
     }
     if (type == "Intensity") {
       if (intensityIndex == intensityData.length - 1) {
@@ -339,6 +343,9 @@ function MusicWheel(props) {
       console.log(imageCount, "...images");
       setDuration(songsData[ind].duration);
       props.handleSong(songsData, ind);
+      setSongTitle(songsData[ind].song_title);
+      setComposer(songsData[ind].composer);
+      setSongNote(songsData[ind].note_or_cord);
     }
 
     setPlaySongposition(++ind);
@@ -487,7 +494,7 @@ function MusicWheel(props) {
               btnHandler("Letter", e, 1);
             }}
           >
-           A Ab B Bb
+            A Ab B Bb
           </button>
         </Grid>
         <Grid item xs={3} md={3}>
@@ -499,7 +506,7 @@ function MusicWheel(props) {
               btnHandler("Staff", e, 2);
             }}
           >
-           <Image src = {staff} alt = 'alt' height={22}/>
+            <Image src={staff} alt="alt" height={22} />
           </button>
         </Grid>
         <Grid item xs={3} md={3}>
@@ -511,8 +518,12 @@ function MusicWheel(props) {
               btnHandler("Keys", e, 3);
             }}
           >
-            <Image src = {keys} alt = 'alt'height={40} style={{maxWidth:'100%',
-maxHeight:'100%',}}/>
+            <Image
+              src={keys}
+              alt="alt"
+              height={40}
+              style={{ maxWidth: "100%", maxHeight: "100%" }}
+            />
           </button>
         </Grid>
         <Grid item xs={3} md={3}>
@@ -541,15 +552,13 @@ maxHeight:'100%',}}/>
                 packageDataIndex > 0 ? classes.iconDesignActive : ""
               }`}
             />
-            <p className={`${classes.leftBtnTextOne} ${packageDataIndex == 1 ? classes.leftBtnTextActive : ''}`}>{packageName[packageDataIndex]
-              ? packageName[packageDataIndex]
-              : "Classic"}</p>
-            <p className={classes.leftBtnTextTwo}>{packageName[packageDataIndex]
-              ? packageName[packageDataIndex]
-              : "Classic"}</p>
-            <p className={`${classes.AllBtnText3} ${packageDataIndex == 2 ? classes.leftBtnTextActive : ''}`}>{packageName[packageDataIndex]
-              ? packageName[packageDataIndex]
-              : "Classic"}</p>
+            <p
+              className={`${classes.leftBtnTextOne}`}
+            >
+              {packageName[packageDataIndex]
+                ? packageName[packageDataIndex]
+                : "Classic"}
+            </p>
           </button>
 
           <div className={classes.imageCount}>
@@ -559,9 +568,7 @@ maxHeight:'100%',}}/>
               {totalSeconds}
             </p>
           </div>
-          {/* <div className={classes.timerBox}>
-           /{totalSeconds}
-          </div> */}
+         
           <button
             className={`${classes.tempoNewBtnBottom} ${
               durationDataIndex > 0 ? "" : ""
@@ -576,30 +583,18 @@ maxHeight:'100%',}}/>
                 durationDataIndex > 0 ? classes.iconDesignActive : ""
               }`}
             />
-            <p className={classes.leftBtnTextOne}> {durationData[durationDataIndex]
-              ? durationData[durationDataIndex] <= 120
-                ? "short"
-                : durationData[durationDataIndex] <= 240 &&
-                  durationData[durationDataIndex] >= 121
-                ? "Medium"
-                : "Long"
-              : "Duration"}</p>
-            <p className={classes.leftBtnTextTwo}> {durationData[durationDataIndex]
-              ? durationData[durationDataIndex] <= 120
-                ? "short"
-                : durationData[durationDataIndex] <= 240 &&
-                  durationData[durationDataIndex] >= 121
-                ? "Medium"
-                : "Long"
-              : "Duration"}</p>
-            <p className={classes.AllBtnText3}> {durationData[durationDataIndex]
-              ? durationData[durationDataIndex] <= 120
-                ? "short"
-                : durationData[durationDataIndex] <= 240 &&
-                  durationData[durationDataIndex] >= 121
-                ? "Medium"
-                : "Long"
-              : "Duration"}</p>
+            <p className={classes.leftBtnTextOne}>
+              {" "}
+              {durationData[durationDataIndex]
+                ? durationData[durationDataIndex] <= 120
+                  ? "short"
+                  : durationData[durationDataIndex] <= 240 &&
+                    durationData[durationDataIndex] >= 121
+                  ? "Medium"
+                  : "Long"
+                : "Duration"}
+            </p>
+            
           </button>
         </Grid>
         <Grid item xs={8} md={8} className={classes.wheelContianer}>
@@ -638,7 +633,7 @@ maxHeight:'100%',}}/>
                   </li>
                 ))}
               </ul>
-    
+
               <ul className="circle3">
                 {data["c3"].map((val, ind) => (
                   <li key={classes.circle3 + "-" + ind} className={styles.list}>
@@ -652,36 +647,24 @@ maxHeight:'100%',}}/>
                       }`}
                       onClick={(e) => changeHandler("c3", ind, e)}
                     >
-                      {val}
+                      {nl2br(val)}
                     </div>
                   </li>
                 ))}
 
                 <div className={classes.circle4}>
-                  <ul>
-                    {circleOne.map((val, ind) => (
-                      <li
-                        key={classes.circle3 + "-" + ind}
-                        className={`${styles.list} ${ ind == 2 ? classes.listBg : ''}`}
-                        // style={{ background: "black",}}
-                      >
-                        <div
-                          className={`${styles.textFour}`}
-                          onClick={(e) => playAudio(data["c3"][ind], e, ind)}
-                        ></div>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className={classes.circle6}>
-                    <ArrowRightIcon
-                      onClick={(e) => {
-                        fetchSongsData();
-                      }}
-                      className={classes.playerBtn}
-                      
-                    />
-                    {/* <Image src = {playBtn}  className={classes.playerBtn} alt = 'alt'/> */}
-                  </p>
+                  <Image
+                    src={playBtn}
+                    className={classes.playerBtn}
+                    alt="alt"
+                    onClick={(e) => {
+                      fetchSongsData();
+                    }}
+                    style={{
+                      width: "50% !important",
+                      height: "50% !important",
+                    }}
+                  />
                 </div>
               </ul>
             </ul>
@@ -700,9 +683,10 @@ maxHeight:'100%',}}/>
               }`}
             />
 
-            <p className={classes.RightBtnTextOne}> {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}</p>
-            <p className={classes.RightBtnTextTwo}> {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}</p>
-            <p className={classes.AllBtnText3}> {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}</p>
+            <p className={classes.RightBtnTextOne}>
+              {" "}
+              {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}
+            </p>
           </button>
 
           <div className={classes.imageCount}>
@@ -725,16 +709,30 @@ maxHeight:'100%',}}/>
                 intensityIndex > 0 ? classes.iconDesignActive : ""
               }`}
             />
-            <p className={classes.RightBtnTextOne}> {intensityData[intensityIndex]
-              ? intensityData[intensityIndex]
-              : "Intensity"}</p>
-            <p className={classes.RightBtnTextTwo}> {intensityData[intensityIndex]
-              ? intensityData[intensityIndex]
-              : "Intensity"}</p>
-            <p className={classes.AllBtnText3}> {intensityData[intensityIndex]
-              ? intensityData[intensityIndex]
-              : "Intensity"}</p>
+            <p className={classes.RightBtnTextOne}>
+              {" "}
+              {intensityData[intensityIndex]
+                ? intensityData[intensityIndex]
+                : "Intensity"}
+            </p>
           </button>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} className={classes.bottomBoxContainer}>
+        <Grid item xs={2} md={2}>
+         <p  className={`${classes.bottomBox}`}>{songNote}</p>
+        </Grid>
+        <Grid item xs={3} md={3}>
+          <p className={`${classes.bottomBox}`}>{songTitle}</p>
+        </Grid>
+        <Grid item xs={3} md={3}>
+          <p className={`${classes.bottomBox}`}>{composer}</p>
+        </Grid>
+        <Grid item xs={2} md={2}>
+         <p className={`${classes.bottomBox}`}>{duration}</p>
+        </Grid>
+        <Grid item xs={2} md={2}>
+         <p className={`${classes.bottomBox}`}>{imageCount}</p>
         </Grid>
       </Grid>
       <div className={styles.songsWrapper}>
@@ -752,11 +750,19 @@ maxHeight:'100%',}}/>
               display: "flex",
             }}
           >
-            <p style={{ color: "#fff",width: "70px", background: "#333333",textAlign: "center", }}>
+            <p
+              style={{
+                color: "#fff",
+                width: "70px",
+                background: "#333333",
+                textAlign: "center",
+              }}
+            >
               {playSongposition}/{totalSongs}
             </p>
             <p>Number Of Cue</p>
           </div>
+          <hr/>
           <div>
             {songsData && songsData.length > 0
               ? songsData.map((val, ind) =>

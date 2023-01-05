@@ -21,6 +21,7 @@
     "next": "^12.2.5",
     "react": "^18.2.0",
     "react-dom": "18.2.0",
+    "react-nl2br": "^1.0.4",
     "react-player": "^2.11.0",
     "react-video-js-player": "^1.1.1",
     "reactjs-media": "^2.2.0"
