@@ -120,7 +120,7 @@
     font-style: normal;
     color: #000;
     cursor: pointer;
-    font-weight: 400;
+    font-weight: 500;
 }
 .textTwo {
 	position: absolute;
@@ -141,7 +141,7 @@
 .textThird {
     position: absolute;
     left: -98%;
-    width: 200%;
+    width: 220%;
     height: 200%;
     text-align: center;
     transform: skewY(60deg) rotate(12deg);
@@ -232,12 +232,15 @@
 }
 .li:first-child .text {
 	background: #18B0A0;
+  font-size: 18px !important;
+  
 }
 .li:nth-child(2) .text {
 	background: #65a983;
 }
 .li:nth-child(3) .text {
 	background: #b1eb82;
+  font-size: 18px !important;
 }
 .li:nth-child(4) .text {
 	background: #cedd8b;
@@ -248,18 +251,21 @@
 }
 .li:nth-child(6) .text {
 	background: rgba(232, 228, 22, 0.9); 
+  font-size: 18px !important;
 }
 .li:nth-child(7) .text {
 	background: #eab150; 
 }
 .li:nth-child(8) .text {
 	background: #5b6475;  
+  font-size: 18px !important;
 }
 .li:nth-child(9) .text {
 	background: #5c7099;  
 }
 .li:nth-child(10) .text {
 	background: #5a829f;  
+  font-size: 18px !important;
 }
 .li:nth-child(11) .text {
 	background: #568ca5;  
@@ -346,7 +352,7 @@
     /* background: #85b5b1; */
     background: #FFFFFF;
     opacity: 80%;
-    font-size: 12px !important;
+    /* font-size: 12px !important; */
    
   }
   .list:nth-child(2) .textThird {
@@ -360,7 +366,7 @@
     /* background: #c4ddaf; */
     background: #FFFFFF;
     opacity: 80%;
-     font-size: 12px !important;
+     /* font-size: 12px !important; */
    
   }
   
@@ -382,7 +388,7 @@
     /* background: rgba(225, 224, 144, 0.9); */
     background: #FFFFFF;
     opacity: 80%;
-     font-size: 12px !important;
+     /* font-size: 12px !important; */
    
   }
   
@@ -397,7 +403,7 @@
     /* background: #a4a5a8; */
     background: #FFFFFF;
     opacity: 80%;
-     font-size: 12px !important;
+     /* font-size: 12px !important; */
    
   }
   
@@ -412,7 +418,7 @@
     /* background: #64717a; */
     background: #FFFFFF;
     opacity: 80%;
-     font-size: 12px !important;
+     /* font-size: 12px !important; */
    
   }
   

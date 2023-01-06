@@ -3,11 +3,12 @@ import React, { useState, useEffect, useRef } from "react";
 import useStyles from "../utils/styles.module2";
 import styles from "./style.module.css";
 import Image from "next/image";
+
 import staff from "../public/assets/images/staff.jpg";
 import keys from "../public/assets/images/keys.jpg";
 import playBtn from "../public/assets/images/playerBtn.jpg";
 import bottomRight from "../public/assets/images/bottomRight.jpg";
-import nl2br from 'react-nl2br';
+import nl2br from "react-nl2br";
 // import dataBase from "../utils/data";
 import LabelIcon from "@mui/icons-material/Label";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
@@ -42,9 +43,9 @@ function MusicWheel(props) {
   const [allImageCount, setAllImageCount] = useState(0);
   const [imageCount, setImageCount] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [songTitle, setSongTitle] = useState('Title');
-  const [composer, setComposer] = useState('composer');
-  const [songNote, setSongNote] = useState('Note');
+  const [songTitle, setSongTitle] = useState("Title");
+  const [composer, setComposer] = useState("composer");
+  const [songNote, setSongNote] = useState("Note");
   const [totalSeconds, setTotalSeconds] = useState(0);
   const [remainingTime, setRemainingTime] = useState(0);
   const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -166,9 +167,22 @@ function MusicWheel(props) {
   let nordArray = [];
   const arryOne = ["c3", "c2", "c1"];
   const data = {
-    c1: ["M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M"],
-    c2: ["m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"],
-    c3: ["C#\nDb", "D", "D#\nEb", "E", "F", "F#\nGb", "G", "G#\nAb", "A", "A#\nBb", "B", "C"],
+    c2: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
+    c3: ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    c1: [
+      "C#\nDb",
+      "D",
+      "D#\nEb",
+      "E",
+      "F",
+      "F#\nGb",
+      "G",
+      "G#\nAb",
+      "A",
+      "A#\nBb",
+      "B",
+      "C",
+    ],
   };
   const nordMap = { "+": "M", "-": "m", "#": "b" };
   const soundData = [
@@ -322,7 +336,7 @@ function MusicWheel(props) {
         let timeoutHandle = setTimeout(tick, 1000);
       } else {
         if (minutes >= 1) {
-          setTimeout(function () {
+          setTimeout(function() {
             countdown(minutes - 1, 59);
           }, 1000);
         }
@@ -340,8 +354,10 @@ function MusicWheel(props) {
   function handleClickSong(songsData, ind) {
     if (songsData.length > 0) {
       setImageCount(songsData[ind].no_of_images);
-      console.log(imageCount, "...images");
-      setDuration(songsData[ind].duration);
+      setAllImageCount(imageCount)+parseInt(songsData[ind].no_of_images)
+      console.log(parseInt(imageCount)+parseInt(songsData[ind].no_of_images), "...images");
+      setDuration(parseInt(duration) + parseInt(songsData[ind].duration));
+     
       props.handleSong(songsData, ind);
       setSongTitle(songsData[ind].song_title);
       setComposer(songsData[ind].composer);
@@ -552,9 +568,7 @@ function MusicWheel(props) {
                 packageDataIndex > 0 ? classes.iconDesignActive : ""
               }`}
             />
-            <p
-              className={`${classes.leftBtnTextOne}`}
-            >
+            <p className={`${classes.leftBtnTextOne}`}>
               {packageName[packageDataIndex]
                 ? packageName[packageDataIndex]
                 : "Classic"}
@@ -562,13 +576,15 @@ function MusicWheel(props) {
           </button>
 
           <div className={classes.imageCount}>
-            <p> {remainingTime}</p>
-            <p style={{ borderTop: "1px solid #7B7B7B", paddingTop: "10px" }}>
+            {/* <p> {remainingTime}</p> */}
+            <p 
+            // style={{ borderTop: "1px solid #7B7B7B", paddingTop: "10px" }}
+            >
               {" "}
               {totalSeconds}
             </p>
           </div>
-         
+
           <button
             className={`${classes.tempoNewBtnBottom} ${
               durationDataIndex > 0 ? "" : ""
@@ -594,7 +610,6 @@ function MusicWheel(props) {
                   : "Long"
                 : "Duration"}
             </p>
-            
           </button>
         </Grid>
         <Grid item xs={8} md={8} className={classes.wheelContianer}>
@@ -610,7 +625,7 @@ function MusicWheel(props) {
                     }`}
                     onClick={(e) => changeHandler("c1", ind, e)}
                   >
-                    {val}
+                     {nl2br(val)}
                   </div>
                 </li>
               ))}
@@ -647,7 +662,7 @@ function MusicWheel(props) {
                       }`}
                       onClick={(e) => changeHandler("c3", ind, e)}
                     >
-                      {nl2br(val)}
+                      {val}
                     </div>
                   </li>
                 ))}
@@ -690,8 +705,10 @@ function MusicWheel(props) {
           </button>
 
           <div className={classes.imageCount}>
-            <p>11</p>
-            <p style={{ borderTop: "1px solid #7B7B7B", paddingTop: "10px" }}>
+            {/* <p>11</p> */}
+            <p 
+            // style={{ borderTop: "1px solid #7B7B7B", paddingTop: "10px" }}
+            >
               {" "}
               {allImageCount}
             </p>
@@ -720,7 +737,7 @@ function MusicWheel(props) {
       </Grid>
       <Grid container spacing={2} className={classes.bottomBoxContainer}>
         <Grid item xs={2} md={2}>
-         <p  className={`${classes.bottomBox}`}>{songNote}</p>
+          <p className={`${classes.bottomBox}`}>{songNote}</p>
         </Grid>
         <Grid item xs={3} md={3}>
           <p className={`${classes.bottomBox}`}>{songTitle}</p>
@@ -729,10 +746,10 @@ function MusicWheel(props) {
           <p className={`${classes.bottomBox}`}>{composer}</p>
         </Grid>
         <Grid item xs={2} md={2}>
-         <p className={`${classes.bottomBox}`}>{duration}</p>
+          <p className={`${classes.bottomBox}`}>{duration}</p>
         </Grid>
         <Grid item xs={2} md={2}>
-         <p className={`${classes.bottomBox}`}>{imageCount}</p>
+          <p className={`${classes.bottomBox}`}>{imageCount}</p>
         </Grid>
       </Grid>
       <div className={styles.songsWrapper}>
@@ -762,7 +779,7 @@ function MusicWheel(props) {
             </p>
             <p>Number Of Cue</p>
           </div>
-          <hr/>
+          <hr />
           <div>
             {songsData && songsData.length > 0
               ? songsData.map((val, ind) =>

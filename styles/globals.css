@@ -26,12 +26,12 @@ body {
 .circle2 {
 	position: absolute;
 	/* border: 1px solid black; */
-	padding: 0;
+	padding: 1px;
     /* margin: 1em auto; */
 	/* width: 12em;
     height: 12em; */
-    width: 13em;
-    height: 13em;
+    width: 10.5em;
+    height: 10.5em;
 	border-radius: 100%;
 	list-style: none;
     overflow: hidden;
@@ -56,11 +56,11 @@ body {
 
 .circle3 {
   position: absolute;
-  padding: 0;
+  padding: 1px;
   margin-top: 15.6%;
-  /* margin-left: 0.5%; */
-  width: 8em;
-  height: 8em;
+  margin-left: 0.5%;
+  width: 6em;
+  height: 6em;
   border-radius: 50%;
   list-style: none;
   overflow: hidden;
@@ -417,4 +417,7 @@ li:nth-child(12) .text {
     background: #23414a;
   }
   
+  
+
+
   

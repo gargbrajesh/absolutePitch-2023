@@ -593,7 +593,7 @@ function MusicWheel(props) {
               {" "}
               {durationData[durationDataIndex]
                 ? durationData[durationDataIndex] <= 120
-                  ? "short"
+                  ? "Short"
                   : durationData[durationDataIndex] <= 240 &&
                     durationData[durationDataIndex] >= 121
                   ? "Medium"
