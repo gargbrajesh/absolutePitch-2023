@@ -56,6 +56,7 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     listStyle: "none",
     overflow: "hidden",
+    zIndex: "99",
   },
 
   circle2: {
@@ -68,7 +69,7 @@ const useStyles = makeStyles({
     borderRadius: " 50%",
     listStyle: "none",
     overflow: "hidden",
-    zIndex: "99",
+    zIndex: "2",
     marginBottom: "50px",
     // transform: 'rotate(.0.1deg)'
   },
@@ -83,7 +84,7 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     listStyle: "none",
     overflow: "hidden",
-    zIndex: "99",
+    zIndex: "1",
     marginBottom: "50px",
     display: "flex",
     alignItems: "center",
@@ -91,8 +92,8 @@ const useStyles = makeStyles({
   },
 
   circle4: {
-    width: "60px",
-    height: "60px",
+    width: "75px",
+    height: "75px",
     borderRadius: "50%",
     listStyle: "none",
     overflow: "hidden",

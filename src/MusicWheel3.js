@@ -167,9 +167,9 @@ function MusicWheel(props) {
   let nordArray = [];
   const arryOne = ["c3", "c2", "c1"];
   const data = {
-    c2: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
-    c3: ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-    c1: [
+    c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
+    c2: ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    c3: [
       "C#\nDb",
       "D",
       "D#\nEb",
@@ -625,7 +625,7 @@ function MusicWheel(props) {
                     }`}
                     onClick={(e) => changeHandler("c1", ind, e)}
                   >
-                     {nl2br(val)}
+                      {val}
                   </div>
                 </li>
               ))}
@@ -662,7 +662,8 @@ function MusicWheel(props) {
                       }`}
                       onClick={(e) => changeHandler("c3", ind, e)}
                     >
-                      {val}
+                     
+                      {nl2br(val)}
                     </div>
                   </li>
                 ))}
