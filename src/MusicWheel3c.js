@@ -632,7 +632,7 @@ function MusicWheel(props) {
           </button>
         </Grid>
         <Grid item xs={8} md={8} className={classes.wheelContianer}>
-          <div className={classes.mainCircle} onClick={(e)=>handlenew(e,'c1')}>
+          <div className={classes.mainCircle}>
             <ul className="circle" >
               {data["c1"].map((val, ind) => (
                 <li key={classes.circle + "-" + ind} className={styles.li } data-index={ind}>
@@ -650,7 +650,7 @@ function MusicWheel(props) {
                 </li>
               ))}
 
-              <ul className="circle2" onClick={(e)=>handlenew(e,'c2')}>
+              <ul className="circle2">
                 {data["c2"].map((val, ind) => (
                   <li key={classes.circle2 + "-" + ind} className={styles.list} data-index={ind}>
                     <div
