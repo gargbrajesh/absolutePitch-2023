@@ -44,7 +44,6 @@ function MusicWheel(props) {
   const [imageCount, setImageCount] = useState(0);
   const [duration, setDuration] = useState(0);
   const [songTitle, setSongTitle] = useState("Title");
-  const [songName, setSongName] = useState("selected song");
   const [composer, setComposer] = useState("composer");
   const [songNote, setSongNote] = useState("Note");
   const [totalSeconds, setTotalSeconds] = useState(0);
@@ -192,10 +191,29 @@ function MusicWheel(props) {
     "https://mylatinhome.com/absolute/note-sound/Ab.wav",
   ];
   // let lastInd = -1;
+  var isCalled = false;
+
+  const handlenew = (event,circle) =>{
+    console.log(  "clientX: " + event.clientX +
+    " - clientY: " + event.clientY,"test");
+    let x= event.target;
+    let ind = x.getAttribute('data-index'); 
+    if(!isCalled){
+      changeHandler(circle,parseInt(ind),event);
+      
+    }
+    isCalled = false;
+      // console.log("change",text,event.target.getAttribute('data-index'));
+    
+  }
   function changeHandler(c, ind, event) {
     // if (imageTypeIndex == "") {
     //   alert("Please seect any ImageType Key");
     // } else {
+      
+    isCalled = true;
+
+     
     const temp = { ...nord };
     const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
     if (["c1", "c2", "c3"].includes(c)) {
@@ -363,7 +381,6 @@ function MusicWheel(props) {
       setSongTitle(songsData[ind].song_title);
       setComposer(songsData[ind].composer);
       setSongNote(songsData[ind].note_or_cord);
-      setSongName(songsData[ind].song_name);
     }
 
     setPlaySongposition(++ind);
@@ -501,7 +518,7 @@ function MusicWheel(props) {
       });
   }
   return (
-    <div className={classes.circleCard}>
+    <div className={classes.circleCard} >
       <Grid container spacing={2} className={classes.topButtonContainer}>
         <Grid item xs={3} md={3}>
           <button
@@ -615,16 +632,17 @@ function MusicWheel(props) {
           </button>
         </Grid>
         <Grid item xs={8} md={8} className={classes.wheelContianer}>
-          <div className={classes.mainCircle}>
-            <ul className="circle">
+          <div className={classes.mainCircle} onClick={(e)=>handlenew(e,'c1')}>
+            <ul className="circle" >
               {data["c1"].map((val, ind) => (
-                <li key={classes.circle + "-" + ind} className={styles.li}>
+                <li key={classes.circle + "-" + ind} className={styles.li } data-index={ind}>
                   <div
                     className={`${styles.text} ${
                       nord["c1"].includes(ind) ? styles.bluebg : ""
                     }  ${
                       highlightedNord["c1"].includes(ind) ? styles.greenbg : ""
                     }`}
+                    data-index={ind}
                     onClick={(e) => changeHandler("c1", ind, e)}
                   >
                       {val}
@@ -632,9 +650,9 @@ function MusicWheel(props) {
                 </li>
               ))}
 
-              <ul className="circle2">
+              <ul className="circle2" onClick={(e)=>handlenew(e,'c2')}>
                 {data["c2"].map((val, ind) => (
-                  <li key={classes.circle2 + "-" + ind} className={styles.list}>
+                  <li key={classes.circle2 + "-" + ind} className={styles.list} data-index={ind}>
                     <div
                       className={`${styles.textTwo} ${
                         nord["c2"].includes(ind) ? styles.bluebg : ""
@@ -653,7 +671,7 @@ function MusicWheel(props) {
 
               <ul className="circle3">
                 {data["c3"].map((val, ind) => (
-                  <li key={classes.circle3 + "-" + ind} className={styles.list}>
+                  <li key={classes.circle3 + "-" + ind} className={styles.list} data-index={ind}>
                     <div
                       className={`${styles.textThird} ${
                         nord["c3"].includes(ind) ? styles.bluebg : ""
@@ -755,19 +773,18 @@ function MusicWheel(props) {
           <p className={`${classes.bottomBox}`}>{imageCount}</p>
         </Grid>
       </Grid>
-      <div className={classes.songScrolling}><marquee width="90%" direction="left" height="30%">
-      {songName}
-    </marquee></div>
       <div className={styles.songsWrapper}>
         <Paper elevation={3} className={classes.paperStyle}>
           <div
             style={{
-             
+              // width: "80px",
               height: "50px",
               borderRadius: "5%",
-             
+              // background: "#333333",
+              // textAlign: "center",
               alignItems: "center",
-             
+              // textAlign: "center",
+              // justifyContent: "center",
               display: "flex",
             }}
           >
