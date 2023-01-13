@@ -1,6 +1,6 @@
 import React, { useState ,useEffect} from "react";
 import { Grid } from "@material-ui/core";
-import MusicWheel from "./MusicWheel3c";
+import MusicWheel from "./MusicWheel";
 import VideoPlayer from "./VideoPlayer";
 import { makeStyles } from "@material-ui/core";
 

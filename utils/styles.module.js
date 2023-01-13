@@ -56,6 +56,7 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     listStyle: "none",
     overflow: "hidden",
+    zIndex: "99",
   },
 
   circle2: {
@@ -68,7 +69,7 @@ const useStyles = makeStyles({
     borderRadius: " 50%",
     listStyle: "none",
     overflow: "hidden",
-    zIndex: "99",
+    zIndex: "2",
     marginBottom: "50px",
     // transform: 'rotate(.0.1deg)'
   },
@@ -83,7 +84,7 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     listStyle: "none",
     overflow: "hidden",
-    zIndex: "99",
+    zIndex: "1",
     marginBottom: "50px",
     display: "flex",
     alignItems: "center",
@@ -91,8 +92,8 @@ const useStyles = makeStyles({
   },
 
   circle4: {
-    width: "55px",
-    height: "55px",
+    width: "75px",
+    height: "75px",
     borderRadius: "50%",
     listStyle: "none",
     overflow: "hidden",
@@ -317,8 +318,8 @@ const useStyles = makeStyles({
     alignItems: "center",
     // marginBottom: "5px",
     padding: "0px 5px",
-    width: "100%",
-    // marginLeft: "2px",
+    width: "98%",
+    marginLeft: "6px",
   },
   tempoBtnTop: {
     position: "absolute",
@@ -564,13 +565,21 @@ const useStyles = makeStyles({
     textAlign: "center !important",
     fontSize: "15px",
   },
+  songScrolling:{
+    width: "92%",
+    padding: "0px 10px 0px 10px",
+    marginLeft: "18px",
+    background:"#fff",
+    fontSize:'12px',
+    color:'#000',
+  },
   paperStyle: {
     marginTop: "10px",
     width: "92%",
     padding: "5px 10px 0px 10px",
     lineHeight: "30px",
     marginLeft: "8px",
-    height: "150px",
+    height: "140px",
     overflow: "scroll",
     "@media (min-width: 600px) and (max-width:768px)": {
       marginTop: "10px",

@@ -579,7 +579,7 @@ const useStyles = makeStyles({
     padding: "5px 10px 0px 10px",
     lineHeight: "30px",
     marginLeft: "8px",
-    height: "150px",
+    height: "140px",
     overflow: "scroll",
     "@media (min-width: 600px) and (max-width:768px)": {
       marginTop: "10px",

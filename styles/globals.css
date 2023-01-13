@@ -41,7 +41,8 @@ body {
     display: flex;
 	align-items: center;
 	justify-content: center;
-  clip-path: circle(130px);
+  clip-path: circle(140px);
+  /* background: red; */
  
 }
 
@@ -60,7 +61,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  clip-path: circle(110px);
+  clip-path: circle(120px);
+  /* background: yellow; */
 }
 
 .circle4 {
