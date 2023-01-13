@@ -126,9 +126,6 @@ const useStyles = makeStyles({
   },
 
   circle6: {
-    // width: "35px",
-   
-    // height: "35px",
     width: "50px",
    background:'#b20ca4',
     height: "50px",
