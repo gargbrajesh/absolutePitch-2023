@@ -186,8 +186,8 @@ const useStyles = makeStyles({
     background: "#333 !important",
     borderRadius: "10px",
 
-    height: "120vh",
-    "@media (min-width: 1280px) and (max-width:1680px)": {},
+    height: "90vh",
+    "@media (min-width: 1280px) and (max-width:1680px)": { height: "130vh",},
     "@media (min-width: 600px) and (max-width:768px)": {
       margin: "25px 15px 15px 25px !important",
     },
@@ -316,10 +316,12 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    // marginBottom: "5px",
+    marginBottom: "5px",
     padding: "0px 5px",
     width: "98%",
     marginLeft: "6px",
+    marginTop:'4%',
+    "@media (min-width: 1280px) and (max-width:1680px)": { marginTop:'4%',},
   },
   tempoBtnTop: {
     position: "absolute",
@@ -567,11 +569,16 @@ const useStyles = makeStyles({
   },
   songScrolling:{
     width: "92%",
-    padding: "0px 10px 0px 10px",
+    padding: "5px 10px 0px 10px",
     marginLeft: "18px",
     background:"#fff",
-    fontSize:'12px',
+    fontSize:'14px',
     color:'#000',
+    marginTop:'-15px',
+    "@media (min-width: 1280px) and (max-width:1680px)": { 
+      marginTop:'-15px',
+      fontSize:'14px',
+    },
   },
   paperStyle: {
     marginTop: "10px",

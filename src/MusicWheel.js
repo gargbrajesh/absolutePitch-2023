@@ -40,7 +40,7 @@ function MusicWheel(props) {
   const [imageCount, setImageCount] = useState(0);
   const [duration, setDuration] = useState(0);
   const [songTitle, setSongTitle] = useState("Title");
-  const [songName, setSongName] = useState("selected song");
+  const [songName, setSongName] = useState("Racer X Real time Simulation Tech Demo");
   const [composer, setComposer] = useState("composer");
   const [songNote, setSongNote] = useState("Note");
   const [totalSeconds, setTotalSeconds] = useState(0);
