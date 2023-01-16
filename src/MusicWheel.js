@@ -39,6 +39,7 @@ function MusicWheel(props) {
   const [allImageCount, setAllImageCount] = useState(0);
   const [imageCount, setImageCount] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [allPlaySongsDuration, setAllPlaySongsDuration] = useState(0);
   const [songTitle, setSongTitle] = useState("Title");
   const [songName, setSongName] = useState("Racer X Real time Simulation Tech Demo");
   const [composer, setComposer] = useState("composer");
@@ -318,7 +319,7 @@ function MusicWheel(props) {
     var sDisplay = s > 0 ? s : "00";
     let time = m + ":" + s;
 
-    setTotalSeconds(time);
+    setAllPlaySongsDuration(time);
     countdown(mDisplay, sDisplay);
   }
 
@@ -350,18 +351,26 @@ function MusicWheel(props) {
   function handleClickSong(songsData, ind) {
     if (songsData.length > 0) {
       setImageCount(songsData[ind].no_of_images);
-      setAllImageCount(imageCount)+parseInt(songsData[ind].no_of_images)
+      setAllImageCount(parseInt(imageCount)+parseInt(songsData[ind].no_of_images));
       console.log(parseInt(imageCount)+parseInt(songsData[ind].no_of_images), "...images");
-      setDuration(parseInt(duration) + parseInt(songsData[ind].duration));
+      setDuration(songsData[ind].duration);
+      setTotalSeconds(parseInt(duration)+parseInt(songsData[ind].duration));
+      console.log(parseInt(duration)+parseInt(songsData[ind].duration), "...duration");
       props.handleSong(songsData, ind);
       setSongTitle(songsData[ind].song_title);
       setComposer(songsData[ind].composer);
       setSongNote(songsData[ind].note_or_cord);
       setSongName(songsData[ind].song_name);
+      // secondsToHms(parseInt(duration)+parseInt(songsData[ind].duration));
+      console.log(totalSeconds,'totalSeconds...');
     }
 
     setPlaySongposition(++ind);
-    secondsToHms(duration);
+    secondsToHms(parseInt(duration)+parseInt(songsData[ind].duration));
+    console.log(totalSeconds,'totalSeconds...');
+    // secondsToHms(totalSeconds);
+    
+    
   }
 
   function highlightNord(songsData, ind) {
@@ -483,7 +492,7 @@ function MusicWheel(props) {
             if (!responseJson.data[i].song_name.includes("_P.")) {
               console.log(responseJson.data[i], "songdata.....");
               handleClickSong(responseJson.data, i);
-              console.log(responseJson.data[i].duration, "....durrrrr..");
+             
               // setDuration(responseJson.data[i].duration);
               break;
             }
@@ -576,7 +585,7 @@ function MusicWheel(props) {
             <p>
           
               {" "}
-              {totalSeconds}
+              {allPlaySongsDuration}
             </p>
           </div>
           <button
@@ -789,7 +798,7 @@ function MusicWheel(props) {
                       onClick={() => handleClickSong(songsData, ind)}
                       className={styles.liststyle}
                     >
-                      * {val["song_title"]}{" "}
+                      * {val["song_title"]}
                     </p>
                   )
                 )
