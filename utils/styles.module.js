@@ -316,7 +316,7 @@ const useStyles = makeStyles({
     marginBottom: "5px",
     padding: "0px 5px",
     width: "98% !important",
-    marginLeft: "6px",
+    marginLeft: "6px !important",
     marginTop:'5% !important',
     "@media (min-width: 1280px) and (max-width:1680px)": { marginTop:'5%',
     width: "98%",
