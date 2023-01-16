@@ -307,7 +307,7 @@ const useStyles = makeStyles({
     marginBottom: "10px",
     padding: "10px 15px",
     width: "98%",
-    marginLeft: "5px",
+    marginLeft: "6px",
   },
   bottomBoxContainer: {
     display: "flex",
@@ -319,7 +319,7 @@ const useStyles = makeStyles({
     marginLeft: "6px",
     marginTop:'4%',
     "@media (min-width: 1280px) and (max-width:1680px)": { marginTop:'4%',
-    width: "96%",
+    width: "98%",
     marginLeft: "6px",
   },
   },

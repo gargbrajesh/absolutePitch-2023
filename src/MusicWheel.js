@@ -50,7 +50,7 @@ function MusicWheel(props) {
   const [changeBg, setChangeBg] = useState("");
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData = ["", "HI", "LI", "MI"];
-  const packageData = ["F", "P", "", ""];
+  const packageData = ["F", "P", "F", "F"];
   const packageName = ["Mix", "Premium", "Original", "All"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
   const durationData = [
