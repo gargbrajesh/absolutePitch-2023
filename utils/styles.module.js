@@ -18,6 +18,7 @@ const useStyles = makeStyles({
     width: "350px",
     height: "350px",
     display: "flex",
+   
     justifyContent: "center",
     alignItems: "center",
 
@@ -184,7 +185,8 @@ const useStyles = makeStyles({
     borderRadius: "10px",
 
     height: "90vh",
-    "@media (min-width: 1280px) and (max-width:1680px)": { height: "130vh",},
+    "@media (min-width: 1280px) and (max-width:1480px)": { height: "130vh",},
+    "@media (min-width: 1481px) and (max-width:1920px)": { height: "105vh",},
     "@media (min-width: 600px) and (max-width:768px)": {
       margin: "25px 15px 15px 25px !important",
     },
