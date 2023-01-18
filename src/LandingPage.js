@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 import MusicWheel from "./MusicWheel";
 import VideoPlayer from "./VideoPlayer";
 import { makeStyles } from "@material-ui/core";
-
+import { forwardRef, useRef, useImperativeHandle } from "react"
 const useStyles = makeStyles({
   root: {
     position: 'relative',
@@ -63,20 +63,34 @@ const useStyles = makeStyles({
   },
 });
 function LandingPage() {
+  const childCompRef = useRef()
+
   const [data, setData] = useState()
   const [index, setIndex] = useState()
-
+  const [songTitle, setSongTitle] = useState("Title");
+  const [songName, setSongName] = useState("Racer X Real time Simulation Tech Demo");
+  const [composer, setComposer] = useState("composer");
+  const [songNote, setSongNote] = useState("Note");
+  const [totalSeconds, setTotalSeconds] = useState(0);
 
   function handleSong(songsData, ind){
     setData(songsData)
     setIndex(ind)
+      const element = document.getElementById("childid").children[ind].innerHTML;;
+     
+console.log(element,'element....')
+      // element.scrollIntoView();
+      setSongTitle(songsData[ind].song_title);
+      setComposer(songsData[ind].composer);
+      setSongNote(songsData[ind].note_or_cord);
+      setSongName(songsData[ind].song_name);
   }
   
   const classes = useStyles();
   return (
     <Grid container spacing={4}  className={classes.containerBox}>
-      <Grid item xs={12} md={6}><MusicWheel handleSong={handleSong}  musicData={data} musicIndex={index} /></Grid>
-      <Grid item xs={12} md={6}><VideoPlayer handleSong={handleSong} musicData={data} musicIndex={index}/></Grid>
+      <Grid item xs={12} md={6}><MusicWheel handleSong={handleSong}  musicData={data} musicIndex={index} id='childid'songName={songName} composer={composer} songNote={songNote} songTitle={songTitle}/></Grid>
+      <Grid item xs={12} md={6}><VideoPlayer handleSong={handleSong} musicData={data} musicIndex={index} /></Grid>
     </Grid>
   );
 }

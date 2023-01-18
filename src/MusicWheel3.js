@@ -1,20 +1,18 @@
 import { Grid, Paper, Button } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
-import useStyles from "../utils/styles.module2";
+import useStyles from "../utils/styles.module";
 import styles from "./style.module.css";
 import Image from "next/image";
-
 import staff from "../public/assets/images/staff.jpg";
 import keys from "../public/assets/images/keys.jpg";
 import playBtn from "../public/assets/images/playerBtn.jpg";
 import bottomRight from "../public/assets/images/bottomRight.jpg";
 import nl2br from "react-nl2br";
-// import dataBase from "../utils/data";
 import LabelIcon from "@mui/icons-material/Label";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import { forwardRef, useImperativeHandle } from "react"
 import "./style.module.css";
-// import excludeVariablesFromRoot from "@mui/material/styles/excludeVariablesFromRoot";
 
 function MusicWheel(props) {
   const classes = useStyles();
@@ -43,8 +41,9 @@ function MusicWheel(props) {
   const [allImageCount, setAllImageCount] = useState(0);
   const [imageCount, setImageCount] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [allPlaySongsDuration, setAllPlaySongsDuration] = useState(0);
   const [songTitle, setSongTitle] = useState("Title");
-  const [songName, setSongName] = useState("selected song");
+  const [songName, setSongName] = useState("Racer X Real time Simulation Tech Demo");
   const [composer, setComposer] = useState("composer");
   const [songNote, setSongNote] = useState("Note");
   const [totalSeconds, setTotalSeconds] = useState(0);
@@ -53,7 +52,7 @@ function MusicWheel(props) {
   const [changeBg, setChangeBg] = useState("");
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData = ["", "HI", "LI", "MI"];
-  const packageData = ["F", "P", "", ""];
+  const packageData = ["", "P", "F", "F"];
   const packageName = ["Mix", "Premium", "Original"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
   const durationData = [
@@ -260,7 +259,6 @@ function MusicWheel(props) {
         setNord({ c1: [], c2: [], c3: [] });
         setNordData([]);
       }
-      console.log(packageDataIndex, "...packageDataIndex");
     }
     if (type == "Intensity") {
       if (intensityIndex == intensityData.length - 1) {
@@ -323,7 +321,7 @@ function MusicWheel(props) {
     var sDisplay = s > 0 ? s : "00";
     let time = m + ":" + s;
 
-    setTotalSeconds(time);
+    setAllPlaySongsDuration(time);
     countdown(mDisplay, sDisplay);
   }
 
@@ -337,7 +335,7 @@ function MusicWheel(props) {
         let timeoutHandle = setTimeout(tick, 1000);
       } else {
         if (minutes >= 1) {
-          setTimeout(function() {
+          setTimeout(function () {
             countdown(minutes - 1, 59);
           }, 1000);
         }
@@ -355,19 +353,26 @@ function MusicWheel(props) {
   function handleClickSong(songsData, ind) {
     if (songsData.length > 0) {
       setImageCount(songsData[ind].no_of_images);
-      setAllImageCount(imageCount)+parseInt(songsData[ind].no_of_images)
+      setAllImageCount(parseInt(imageCount)+parseInt(songsData[ind].no_of_images));
       console.log(parseInt(imageCount)+parseInt(songsData[ind].no_of_images), "...images");
-      setDuration(parseInt(duration) + parseInt(songsData[ind].duration));
-     
+      setDuration(songsData[ind].duration);
+      setTotalSeconds(parseInt(duration)+parseInt(songsData[ind].duration));
+      console.log(parseInt(duration)+parseInt(songsData[ind].duration), "...duration");
       props.handleSong(songsData, ind);
-      setSongTitle(songsData[ind].song_title);
-      setComposer(songsData[ind].composer);
-      setSongNote(songsData[ind].note_or_cord);
-      setSongName(songsData[ind].song_name);
+      // setSongTitle(songsData[ind].song_title);
+      // setComposer(songsData[ind].composer);
+      // setSongNote(songsData[ind].note_or_cord);
+      // setSongName(songsData[ind].song_name);
+      // secondsToHms(parseInt(duration)+parseInt(songsData[ind].duration));
+      console.log(totalSeconds,'totalSeconds...');
     }
 
     setPlaySongposition(++ind);
-    secondsToHms(duration);
+    secondsToHms(parseInt(duration)+parseInt(songsData[ind].duration));
+    console.log(totalSeconds,'totalSeconds...');
+    // secondsToHms(totalSeconds);
+    
+    
   }
 
   function highlightNord(songsData, ind) {
@@ -418,34 +423,40 @@ function MusicWheel(props) {
 
   // for get nord  on button click
 
-  function playAudio(noteType, e, ind) {
-    if (counter == 0) {
-      nordArray.push(data["c3"][ind]);
-      if (data["c3"][ind]) {
-        var nrd = data["c3"][ind];
-        changeHandler("c3", ind);
-        new Audio(soundData[counter]).play();
-      }
-    } else if (counter == 1) {
-      if (data["c2"][ind]) {
-        var nrd2 = data["c2"][ind];
-        changeHandler("c2", ind);
-        changeHandler("c3", ind);
-        new Audio(soundData[counter]).play();
-      }
-    } else if (counter == 2) {
-      if (data["c1"][ind]) {
-        var nrd3 = data["c1"][ind];
-        changeHandler("c1", ind);
-        changeHandler("c2", ind);
-        new Audio(soundData[counter]).play();
-      }
-    } else {
-      counter = -1;
-      changeHandler("c1", ind);
-    }
-    setCounter(++counter);
-  }
+  // function playAudio(noteType, e, ind) {
+  //   if (counter == 0) {
+  //     nordArray.push(data["c3"][ind]);
+  //     if (data["c3"][ind]) {
+  //       var nrd = data["c3"][ind];
+  //       changeHandler("c3", ind);
+  //       new Audio(soundData[counter]).play();
+  //     }
+  //   } else if (counter == 1) {
+  //     if (data["c2"][ind]) {
+  //       var nrd2 = data["c2"][ind];
+  //       changeHandler("c2", ind);
+  //       changeHandler("c3", ind);
+  //       new Audio(soundData[counter]).play();
+  //     }
+  //   } else if (counter == 2) {
+  //     if (data["c1"][ind]) {
+  //       var nrd3 = data["c1"][ind];
+  //       changeHandler("c1", ind);
+  //       changeHandler("c2", ind);
+  //       new Audio(soundData[counter]).play();
+  //     }
+  //   } else {
+  //     counter = -1;
+  //     changeHandler("c1", ind);
+  //   }
+  //   setCounter(++counter);
+  // }
+  
+  
+  // const onClick = () => {
+  //   const element = document.getElementById("content");
+  //   element.scrollIntoView();
+  // }
 
   function refreshPage() {
     window.location.reload(false);
@@ -489,7 +500,7 @@ function MusicWheel(props) {
             if (!responseJson.data[i].song_name.includes("_P.")) {
               console.log(responseJson.data[i], "songdata.....");
               handleClickSong(responseJson.data, i);
-              console.log(responseJson.data[i].duration, "....durrrrr..");
+             
               // setDuration(responseJson.data[i].duration);
               break;
             }
@@ -579,14 +590,12 @@ function MusicWheel(props) {
 
           <div className={classes.imageCount}>
             {/* <p> {remainingTime}</p> */}
-            <p 
-            // style={{ borderTop: "1px solid #7B7B7B", paddingTop: "10px" }}
-            >
+            <p>
+          
               {" "}
-              {totalSeconds}
+              {allPlaySongsDuration}
             </p>
           </div>
-
           <button
             className={`${classes.tempoNewBtnBottom} ${
               durationDataIndex > 0 ? "" : ""
@@ -605,7 +614,7 @@ function MusicWheel(props) {
               {" "}
               {durationData[durationDataIndex]
                 ? durationData[durationDataIndex] <= 120
-                  ? "short"
+                  ? "Short"
                   : durationData[durationDataIndex] <= 240 &&
                     durationData[durationDataIndex] >= 121
                   ? "Medium"
@@ -627,7 +636,7 @@ function MusicWheel(props) {
                     }`}
                     onClick={(e) => changeHandler("c1", ind, e)}
                   >
-                      {val}
+                    {val}
                   </div>
                 </li>
               ))}
@@ -664,7 +673,6 @@ function MusicWheel(props) {
                       }`}
                       onClick={(e) => changeHandler("c3", ind, e)}
                     >
-                     
                       {nl2br(val)}
                     </div>
                   </li>
@@ -706,13 +714,9 @@ function MusicWheel(props) {
               {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}
             </p>
           </button>
-
           <div className={classes.imageCount}>
-            {/* <p>11</p> */}
-            <p 
-            // style={{ borderTop: "1px solid #7B7B7B", paddingTop: "10px" }}
-            >
-              {" "}
+            
+            <p> {" "}
               {allImageCount}
             </p>
           </div>
@@ -740,13 +744,13 @@ function MusicWheel(props) {
       </Grid>
       <Grid container spacing={2} className={classes.bottomBoxContainer}>
         <Grid item xs={2} md={2}>
-          <p className={`${classes.bottomBox}`}>{songNote}</p>
+          <p className={`${classes.bottomBox}`}>{props.songNote}</p>
         </Grid>
         <Grid item xs={3} md={3}>
-          <p className={`${classes.bottomBox}`}>{songTitle}</p>
+          <p className={`${classes.bottomBox}`}>{props.songTitle}</p>
         </Grid>
         <Grid item xs={3} md={3}>
-          <p className={`${classes.bottomBox}`}>{composer}</p>
+          <p className={`${classes.bottomBox}`}>{props.composer}</p>
         </Grid>
         <Grid item xs={2} md={2}>
           <p className={`${classes.bottomBox}`}>{duration}</p>
@@ -756,18 +760,15 @@ function MusicWheel(props) {
         </Grid>
       </Grid>
       <div className={classes.songScrolling}><marquee width="90%" direction="left" height="30%">
-      {songName}
+      {props.songName}
     </marquee></div>
       <div className={styles.songsWrapper}>
         <Paper elevation={3} className={classes.paperStyle}>
           <div
             style={{
-             
-              height: "50px",
+              height: "30px",
               borderRadius: "5%",
-             
               alignItems: "center",
-             
               display: "flex",
             }}
           >
@@ -781,10 +782,12 @@ function MusicWheel(props) {
             >
               {playSongposition}/{totalSongs}
             </p>
-            <p>Number Of Cue</p>
+           
           </div>
           <hr />
-          <div>
+          <div id={props.id}>
+          {/* <p>{songsData[playSongposition]["song_title"]}</p> */}
+         
             {songsData && songsData.length > 0
               ? songsData.map((val, ind) =>
                   val["song_name"].includes("_P.") ? (
@@ -800,16 +803,19 @@ function MusicWheel(props) {
                       * {val["song_title"]}{" "}
                     </p>
                   ) : (
+                    
                     <p
                       key={"songs" + ind}
                       onClick={() => handleClickSong(songsData, ind)}
                       className={styles.liststyle}
+                      id = {ind}
                     >
-                      * {val["song_title"]}{" "}
+                      * {val["song_title"]}
                     </p>
                   )
                 )
               : "No Songs Found"}
+             
           </div>
         </Paper>
       </div>

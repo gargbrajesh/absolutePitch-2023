@@ -46,6 +46,7 @@ function VideoPlayer(prop) {
   function playNextSong(){
     for (let i=prop.musicIndex+1;i<prop.musicData.length;i++){
       if(!(prop.musicData[i]["song_url"].includes("_P."))){
+      
         prop.handleSong(prop.musicData, i)
           break;
       }

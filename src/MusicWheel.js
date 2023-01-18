@@ -11,7 +11,9 @@ import nl2br from "react-nl2br";
 import LabelIcon from "@mui/icons-material/Label";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import { forwardRef, useImperativeHandle } from "react"
 import "./style.module.css";
+
 function MusicWheel(props) {
   const classes = useStyles();
 
@@ -50,8 +52,8 @@ function MusicWheel(props) {
   const [changeBg, setChangeBg] = useState("");
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData = ["", "HI", "LI", "MI"];
-  const packageData = ["F", "P", "F", "F"];
-  const packageName = ["Mix", "Premium", "Original", "All"];
+  const packageData = ["", "P", "F", "F"];
+  const packageName = ["Mix", "Premium", "Original"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
   const durationData = [
     "",
@@ -357,10 +359,10 @@ function MusicWheel(props) {
       setTotalSeconds(parseInt(duration)+parseInt(songsData[ind].duration));
       console.log(parseInt(duration)+parseInt(songsData[ind].duration), "...duration");
       props.handleSong(songsData, ind);
-      setSongTitle(songsData[ind].song_title);
-      setComposer(songsData[ind].composer);
-      setSongNote(songsData[ind].note_or_cord);
-      setSongName(songsData[ind].song_name);
+      // setSongTitle(songsData[ind].song_title);
+      // setComposer(songsData[ind].composer);
+      // setSongNote(songsData[ind].note_or_cord);
+      // setSongName(songsData[ind].song_name);
       // secondsToHms(parseInt(duration)+parseInt(songsData[ind].duration));
       console.log(totalSeconds,'totalSeconds...');
     }
@@ -448,6 +450,12 @@ function MusicWheel(props) {
   //     changeHandler("c1", ind);
   //   }
   //   setCounter(++counter);
+  // }
+  
+  
+  // const onClick = () => {
+  //   const element = document.getElementById("content");
+  //   element.scrollIntoView();
   // }
 
   function refreshPage() {
@@ -736,13 +744,13 @@ function MusicWheel(props) {
       </Grid>
       <Grid container spacing={2} className={classes.bottomBoxContainer}>
         <Grid item xs={2} md={2}>
-          <p className={`${classes.bottomBox}`}>{songNote}</p>
+          <p className={`${classes.bottomBox}`}>{props.songNote}</p>
         </Grid>
         <Grid item xs={3} md={3}>
-          <p className={`${classes.bottomBox}`}>{songTitle}</p>
+          <p className={`${classes.bottomBox}`}>{props.songTitle}</p>
         </Grid>
         <Grid item xs={3} md={3}>
-          <p className={`${classes.bottomBox}`}>{composer}</p>
+          <p className={`${classes.bottomBox}`}>{props.composer}</p>
         </Grid>
         <Grid item xs={2} md={2}>
           <p className={`${classes.bottomBox}`}>{duration}</p>
@@ -752,7 +760,7 @@ function MusicWheel(props) {
         </Grid>
       </Grid>
       <div className={classes.songScrolling}><marquee width="90%" direction="left" height="30%">
-      {songName}
+      {props.songName}
     </marquee></div>
       <div className={styles.songsWrapper}>
         <Paper elevation={3} className={classes.paperStyle}>
@@ -774,10 +782,11 @@ function MusicWheel(props) {
             >
               {playSongposition}/{totalSongs}
             </p>
-            <p>Number Of Cue</p>
+           
           </div>
           <hr />
-          <div>
+          <div id={props.id}>
+          {/* <p>{songsData[playSongposition]["song_title"]}</p> */}
             {songsData && songsData.length > 0
               ? songsData.map((val, ind) =>
                   val["song_name"].includes("_P.") ? (
@@ -793,6 +802,7 @@ function MusicWheel(props) {
                       * {val["song_title"]}{" "}
                     </p>
                   ) : (
+                    
                     <p
                       key={"songs" + ind}
                       onClick={() => handleClickSong(songsData, ind)}
