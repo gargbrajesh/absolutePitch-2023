@@ -782,7 +782,7 @@ function MusicWheel(props) {
             >
               {playSongposition}/{totalSongs}
             </p>
-           
+            <p>Number Of Cue</p>
           </div>
           <hr />
           <div id={props.id}>

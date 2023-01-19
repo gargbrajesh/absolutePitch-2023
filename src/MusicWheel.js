@@ -34,7 +34,7 @@ function MusicWheel(props) {
   const [imageTypeActive, setImageTypeActive] = useState(false);
   const [durationDataIndex, setDurationDataIndex] = useState(0);
   const [totalSongs, setTotalSongs] = useState(0);
-  const [playSongposition, setPlaySongposition] = useState(0);
+  // const [playSongposition, setPlaySongposition] = useState(0);
   const [nordIndex111, setNordIndex111] = useState(0);
   let [counter, setCounter] = useState(0);
   let [lastInd, setLastInd] = useState(-1);
@@ -311,38 +311,38 @@ function MusicWheel(props) {
     }
   }
 
-  function secondsToHms(Seconds) {
-    let d = Number(Seconds);
-    console.log(Seconds, "...Secondss");
-    var m = Math.floor((d % 3600) / 60);
-    var s = Math.floor((d % 3600) % 60);
+  // function secondsToHms(Seconds) {
+  //   let d = Number(Seconds);
+  //   console.log(Seconds, "...Secondss");
+  //   var m = Math.floor((d % 3600) / 60);
+  //   var s = Math.floor((d % 3600) % 60);
 
-    var mDisplay = m > 0 ? m : "00";
-    var sDisplay = s > 0 ? s : "00";
-    let time = m + ":" + s;
+  //   var mDisplay = m > 0 ? m : "00";
+  //   var sDisplay = s > 0 ? s : "00";
+  //   let time = m + ":" + s;
 
-    setAllPlaySongsDuration(time);
-    countdown(mDisplay, sDisplay);
-  }
+  //   setAllPlaySongsDuration(time);
+  //   countdown(mDisplay, sDisplay);
+  // }
 
-  function countdown(minutes, seconds) {
-    function tick() {
-      setRemainingTime(
-        minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds)
-      );
-      seconds--;
-      if (seconds >= 0) {
-        let timeoutHandle = setTimeout(tick, 1000);
-      } else {
-        if (minutes >= 1) {
-          setTimeout(function () {
-            countdown(minutes - 1, 59);
-          }, 1000);
-        }
-      }
-    }
-    tick();
-  }
+  // function countdown(minutes, seconds) {
+  //   function tick() {
+  //     setRemainingTime(
+  //       minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds)
+  //     );
+  //     seconds--;
+  //     if (seconds >= 0) {
+  //       let timeoutHandle = setTimeout(tick, 1000);
+  //     } else {
+  //       if (minutes >= 1) {
+  //         setTimeout(function () {
+  //           countdown(minutes - 1, 59);
+  //         }, 1000);
+  //       }
+  //     }
+  //   }
+  //   tick();
+  // }
 
   useEffect(() => {
     if (props.musicIndex >= 0) {
@@ -352,11 +352,11 @@ function MusicWheel(props) {
 
   function handleClickSong(songsData, ind) {
     if (songsData.length > 0) {
-      setImageCount(songsData[ind].no_of_images);
-      setAllImageCount(parseInt(imageCount)+parseInt(songsData[ind].no_of_images));
-      console.log(parseInt(imageCount)+parseInt(songsData[ind].no_of_images), "...images");
-      setDuration(songsData[ind].duration);
-      setTotalSeconds(parseInt(duration)+parseInt(songsData[ind].duration));
+      // setImageCount(songsData[ind].no_of_images);
+      // setAllImageCount(parseInt(imageCount)+parseInt(songsData[ind].no_of_images));
+       // console.log(parseInt(imageCount)+parseInt(songsData[ind].no_of_images), "...images");
+      // setDuration(songsData[ind].duration);
+      // setTotalSeconds(parseInt(duration)+parseInt(songsData[ind].duration));
       console.log(parseInt(duration)+parseInt(songsData[ind].duration), "...duration");
       props.handleSong(songsData, ind);
       // setSongTitle(songsData[ind].song_title);
@@ -367,8 +367,8 @@ function MusicWheel(props) {
       console.log(totalSeconds,'totalSeconds...');
     }
 
-    setPlaySongposition(++ind);
-    secondsToHms(parseInt(duration)+parseInt(songsData[ind].duration));
+    // setPlaySongposition(++ind);
+    // secondsToHms(parseInt(duration)+parseInt(songsData[ind].duration));
     console.log(totalSeconds,'totalSeconds...');
     // secondsToHms(totalSeconds);
     
@@ -493,6 +493,7 @@ function MusicWheel(props) {
     )
       .then((response) => response.json())
       .then((responseJson) => {
+        setTotalSongs(responseJson.data.length)
         if (responseJson != "") {
           setSongsData(responseJson.data);
           console.log(songsData, "songdata.....");
@@ -505,7 +506,7 @@ function MusicWheel(props) {
               break;
             }
           }
-          setTotalSongs(responseJson.data.length);
+         ;
         } else {
           alert("error in response");
         }
@@ -593,7 +594,7 @@ function MusicWheel(props) {
             <p>
           
               {" "}
-              {allPlaySongsDuration}
+              {props.allPlaySongsDuration}
             </p>
           </div>
           <button
@@ -717,7 +718,7 @@ function MusicWheel(props) {
           <div className={classes.imageCount}>
             
             <p> {" "}
-              {allImageCount}
+              {props.allImageCount}
             </p>
           </div>
           <button
@@ -753,10 +754,10 @@ function MusicWheel(props) {
           <p className={`${classes.bottomBox}`}>{props.composer}</p>
         </Grid>
         <Grid item xs={2} md={2}>
-          <p className={`${classes.bottomBox}`}>{duration}</p>
+          <p className={`${classes.bottomBox}`}>{props.duration}</p>
         </Grid>
         <Grid item xs={2} md={2}>
-          <p className={`${classes.bottomBox}`}>{imageCount}</p>
+          <p className={`${classes.bottomBox}`}>{props.imageCount}</p>
         </Grid>
       </Grid>
       <div className={classes.songScrolling}><marquee width="90%" direction="left" height="30%">
@@ -780,13 +781,13 @@ function MusicWheel(props) {
                 textAlign: "center",
               }}
             >
-              {playSongposition}/{totalSongs}
+              {props.playSongposition}/{totalSongs}
             </p>
-           
+            <p>Number Of Cue</p>
           </div>
           <hr />
           <div id={props.id}>
-          {/* <p>{songsData[playSongposition]["song_title"]}</p> */}
+        
             {songsData && songsData.length > 0
               ? songsData.map((val, ind) =>
                   val["song_name"].includes("_P.") ? (
