@@ -6,12 +6,8 @@ import Image from "next/image";
 import staff from "../public/assets/images/staff.jpg";
 import keys from "../public/assets/images/keys.jpg";
 import playBtn from "../public/assets/images/playerBtn.jpg";
-import bottomRight from "../public/assets/images/bottomRight.jpg";
 import nl2br from "react-nl2br";
 import LabelIcon from "@mui/icons-material/Label";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import { forwardRef, useImperativeHandle } from "react"
 import "./style.module.css";
 
 function MusicWheel(props) {
@@ -24,8 +20,6 @@ function MusicWheel(props) {
     c3: [],
   });
   const [songsData, setSongsData] = useState([]);
-  const [tempo, SetTempo] = useState("");
-  const [freeSongData, SetFreeSongData] = useState([]);
   const [nordData, setNordData] = useState([]);
   const [tempoIndex, setTempoIndex] = useState(0);
   const [intensityIndex, setIntensityIndex] = useState(0);
@@ -36,21 +30,8 @@ function MusicWheel(props) {
   const [totalSongs, setTotalSongs] = useState(0);
   // const [playSongposition, setPlaySongposition] = useState(0);
   const [nordIndex111, setNordIndex111] = useState(0);
-  let [counter, setCounter] = useState(0);
-  let [lastInd, setLastInd] = useState(-1);
-  const [allImageCount, setAllImageCount] = useState(0);
-  const [imageCount, setImageCount] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [allPlaySongsDuration, setAllPlaySongsDuration] = useState(0);
-  const [songTitle, setSongTitle] = useState("Title");
-  const [songName, setSongName] = useState("Racer X Real time Simulation Tech Demo");
-  const [composer, setComposer] = useState("composer");
-  const [songNote, setSongNote] = useState("Note");
-  const [totalSeconds, setTotalSeconds] = useState(0);
-  const [remainingTime, setRemainingTime] = useState(0);
-  const circleOne = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const [changeBg, setChangeBg] = useState("");
-  const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
+ 
+   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData = ["", "HI", "LI", "MI"];
   const packageData = ["", "P", "F", "F"];
   const packageName = ["Mix", "Premium", "Original"];
@@ -161,9 +142,6 @@ function MusicWheel(props) {
     "288",
     "300",
   ];
-  let preImageCount = 0;
-  preImageCount = imageCount;
-  // setAllImageCount(imageCount)
   let nordArray = [];
   const arryOne = ["c3", "c2", "c1"];
   const data = {
@@ -231,15 +209,7 @@ function MusicWheel(props) {
     //}
   }
   async function btnHandler(type, e, ind) {
-    // if (
-    //   imageTypeIndex == "" &&
-    //   type != "Letter" &&
-    //   type != "Staff" &&
-    //   type != "Keys"
-    // ) {
-    //   alert("Please select any ImageType Key");
-    // } else {
-
+   
     if (type == "Tempo") {
       if (tempoIndex == tempoData.length - 1) {
         setTempoIndex(0);
@@ -272,9 +242,7 @@ function MusicWheel(props) {
 
     if (type == "Keys") {
       alert("You need to purchase the membership");
-      // setImageTypeIndex(type);
-      // toggleActiveStyle(ind);
-      // await fetchSongsData(type);
+     
     }
     if (type == "Letter") {
       setImageTypeIndex(type);
@@ -283,9 +251,7 @@ function MusicWheel(props) {
     }
     if (type == "Staff") {
       alert("You need to purchase the membership");
-      // toggleActiveStyle(ind);
-      // setImageTypeIndex(type);
-      // await fetchSongsData(type);
+     
     }
     if (type == "Duration") {
       if (durationDataIndex == durationData.length - 1) {
@@ -311,39 +277,6 @@ function MusicWheel(props) {
     }
   }
 
-  // function secondsToHms(Seconds) {
-  //   let d = Number(Seconds);
-  //   console.log(Seconds, "...Secondss");
-  //   var m = Math.floor((d % 3600) / 60);
-  //   var s = Math.floor((d % 3600) % 60);
-
-  //   var mDisplay = m > 0 ? m : "00";
-  //   var sDisplay = s > 0 ? s : "00";
-  //   let time = m + ":" + s;
-
-  //   setAllPlaySongsDuration(time);
-  //   countdown(mDisplay, sDisplay);
-  // }
-
-  // function countdown(minutes, seconds) {
-  //   function tick() {
-  //     setRemainingTime(
-  //       minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds)
-  //     );
-  //     seconds--;
-  //     if (seconds >= 0) {
-  //       let timeoutHandle = setTimeout(tick, 1000);
-  //     } else {
-  //       if (minutes >= 1) {
-  //         setTimeout(function () {
-  //           countdown(minutes - 1, 59);
-  //         }, 1000);
-  //       }
-  //     }
-  //   }
-  //   tick();
-  // }
-
   useEffect(() => {
     if (props.musicIndex >= 0) {
       highlightNord(props.musicData, props.musicIndex);
@@ -352,28 +285,9 @@ function MusicWheel(props) {
 
   function handleClickSong(songsData, ind) {
     if (songsData.length > 0) {
-      // setImageCount(songsData[ind].no_of_images);
-      // setAllImageCount(parseInt(imageCount)+parseInt(songsData[ind].no_of_images));
-       // console.log(parseInt(imageCount)+parseInt(songsData[ind].no_of_images), "...images");
-      // setDuration(songsData[ind].duration);
-      // setTotalSeconds(parseInt(duration)+parseInt(songsData[ind].duration));
-      console.log(parseInt(duration)+parseInt(songsData[ind].duration), "...duration");
       props.handleSong(songsData, ind);
-      // setSongTitle(songsData[ind].song_title);
-      // setComposer(songsData[ind].composer);
-      // setSongNote(songsData[ind].note_or_cord);
-      // setSongName(songsData[ind].song_name);
-      // secondsToHms(parseInt(duration)+parseInt(songsData[ind].duration));
-      console.log(totalSeconds,'totalSeconds...');
     }
-
-    // setPlaySongposition(++ind);
-    // secondsToHms(parseInt(duration)+parseInt(songsData[ind].duration));
-    console.log(totalSeconds,'totalSeconds...');
-    // secondsToHms(totalSeconds);
-    
-    
-  }
+        }
 
   function highlightNord(songsData, ind) {
     const current_song = songsData[ind];
@@ -420,43 +334,6 @@ function MusicWheel(props) {
   }
 
   var i = 0;
-
-  // for get nord  on button click
-
-  // function playAudio(noteType, e, ind) {
-  //   if (counter == 0) {
-  //     nordArray.push(data["c3"][ind]);
-  //     if (data["c3"][ind]) {
-  //       var nrd = data["c3"][ind];
-  //       changeHandler("c3", ind);
-  //       new Audio(soundData[counter]).play();
-  //     }
-  //   } else if (counter == 1) {
-  //     if (data["c2"][ind]) {
-  //       var nrd2 = data["c2"][ind];
-  //       changeHandler("c2", ind);
-  //       changeHandler("c3", ind);
-  //       new Audio(soundData[counter]).play();
-  //     }
-  //   } else if (counter == 2) {
-  //     if (data["c1"][ind]) {
-  //       var nrd3 = data["c1"][ind];
-  //       changeHandler("c1", ind);
-  //       changeHandler("c2", ind);
-  //       new Audio(soundData[counter]).play();
-  //     }
-  //   } else {
-  //     counter = -1;
-  //     changeHandler("c1", ind);
-  //   }
-  //   setCounter(++counter);
-  // }
-  
-  
-  // const onClick = () => {
-  //   const element = document.getElementById("content");
-  //   element.scrollIntoView();
-  // }
 
   function refreshPage() {
     window.location.reload(false);
