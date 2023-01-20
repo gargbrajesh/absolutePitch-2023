@@ -148,6 +148,20 @@ function MusicWheel(props) {
     c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
     c2: ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
     c3: [
+      "D#",
+      "D",
+      "E#",
+      "E",
+      "F",
+      "G#",
+      "G",
+      "A#",
+      "A",
+      "B#",
+      "B",
+      "C",
+    ],
+    c3String: [
       "C#\nDb",
       "D",
       "D#\nEb",
@@ -200,6 +214,7 @@ function MusicWheel(props) {
         }
         nordData.splice(nordIndex1, 1);
         setNordData(nordData);
+       
       }
       setPackageDataIndex(0);
       setTempoIndex(0);
@@ -345,6 +360,7 @@ function MusicWheel(props) {
     myHeaders.append("Cookie", "PHPSESSID=ckmj4nc6enk1u3e0rle62m3l64");
 
     const nord_or_cord = getNord();
+    console.log(nord_or_cord,'nord_or_cord.............')
     var urlencoded = new URLSearchParams();
     urlencoded.append("songs", "1");
     urlencoded.append("note_or_cord", nord_or_cord);
@@ -551,7 +567,7 @@ function MusicWheel(props) {
                       }`}
                       onClick={(e) => changeHandler("c3", ind, e)}
                     >
-                      {nl2br(val)}
+                      {nl2br(data["c3String"][ind])}
                     </div>
                   </li>
                 ))}
