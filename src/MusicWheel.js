@@ -23,7 +23,7 @@ function MusicWheel(props) {
   const [nordData, setNordData] = useState([]);
   const [tempoIndex, setTempoIndex] = useState(0);
   const [intensityIndex, setIntensityIndex] = useState(0);
-  const [packageDataIndex, setPackageDataIndex] = useState(0);
+  const [packageDataIndex, setPackageDataIndex] = useState(1);
   const [imageTypeIndex, setImageTypeIndex] = useState("");
   const [imageTypeActive, setImageTypeActive] = useState(false);
   const [durationDataIndex, setDurationDataIndex] = useState(0);
@@ -33,8 +33,8 @@ function MusicWheel(props) {
  
    const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData = ["", "HI", "LI", "MI"];
-  const packageData = ["", "P", "F", "F"];
-  const packageName = ["Mix", "Premium", "Original"];
+  const packageData = ["","", "P", "F", "F"];
+  const packageName = ["","Mix", "Premium", "Original"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
   const durationData = [
     "",
@@ -636,26 +636,29 @@ function MusicWheel(props) {
           </button>
         </Grid>
       </Grid>
+      <div className={classes.songScrolling}>
+        {/* <marquee width="90%" direction="left" height="30%"> */}
+      {props.songName}
+    {/* </marquee> */}
+    </div>
       <Grid container spacing={2} className={classes.bottomBoxContainer}>
-        <Grid item xs={2} md={2}>
+        <Grid item xs={3} md={3}>
           <p className={`${classes.bottomBox}`}>{props.songNote}</p>
         </Grid>
-        <Grid item xs={3} md={3}>
+        {/* <Grid item xs={3} md={3}>
           <p className={`${classes.bottomBox}`}>{props.songTitle}</p>
-        </Grid>
+        </Grid> */}
         <Grid item xs={3} md={3}>
           <p className={`${classes.bottomBox}`}>{props.composer}</p>
         </Grid>
-        <Grid item xs={2} md={2}>
+        <Grid item xs={3} md={3}>
           <p className={`${classes.bottomBox}`}>{props.duration}</p>
         </Grid>
-        <Grid item xs={2} md={2}>
+        <Grid item xs={3} md={3}>
           <p className={`${classes.bottomBox}`}>{props.imageCount}</p>
         </Grid>
       </Grid>
-      <div className={classes.songScrolling}><marquee width="90%" direction="left" height="30%">
-      {props.songName}
-    </marquee></div>
+      
       <div className={styles.songsWrapper}>
         <Paper elevation={3} className={classes.paperStyle}>
           <div
@@ -690,7 +693,7 @@ function MusicWheel(props) {
                         alert("You need to purchase the membership")
                       }
                       id={ind}
-                      className={styles.listStyleDisable}
+                      className={`${styles.listStyleDisable} ${styles.liststyle}`}
                     >
                       {" "}
                       * {val["song_title"]}{" "}
