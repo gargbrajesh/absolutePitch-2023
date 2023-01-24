@@ -637,9 +637,9 @@ function MusicWheel(props) {
         </Grid>
       </Grid>
       <div className={classes.songScrolling}>
-        {/* <marquee width="90%" direction="left" height="30%"> */}
-      {props.songName}
-    {/* </marquee> */}
+        <marquee width="90%" direction="left" height="30%">
+      {props.songTitle }
+    </marquee>
     </div>
       <Grid container spacing={2} className={classes.bottomBoxContainer}>
         <Grid item xs={3} md={3}>
