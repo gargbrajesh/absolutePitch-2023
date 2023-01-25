@@ -91,12 +91,22 @@ function LandingPage() {
       parseInt(imageCount) + parseInt(songsData[ind].no_of_images)
     );
     // console.log(parseInt(imageCount)+parseInt(songsData[ind].no_of_images), "...images");
-    setDuration(songsData[ind].duration);
+    
     // setTotalSeconds(parseInt(duration) + parseInt(songsData[--ind].duration));
     secondsToHms(parseInt(duration) + parseInt(songsData[ind].duration));
     setPlaySongposition(++ind);
+    // totleTimeAndImage(songsData,ind)
     const getNextSong = document.getElementById("childid").children[ind];
      getNextSong.scrollIntoView();
+  }
+
+  function totleTimeAndImage(data,index){
+    setAllImageCount(
+      parseInt(imageCount) + parseInt(data[index].no_of_images)
+    );
+    setDuration(data[index].duration);
+    setTotalSeconds(parseInt(duration) + parseInt(data[index].duration));
+    console.log(parseInt(duration) , parseInt(data[index].duration))
   }
 
   function secondsToHms(Seconds) {
@@ -138,6 +148,7 @@ function LandingPage() {
           handleSong={handleSong}
           musicData={data}
           musicIndex={index}
+          totleTimeAndImage={totleTimeAndImage}
         />
       </Grid>
     </Grid>

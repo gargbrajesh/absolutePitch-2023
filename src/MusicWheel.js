@@ -490,8 +490,8 @@ function MusicWheel(props) {
             <p>
           
               {" "}
-              {/* {props.allPlaySongsDuration} */}
-              {getCookie('totileTime') ? getCookie('totileTime'):'0'}
+              {props.totalSeconds}
+              {/* {getCookie('totileTime') ? getCookie('totileTime'):'0'} */}
             </p>
           </div>
           <button
