@@ -49,7 +49,7 @@ function VideoPlayer(prop) {
    
     for (let i=prop.musicIndex+1;i<prop.musicData.length;i++){
       if(!(prop.musicData[i]["song_url"].includes("_P."))){
-        setTotalSeconds(parseInt(totalSeconds) + parseInt(prop.musicData[i]["duration"]));
+        setTotalSeconds(parseInt(totalSeconds) + parseInt(prop.musicData[musicIndex]["duration"]));
         console.log('totle duration in video',totalSeconds);
         setCookie('totileTime',totalSeconds)
         prop.handleSong(prop.musicData, i)
