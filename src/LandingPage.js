@@ -73,6 +73,7 @@ function LandingPage() {
   const [allImageCount, setAllImageCount] = useState(0);
   const [imageCount, setImageCount] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [durationLast, setDurationLast] = useState(0);
   const [allPlaySongsDuration, setAllPlaySongsDuration] = useState(0);
   const [playSongposition, setPlaySongposition] = useState(0);
   const [totalSongs, setTotalSongs] = useState(0);
@@ -91,7 +92,7 @@ function LandingPage() {
       parseInt(imageCount) + parseInt(songsData[ind].no_of_images)
     );
     // console.log(parseInt(imageCount)+parseInt(songsData[ind].no_of_images), "...images");
-    
+    setDuration(songsData[ind].duration);
     // setTotalSeconds(parseInt(duration) + parseInt(songsData[--ind].duration));
     secondsToHms(parseInt(duration) + parseInt(songsData[ind].duration));
     setPlaySongposition(++ind);
@@ -104,8 +105,8 @@ function LandingPage() {
     setAllImageCount(
       parseInt(imageCount) + parseInt(data[index].no_of_images)
     );
-    setDuration(data[index].duration);
-    setTotalSeconds(parseInt(duration) + parseInt(data[index].duration));
+    setDurationLast(data[index].duration);
+    setTotalSeconds(parseInt(durationLast) + parseInt(data[index].duration));
     console.log(parseInt(duration) , parseInt(data[index].duration))
   }
 
