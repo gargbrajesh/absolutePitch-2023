@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { setCookie } from 'cookies-next';
 import { Grid } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import ReactPlayer from "react-player";
@@ -39,14 +40,18 @@ const useStyles = makeStyles({
 });
 function VideoPlayer(prop) {
   const [song, setSong] = useState();
-
+  const [totalSeconds, setTotalSeconds] = useState(0);
   const music = prop.musicData ? prop.musicData[prop.musicIndex]["song_url"] : "";
   
 
   function playNextSong(){
+   
+   
     for (let i=prop.musicIndex+1;i<prop.musicData.length;i++){
       if(!(prop.musicData[i]["song_url"].includes("_P."))){
-      
+        setTotalSeconds(parseInt(totalSeconds) + parseInt(prop.musicData[i]["duration"]));
+        console.log('totle duration in video',totalSeconds);
+        setCookie('totileTime',totalSeconds)
         prop.handleSong(prop.musicData, i)
           break;
       }

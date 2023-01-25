@@ -92,7 +92,7 @@ function LandingPage() {
     );
     // console.log(parseInt(imageCount)+parseInt(songsData[ind].no_of_images), "...images");
     setDuration(songsData[ind].duration);
-    setTotalSeconds(parseInt(duration) + parseInt(songsData[ind].duration));
+    // setTotalSeconds(parseInt(duration) + parseInt(songsData[--ind].duration));
     secondsToHms(parseInt(duration) + parseInt(songsData[ind].duration));
     setPlaySongposition(++ind);
     const getNextSong = document.getElementById("childid").children[ind];

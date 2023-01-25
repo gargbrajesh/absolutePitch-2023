@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import useStyles from "../utils/styles.module";
 import styles from "./style.module.css";
 import Image from "next/image";
+import { getCookie, setCookie,deleteCookie } from 'cookies-next';
 import staff from "../public/assets/images/staff.jpg";
 import keys from "../public/assets/images/keys.jpg";
 import playBtn from "../public/assets/images/playerBtn.jpg";
@@ -293,6 +294,7 @@ function MusicWheel(props) {
   }
 
   useEffect(() => {
+   
     if (props.musicIndex >= 0) {
       highlightNord(props.musicData, props.musicIndex);
     }
@@ -352,6 +354,7 @@ function MusicWheel(props) {
 
   function refreshPage() {
     window.location.reload(false);
+    // setCookie('totileTime');
   }
   function fetchSongsData(imageType = imageTypeIndex) {
     var myHeaders = new Headers();
@@ -487,7 +490,8 @@ function MusicWheel(props) {
             <p>
           
               {" "}
-              {props.allPlaySongsDuration}
+              {/* {props.allPlaySongsDuration} */}
+              {getCookie('totileTime') ? getCookie('totileTime'):'0'}
             </p>
           </div>
           <button
@@ -696,7 +700,7 @@ function MusicWheel(props) {
                       className={`${styles.listStyleDisable} ${styles.liststyle}`}
                     >
                       {" "}
-                      * {val["song_title"]}{" "}
+                      * {val["song_name"]}{" "}
                     </p>
                   ) : (
                     
@@ -705,7 +709,7 @@ function MusicWheel(props) {
                       onClick={() => handleClickSong(songsData, ind)}
                       className={styles.liststyle}
                     >
-                      * {val["song_title"]}
+                      * {val["song_name"]}
                     </p>
                   )
                 )
