@@ -475,7 +475,7 @@ const useStyles = makeStyles({
     position: "absolute",
     left: " -40%",
     right: "27.31%",
-    top: "85%",
+    top: "84%",
     bottom: "-72.49%",
     height: "80px",
     width: "100px",
@@ -484,6 +484,7 @@ const useStyles = makeStyles({
     borderRadius:'20%',
     "@media (min-width: 1280px) and (max-width:1680px)":{
       top: "82%",
+      borderRadius:'20%',
     },
     // background: "radial-gradient(#FFF 40%, #000)",
     transform: "rotate(208.33deg)",
@@ -592,7 +593,7 @@ const useStyles = makeStyles({
     textAlign:'center',
     marginTop:'15px',
     "@media (min-width: 1280px) and (max-width:1680px)": { 
-      marginTop:'4% !important',
+      marginTop:'5% !important',
       fontSize:'14px',
     },
   },

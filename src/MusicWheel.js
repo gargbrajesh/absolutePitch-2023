@@ -444,7 +444,7 @@ function MusicWheel(props) {
           </button>
         </Grid>
       </Grid>
-    
+      <div style={{ marginTop: "2%", marginBottom: "5%" }}>
         <Grid container spacing={1}>
           <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
             <button
@@ -626,12 +626,13 @@ function MusicWheel(props) {
             </button>
           </Grid>
         </Grid>
-     
+      </div>
       <div className={classes.songScrolling}>
         <marquee width="90%" direction="left" height="30%">
           {props.songTitle}
         </marquee>
       </div>
+      <div>
       <Grid container spacing={2} className={classes.bottomBoxContainer}>
         <Grid item xs={3} md={3}>
           <p className={`${classes.bottomBox}`}>{props.songNote}</p>
@@ -649,7 +650,7 @@ function MusicWheel(props) {
           <p className={`${classes.bottomBox}`}>{props.imageCount}</p>
         </Grid>
       </Grid>
-
+      </div>
       <div className={styles.songsWrapper}>
         <Paper elevation={3} className={classes.paperStyle}>
           <div
