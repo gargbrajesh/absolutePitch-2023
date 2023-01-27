@@ -332,9 +332,11 @@ function MusicWheel(props) {
     return final_result;
   }
 
+ 
   var i = 0;
 
   function refreshPage() {
+    // alert("Your volume level will be set to maximum if you refresh. You will have to reset the volume level. ");
     window.location.reload(false);
     // setCookie('totileTime');
   }

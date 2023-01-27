@@ -60,7 +60,7 @@ const useStyles = makeStyles({
 });
 function LandingPage() {
   const childCompRef = useRef();
-
+  
   const [data, setData] = useState();
   const [index, setIndex] = useState();
   const [songTitle, setSongTitle] = useState("Title");
