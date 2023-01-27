@@ -149,16 +149,16 @@ function MusicWheel(props) {
     c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
     c2: ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
     c3: [
-      "D#",
+      "Db",
       "D",
-      "E#",
+      "Eb",
       "E",
       "F",
-      "G#",
+      "Gb",
       "G",
-      "A#",
+      "Ab",
       "A",
-      "B#",
+      "Bb",
       "B",
       "C",
     ],
@@ -177,7 +177,7 @@ function MusicWheel(props) {
       "C",
     ],
   };
-  const nordMap = { "+": "M", "-": "m", "#": "b" };
+  const nordMap = { "+": "M", "-": "m", "#": "b",};
   const soundData = [
     "https://mylatinhome.com/absolute/note-sound/A.wav",
     "https://mylatinhome.com/absolute/note-sound/Am.wav",
@@ -490,7 +490,7 @@ function MusicWheel(props) {
             <p>
           
               {" "}
-              {props.totalSeconds}
+              {props.allPlaySongsDuration}
               {/* {getCookie('totileTime') ? getCookie('totileTime'):'0'} */}
             </p>
           </div>

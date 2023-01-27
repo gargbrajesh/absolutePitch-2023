@@ -74,6 +74,7 @@ function LandingPage() {
   const [imageCount, setImageCount] = useState(0);
   const [duration, setDuration] = useState(0);
   const [durationLast, setDurationLast] = useState(0);
+  const [imageCountLast, setImageCountLast] = useState(0);
   const [allPlaySongsDuration, setAllPlaySongsDuration] = useState(0);
   const [playSongposition, setPlaySongposition] = useState(0);
   const [totalSongs, setTotalSongs] = useState(0);
@@ -88,13 +89,13 @@ function LandingPage() {
     setSongNote(songsData[ind].note_or_cord);
     setSongName(songsData[ind].song_name);
     setImageCount(songsData[ind].no_of_images);
-    setAllImageCount(
-      parseInt(imageCount) + parseInt(songsData[ind].no_of_images)
-    );
+    // setAllImageCount(
+    //   parseInt(imageCount) + parseInt(songsData[ind].no_of_images)
+    // );
     // console.log(parseInt(imageCount)+parseInt(songsData[ind].no_of_images), "...images");
     setDuration(songsData[ind].duration);
     // setTotalSeconds(parseInt(duration) + parseInt(songsData[--ind].duration));
-    secondsToHms(parseInt(duration) + parseInt(songsData[ind].duration));
+    // secondsToHms(parseInt(duration) + parseInt(songsData[ind].duration));
     setPlaySongposition(++ind);
     // totleTimeAndImage(songsData,ind)
     const getNextSong = document.getElementById("childid").children[ind];
@@ -102,15 +103,16 @@ function LandingPage() {
   }
 
   function totleTimeAndImage(data,index){
-    setAllImageCount(
-      parseInt(imageCount) + parseInt(data[index].no_of_images)
-    );
+    setImageCountLast(data[index].no_of_images);
+    setAllImageCount(parseInt(imageCountLast) + parseInt(data[index].no_of_images));
     setDurationLast(data[index].duration);
     setTotalSeconds(parseInt(durationLast) + parseInt(data[index].duration));
     console.log(parseInt(duration) , parseInt(data[index].duration))
+    secondsToHms(parseInt(durationLast) + parseInt(data[index].duration))
   }
 
   function secondsToHms(Seconds) {
+    console.log(Seconds,'Seconds.............');
     let d = Number(Seconds);
     console.log(Seconds, "...Secondss");
     var m = Math.floor((d % 3600) / 60);
