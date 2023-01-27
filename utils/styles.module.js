@@ -311,6 +311,9 @@ const useStyles = makeStyles({
     width: "98%",
     marginLeft: "5px",
     marginBottom:'3%',
+    "@media (min-width: 1280px) and (max-width:1680px)":{
+      marginBottom:'3%',
+    }
   },
   bottomBoxContainer: {
     display: "flex",
@@ -457,6 +460,10 @@ const useStyles = makeStyles({
     width: "100px",
     background: "#333333",
     cursor: "pointer",
+    borderRadius:'20%',
+    "@media (min-width: 1280px) and (max-width:1680px)":{
+      top: "82%",
+    },
     // background: "radial-gradient(#FFF 40%, #000)",
     transform: "rotate(-25.33deg)",
     border: "none",
@@ -474,6 +481,10 @@ const useStyles = makeStyles({
     width: "100px",
     background: "#333333",
     cursor: "pointer",
+    borderRadius:'20%',
+    "@media (min-width: 1280px) and (max-width:1680px)":{
+      top: "82%",
+    },
     // background: "radial-gradient(#FFF 40%, #000)",
     transform: "rotate(208.33deg)",
     border: "none",
@@ -581,7 +592,7 @@ const useStyles = makeStyles({
     textAlign:'center',
     marginTop:'15px',
     "@media (min-width: 1280px) and (max-width:1680px)": { 
-      marginTop:'14px',
+      marginTop:'4% !important',
       fontSize:'14px',
     },
   },

@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import useStyles from "../utils/styles.module";
 import styles from "./style.module.css";
 import Image from "next/image";
-import { getCookie, setCookie,deleteCookie } from 'cookies-next';
+import { getCookie, setCookie, deleteCookie } from "cookies-next";
 import staff from "../public/assets/images/staff.jpg";
 import keys from "../public/assets/images/keys.jpg";
 import playBtn from "../public/assets/images/playerBtn.jpg";
@@ -31,11 +31,11 @@ function MusicWheel(props) {
   const [totalSongs, setTotalSongs] = useState(0);
   // const [playSongposition, setPlaySongposition] = useState(0);
   const [nordIndex111, setNordIndex111] = useState(0);
- 
-   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
+
+  const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData = ["", "HI", "LI", "MI"];
-  const packageData = ["","", "P", "F", "F"];
-  const packageName = ["","Mix", "Premium", "Original"];
+  const packageData = ["", "", "P", "F", "F"];
+  const packageName = ["", "Mix", "Premium", "Original"];
   const imageTypeData = ["", "Keys", "Letter", "Staff"];
   const durationData = [
     "",
@@ -148,20 +148,7 @@ function MusicWheel(props) {
   const data = {
     c1: ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
     c2: ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-    c3: [
-      "Db",
-      "D",
-      "Eb",
-      "E",
-      "F",
-      "Gb",
-      "G",
-      "Ab",
-      "A",
-      "Bb",
-      "B",
-      "C",
-    ],
+    c3: ["Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B", "C"],
     c3String: [
       "C#\nDb",
       "D",
@@ -177,7 +164,7 @@ function MusicWheel(props) {
       "C",
     ],
   };
-  const nordMap = { "+": "M", "-": "m", "#": "b",};
+  const nordMap = { "+": "M", "-": "m", "#": "b" };
   const soundData = [
     "https://mylatinhome.com/absolute/note-sound/A.wav",
     "https://mylatinhome.com/absolute/note-sound/Am.wav",
@@ -215,7 +202,6 @@ function MusicWheel(props) {
         }
         nordData.splice(nordIndex1, 1);
         setNordData(nordData);
-       
       }
       setPackageDataIndex(0);
       setTempoIndex(0);
@@ -225,7 +211,6 @@ function MusicWheel(props) {
     //}
   }
   async function btnHandler(type, e, ind) {
-   
     if (type == "Tempo") {
       if (tempoIndex == tempoData.length - 1) {
         setTempoIndex(0);
@@ -258,7 +243,6 @@ function MusicWheel(props) {
 
     if (type == "Keys") {
       alert("You need to purchase the membership");
-     
     }
     if (type == "Letter") {
       setImageTypeIndex(type);
@@ -267,7 +251,6 @@ function MusicWheel(props) {
     }
     if (type == "Staff") {
       alert("You need to purchase the membership");
-     
     }
     if (type == "Duration") {
       if (durationDataIndex == durationData.length - 1) {
@@ -294,7 +277,6 @@ function MusicWheel(props) {
   }
 
   useEffect(() => {
-   
     if (props.musicIndex >= 0) {
       highlightNord(props.musicData, props.musicIndex);
     }
@@ -304,7 +286,7 @@ function MusicWheel(props) {
     if (songsData.length > 0) {
       props.handleSong(songsData, ind);
     }
-        }
+  }
 
   function highlightNord(songsData, ind) {
     const current_song = songsData[ind];
@@ -363,7 +345,7 @@ function MusicWheel(props) {
     myHeaders.append("Cookie", "PHPSESSID=ckmj4nc6enk1u3e0rle62m3l64");
 
     const nord_or_cord = getNord();
-    console.log(nord_or_cord,'nord_or_cord.............')
+    console.log(nord_or_cord, "nord_or_cord.............");
     var urlencoded = new URLSearchParams();
     urlencoded.append("songs", "1");
     urlencoded.append("note_or_cord", nord_or_cord);
@@ -389,7 +371,7 @@ function MusicWheel(props) {
     )
       .then((response) => response.json())
       .then((responseJson) => {
-        setTotalSongs(responseJson.data.length)
+        setTotalSongs(responseJson.data.length);
         if (responseJson != "") {
           setSongsData(responseJson.data);
           console.log(songsData, "songdata.....");
@@ -397,12 +379,11 @@ function MusicWheel(props) {
             if (!responseJson.data[i].song_name.includes("_P.")) {
               console.log(responseJson.data[i], "songdata.....");
               handleClickSong(responseJson.data, i);
-             
+
               // setDuration(responseJson.data[i].duration);
               break;
             }
           }
-         ;
         } else {
           alert("error in response");
         }
@@ -463,188 +444,194 @@ function MusicWheel(props) {
           </button>
         </Grid>
       </Grid>
-      <Grid container spacing={1}>
-        <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
-          <button
-            className={`${classes.tempoBtnTop} ${
-              packageDataIndex > 0 ? "" : ""
-            }`}
-            onClick={(e) => {
-              btnHandler("Package", e);
-            }}
-          >
-            <LabelIcon
-              className={`${classes.iconDesign} ${
-                packageDataIndex > 0 ? classes.iconDesignActive : ""
+    
+        <Grid container spacing={1}>
+          <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
+            <button
+              className={`${classes.tempoBtnTop} ${
+                packageDataIndex > 0 ? "" : ""
               }`}
-            />
-            <p className={`${classes.leftBtnTextOne}`}>
-              {packageName[packageDataIndex]
-                ? packageName[packageDataIndex]
-                : "Classic"}
-            </p>
-          </button>
+              onClick={(e) => {
+                btnHandler("Package", e);
+              }}
+            >
+              <LabelIcon
+                className={`${classes.iconDesign} ${
+                  packageDataIndex > 0 ? classes.iconDesignActive : ""
+                }`}
+              />
+              <p className={`${classes.leftBtnTextOne}`}>
+                {packageName[packageDataIndex]
+                  ? packageName[packageDataIndex]
+                  : "Classic"}
+              </p>
+            </button>
 
-          <div className={classes.imageCount}>
-            {/* <p> {remainingTime}</p> */}
-            <p>
-          
-              {" "}
-              {props.allPlaySongsDuration}
-              {/* {getCookie('totileTime') ? getCookie('totileTime'):'0'} */}
-            </p>
-          </div>
-          <button
-            className={`${classes.tempoNewBtnBottom} ${
-              durationDataIndex > 0 ? "" : ""
-            }`}
-            onClick={(e) => {
-              btnHandler("Duration", e);
-            }}
-          >
-            {" "}
-            <LabelIcon
-              className={`${classes.iconDesign} ${
-                durationDataIndex > 0 ? classes.iconDesignActive : ""
+            <div className={classes.imageCount}>
+              {/* <p> {remainingTime}</p> */}
+              <p>
+                {" "}
+                {props.allPlaySongsDuration}
+                {/* {getCookie('totileTime') ? getCookie('totileTime'):'0'} */}
+              </p>
+            </div>
+            <button
+              className={`${classes.tempoNewBtnBottom} ${
+                durationDataIndex > 0 ? "" : ""
               }`}
-            />
-            <p className={classes.leftBtnTextOne}>
+              onClick={(e) => {
+                btnHandler("Duration", e);
+              }}
+            >
               {" "}
-              {durationData[durationDataIndex]
-                ? durationData[durationDataIndex] <= 120
-                  ? "Short"
-                  : durationData[durationDataIndex] <= 240 &&
-                    durationData[durationDataIndex] >= 121
-                  ? "Medium"
-                  : "Long"
-                : "Duration"}
-            </p>
-          </button>
-        </Grid>
-        <Grid item xs={8} md={8} className={classes.wheelContianer}>
-          <div className={classes.mainCircle}>
-            <ul className="circle">
-              {data["c1"].map((val, ind) => (
-                <li key={classes.circle + "-" + ind} className={styles.li}>
-                  <div
-                    className={`${styles.text} ${
-                      nord["c1"].includes(ind) ? styles.bluebg : ""
-                    }  ${
-                      highlightedNord["c1"].includes(ind) ? styles.greenbg : ""
-                    }`}
-                    onClick={(e) => changeHandler("c1", ind, e)}
-                  >
-                    {val}
+              <LabelIcon
+                className={`${classes.iconDesign} ${
+                  durationDataIndex > 0 ? classes.iconDesignActive : ""
+                }`}
+              />
+              <p className={classes.leftBtnTextOne}>
+                {" "}
+                {durationData[durationDataIndex]
+                  ? durationData[durationDataIndex] <= 120
+                    ? "Short"
+                    : durationData[durationDataIndex] <= 240 &&
+                      durationData[durationDataIndex] >= 121
+                    ? "Medium"
+                    : "Long"
+                  : "Duration"}
+              </p>
+            </button>
+          </Grid>
+          <Grid item xs={8} md={8} className={classes.wheelContianer}>
+            <div className={classes.mainCircle}>
+              <ul className="circle">
+                {data["c1"].map((val, ind) => (
+                  <li key={classes.circle + "-" + ind} className={styles.li}>
+                    <div
+                      className={`${styles.text} ${
+                        nord["c1"].includes(ind) ? styles.bluebg : ""
+                      }  ${
+                        highlightedNord["c1"].includes(ind)
+                          ? styles.greenbg
+                          : ""
+                      }`}
+                      onClick={(e) => changeHandler("c1", ind, e)}
+                    >
+                      {val}
+                    </div>
+                  </li>
+                ))}
+
+                <ul className="circle2">
+                  {data["c2"].map((val, ind) => (
+                    <li
+                      key={classes.circle2 + "-" + ind}
+                      className={styles.list}
+                    >
+                      <div
+                        className={`${styles.textTwo} ${
+                          nord["c2"].includes(ind) ? styles.bluebg : ""
+                        } ${
+                          highlightedNord["c2"].includes(ind)
+                            ? styles.greenbg
+                            : ""
+                        }`}
+                        onClick={(e) => changeHandler("c2", ind, e)}
+                      >
+                        {val} {nord["c2"].includes(val)}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+
+                <ul className="circle3">
+                  {data["c3"].map((val, ind) => (
+                    <li
+                      key={classes.circle3 + "-" + ind}
+                      className={styles.list}
+                    >
+                      <div
+                        className={`${styles.textThird} ${
+                          nord["c3"].includes(ind) ? styles.bluebg : ""
+                        } ${
+                          highlightedNord["c3"].includes(ind)
+                            ? styles.greenbg
+                            : ""
+                        }`}
+                        onClick={(e) => changeHandler("c3", ind, e)}
+                      >
+                        {nl2br(data["c3String"][ind])}
+                      </div>
+                    </li>
+                  ))}
+
+                  <div className={classes.circle4}>
+                    <Image
+                      src={playBtn}
+                      className={classes.playerBtn}
+                      alt="alt"
+                      onClick={(e) => {
+                        fetchSongsData();
+                      }}
+                      style={{
+                        width: "50% !important",
+                        height: "50% !important",
+                      }}
+                    />
                   </div>
-                </li>
-              ))}
-
-              <ul className="circle2">
-                {data["c2"].map((val, ind) => (
-                  <li key={classes.circle2 + "-" + ind} className={styles.list}>
-                    <div
-                      className={`${styles.textTwo} ${
-                        nord["c2"].includes(ind) ? styles.bluebg : ""
-                      } ${
-                        highlightedNord["c2"].includes(ind)
-                          ? styles.greenbg
-                          : ""
-                      }`}
-                      onClick={(e) => changeHandler("c2", ind, e)}
-                    >
-                      {val} {nord["c2"].includes(val)}
-                    </div>
-                  </li>
-                ))}
+                </ul>
               </ul>
+            </div>
+          </Grid>
+          <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
+            <button
+              className={`${classes.tempoBtnNew} ${tempoIndex > 0 ? "" : ""}`}
+              onClick={(e) => {
+                btnHandler("Tempo", e);
+              }}
+            >
+              <LabelIcon
+                className={`${classes.iconDesign} ${
+                  tempoIndex > 0 ? classes.iconDesignActive : ""
+                }`}
+              />
 
-              <ul className="circle3">
-                {data["c3"].map((val, ind) => (
-                  <li key={classes.circle3 + "-" + ind} className={styles.list}>
-                    <div
-                      className={`${styles.textThird} ${
-                        nord["c3"].includes(ind) ? styles.bluebg : ""
-                      } ${
-                        highlightedNord["c3"].includes(ind)
-                          ? styles.greenbg
-                          : ""
-                      }`}
-                      onClick={(e) => changeHandler("c3", ind, e)}
-                    >
-                      {nl2br(data["c3String"][ind])}
-                    </div>
-                  </li>
-                ))}
-
-                <div className={classes.circle4}>
-                  <Image
-                    src={playBtn}
-                    className={classes.playerBtn}
-                    alt="alt"
-                    onClick={(e) => {
-                      fetchSongsData();
-                    }}
-                    style={{
-                      width: "50% !important",
-                      height: "50% !important",
-                    }}
-                  />
-                </div>
-              </ul>
-            </ul>
-          </div>
-        </Grid>
-        <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
-          <button
-            className={`${classes.tempoBtnNew} ${tempoIndex > 0 ? "" : ""}`}
-            onClick={(e) => {
-              btnHandler("Tempo", e);
-            }}
-          >
-            <LabelIcon
-              className={`${classes.iconDesign} ${
-                tempoIndex > 0 ? classes.iconDesignActive : ""
+              <p className={classes.RightBtnTextOne}>
+                {" "}
+                {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}
+              </p>
+            </button>
+            <div className={classes.imageCount}>
+              <p> {props.allImageCount}</p>
+            </div>
+            <button
+              className={`${classes.IntensityBtnNew} ${
+                intensityIndex > 0 ? "classes.IntensityBtnNewActive" : ""
               }`}
-            />
-
-            <p className={classes.RightBtnTextOne}>
-              {" "}
-              {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}
-            </p>
-          </button>
-          <div className={classes.imageCount}>
-            
-            <p> {" "}
-              {props.allImageCount}
-            </p>
-          </div>
-          <button
-            className={`${classes.IntensityBtnNew} ${
-              intensityIndex > 0 ? "classes.IntensityBtnNewActive" : ""
-            }`}
-            onClick={(e) => {
-              btnHandler("Intensity", e);
-            }}
-          >
-            <LabelIcon
-              className={`${classes.iconDesign} ${
-                intensityIndex > 0 ? classes.iconDesignActive : ""
-              }`}
-            />
-            <p className={classes.RightBtnTextOne}>
-              {" "}
-              {intensityData[intensityIndex]
-                ? intensityData[intensityIndex]
-                : "Intensity"}
-            </p>
-          </button>
+              onClick={(e) => {
+                btnHandler("Intensity", e);
+              }}
+            >
+              <LabelIcon
+                className={`${classes.iconDesign} ${
+                  intensityIndex > 0 ? classes.iconDesignActive : ""
+                }`}
+              />
+              <p className={classes.RightBtnTextOne}>
+                {" "}
+                {intensityData[intensityIndex]
+                  ? intensityData[intensityIndex]
+                  : "Intensity"}
+              </p>
+            </button>
+          </Grid>
         </Grid>
-      </Grid>
+     
       <div className={classes.songScrolling}>
         <marquee width="90%" direction="left" height="30%">
-      {props.songTitle }
-    </marquee>
-    </div>
+          {props.songTitle}
+        </marquee>
+      </div>
       <Grid container spacing={2} className={classes.bottomBoxContainer}>
         <Grid item xs={3} md={3}>
           <p className={`${classes.bottomBox}`}>{props.songNote}</p>
@@ -662,7 +649,7 @@ function MusicWheel(props) {
           <p className={`${classes.bottomBox}`}>{props.imageCount}</p>
         </Grid>
       </Grid>
-      
+
       <div className={styles.songsWrapper}>
         <Paper elevation={3} className={classes.paperStyle}>
           <div
@@ -687,7 +674,6 @@ function MusicWheel(props) {
           </div>
           <hr />
           <div id={props.id}>
-        
             {songsData && songsData.length > 0
               ? songsData.map((val, ind) =>
                   val["song_name"].includes("_P.") ? (
@@ -703,7 +689,6 @@ function MusicWheel(props) {
                       * {val["song_name"]}{" "}
                     </p>
                   ) : (
-                    
                     <p
                       key={"songs" + ind}
                       onClick={() => handleClickSong(songsData, ind)}
