@@ -489,7 +489,7 @@
     direction: none;
     padding-left: 10px;
     margin: 0px;
-    font-size: 14px;
+    font-size: 12px;
     justify-content: center;
   }
   .liststyle:hover {
@@ -499,7 +499,7 @@
     /* border-radius: 20px; */
    
     background: #18b0a0;
-    font-size: 14px;
+    font-size: 12px;
     width: 96%;
   }
   .liststyle {
@@ -510,7 +510,7 @@
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 14px;
     /* border-color: #CACACA; */
     line-height: 25px;
     margin-left: 50px;

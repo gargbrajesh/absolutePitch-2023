@@ -337,7 +337,7 @@ const useStyles = makeStyles({
     left: " 50%",
     right: "27.31%",
     top: "1.25%",
-    transform: "rotate(35.33deg)",
+    // transform: "rotate(35.33deg)",
     background: "#333333",
     // background: "radial-gradient(#FFF 40%, #000)",
     fontSize: "12px",
@@ -353,6 +353,17 @@ const useStyles = makeStyles({
     width: "100%",
     color: "#CEB858",
     background: "#333333",
+  },
+  iconDesignN: {
+    position: "relative",
+    height: "35px",
+    width: "35px",
+    color: "#0058ab",
+    // left: "-15%",
+    // background: "#333333",
+    borderRadius:'50%',
+    fontSize:'10px',
+    transform: "rotate(150.33deg)",
   },
   leftBtnTextOne: {
     position: "absolute",
@@ -438,12 +449,14 @@ const useStyles = makeStyles({
     top: "1.25%",
     bottom: "-72.49%",
     height: "80px",
-    width: "100px",
-    background: "#333333",
+    width: "80px",
+    border:'2px solid #0058ab !important',
+    // background: "#333333",
+    background: "white",
     cursor: "pointer",
+    borderRadius:'50%',
     // background: "radial-gradient(#FFF 40%, #000)",
     transform: "rotate(150.33deg)",
-    border: "none",
     '&:hover':{
       // background: "radial-gradient(blue 40%, #000)",
     },
@@ -597,6 +610,22 @@ const useStyles = makeStyles({
       fontSize:'14px',
     },
   },
+  tableStyle:{
+    //  border :'1px solid black',
+     width:'100%',
+     padding:'5px',
+     textAlign:'center',
+},
+trStyle:{
+  background:'black',
+  // border:'2px solid black',
+ },
+thStyle:{
+//  borderRight:'2px solid black',
+background:'#5D432C',
+color:'white !important'
+},
+ 
   paperStyle: {
     marginTop: "10px",
     width: "92%",

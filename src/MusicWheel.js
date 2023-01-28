@@ -9,6 +9,7 @@ import keys from "../public/assets/images/keys.jpg";
 import playBtn from "../public/assets/images/playerBtn.jpg";
 import nl2br from "react-nl2br";
 import LabelIcon from "@mui/icons-material/Label";
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import "./style.module.css";
 
 function MusicWheel(props) {
@@ -332,13 +333,25 @@ function MusicWheel(props) {
     return final_result;
   }
 
- 
   var i = 0;
 
   function refreshPage() {
     // alert("Your volume level will be set to maximum if you refresh. You will have to reset the volume level. ");
     window.location.reload(false);
     // setCookie('totileTime');
+  }
+ 
+  
+  function rotationBtn() {
+    var rote = 100;
+    // alert(rote);
+    let content = document.getElementById("TempoBtn");
+    let btn = document.getElementById("Tempo");
+    // content.addEventListener('click',()=>{
+      btn.style.transform = 'rotate(' + rote + 'deg)';
+      rote = rote + 20;
+    // })
+     
   }
   function fetchSongsData(imageType = imageTypeIndex) {
     var myHeaders = new Headers();
@@ -586,13 +599,13 @@ function MusicWheel(props) {
             </div>
           </Grid>
           <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
-            <button
+            {/* <button
               className={`${classes.tempoBtnNew} ${tempoIndex > 0 ? "" : ""}`}
               onClick={(e) => {
                 btnHandler("Tempo", e);
               }}
-            >
-              <LabelIcon
+            > */}
+              {/* <LabelIcon
                 className={`${classes.iconDesign} ${
                   tempoIndex > 0 ? classes.iconDesignActive : ""
                 }`}
@@ -602,7 +615,26 @@ function MusicWheel(props) {
                 {" "}
                 {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}
               </p>
+            </button> */}
+
+            <button id = "TempoBtn"
+              className={`${classes.tempoBtnNew} ${tempoIndex > 0 ? "" : ""}`}
+              onClick={(e) => {
+                rotationBtn();
+                btnHandler("Tempo", e);
+                
+              }}
+            >
+              <ArrowRightAltIcon id = "Tempo"
+                className={`${classes.iconDesignN}`}
+              />
+
+              {/* <p className={classes.RightBtnTextOne}>
+                {" "}
+                {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}
+              </p> */}
             </button>
+
             <div className={classes.imageCount}>
               <p> {props.allImageCount}</p>
             </div>
@@ -635,23 +667,23 @@ function MusicWheel(props) {
         </marquee>
       </div>
       <div>
-      <Grid container spacing={2} className={classes.bottomBoxContainer}>
-        <Grid item xs={3} md={3}>
-          <p className={`${classes.bottomBox}`}>{props.songNote}</p>
-        </Grid>
-        {/* <Grid item xs={3} md={3}>
+        <Grid container spacing={2} className={classes.bottomBoxContainer}>
+          <Grid item xs={3} md={3}>
+            <p className={`${classes.bottomBox}`}>{props.songNote}</p>
+          </Grid>
+          {/* <Grid item xs={3} md={3}>
           <p className={`${classes.bottomBox}`}>{props.songTitle}</p>
         </Grid> */}
-        <Grid item xs={3} md={3}>
-          <p className={`${classes.bottomBox}`}>{props.composer}</p>
+          <Grid item xs={3} md={3}>
+            <p className={`${classes.bottomBox}`}>{props.composer}</p>
+          </Grid>
+          <Grid item xs={3} md={3}>
+            <p className={`${classes.bottomBox}`}>{props.duration}</p>
+          </Grid>
+          <Grid item xs={3} md={3}>
+            <p className={`${classes.bottomBox}`}>{props.imageCount}</p>
+          </Grid>
         </Grid>
-        <Grid item xs={3} md={3}>
-          <p className={`${classes.bottomBox}`}>{props.duration}</p>
-        </Grid>
-        <Grid item xs={3} md={3}>
-          <p className={`${classes.bottomBox}`}>{props.imageCount}</p>
-        </Grid>
-      </Grid>
       </div>
       <div className={styles.songsWrapper}>
         <Paper elevation={3} className={classes.paperStyle}>
@@ -677,31 +709,51 @@ function MusicWheel(props) {
           </div>
           <hr />
           <div id={props.id}>
-            {songsData && songsData.length > 0
-              ? songsData.map((val, ind) =>
-                  val["song_name"].includes("_P.") ? (
-                    <p
-                      key={"songs" + ind}
-                      onClick={() =>
-                        alert("You need to purchase the membership")
-                      }
-                      id={ind}
-                      className={`${styles.listStyleDisable} ${styles.liststyle}`}
-                    >
-                      {" "}
-                      * {val["song_name"]}{" "}
-                    </p>
-                  ) : (
-                    <p
-                      key={"songs" + ind}
-                      onClick={() => handleClickSong(songsData, ind)}
-                      className={styles.liststyle}
-                    >
-                      * {val["song_name"]}
-                    </p>
+            <table className={classes.tableStyle}>
+              <tr className={classes.trStyle}>
+                <th className={classes.thStyle}>Title</th>
+                <th className={classes.thStyle}>Composer</th>
+                <th className={classes.thStyle}>Tempo</th>
+                <th className={classes.thStyle} style={{cursor:'pointer'}} onClick={(e) => {
+                btnHandler("Intensity", e);fetchSongsData();
+              }}>Intensity</th>
+                <th className={classes.thStyle}>Note</th>
+              </tr>
+              {songsData && songsData.length > 0
+                ? songsData.map((val, ind) =>
+                    val["song_name"].includes("_P.") ? (
+                      <tr
+                        key={"songs" + ind}
+                        onClick={() =>
+                          alert("You need to purchase the membership")
+                        }
+                        id={ind}
+                        className={`${styles.listStyleDisable} ${styles.liststyle}`}
+                      >
+                        {" "}
+                        <td>{val["song_title"]}</td>
+                        <td>{val["composer"]}</td>
+                        <td>{val["tempo"]}</td>
+                        <td>{val["intensity"]}</td>
+                        <td>{val["note_or_cord"]}</td>
+                      </tr>
+                    ) : (
+                      <tr
+                        key={"songs" + ind}
+                        onClick={() => handleClickSong(songsData, ind)}
+                        className={styles.liststyle}
+                      >
+                        <td>{val["song_title"]}</td>
+                        <td>{val["composer"]}</td>
+                        <td>{val["tempo"]}</td>
+                        <td>{val["intensity"]}</td>
+                        <td>{val["note_or_cord"]}</td>
+                       
+                      </tr>
+                    )
                   )
-                )
-              : "No Songs Found"}
+                : "No Songs Found"}
+            </table>
           </div>
         </Paper>
       </div>
