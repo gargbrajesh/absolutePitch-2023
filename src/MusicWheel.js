@@ -10,6 +10,8 @@ import playBtn from "../public/assets/images/playerBtn.jpg";
 import nl2br from "react-nl2br";
 import LabelIcon from "@mui/icons-material/Label";
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import "./style.module.css";
 
 function MusicWheel(props) {
@@ -30,7 +32,7 @@ function MusicWheel(props) {
   const [imageTypeActive, setImageTypeActive] = useState(false);
   const [durationDataIndex, setDurationDataIndex] = useState(0);
   const [totalSongs, setTotalSongs] = useState(0);
-  // const [playSongposition, setPlaySongposition] = useState(0);
+  const [deg, setDeg] = useState(90);
   const [nordIndex111, setNordIndex111] = useState(0);
 
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
@@ -342,16 +344,16 @@ function MusicWheel(props) {
   }
  
   
-  function rotationBtn() {
+  function rotationBtn(id,e) {
     var rote = 100;
-    // alert(rote);
+   
     let content = document.getElementById("TempoBtn");
-    let btn = document.getElementById("Tempo");
+    let btn = document.getElementById(id);
     // content.addEventListener('click',()=>{
-      btn.style.transform = 'rotate(' + rote + 'deg)';
-      rote = rote + 20;
-    // })
+      btn.style.transform = 'rotate(' + deg + 'deg)';
+      setDeg(deg + 45);
      
+    // })  
   }
   function fetchSongsData(imageType = imageTypeIndex) {
     var myHeaders = new Headers();
@@ -467,11 +469,12 @@ function MusicWheel(props) {
                 packageDataIndex > 0 ? "" : ""
               }`}
               onClick={(e) => {
+                rotationBtn('Package',e);
                 btnHandler("Package", e);
               }}
             >
-              <LabelIcon
-                className={`${classes.iconDesign} ${
+              <RefreshIcon id = "Package"
+                className={`${classes.iconDesignN} ${
                   packageDataIndex > 0 ? classes.iconDesignActive : ""
                 }`}
               />
@@ -495,12 +498,13 @@ function MusicWheel(props) {
                 durationDataIndex > 0 ? "" : ""
               }`}
               onClick={(e) => {
+                rotationBtn('duration',e);
                 btnHandler("Duration", e);
               }}
             >
               {" "}
-              <LabelIcon
-                className={`${classes.iconDesign} ${
+              <RefreshIcon id = "duration"
+                className={`${classes.iconDesignN} ${
                   durationDataIndex > 0 ? classes.iconDesignActive : ""
                 }`}
               />
@@ -620,19 +624,20 @@ function MusicWheel(props) {
             <button id = "TempoBtn"
               className={`${classes.tempoBtnNew} ${tempoIndex > 0 ? "" : ""}`}
               onClick={(e) => {
-                rotationBtn();
-                btnHandler("Tempo", e);
-                
+                rotationBtn('Tempo',e);
+                btnHandler("Tempo", e); 
               }}
             >
-              <ArrowRightAltIcon id = "Tempo"
-                className={`${classes.iconDesignN}`}
-              />
+              <RefreshIcon id = "Tempo"
+                className={`${classes.iconDesignN} ${
+                  tempoIndex > 0 ? classes.iconDesignActive : ""
+                }`}
+               />
 
-              {/* <p className={classes.RightBtnTextOne}>
+              <p className={classes.RightBtnTextOne} id ="tempoText">
                 {" "}
                 {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}
-              </p> */}
+              </p>
             </button>
 
             <div className={classes.imageCount}>
@@ -643,11 +648,12 @@ function MusicWheel(props) {
                 intensityIndex > 0 ? "classes.IntensityBtnNewActive" : ""
               }`}
               onClick={(e) => {
+                rotationBtn('intensity',e);
                 btnHandler("Intensity", e);
               }}
             >
-              <LabelIcon
-                className={`${classes.iconDesign} ${
+              <RefreshIcon id = 'intensity'
+                className={`${classes.iconDesignN} ${
                   intensityIndex > 0 ? classes.iconDesignActive : ""
                 }`}
               />
