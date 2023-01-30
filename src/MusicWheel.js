@@ -32,7 +32,7 @@ function MusicWheel(props) {
   const [imageTypeActive, setImageTypeActive] = useState(false);
   const [durationDataIndex, setDurationDataIndex] = useState(0);
   const [totalSongs, setTotalSongs] = useState(0);
-  const [deg, setDeg] = useState(90);
+  const [deg, setDeg] = useState(45);
   const [nordIndex111, setNordIndex111] = useState(0);
 
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
@@ -473,7 +473,7 @@ function MusicWheel(props) {
                 btnHandler("Package", e);
               }}
             >
-              <RefreshIcon id = "Package"
+              <ArrowRightAltIcon id = "Package"
                 className={`${classes.iconDesignN} ${
                   packageDataIndex > 0 ? classes.iconDesignActive : ""
                 }`}
@@ -503,7 +503,7 @@ function MusicWheel(props) {
               }}
             >
               {" "}
-              <RefreshIcon id = "duration"
+              <ArrowRightAltIcon id = "duration"
                 className={`${classes.iconDesignN} ${
                   durationDataIndex > 0 ? classes.iconDesignActive : ""
                 }`}
@@ -628,7 +628,7 @@ function MusicWheel(props) {
                 btnHandler("Tempo", e); 
               }}
             >
-              <RefreshIcon id = "Tempo"
+              <ArrowRightAltIcon id = "Tempo"
                 className={`${classes.iconDesignN} ${
                   tempoIndex > 0 ? classes.iconDesignActive : ""
                 }`}
@@ -652,7 +652,7 @@ function MusicWheel(props) {
                 btnHandler("Intensity", e);
               }}
             >
-              <RefreshIcon id = 'intensity'
+              <ArrowRightAltIcon id = 'intensity'
                 className={`${classes.iconDesignN} ${
                   intensityIndex > 0 ? classes.iconDesignActive : ""
                 }`}
