@@ -305,14 +305,10 @@ function MusicWheel(props) {
         "bk......."
       );
     }
-    if(songsData.length>700){
-      secondsToHms(sum);
-    }
-   else
-   {
-    secondsToHms(allsongTime) + parseInt(songsData[i].duration);
+    
+    secondsToHms(allsongTime);
 
-   }
+   
      
   }
 
