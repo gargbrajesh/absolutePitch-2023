@@ -9,9 +9,9 @@ import keys from "../public/assets/images/keys.jpg";
 import playBtn from "../public/assets/images/playerBtn.jpg";
 import nl2br from "react-nl2br";
 import LabelIcon from "@mui/icons-material/Label";
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import AutorenewIcon from '@mui/icons-material/Autorenew';
-import RefreshIcon from '@mui/icons-material/Refresh';
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
+import RefreshIcon from "@mui/icons-material/Refresh";
 import "./style.module.css";
 
 function MusicWheel(props) {
@@ -32,9 +32,10 @@ function MusicWheel(props) {
   const [imageTypeActive, setImageTypeActive] = useState(false);
   const [durationDataIndex, setDurationDataIndex] = useState(0);
   const [totalSongs, setTotalSongs] = useState(0);
+  const [allsongTime, setAllsongTime] = useState(0);
   const [deg, setDeg] = useState(45);
   const [nordIndex111, setNordIndex111] = useState(0);
-
+   const [allPlaySongsDuration, setAllPlaySongsDuration] = useState(0);
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData = ["", "HI", "LI", "MI"];
   const packageData = ["", "", "P", "F", "F"];
@@ -174,6 +175,7 @@ function MusicWheel(props) {
     "https://mylatinhome.com/absolute/note-sound/Ab.wav",
   ];
   // let lastInd = -1;
+
   function changeHandler(c, ind, event) {
     // if (imageTypeIndex == "") {
     //   alert("Please seect any ImageType Key");
@@ -291,6 +293,44 @@ function MusicWheel(props) {
     }
   }
 
+  function totleTime() {
+    let arr = [];
+    let sum = 9696;
+   
+    for (let i = 0; i <= songsData.length; i++) {
+      arr.push(parseInt(songsData[i].duration));
+      setAllsongTime(parseInt(allsongTime) + parseInt(songsData[i].duration));
+      console.log(
+        parseInt(allsongTime) + parseInt(songsData[i].duration),
+        "bk......."
+      );
+    }
+    if(songsData.length>700){
+      secondsToHms(sum);
+    }
+   else
+   {
+    secondsToHms(allsongTime) + parseInt(songsData[i].duration);
+
+   }
+     
+  }
+
+  function secondsToHms(Seconds) {
+    // alert('second')
+    console.log(Seconds, "Seconds.............");
+    let d = Number(Seconds);
+    console.log(Seconds, "...Secondss");
+    var m = Math.floor((d % 3600) / 60);
+    var s = Math.floor((d % 3600) % 60);
+
+    var mDisplay = m > 0 ? m : "00";
+    var sDisplay = s > 0 ? s : "00";
+    let time = m + ":" + s;
+
+    setAllPlaySongsDuration(time);
+  }
+
   function highlightNord(songsData, ind) {
     const current_song = songsData[ind];
     let selected_nord = current_song["note_or_cord"];
@@ -342,18 +382,17 @@ function MusicWheel(props) {
     window.location.reload(false);
     // setCookie('totileTime');
   }
- 
-  
-  function rotationBtn(id,e) {
+
+  function rotationBtn(id, e) {
     var rote = 100;
-   
+
     let content = document.getElementById("TempoBtn");
     let btn = document.getElementById(id);
     // content.addEventListener('click',()=>{
-      btn.style.transform = 'rotate(' + deg + 'deg)';
-      setDeg(deg + 45);
-     
-    // })  
+    btn.style.transform = "rotate(" + deg + "deg)";
+    setDeg(deg + 45);
+
+    // })
   }
   function fetchSongsData(imageType = imageTypeIndex) {
     var myHeaders = new Headers();
@@ -394,9 +433,7 @@ function MusicWheel(props) {
           console.log(songsData, "songdata.....");
           for (let i = 0; i <= responseJson.data.length; i++) {
             if (!responseJson.data[i].song_name.includes("_P.")) {
-              console.log(responseJson.data[i], "songdata.....");
               handleClickSong(responseJson.data, i);
-
               // setDuration(responseJson.data[i].duration);
               break;
             }
@@ -405,7 +442,13 @@ function MusicWheel(props) {
           alert("error in response");
         }
       });
+
+      totleTime();
+   
   }
+  setTimeout(() => {
+    totleTime();
+  }, 1000);
   return (
     <div className={classes.circleCard}>
       <Grid container spacing={2} className={classes.topButtonContainer}>
@@ -469,11 +512,12 @@ function MusicWheel(props) {
                 packageDataIndex > 0 ? "" : ""
               }`}
               onClick={(e) => {
-                rotationBtn('Package',e);
+                rotationBtn("Package", e);
                 btnHandler("Package", e);
               }}
             >
-              <ArrowRightAltIcon id = "Package"
+              <ArrowRightAltIcon
+                id="Package"
                 className={`${classes.iconDesignN} ${
                   packageDataIndex > 0 ? classes.iconDesignActive : ""
                 }`}
@@ -489,7 +533,7 @@ function MusicWheel(props) {
               {/* <p> {remainingTime}</p> */}
               <p>
                 {" "}
-                {props.allPlaySongsDuration}
+                {allPlaySongsDuration}
                 {/* {getCookie('totileTime') ? getCookie('totileTime'):'0'} */}
               </p>
             </div>
@@ -498,12 +542,13 @@ function MusicWheel(props) {
                 durationDataIndex > 0 ? "" : ""
               }`}
               onClick={(e) => {
-                rotationBtn('duration',e);
+                rotationBtn("duration", e);
                 btnHandler("Duration", e);
               }}
             >
               {" "}
-              <ArrowRightAltIcon id = "duration"
+              <ArrowRightAltIcon
+                id="duration"
                 className={`${classes.iconDesignN} ${
                   durationDataIndex > 0 ? classes.iconDesignActive : ""
                 }`}
@@ -609,7 +654,7 @@ function MusicWheel(props) {
                 btnHandler("Tempo", e);
               }}
             > */}
-              {/* <LabelIcon
+            {/* <LabelIcon
                 className={`${classes.iconDesign} ${
                   tempoIndex > 0 ? classes.iconDesignActive : ""
                 }`}
@@ -621,20 +666,22 @@ function MusicWheel(props) {
               </p>
             </button> */}
 
-            <button id = "TempoBtn"
+            <button
+              id="TempoBtn"
               className={`${classes.tempoBtnNew} ${tempoIndex > 0 ? "" : ""}`}
               onClick={(e) => {
-                rotationBtn('Tempo',e);
-                btnHandler("Tempo", e); 
+                rotationBtn("Tempo", e);
+                btnHandler("Tempo", e);
               }}
             >
-              <ArrowRightAltIcon id = "Tempo"
+              <ArrowRightAltIcon
+                id="Tempo"
                 className={`${classes.iconDesignN} ${
                   tempoIndex > 0 ? classes.iconDesignActive : ""
                 }`}
-               />
+              />
 
-              <p className={classes.RightBtnTextOne} id ="tempoText">
+              <p className={classes.RightBtnTextOne} id="tempoText">
                 {" "}
                 {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}
               </p>
@@ -648,11 +695,12 @@ function MusicWheel(props) {
                 intensityIndex > 0 ? "classes.IntensityBtnNewActive" : ""
               }`}
               onClick={(e) => {
-                rotationBtn('intensity',e);
+                rotationBtn("intensity", e);
                 btnHandler("Intensity", e);
               }}
             >
-              <ArrowRightAltIcon id = 'intensity'
+              <ArrowRightAltIcon
+                id="intensity"
                 className={`${classes.iconDesignN} ${
                   intensityIndex > 0 ? classes.iconDesignActive : ""
                 }`}
@@ -720,9 +768,16 @@ function MusicWheel(props) {
                 <th className={classes.thStyle}>Title</th>
                 <th className={classes.thStyle}>Composer</th>
                 <th className={classes.thStyle}>Tempo</th>
-                <th className={classes.thStyle} style={{cursor:'pointer'}} onClick={(e) => {
-                btnHandler("Intensity", e);fetchSongsData();
-              }}>Intensity</th>
+                <th
+                  className={classes.thStyle}
+                  style={{ cursor: "pointer" }}
+                  onClick={(e) => {
+                    btnHandler("Intensity", e);
+                    fetchSongsData();
+                  }}
+                >
+                  Intensity
+                </th>
                 <th className={classes.thStyle}>Note</th>
               </tr>
               {songsData && songsData.length > 0
@@ -736,7 +791,6 @@ function MusicWheel(props) {
                         id={ind}
                         className={`${styles.listStyleDisable} ${styles.liststyle}`}
                       >
-                        {" "}
                         <td>{val["song_title"]}</td>
                         <td>{val["composer"]}</td>
                         <td>{val["tempo"]}</td>
@@ -754,9 +808,9 @@ function MusicWheel(props) {
                         <td>{val["tempo"]}</td>
                         <td>{val["intensity"]}</td>
                         <td>{val["note_or_cord"]}</td>
-                       
                       </tr>
                     )
+
                   )
                 : "No Songs Found"}
             </table>

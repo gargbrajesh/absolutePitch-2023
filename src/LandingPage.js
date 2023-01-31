@@ -72,6 +72,7 @@ function LandingPage() {
   const [totalSeconds, setTotalSeconds] = useState(0);
   const [allImageCount, setAllImageCount] = useState(0);
   const [imageCount, setImageCount] = useState(0);
+  const [allsongTime, setAllsongTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [durationLast, setDurationLast] = useState(0);
   const [imageCountLast, setImageCountLast] = useState(0);
@@ -89,17 +90,14 @@ function LandingPage() {
     setSongNote(songsData[ind].note_or_cord);
     setSongName(songsData[ind].song_name);
     setImageCount(songsData[ind].no_of_images);
-    // setAllImageCount(
-    //   parseInt(imageCount) + parseInt(songsData[ind].no_of_images)
-    // );
-    // console.log(parseInt(imageCount)+parseInt(songsData[ind].no_of_images), "...images");
     setDuration(songsData[ind].duration);
-    // setTotalSeconds(parseInt(duration) + parseInt(songsData[--ind].duration));
-    // secondsToHms(parseInt(duration) + parseInt(songsData[ind].duration));
     setPlaySongposition(++ind);
+   
+    // secondsToHms(allsongTime)
     // totleTimeAndImage(songsData,ind)
     const getNextSong = document.getElementById("childid").children[ind];
      getNextSong.scrollIntoView();
+    
   }
 
   function totleTimeAndImage(data,index){
@@ -108,7 +106,9 @@ function LandingPage() {
     setDurationLast(data[index].duration);
     setTotalSeconds(parseInt(durationLast) + parseInt(data[index].duration));
     console.log(parseInt(duration) , parseInt(data[index].duration))
-    secondsToHms(parseInt(durationLast) + parseInt(data[index].duration))
+   
+    // secondsToHms(parseInt(durationLast) + parseInt(data[index].duration))
+    
   }
 
   function secondsToHms(Seconds) {
