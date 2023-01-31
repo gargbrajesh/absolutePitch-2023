@@ -306,7 +306,7 @@ function MusicWheel(props) {
       );
     }
     
-    secondsToHms(allsongTime);
+    secondsToHms(sum);
 
    
      
