@@ -7,6 +7,15 @@ import { getCookie, setCookie, deleteCookie } from "cookies-next";
 import staff from "../public/assets/images/staff.jpg";
 import keys from "../public/assets/images/keys.jpg";
 import playBtn from "../public/assets/images/playerBtn.jpg";
+import Duration from "../public/assets/images/Duration.png";
+import Mix from "../public/assets/images/Mix.png";
+import Tempo from "../public/assets/images/Tempo.png";
+import Intencity from "../public/assets/images/Intencity.png";
+import Intencity2 from "../public/assets/images/Intencity2.png";
+import Intencity3 from "../public/assets/images/Intencity3.png";
+import Intencity4 from "../public/assets/images/Intencity4.png";
+
+
 import nl2br from "react-nl2br";
 import LabelIcon from "@mui/icons-material/Label";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
@@ -514,21 +523,22 @@ function MusicWheel(props) {
                 packageDataIndex > 0 ? "" : ""
               }`}
               onClick={(e) => {
-                rotationBtn("Package", e);
+                // rotationBtn("Package", e);
                 btnHandler("Package", e);
               }}
             >
-              <ArrowRightAltIcon
+               <Image src={Mix}  alt='...'/>
+              {/* <ArrowRightAltIcon
                 id="Package"
                 className={`${classes.iconDesignN} ${
                   packageDataIndex > 0 ? classes.iconDesignActive : ""
                 }`}
-              />
-              <p className={`${classes.leftBtnTextOne}`}>
+              /> */}
+              {/* <p className={`${classes.leftBtnTextOne}`}>
                 {packageName[packageDataIndex]
                   ? packageName[packageDataIndex]
                   : "Classic"}
-              </p>
+              </p> */}
             </button>
 
             <div className={classes.imageCount}>
@@ -544,7 +554,6 @@ function MusicWheel(props) {
                       )
                     )
                   : ""}
-               
               </p>
             </div>
             <button
@@ -552,18 +561,20 @@ function MusicWheel(props) {
                 durationDataIndex > 0 ? "" : ""
               }`}
               onClick={(e) => {
-                rotationBtn("duration", e);
+                // rotationBtn("duration", e);
                 btnHandler("Duration", e);
               }}
             >
+              <Image src={Duration}  alt='...'/>
               {" "}
-              <ArrowRightAltIcon
+              {/* <ArrowRightAltIcon
                 id="duration"
                 className={`${classes.iconDesignN} ${
                   durationDataIndex > 0 ? classes.iconDesignActive : ""
                 }`}
-              />
-              <p className={classes.leftBtnTextOne}>
+              /> */}
+
+              {/* <p className={classes.leftBtnTextOne}>
                 {" "}
                 {durationData[durationDataIndex]
                   ? durationData[durationDataIndex] <= 120
@@ -573,7 +584,7 @@ function MusicWheel(props) {
                     ? "Medium"
                     : "Long"
                   : "Duration"}
-              </p>
+              </p> */}
             </button>
           </Grid>
           <Grid item xs={8} md={8} className={classes.wheelContianer}>
@@ -680,11 +691,12 @@ function MusicWheel(props) {
               id="TempoBtn"
               className={`${classes.tempoBtnNew} ${tempoIndex > 0 ? "" : ""}`}
               onClick={(e) => {
-                rotationBtn("Tempo", e);
+                // rotationBtn("Tempo", e);
                 btnHandler("Tempo", e);
               }}
             >
-              <ArrowRightAltIcon
+               <Image src={Tempo}  alt='...'/>
+              {/* <ArrowRightAltIcon
                 id="Tempo"
                 className={`${classes.iconDesignN} ${
                   tempoIndex > 0 ? classes.iconDesignActive : ""
@@ -694,7 +706,7 @@ function MusicWheel(props) {
               <p className={classes.RightBtnTextOne} id="tempoText">
                 {" "}
                 {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}
-              </p>
+              </p> */}
             </button>
 
             <div className={classes.imageCount}>
@@ -705,11 +717,15 @@ function MusicWheel(props) {
                 intensityIndex > 0 ? "classes.IntensityBtnNewActive" : ""
               }`}
               onClick={(e) => {
-                rotationBtn("intensity", e);
+                // rotationBtn("intensity", e);
                 btnHandler("Intensity", e);
               }}
             >
-              <ArrowRightAltIcon
+              {
+                intensityIndex == 0 ? <Image src={Intencity}  alt='...'/> : intensityIndex == 1 ? <Image src={Intencity2}  alt='...'/> :intensityIndex == 2 ? <Image src={Intencity3}  alt='...'/> : intensityIndex == 3 ? <Image src={Intencity4}  alt='...'/> :<Image src={Intencity}  alt='...'/>
+              }
+               {/* <Image src={Intencity}  alt='...'/> */}
+              {/* <ArrowRightAltIcon
                 id="intensity"
                 className={`${classes.iconDesignN} ${
                   intensityIndex > 0 ? classes.iconDesignActive : ""
@@ -720,25 +736,25 @@ function MusicWheel(props) {
                 {intensityData[intensityIndex]
                   ? intensityData[intensityIndex]
                   : "Intensity"}
-              </p>
+              </p> */}
             </button>
           </Grid>
         </Grid>
       </div>
       <div className={classes.songScrolling}>
         <marquee width="90%" direction="left" height="30%">
-          {props.songTitle}
+          {" Title_"+ props.songTitle +" Note_"+ props.songNote +" Composer_" + props.composer +" Duration_" + props.duration +" Image Count_" + props.imageCount}
         </marquee>
       </div>
-      <div>
-        <Grid container spacing={2} className={classes.bottomBoxContainer}>
+      <div style={{marginBottom:'30px'}}>
+        {/* <Grid container spacing={2} className={classes.bottomBoxContainer}>
           <Grid item xs={3} md={3}>
             <p className={`${classes.bottomBox}`}>{props.songNote}</p>
-          </Grid>
+          </Grid> */}
           {/* <Grid item xs={3} md={3}>
           <p className={`${classes.bottomBox}`}>{props.songTitle}</p>
         </Grid> */}
-          <Grid item xs={3} md={3}>
+          {/* <Grid item xs={3} md={3}>
             <p className={`${classes.bottomBox}`}>{props.composer}</p>
           </Grid>
           <Grid item xs={3} md={3}>
@@ -747,7 +763,7 @@ function MusicWheel(props) {
           <Grid item xs={3} md={3}>
             <p className={`${classes.bottomBox}`}>{props.imageCount}</p>
           </Grid>
-        </Grid>
+        </Grid> */}
       </div>
       <div className={styles.songsWrapper}>
         <Paper elevation={3} className={classes.paperStyle}>
