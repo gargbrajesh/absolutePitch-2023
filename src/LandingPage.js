@@ -79,7 +79,7 @@ function LandingPage() {
   const [allPlaySongsDuration, setAllPlaySongsDuration] = useState(0);
   const [playSongposition, setPlaySongposition] = useState(0);
   const [totalSongs, setTotalSongs] = useState(0);
-
+  const [remainingTime, setRemainingTime] = useState(0);
   function handleSong(songsData, ind) {
     setData(songsData);
     setIndex(ind);
@@ -111,19 +111,39 @@ function LandingPage() {
     
   }
 
-  function secondsToHms(Seconds) {
-    console.log(Seconds,'Seconds.............');
-    let d = Number(Seconds);
-    console.log(Seconds, "...Secondss");
-    var m = Math.floor((d % 3600) / 60);
-    var s = Math.floor((d % 3600) % 60);
+  // function secondsToHms(Seconds) {
+  //   console.log(Seconds,'Seconds.............');
+  //   let d = Number(Seconds);
+  //   console.log(Seconds, "...Secondss");
+  //   var m = Math.floor((d % 3600) / 60);
+  //   var s = Math.floor((d % 3600) % 60);
 
-    var mDisplay = m > 0 ? m : "00";
-    var sDisplay = s > 0 ? s : "00";
-    let time = m + ":" + s;
+  //   var mDisplay = m > 0 ? m : "00";
+  //   var sDisplay = s > 0 ? s : "00";
+  //   let time = m + ":" + s;
 
-    setAllPlaySongsDuration(time);
-  }
+  //   setAllPlaySongsDuration(time);
+  //   countdown(mDisplay, sDisplay);
+  // }
+
+  // function countdown(minutes, seconds) {
+  //   function tick() {
+  //     setRemainingTime(
+  //       minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds)
+  //     );
+  //     seconds--;
+  //     if (seconds >= 0) {
+  //       let timeoutHandle = setTimeout(tick, 1000);
+  //     } else {
+  //       if (minutes >= 1) {
+  //         setTimeout(function() {
+  //           countdown(minutes - 1, 59);
+  //         }, 1000);
+  //       }
+  //     }
+  //   }
+  //   tick();
+  // }
 
   const classes = useStyles();
   return (

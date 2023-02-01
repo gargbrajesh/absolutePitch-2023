@@ -16,7 +16,7 @@ import "./style.module.css";
 
 function MusicWheel(props) {
   const classes = useStyles();
-
+var totalduraion = 0;
   const [nord, setNord] = useState({ c1: [], c2: [], c3: [] });
   const [highlightedNord, setHighlightedNord] = useState({
     c1: [],
@@ -35,6 +35,7 @@ function MusicWheel(props) {
   const [allsongTime, setAllsongTime] = useState(0);
   const [deg, setDeg] = useState(45);
   const [nordIndex111, setNordIndex111] = useState(0);
+  const [remainingTime, setRemainingTime] = useState(0);
    const [allPlaySongsDuration, setAllPlaySongsDuration] = useState(0);
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData = ["", "HI", "LI", "MI"];
@@ -325,6 +326,26 @@ function MusicWheel(props) {
     let time = m + ":" + s;
 
     setAllPlaySongsDuration(time);
+    countdown(mDisplay, sDisplay);
+  }
+
+  function countdown(minutes, seconds) {
+    function tick() {
+      setRemainingTime(
+        minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds)
+      );
+      seconds--;
+      if (seconds >= 0) {
+        let timeoutHandle = setTimeout(tick, 1000);
+      } else {
+        if (minutes >= 1) {
+          setTimeout(function() {
+            countdown(minutes - 1, 59);
+          }, 1000);
+        }
+      }
+    }
+    tick();
   }
 
   function highlightNord(songsData, ind) {
@@ -438,12 +459,10 @@ function MusicWheel(props) {
           alert("error in response");
         }
       });
-
-      totleTime();
    
   }
   setTimeout(() => {
-    totleTime();
+    secondsToHms(totalduraion)
   }, 1000);
   return (
     <div className={classes.circleCard}>
@@ -529,8 +548,10 @@ function MusicWheel(props) {
               {/* <p> {remainingTime}</p> */}
               <p>
                 {" "}
-                {allPlaySongsDuration}
-                {/* {getCookie('totileTime') ? getCookie('totileTime'):'0'} */}
+                {/* {allPlaySongsDuration} */}
+                {songsData && songsData.length > 0
+                ? songsData.map((val, ind) =>(console.log(totalduraion = parseInt(totalduraion) + parseInt(val["duration"])))) : ""}
+                {remainingTime}
               </p>
             </div>
             <button
