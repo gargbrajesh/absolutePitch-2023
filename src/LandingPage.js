@@ -3,7 +3,6 @@ import { Grid } from "@material-ui/core";
 import MusicWheel from "./MusicWheel";
 import VideoPlayer from "./VideoPlayer";
 import { makeStyles } from "@material-ui/core";
-import { forwardRef, useRef, useImperativeHandle } from "react";
 const useStyles = makeStyles({
   root: {
     position: "relative",
@@ -59,8 +58,6 @@ const useStyles = makeStyles({
   },
 });
 function LandingPage() {
-  const childCompRef = useRef();
-  
   const [data, setData] = useState();
   const [index, setIndex] = useState();
   const [songTitle, setSongTitle] = useState("Title");
@@ -72,14 +69,10 @@ function LandingPage() {
   const [totalSeconds, setTotalSeconds] = useState(0);
   const [allImageCount, setAllImageCount] = useState(0);
   const [imageCount, setImageCount] = useState(0);
-  const [allsongTime, setAllsongTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [durationLast, setDurationLast] = useState(0);
   const [imageCountLast, setImageCountLast] = useState(0);
-  const [allPlaySongsDuration, setAllPlaySongsDuration] = useState(0);
   const [playSongposition, setPlaySongposition] = useState(0);
-  const [totalSongs, setTotalSongs] = useState(0);
-  const [remainingTime, setRemainingTime] = useState(0);
   function handleSong(songsData, ind) {
     setData(songsData);
     setIndex(ind);
@@ -92,9 +85,6 @@ function LandingPage() {
     setImageCount(songsData[ind].no_of_images);
     setDuration(songsData[ind].duration);
     setPlaySongposition(++ind);
-   
-    // secondsToHms(allsongTime)
-    // totleTimeAndImage(songsData,ind)
     const getNextSong = document.getElementById("childid").children[ind];
      getNextSong.scrollIntoView();
     
@@ -105,45 +95,8 @@ function LandingPage() {
     setAllImageCount(parseInt(imageCountLast) + parseInt(data[index].no_of_images));
     setDurationLast(data[index].duration);
     setTotalSeconds(parseInt(durationLast) + parseInt(data[index].duration));
-    console.log(parseInt(duration) , parseInt(data[index].duration))
-   
-    // secondsToHms(parseInt(durationLast) + parseInt(data[index].duration))
     
   }
-
-  // function secondsToHms(Seconds) {
-  //   console.log(Seconds,'Seconds.............');
-  //   let d = Number(Seconds);
-  //   console.log(Seconds, "...Secondss");
-  //   var m = Math.floor((d % 3600) / 60);
-  //   var s = Math.floor((d % 3600) % 60);
-
-  //   var mDisplay = m > 0 ? m : "00";
-  //   var sDisplay = s > 0 ? s : "00";
-  //   let time = m + ":" + s;
-
-  //   setAllPlaySongsDuration(time);
-  //   countdown(mDisplay, sDisplay);
-  // }
-
-  // function countdown(minutes, seconds) {
-  //   function tick() {
-  //     setRemainingTime(
-  //       minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds)
-  //     );
-  //     seconds--;
-  //     if (seconds >= 0) {
-  //       let timeoutHandle = setTimeout(tick, 1000);
-  //     } else {
-  //       if (minutes >= 1) {
-  //         setTimeout(function() {
-  //           countdown(minutes - 1, 59);
-  //         }, 1000);
-  //       }
-  //     }
-  //   }
-  //   tick();
-  // }
 
   const classes = useStyles();
   return (
@@ -161,7 +114,6 @@ function LandingPage() {
           allImageCount={allImageCount}
           duration={duration}
           totalSeconds={totalSeconds}
-          allPlaySongsDuration={allPlaySongsDuration}
           imageCount={imageCount}
           playSongposition={playSongposition}
         />

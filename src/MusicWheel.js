@@ -16,7 +16,7 @@ import "./style.module.css";
 
 function MusicWheel(props) {
   const classes = useStyles();
-var totalduraion = 0;
+  var totalduraion = 0;
   const [nord, setNord] = useState({ c1: [], c2: [], c3: [] });
   const [highlightedNord, setHighlightedNord] = useState({
     c1: [],
@@ -36,7 +36,9 @@ var totalduraion = 0;
   const [deg, setDeg] = useState(45);
   const [nordIndex111, setNordIndex111] = useState(0);
   const [remainingTime, setRemainingTime] = useState(0);
-   const [allPlaySongsDuration, setAllPlaySongsDuration] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [allPlaySongsDuration, setAllPlaySongsDuration] = useState(0);
   const tempoData = ["", "Calm", "Lively", "Mellow", "Moderate"];
   const intensityData = ["", "HI", "LI", "MI"];
   const packageData = ["", "", "P", "F", "F"];
@@ -294,28 +296,7 @@ var totalduraion = 0;
     }
   }
 
-  function totleTime() {
-    let arr = [];
-    let sum = 9696;
-   
-    for (let i = 0; i <= songsData.length; i++) {
-      arr.push(parseInt(songsData[i].duration));
-      setAllsongTime(parseInt(allsongTime) + parseInt(songsData[i].duration));
-      console.log(
-        parseInt(allsongTime) + parseInt(songsData[i].duration),
-        "bk......."
-      );
-    }
-    
-    secondsToHms(sum);
-
-   
-     
-  }
-
   function secondsToHms(Seconds) {
-    // alert('second')
-    console.log(Seconds, "Seconds.............");
     let d = Number(Seconds);
     console.log(Seconds, "...Secondss");
     var m = Math.floor((d % 3600) / 60);
@@ -330,17 +311,24 @@ var totalduraion = 0;
   }
 
   function countdown(minutes, seconds) {
+    var mins = minutes;
+
     function tick() {
-      setRemainingTime(
-        minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds)
-      );
+      var counter = document.getElementById("duration");
+      var current_minutes = mins;
       seconds--;
-      if (seconds >= 0) {
+      counter.innerHTML =
+        current_minutes.toString() +
+        ":" +
+        (seconds < 10 ? "0" : "") +
+        String(seconds);
+
+      if (seconds > 0) {
         let timeoutHandle = setTimeout(tick, 1000);
       } else {
-        if (minutes >= 1) {
+        if (mins > 1) {
           setTimeout(function() {
-            countdown(minutes - 1, 59);
+            countdown(mins - 1, 59);
           }, 1000);
         }
       }
@@ -459,10 +447,9 @@ var totalduraion = 0;
           alert("error in response");
         }
       });
-   
   }
   setTimeout(() => {
-    secondsToHms(totalduraion)
+    secondsToHms(totalduraion);
   }, 1000);
   return (
     <div className={classes.circleCard}>
@@ -545,13 +532,19 @@ var totalduraion = 0;
             </button>
 
             <div className={classes.imageCount}>
-              {/* <p> {remainingTime}</p> */}
-              <p>
+            
+              <p id="duration">
                 {" "}
-                {/* {allPlaySongsDuration} */}
+               
                 {songsData && songsData.length > 0
-                ? songsData.map((val, ind) =>(console.log(totalduraion = parseInt(totalduraion) + parseInt(val["duration"])))) : ""}
-                {remainingTime}
+                  ? songsData.map((val, ind) =>
+                      console.log(
+                        (totalduraion =
+                          parseInt(totalduraion) + parseInt(val["duration"]))
+                      )
+                    )
+                  : ""}
+               
               </p>
             </div>
             <button
@@ -827,7 +820,6 @@ var totalduraion = 0;
                         <td>{val["note_or_cord"]}</td>
                       </tr>
                     )
-
                   )
                 : "No Songs Found"}
             </table>
