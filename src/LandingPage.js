@@ -73,11 +73,12 @@ function LandingPage() {
   const [durationLast, setDurationLast] = useState(0);
   const [imageCountLast, setImageCountLast] = useState(0);
   const [playSongposition, setPlaySongposition] = useState(0);
+
   function handleSong(songsData, ind) {
+
     setData(songsData);
     setIndex(ind);
-    
-    //end here
+
     setSongTitle(songsData[ind].song_title);
     setComposer(songsData[ind].composer);
     setSongNote(songsData[ind].note_or_cord);
@@ -87,7 +88,9 @@ function LandingPage() {
     setPlaySongposition(++ind);
     const getNextSong = document.getElementById("childid").children[ind];
      getNextSong.scrollIntoView();
-    
+  
+     
+     
   }
 
   function totleTimeAndImage(data,index){

@@ -14,7 +14,9 @@ import Intencity from "../public/assets/images/Intencity.png";
 import Intencity2 from "../public/assets/images/Intencity2.png";
 import Intencity3 from "../public/assets/images/Intencity3.png";
 import Intencity4 from "../public/assets/images/Intencity4.png";
-
+import Duration1 from "../public/assets/images/GroupDuration1.png";
+import Duration2 from "../public/assets/images/GroupDuration2.png";
+import Duration3 from "../public/assets/images/GroupDuration3.png";
 
 import nl2br from "react-nl2br";
 import LabelIcon from "@mui/icons-material/Label";
@@ -321,7 +323,7 @@ function MusicWheel(props) {
 
   function countdown(minutes, seconds) {
     var mins = minutes;
-
+     seconds++;
     function tick() {
       var counter = document.getElementById("duration");
       var current_minutes = mins;
@@ -389,12 +391,11 @@ function MusicWheel(props) {
     return final_result;
   }
 
-  var i = 0;
 
   function refreshPage() {
-    // alert("Your volume level will be set to maximum if you refresh. You will have to reset the volume level. ");
+   
     window.location.reload(false);
-    // setCookie('totileTime');
+   
   }
 
   function rotationBtn(id, e) {
@@ -565,7 +566,14 @@ function MusicWheel(props) {
                 btnHandler("Duration", e);
               }}
             >
-              <Image src={Duration}  alt='...'/>
+             {durationData[durationDataIndex]
+                  ? durationData[durationDataIndex] <= 120
+                    ? <Image src={Duration1}  alt='...'/>
+                    : durationData[durationDataIndex] <= 240 &&
+                      durationData[durationDataIndex] >= 121
+                    ? <Image src={Duration2}  alt='...'/>
+                    : <Image src={Duration3}  alt='...'/>
+                  : <Image src={Duration1}  alt='...'/>}
               {" "}
               {/* <ArrowRightAltIcon
                 id="duration"
@@ -578,12 +586,12 @@ function MusicWheel(props) {
                 {" "}
                 {durationData[durationDataIndex]
                   ? durationData[durationDataIndex] <= 120
-                    ? "Short"
+                    ? <Image src={Duration1}  alt='...'/>
                     : durationData[durationDataIndex] <= 240 &&
                       durationData[durationDataIndex] >= 121
-                    ? "Medium"
-                    : "Long"
-                  : "Duration"}
+                    ? <Image src={Duration2}  alt='...'/>
+                    : <Image src={Duration3}  alt='...'/>
+                  : <Image src={Duration1}  alt='...'/>}
               </p> */}
             </button>
           </Grid>
@@ -788,8 +796,8 @@ function MusicWheel(props) {
             <p>Number Of Cue</p>
           </div>
           <hr />
-          <div id={props.id}>
-            <table className={classes.tableStyle}>
+          <div>
+            <table className={classes.tableStyle} id={props.id}>
               <tr className={classes.trStyle}>
                 <th className={classes.thStyle}>Title</th>
                 <th className={classes.thStyle}>Composer</th>
