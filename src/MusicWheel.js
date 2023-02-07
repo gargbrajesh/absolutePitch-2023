@@ -398,6 +398,16 @@ function MusicWheel(props) {
    
   }
 
+  function ResetCounter() {
+   secondsToHms(totalduraion);
+   props.setAllImageCount(0);
+   
+   var countDown = document.getElementById("duration");
+    
+   countDown.innerHTML ="00:00"
+  
+        }
+
   function rotationBtn(id, e) {
     var rote = 100;
 
@@ -516,7 +526,7 @@ function MusicWheel(props) {
           </button>
         </Grid>
       </Grid>
-      <div style={{ marginTop: "2%", marginBottom: "5%" }}>
+      <div style={{ marginTop: "2%", marginBottom: "5%"}}>
         <Grid container spacing={1}>
           <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
             <button
@@ -528,7 +538,7 @@ function MusicWheel(props) {
                 btnHandler("Package", e);
               }}
             >
-               <Image src={Mix}  alt='...'/>
+               <Image src={Mix}  alt='...' style={{width:'200px',height:'200px'}}/>
               {/* <ArrowRightAltIcon
                 id="Package"
                 className={`${classes.iconDesignN} ${
@@ -674,8 +684,11 @@ function MusicWheel(props) {
                   </div>
                 </ul>
               </ul>
+              
             </div>
+            
           </Grid>
+          
           <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
             {/* <button
               className={`${classes.tempoBtnNew} ${tempoIndex > 0 ? "" : ""}`}
@@ -748,7 +761,9 @@ function MusicWheel(props) {
             </button>
           </Grid>
         </Grid>
+        <div className={classes.resetBtn}><button style={{padding:'5px',width:'90px'}} onClick={()=>{ResetCounter()}}>Reset</button> </div>
       </div>
+
       <div className={classes.songScrolling}>
         <marquee width="90%" direction="left" height="30%">
           {" Title_"+ props.songTitle +" Note_"+ props.songNote +" Composer_" + props.composer +" Duration_" + props.duration +" Image Count_" + props.imageCount}

@@ -429,8 +429,8 @@ const useStyles = makeStyles({
   },
   tempoBtnTop: {
     position: "absolute",
-    height: "80px",
-    width: "80px",
+    height: "120px",
+    width: "120px",
     border: "2px solid #0058ab !important",
     background: "#333333",
     display: "flex",
@@ -458,8 +458,8 @@ const useStyles = makeStyles({
     right: "16.31%",
     top: "1.25%",
     bottom: "-72.49%",
-    height: "80px",
-    width: "80px",
+    height: "120px",
+    width: "120px",
     border: 'none',
     background: "#333333",
     display: "flex",
@@ -481,8 +481,8 @@ const useStyles = makeStyles({
     right: "16.31%",
     top: "85%",
     bottom: "-72.49%",
-    height: "80px",
-    width: "80px",
+    height: "120px",
+    width: "120px",
     // border: "2px solid #0058ab !important",
     background: "#333333",
     display: "flex",
@@ -509,8 +509,8 @@ const useStyles = makeStyles({
     right: "16%",
     top: "84%",
     bottom: "-72.49%",
-    height: "80px",
-    width: "80px",
+    height: "120px",
+    width: "120px",
     display: "flex",
     alignItems: "center",
     textAlign: "center",
@@ -519,7 +519,7 @@ const useStyles = makeStyles({
     color: "blue",
     cursor: "pointer",
     borderRadius: "50%",
-    "@media (min-width: 1280px) and (max-width:1680px)": {
+    "@media screen and (min-width: 1280px) and (max-width:1680px)": {
       top: "82%",
     },
     // background: "radial-gradient(#FFF 40%, #000)",
@@ -528,6 +528,7 @@ const useStyles = makeStyles({
     "&:hover": {
       // background: "radial-gradient(blue 40%, #000)",
     },
+    
   },
   IntensityBtnNewActive: {
     position: "absolute",
@@ -543,6 +544,13 @@ const useStyles = makeStyles({
     // background: "radial-gradient(#FFF 40%, #000)",
     // transform: "rotate(208.33deg)",
     border: "none",
+  },
+  resetBtn:{
+    marginTop: "-5%"
+    ,alignItems:'center',
+    textAlign:'center',
+    display:'flex' ,
+    justifyContent: 'center'
   },
   packageBtnActive: {
     position: "absolute",
@@ -679,6 +687,14 @@ const useStyles = makeStyles({
     "&:active": {
       color: "blue",
     },
+  },
+  homeImage:{
+    backgroundImage: "url('/background.png')",
+    backgroundSize: "cover",
+    width:'104%',
+    height:'600px',
+    marginTop:'-24px',
+    marginLeft:'-25px',
   },
   btnPiano: {
     cursor: "pointer",

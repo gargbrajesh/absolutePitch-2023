@@ -93,7 +93,9 @@ function LandingPage() {
      
   }
 
-  function totleTimeAndImage(data,index){
+  function totleTimeAndImage(data,index)
+  {
+
     setImageCountLast(data[index].no_of_images);
     setAllImageCount(parseInt(imageCountLast) + parseInt(data[index].no_of_images));
     setDurationLast(data[index].duration);
@@ -119,6 +121,7 @@ function LandingPage() {
           totalSeconds={totalSeconds}
           imageCount={imageCount}
           playSongposition={playSongposition}
+          setAllImageCount={setAllImageCount}
         />
       </Grid>
       <Grid item xs={12} md={6}>
