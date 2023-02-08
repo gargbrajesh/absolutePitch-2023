@@ -17,7 +17,7 @@ import Intencity4 from "../public/assets/images/Intencity4.png";
 import Duration1 from "../public/assets/images/GroupDuration1.png";
 import Duration2 from "../public/assets/images/GroupDuration2.png";
 import Duration3 from "../public/assets/images/GroupDuration3.png";
-
+import DataTable from "react-data-table-component";
 import nl2br from "react-nl2br";
 import LabelIcon from "@mui/icons-material/Label";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
@@ -189,6 +189,17 @@ function MusicWheel(props) {
     "https://mylatinhome.com/absolute/note-sound/Ab.wav",
   ];
   // let lastInd = -1;
+  const columns = [
+    {
+      name: "Title",
+      selector: (row) => row.song_title,
+      sortable: true,
+     
+    },
+    { name: "Composer", selector: (row) => row.composer, sortable: true, },
+    { name: "Tempo", selector: (row) => row.tempo , sortable: true,},
+    { name: "Intensity", selector: (row) => row.intensity, sortable: true, },
+  ];
 
   function changeHandler(c, ind, event) {
     // if (imageTypeIndex == "") {
@@ -323,7 +334,7 @@ function MusicWheel(props) {
 
   function countdown(minutes, seconds) {
     var mins = minutes;
-     seconds++;
+    seconds++;
     function tick() {
       var counter = document.getElementById("duration");
       var current_minutes = mins;
@@ -391,22 +402,18 @@ function MusicWheel(props) {
     return final_result;
   }
 
-
   function refreshPage() {
-   
     window.location.reload(false);
-   
   }
 
   function ResetCounter() {
-   secondsToHms(totalduraion);
-   props.setAllImageCount(0);
-   
-   var countDown = document.getElementById("duration");
-    
-   countDown.innerHTML ="00:00"
-  
-        }
+    secondsToHms(totalduraion);
+    props.setAllImageCount(0);
+
+    var countDown = document.getElementById("duration");
+
+    countDown.innerHTML = "00:00";
+  }
 
   function rotationBtn(id, e) {
     var rote = 100;
@@ -471,6 +478,7 @@ function MusicWheel(props) {
   setTimeout(() => {
     secondsToHms(totalduraion);
   }, 1000);
+
   return (
     <div className={classes.circleCard}>
       <Grid container spacing={2} className={classes.topButtonContainer}>
@@ -526,7 +534,7 @@ function MusicWheel(props) {
           </button>
         </Grid>
       </Grid>
-      <div style={{ marginTop: "2%", marginBottom: "5%"}}>
+      <div style={{ marginTop: "2%", marginBottom: "5%" }}>
         <Grid container spacing={1}>
           <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
             <button
@@ -534,75 +542,36 @@ function MusicWheel(props) {
                 packageDataIndex > 0 ? "" : ""
               }`}
               onClick={(e) => {
-                // rotationBtn("Package", e);
                 btnHandler("Package", e);
               }}
             >
-               <Image src={Mix}  alt='...' style={{width:'200px',height:'200px'}}/>
-              {/* <ArrowRightAltIcon
-                id="Package"
-                className={`${classes.iconDesignN} ${
-                  packageDataIndex > 0 ? classes.iconDesignActive : ""
-                }`}
-              /> */}
-              {/* <p className={`${classes.leftBtnTextOne}`}>
-                {packageName[packageDataIndex]
-                  ? packageName[packageDataIndex]
-                  : "Classic"}
-              </p> */}
+              <Image
+                src={Mix}
+                alt="..."
+                style={{ width: "200px", height: "200px" }}
+              />
             </button>
 
-            <div className={classes.imageCount}>
-            
-              <p id="duration">
-                {" "}
-               
-                {songsData && songsData.length > 0
-                  ? songsData.map((val, ind) =>
-                      console.log(
-                        (totalduraion =
-                          parseInt(totalduraion) + parseInt(val["duration"]))
-                      )
-                    )
-                  : ""}
-              </p>
-            </div>
             <button
               className={`${classes.tempoNewBtnBottom} ${
                 durationDataIndex > 0 ? "" : ""
               }`}
               onClick={(e) => {
-                // rotationBtn("duration", e);
                 btnHandler("Duration", e);
               }}
             >
-             {durationData[durationDataIndex]
-                  ? durationData[durationDataIndex] <= 120
-                    ? <Image src={Duration1}  alt='...'/>
-                    : durationData[durationDataIndex] <= 240 &&
-                      durationData[durationDataIndex] >= 121
-                    ? <Image src={Duration2}  alt='...'/>
-                    : <Image src={Duration3}  alt='...'/>
-                  : <Image src={Duration1}  alt='...'/>}
-              {" "}
-              {/* <ArrowRightAltIcon
-                id="duration"
-                className={`${classes.iconDesignN} ${
-                  durationDataIndex > 0 ? classes.iconDesignActive : ""
-                }`}
-              /> */}
-
-              {/* <p className={classes.leftBtnTextOne}>
-                {" "}
-                {durationData[durationDataIndex]
-                  ? durationData[durationDataIndex] <= 120
-                    ? <Image src={Duration1}  alt='...'/>
-                    : durationData[durationDataIndex] <= 240 &&
-                      durationData[durationDataIndex] >= 121
-                    ? <Image src={Duration2}  alt='...'/>
-                    : <Image src={Duration3}  alt='...'/>
-                  : <Image src={Duration1}  alt='...'/>}
-              </p> */}
+              {durationData[durationDataIndex] ? (
+                durationData[durationDataIndex] <= 120 ? (
+                  <Image src={Duration1} alt="..." />
+                ) : durationData[durationDataIndex] <= 240 &&
+                  durationData[durationDataIndex] >= 121 ? (
+                  <Image src={Duration2} alt="..." />
+                ) : (
+                  <Image src={Duration3} alt="..." />
+                )
+              ) : (
+                <Image src={Duration1} alt="..." />
+              )}{" "}
             </button>
           </Grid>
           <Grid item xs={8} md={8} className={classes.wheelContianer}>
@@ -684,100 +653,130 @@ function MusicWheel(props) {
                   </div>
                 </ul>
               </ul>
-              
             </div>
-            
           </Grid>
-          
+
           <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
-            {/* <button
-              className={`${classes.tempoBtnNew} ${tempoIndex > 0 ? "" : ""}`}
-              onClick={(e) => {
-                btnHandler("Tempo", e);
-              }}
-            > */}
-            {/* <LabelIcon
-                className={`${classes.iconDesign} ${
-                  tempoIndex > 0 ? classes.iconDesignActive : ""
-                }`}
-              />
-
-              <p className={classes.RightBtnTextOne}>
-                {" "}
-                {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}
-              </p>
-            </button> */}
-
             <button
               id="TempoBtn"
               className={`${classes.tempoBtnNew} ${tempoIndex > 0 ? "" : ""}`}
               onClick={(e) => {
-                // rotationBtn("Tempo", e);
                 btnHandler("Tempo", e);
               }}
             >
-               <Image src={Tempo}  alt='...'/>
-              {/* <ArrowRightAltIcon
-                id="Tempo"
-                className={`${classes.iconDesignN} ${
-                  tempoIndex > 0 ? classes.iconDesignActive : ""
-                }`}
-              />
-
-              <p className={classes.RightBtnTextOne} id="tempoText">
-                {" "}
-                {tempoData[tempoIndex] ? tempoData[tempoIndex] : "Tempo"}
-              </p> */}
+              <Image src={Tempo} alt="..." />
             </button>
 
-            <div className={classes.imageCount}>
-              <p> {props.allImageCount}</p>
-            </div>
             <button
               className={`${classes.IntensityBtnNew} ${
                 intensityIndex > 0 ? "classes.IntensityBtnNewActive" : ""
               }`}
               onClick={(e) => {
-                // rotationBtn("intensity", e);
                 btnHandler("Intensity", e);
               }}
             >
-              {
-                intensityIndex == 0 ? <Image src={Intencity}  alt='...'/> : intensityIndex == 1 ? <Image src={Intencity2}  alt='...'/> :intensityIndex == 2 ? <Image src={Intencity3}  alt='...'/> : intensityIndex == 3 ? <Image src={Intencity4}  alt='...'/> :<Image src={Intencity}  alt='...'/>
-              }
-               {/* <Image src={Intencity}  alt='...'/> */}
-              {/* <ArrowRightAltIcon
-                id="intensity"
-                className={`${classes.iconDesignN} ${
-                  intensityIndex > 0 ? classes.iconDesignActive : ""
-                }`}
-              />
-              <p className={classes.RightBtnTextOne}>
-                {" "}
-                {intensityData[intensityIndex]
-                  ? intensityData[intensityIndex]
-                  : "Intensity"}
-              </p> */}
+              {intensityIndex == 0 ? (
+                <Image src={Intencity} alt="..." />
+              ) : intensityIndex == 1 ? (
+                <Image src={Intencity2} alt="..." />
+              ) : intensityIndex == 2 ? (
+                <Image src={Intencity3} alt="..." />
+              ) : intensityIndex == 3 ? (
+                <Image src={Intencity4} alt="..." />
+              ) : (
+                <Image src={Intencity} alt="..." />
+              )}
             </button>
           </Grid>
         </Grid>
-        <div className={classes.resetBtn}><button style={{padding:'5px',width:'90px'}} onClick={()=>{ResetCounter()}}>Reset</button> </div>
+        <div className={classes.resetBtn}>
+          <Grid container spacing={1}>
+            <Grid item xs={3} md={4} style={{ padding: "2px" }}>
+              {/* <div className={classes.imageCount}> */}
+
+              <p
+                id="duration"
+                style={{
+                  background: "#fff",
+                  padding: "2px",
+                  borderRadius: "5px",
+                }}
+              >
+                {" "}
+                {songsData && songsData.length > 0
+                  ? songsData.map((val, ind) =>
+                      console.log(
+                        (totalduraion =
+                          parseInt(totalduraion) + parseInt(val["duration"]))
+                      )
+                    )
+                  : ""}
+              </p>
+              {/* </div> */}
+            </Grid>
+            <Grid item xs={3} md={4} style={{ padding: "2px" }}>
+              <p
+                style={{
+                  background: "#fff",
+                  padding: "2px",
+                  borderRadius: "5px",
+                }}
+              >
+                {" "}
+                <button
+                  style={{
+                    background: "#fff",
+                    width: "100%",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    ResetCounter();
+                  }}
+                >
+                  Reset
+                </button>{" "}
+              </p>
+            </Grid>
+            <Grid item xs={3} md={4} style={{ padding: "2px" }}>
+              <p
+                style={{
+                  background: "#fff",
+                  padding: "2px",
+                  borderRadius: "5px",
+                }}
+              >
+                {" "}
+                {props.allImageCount}
+              </p>
+            </Grid>
+          </Grid>
+        </div>
       </div>
 
       <div className={classes.songScrolling}>
         <marquee width="90%" direction="left" height="30%">
-          {" Title_"+ props.songTitle +" Note_"+ props.songNote +" Composer_" + props.composer +" Duration_" + props.duration +" Image Count_" + props.imageCount}
+          {" Title_" +
+            props.songTitle +
+            " Note_" +
+            props.songNote +
+            " Composer_" +
+            props.composer +
+            " Duration_" +
+            props.duration +
+            " Image Count_" +
+            props.imageCount}
         </marquee>
       </div>
-      <div style={{marginBottom:'30px'}}>
+      <div style={{ marginBottom: "30px" }}>
         {/* <Grid container spacing={2} className={classes.bottomBoxContainer}>
           <Grid item xs={3} md={3}>
             <p className={`${classes.bottomBox}`}>{props.songNote}</p>
           </Grid> */}
-          {/* <Grid item xs={3} md={3}>
+        {/* <Grid item xs={3} md={3}>
           <p className={`${classes.bottomBox}`}>{props.songTitle}</p>
         </Grid> */}
-          {/* <Grid item xs={3} md={3}>
+        {/* <Grid item xs={3} md={3}>
             <p className={`${classes.bottomBox}`}>{props.composer}</p>
           </Grid>
           <Grid item xs={3} md={3}>
@@ -811,8 +810,8 @@ function MusicWheel(props) {
             <p>Number Of Cue</p>
           </div>
           <hr />
-          <div>
-            <table className={classes.tableStyle} id={props.id}>
+          {/* <div> */}
+          {/* <table className={classes.tableStyle} id={props.id}>
               <tr className={classes.trStyle}>
                 <th className={classes.thStyle}>Title</th>
                 <th className={classes.thStyle}>Composer</th>
@@ -861,8 +860,19 @@ function MusicWheel(props) {
                     )
                   )
                 : "No Songs Found"}
-            </table>
-          </div>
+            </table> */}
+
+          {songsData && songsData.length > 0 ? (
+            <DataTable id={props.id}
+            columns={columns} 
+            data={songsData} 
+            highlightOnHover
+            fixedHeader
+            pagination />
+          ) : (
+            ""
+          )}
+          {/* </div> */}
         </Paper>
       </div>
     </div>

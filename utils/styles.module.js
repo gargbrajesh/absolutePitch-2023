@@ -545,12 +545,14 @@ const useStyles = makeStyles({
     // transform: "rotate(208.33deg)",
     border: "none",
   },
-  resetBtn:{
+  resetCounterBtn:{
     marginTop: "-5%"
     ,alignItems:'center',
     textAlign:'center',
     display:'flex' ,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    border:'2px solid red'
+
   },
   packageBtnActive: {
     position: "absolute",
@@ -635,9 +637,9 @@ const useStyles = makeStyles({
     color: "#000",
     alignItems: "center",
     textAlign: "center",
-    marginTop: "15px",
+    marginTop: "-20px",
     "@media (min-width: 1280px) and (max-width:1680px)": {
-      marginTop: "5% !important",
+      // marginTop: "5% !important",
       fontSize: "14px",
     },
   },
@@ -708,7 +710,8 @@ const useStyles = makeStyles({
     textAlign: "center",
     display: "flex",
     justifyContent: "center",
-    cursor: "pointer",
+    width:'54%',
+    marginLeft:'23%',
   },
   premiumList: { pointerEvents: "none", opacity: "0.6", background: "gray" },
 

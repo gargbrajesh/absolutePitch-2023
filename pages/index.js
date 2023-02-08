@@ -6,6 +6,7 @@ import LandingPage from "../src/LandingPage";
 import { useEffect, useRef } from "react";
 import HomePage from "../src/Home";
 import cat from '../public/cat.gif';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 // import videoUrl from '../video/homePageVideo.mp4'
 
