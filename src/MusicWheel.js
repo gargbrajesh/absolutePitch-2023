@@ -25,7 +25,35 @@ import AutorenewIcon from "@mui/icons-material/Autorenew";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import "./style.module.css";
 
+
+const customStyles = {
+  
+  rows: {
+      style: {
+          minHeight: '35px', // override the row height
+         
+      },
+  },
+  
+  headCells: {
+      style: {
+          paddingLeft: '8px', // override the cell padding for head cells
+          paddingRight: '8px',
+          background:'#272d30',
+          color:'#fff',
+         fontSize:'14px',
+         height:'35px',
+      },
+  },
+  cells: {
+      style: {
+          paddingLeft: '8px', // override the cell padding for data cells
+          paddingRight: '8px',
+      },
+  },
+};
 function MusicWheel(props) {
+ 
   const classes = useStyles();
   var totalduraion = 0;
   const [nord, setNord] = useState({ c1: [], c2: [], c3: [] });
@@ -194,6 +222,8 @@ function MusicWheel(props) {
       name: "Title",
       selector: (row) => row.song_title,
       sortable: true,
+      keyField:true,
+      striped:true,
      
     },
     { name: "Composer", selector: (row) => row.composer, sortable: true, },
@@ -715,7 +745,7 @@ function MusicWheel(props) {
               </p>
               {/* </div> */}
             </Grid>
-            <Grid item xs={3} md={4} style={{ padding: "2px", cursor: "pointer",}}>
+            <Grid item xs={3} md={4} style={{ padding: "2px"}}>
               <p
                 style={{
                   background:'#E90D0D',
@@ -731,7 +761,7 @@ function MusicWheel(props) {
                     color:'#FFFFFF',
                     width: "100%",
                     border: "none",
-                   
+                   cursor:'pointer',
                   }}
                   onClick={() => {
                     ResetCounter();
@@ -758,7 +788,45 @@ function MusicWheel(props) {
       </div>
 
       <div className={classes.songScrolling}>
-        <marquee width="90%" direction="left" height="30%">
+      <Grid container spacing={2} className={classes.bottomBoxContainer}>
+
+      <Grid item xs={3} md={1}>
+          <p className={`${classes.bottomBox}`}
+              style={{
+                color: "#fff",
+                width: "30px",
+                background: "#333333",
+                textAlign: "center",
+              }}
+            >
+              {props.playSongposition}/{totalSongs}
+            </p>
+            
+        </Grid> 
+        <Grid item xs={3} md={11}>
+        <p 
+              style={{
+                
+                width: "100%",
+               fontSize:'12px',
+                textAlign: "center",
+                padding:'0px',
+              }}
+            >
+        {" Title_" +
+            props.songTitle +
+            " Note_" +
+            props.songNote +
+            " Composer_" +
+            props.composer +
+            " Duration_" +
+            props.duration +
+            " Img Count_" +
+            props.imageCount}
+            </p>
+        </Grid> 
+      </Grid>
+        {/* <marquee width="90%" direction="left" height="30%">
           {" Title_" +
             props.songTitle +
             " Note_" +
@@ -769,7 +837,7 @@ function MusicWheel(props) {
             props.duration +
             " Image Count_" +
             props.imageCount}
-        </marquee>
+        </marquee> */}
       </div>
       <div style={{ marginBottom: "30px" }}>
         {/* <Grid container spacing={2} className={classes.bottomBoxContainer}>
@@ -792,15 +860,15 @@ function MusicWheel(props) {
       </div>
       <div className={styles.songsWrapper}>
         <Paper elevation={3} className={classes.paperStyle}>
-          <div
+          {/* <div
             style={{
               height: "30px",
               borderRadius: "5%",
               alignItems: "center",
               display: "flex",
             }}
-          >
-            <p
+          > */}
+            {/* <p
               style={{
                 color: "#fff",
                 width: "70px",
@@ -810,9 +878,9 @@ function MusicWheel(props) {
             >
               {props.playSongposition}/{totalSongs}
             </p>
-            <p>Number Of Cue</p>
-          </div>
-          <hr />
+            <p>Number Of Cue</p> */}
+          {/* </div> */}
+          {/* <hr /> */}
           {/* <div> */}
           {/* <table className={classes.tableStyle} id={props.id}>
               <tr className={classes.trStyle}>
@@ -871,9 +939,12 @@ function MusicWheel(props) {
             data={songsData} 
             highlightOnHover
             fixedHeader
-            pagination />
+            keyField
+            className={classes.tableStyleNew}
+            customStyles={customStyles}
+            />
           ) : (
-            ""
+            "No Songs Found"
           )}
           {/* </div> */}
         </Paper>

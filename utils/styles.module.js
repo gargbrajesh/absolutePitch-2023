@@ -98,7 +98,7 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     listStyle: "none",
     overflow: "hidden",
-    // background: "#041e4e",
+    background: "#00BF55",
     // backgroundImage: `url('https://mylatinhome.com/image_play/Group%202.png')`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
@@ -108,7 +108,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    background: "#903884",
+    // background: "#00BF55 !important",
   },
 
   circle5: {
@@ -274,11 +274,11 @@ const useStyles = makeStyles({
     },
   },
   bottomBox: {
-    fontSize: "14px",
+    fontSize: "12px",
     // fontWeight: "500",
-    width: "96%",
+    width: "100%",
     padding: "5px",
-    height: "20px",
+    height: "15px",
     justifyContent: "center",
     alignContent: "center",
     display: "flex",
@@ -287,7 +287,7 @@ const useStyles = makeStyles({
     whiteSpace: "normal",
     verticalAlign: "middle",
     color: "#000",
-    transform: "rotate(-30deg) skew(25deg) tanslate(20px,-15px)",
+    // transform: "rotate(-30deg) skew(25deg) tanslate(20px,-15px)",
   },
   tempoBtnContainer: {
     position: "relative",
@@ -319,7 +319,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: "5px",
+    // marginBottom: "5px",
     padding: "0px 2px",
     width: "98% !important",
     marginLeft: "4px !important",
@@ -648,6 +648,12 @@ const useStyles = makeStyles({
     width: "100%",
     padding: "5px",
     textAlign: "center",
+    height:'98%'
+  },
+  tableStyleNew: {
+    width: "100%",
+    textAlign: "center",
+    height:'98%'
   },
   trStyle: {
     background: "black",
@@ -665,23 +671,23 @@ const useStyles = makeStyles({
     padding: "5px 10px 0px 10px",
     lineHeight: "30px",
     marginLeft: "2px",
-    height: "170px",
-    overflow: "scroll",
+    height: "150px",
+    // overflow: "scroll",
     "@media (min-width: 600px) and (max-width:768px)": {
       marginTop: "10px",
       width: "92%",
       padding: "5px 10px 0px 10px",
       lineHeight: "30px",
       marginLeft: "8px",
-      height: "100px",
-      overflow: "scroll",
+      height: "90px",
+      // overflow: "scroll",
     },
   },
   playerBtn: {
     cursor: "pointer",
     fontSize: "70px",
     position: "absolute",
-    color: "#fff",
+    color: "#00BF55",
     borderRadius: "5px",
     "&:hover": {
       color: "yellow",
