@@ -402,9 +402,9 @@ function MusicWheel(props) {
     return final_result;
   }
 
-  function refreshPage() {
-    window.location.reload(false);
-  }
+  // function refreshPage() {
+  //   window.location.reload(false);
+  // }
 
   function ResetCounter() {
     secondsToHms(totalduraion);
@@ -413,6 +413,7 @@ function MusicWheel(props) {
     var countDown = document.getElementById("duration");
 
     countDown.innerHTML = "00:00";
+    window.location.reload(false);
   }
 
   function rotationBtn(id, e) {
@@ -482,7 +483,7 @@ function MusicWheel(props) {
   return (
     <div className={classes.circleCard}>
       <Grid container spacing={2} className={classes.topButtonContainer}>
-        <Grid item xs={3} md={3}>
+        <Grid item xs={4} md={4}>
           <button
             className={`${
               imageTypeActive == "1" ? classes.activeKey : classes.topButtons
@@ -494,7 +495,7 @@ function MusicWheel(props) {
             A Ab B Bb
           </button>
         </Grid>
-        <Grid item xs={3} md={3}>
+        <Grid item xs={4} md={4}>
           <button
             className={`${
               imageTypeActive == "2" ? classes.activeKey : classes.topButtons
@@ -506,7 +507,7 @@ function MusicWheel(props) {
             <Image src={staff} alt="alt" height={22} />
           </button>
         </Grid>
-        <Grid item xs={3} md={3}>
+        <Grid item xs={4} md={4}>
           <button
             className={`${
               imageTypeActive == "3" ? classes.activeKey : classes.topButtons
@@ -518,12 +519,12 @@ function MusicWheel(props) {
             <Image
               src={keys}
               alt="alt"
-              height={40}
+              height={26}
               style={{ maxWidth: "100%", maxHeight: "100%" }}
             />
           </button>
         </Grid>
-        <Grid item xs={3} md={3}>
+        {/* <Grid item xs={3} md={3}>
           <button
             className={classes.resetButtons}
             onClick={(e) => {
@@ -532,7 +533,7 @@ function MusicWheel(props) {
           >
             Reset
           </button>
-        </Grid>
+        </Grid> */}
       </Grid>
       <div style={{ marginTop: "2%", marginBottom: "5%" }}>
         <Grid container spacing={1}>
@@ -714,21 +715,23 @@ function MusicWheel(props) {
               </p>
               {/* </div> */}
             </Grid>
-            <Grid item xs={3} md={4} style={{ padding: "2px" }}>
+            <Grid item xs={3} md={4} style={{ padding: "2px", cursor: "pointer",}}>
               <p
                 style={{
-                  background: "#fff",
+                  background:'#E90D0D',
                   padding: "2px",
                   borderRadius: "5px",
+                 
                 }}
               >
                 {" "}
                 <button
                   style={{
-                    background: "#fff",
+                    background:'#E90D0D',
+                    color:'#FFFFFF',
                     width: "100%",
                     border: "none",
-                    cursor: "pointer",
+                   
                   }}
                   onClick={() => {
                     ResetCounter();
