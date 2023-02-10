@@ -6,7 +6,7 @@ import Image from "next/image";
 import { getCookie, setCookie, deleteCookie } from "cookies-next";
 import staff from "../public/assets/images/staff.jpg";
 import keys from "../public/assets/images/keys.jpg";
-import playBtn from "../public/assets/images/playerBtn.jpg";
+import playBtn from "../public/assets/images/playerButton.jpg";
 import Duration from "../public/assets/images/Duration.png";
 import Mix from "../public/assets/images/Mix.png";
 import Tempo from "../public/assets/images/Tempo.png";
@@ -210,6 +210,7 @@ function MusicWheel(props) {
       "C",
     ],
   };
+  const customProps = { id: props.id };
   const nordMap = { "+": "M", "-": "m", "#": "b" };
   const soundData = [
     "https://mylatinhome.com/absolute/note-sound/A.wav",
@@ -806,22 +807,21 @@ function MusicWheel(props) {
         <Grid item xs={3} md={11}>
         <p 
               style={{
-                
                 width: "100%",
-               fontSize:'12px',
+               fontSize:'14px',
                 textAlign: "center",
                 padding:'0px',
               }}
             >
-        {" Title_" +
+        {
             props.songTitle +
-            " Note_" +
+            "   " +
             props.songNote +
-            " Composer_" +
+            "  " +
             props.composer +
-            " Duration_" +
+            "  " +
             props.duration +
-            " Img Count_" +
+            "  " +
             props.imageCount}
             </p>
         </Grid> 
@@ -934,7 +934,7 @@ function MusicWheel(props) {
             </table> */}
 
           {songsData && songsData.length > 0 ? (
-            <DataTable id={props.id}
+            <DataTable
             columns={columns} 
             data={songsData} 
             highlightOnHover
@@ -942,6 +942,7 @@ function MusicWheel(props) {
             keyField
             className={classes.tableStyleNew}
             customStyles={customStyles}
+            getProps={() => customProps}
             />
           ) : (
             "No Songs Found"
