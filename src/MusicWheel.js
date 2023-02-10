@@ -13,6 +13,10 @@ import Mix1 from "../public/assets/images/Mix 1st.png";
 import Mix2 from "../public/assets/images/Mix 2nd.png";
 import Mix3 from "../public/assets/images/Mix 3rd.png";
 import Tempo from "../public/assets/images/Tempo.png";
+import Tempo1 from "../public/assets/images/Tempo 1st.png";
+import Tempo2 from "../public/assets/images/Tempo 2nd.png";
+import Tempo3 from "../public/assets/images/Tempo 3rd.png";
+import Tempo4 from "../public/assets/images/Tempo 4th.png";
 import Intencity from "../public/assets/images/Intencity.png";
 import Intencity2 from "../public/assets/images/Intencity2.png";
 import Intencity3 from "../public/assets/images/Intencity3.png";
@@ -700,7 +704,20 @@ function MusicWheel(props) {
                 btnHandler("Tempo", e);
               }}
             >
-              <Image src={Tempo} alt="..." />
+             
+              {tempoIndex == 0 ? (
+                <Image src={Tempo} alt="..." />
+              ) : tempoIndex == 1 ? (
+                <Image src={Tempo1} alt="..." />
+              ) : tempoIndex == 2 ? (
+                <Image src={Tempo2} alt="..." />
+              ) : tempoIndex == 3 ? (
+                <Image src={Tempo3} alt="..." />
+              ) :tempoIndex == 4 ? (
+                <Image src={Tempo4} alt="..." />
+              ): (
+                <Image src={Tempo} alt="..." />
+              )}
             </button>
 
             <button
