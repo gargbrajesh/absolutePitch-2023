@@ -9,6 +9,9 @@ import keys from "../public/assets/images/keys.jpg";
 import playBtn from "../public/assets/images/playerButton.jpg";
 import Duration from "../public/assets/images/Duration.png";
 import Mix from "../public/assets/images/Mix.png";
+import Mix1 from "../public/assets/images/Mix 1st.png";
+import Mix2 from "../public/assets/images/Mix 2nd.png";
+import Mix3 from "../public/assets/images/Mix 3rd.png";
 import Tempo from "../public/assets/images/Tempo.png";
 import Intencity from "../public/assets/images/Intencity.png";
 import Intencity2 from "../public/assets/images/Intencity2.png";
@@ -25,35 +28,31 @@ import AutorenewIcon from "@mui/icons-material/Autorenew";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import "./style.module.css";
 
-
 const customStyles = {
-  
   rows: {
-      style: {
-          minHeight: '35px', // override the row height
-         
-      },
+    style: {
+      minHeight: "35px", // override the row height
+    },
   },
-  
+
   headCells: {
-      style: {
-          paddingLeft: '8px', // override the cell padding for head cells
-          paddingRight: '8px',
-          background:'#272d30',
-          color:'#fff',
-         fontSize:'14px',
-         height:'35px',
-      },
+    style: {
+      paddingLeft: "8px", // override the cell padding for head cells
+      paddingRight: "8px",
+      background: "#272d30",
+      color: "#fff",
+      fontSize: "14px",
+      height: "35px",
+    },
   },
   cells: {
-      style: {
-          paddingLeft: '8px', // override the cell padding for data cells
-          paddingRight: '8px',
-      },
+    style: {
+      paddingLeft: "8px", // override the cell padding for data cells
+      paddingRight: "8px",
+    },
   },
 };
 function MusicWheel(props) {
- 
   const classes = useStyles();
   var totalduraion = 0;
   const [nord, setNord] = useState({ c1: [], c2: [], c3: [] });
@@ -223,13 +222,12 @@ function MusicWheel(props) {
       name: "Title",
       selector: (row) => row.song_title,
       sortable: true,
-      keyField:true,
-      striped:true,
-     
+      keyField: true,
+      striped: true,
     },
-    { name: "Composer", selector: (row) => row.composer, sortable: true, },
-    { name: "Tempo", selector: (row) => row.tempo , sortable: true,},
-    { name: "Intensity", selector: (row) => row.intensity, sortable: true, },
+    { name: "Composer", selector: (row) => row.composer, sortable: true },
+    { name: "Tempo", selector: (row) => row.tempo, sortable: true },
+    { name: "Intensity", selector: (row) => row.intensity, sortable: true },
   ];
 
   function changeHandler(c, ind, event) {
@@ -577,11 +575,17 @@ function MusicWheel(props) {
                 btnHandler("Package", e);
               }}
             >
-              <Image
-                src={Mix}
-                alt="..."
-                style={{ width: "200px", height: "200px" }}
-              />
+              {packageDataIndex == 0 ? (
+                <Image src={Mix} alt="..." />
+              ) : packageDataIndex == 1 ? (
+                <Image src={Mix1} alt="..." />
+              ) : packageDataIndex == 2 ? (
+                <Image src={Mix2} alt="..." />
+              ) : packageDataIndex == 3 ? (
+                <Image src={Mix3} alt="..." />
+              ) : (
+                <Image src={Mix} alt="..." />
+              )}
             </button>
 
             <button
@@ -746,23 +750,22 @@ function MusicWheel(props) {
               </p>
               {/* </div> */}
             </Grid>
-            <Grid item xs={3} md={4} style={{ padding: "2px"}}>
+            <Grid item xs={3} md={4} style={{ padding: "2px" }}>
               <p
                 style={{
-                  background:'#E90D0D',
+                  background: "#E90D0D",
                   padding: "2px",
                   borderRadius: "5px",
-                 
                 }}
               >
                 {" "}
                 <button
                   style={{
-                    background:'#E90D0D',
-                    color:'#FFFFFF',
+                    background: "#E90D0D",
+                    color: "#FFFFFF",
                     width: "100%",
                     border: "none",
-                   cursor:'pointer',
+                    cursor: "pointer",
                   }}
                   onClick={() => {
                     ResetCounter();
@@ -789,10 +792,10 @@ function MusicWheel(props) {
       </div>
 
       <div className={classes.songScrolling}>
-      <Grid container spacing={2} className={classes.bottomBoxContainer}>
-
-      <Grid item xs={3} md={1}>
-          <p className={`${classes.bottomBox}`}
+        <Grid container spacing={2} className={classes.bottomBoxContainer}>
+          <Grid item xs={3} md={1}>
+            <p
+              className={`${classes.bottomBox}`}
               style={{
                 color: "#fff",
                 width: "30px",
@@ -802,30 +805,28 @@ function MusicWheel(props) {
             >
               {props.playSongposition}/{totalSongs}
             </p>
-            
-        </Grid> 
-        <Grid item xs={3} md={11}>
-        <p 
+          </Grid>
+          <Grid item xs={3} md={11}>
+            <p
               style={{
                 width: "100%",
-               fontSize:'14px',
+                fontSize: "14px",
                 textAlign: "center",
-                padding:'0px',
+                padding: "0px",
               }}
             >
-        {
-            props.songTitle +
-            "   " +
-            props.songNote +
-            "  " +
-            props.composer +
-            "  " +
-            props.duration +
-            "  " +
-            props.imageCount}
+              {props.songTitle +
+                "   " +
+                props.songNote +
+                "  " +
+                props.composer +
+                "  " +
+                props.duration +
+                "  " +
+                props.imageCount}
             </p>
-        </Grid> 
-      </Grid>
+          </Grid>
+        </Grid>
         {/* <marquee width="90%" direction="left" height="30%">
           {" Title_" +
             props.songTitle +
@@ -868,7 +869,7 @@ function MusicWheel(props) {
               display: "flex",
             }}
           > */}
-            {/* <p
+          {/* <p
               style={{
                 color: "#fff",
                 width: "70px",
@@ -935,14 +936,14 @@ function MusicWheel(props) {
 
           {songsData && songsData.length > 0 ? (
             <DataTable
-            columns={columns} 
-            data={songsData} 
-            highlightOnHover
-            fixedHeader
-            keyField
-            className={classes.tableStyleNew}
-            customStyles={customStyles}
-            getProps={() => customProps}
+              columns={columns}
+              data={songsData}
+              highlightOnHover
+              fixedHeader
+              keyField
+              className={classes.tableStyleNew}
+              customStyles={customStyles}
+              getProps={() => customProps}
             />
           ) : (
             "No Songs Found"
