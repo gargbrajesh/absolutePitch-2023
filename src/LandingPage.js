@@ -86,13 +86,13 @@ function LandingPage() {
     setImageCount(songsData[ind].no_of_images);
     setDuration(songsData[ind].duration);
     setPlaySongposition(++ind);
-    const getNextSong = document.getElementById("childid").children[ind];
-     getNextSong.scrollIntoView();
+    // const getNextSong = document.getElementById("childid").children[ind];
+    //  getNextSong.scrollIntoView(); 
+     
   }
 
   function totleTimeAndImage(data,index)
   {
-
     setImageCountLast(data[index].no_of_images);
     setAllImageCount(parseInt(imageCountLast) + parseInt(data[index].no_of_images));
     setDurationLast(data[index].duration);
