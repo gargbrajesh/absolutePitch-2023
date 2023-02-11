@@ -47,12 +47,15 @@ const customStyles = {
       color: "#fff",
       fontSize: "14px",
       height: "35px",
+      textAlign:'center',
+      
     },
   },
   cells: {
     style: {
       paddingLeft: "8px", // override the cell padding for data cells
       paddingRight: "8px",
+      textAlign:'center',
     },
   },
 };
@@ -228,10 +231,12 @@ function MusicWheel(props) {
       sortable: true,
       keyField: true,
       striped: true,
+      width: '220px',
+      
     },
     { name: "Composer", selector: (row) => row.composer, sortable: true },
     { name: "Tempo", selector: (row) => row.tempo, sortable: true },
-    { name: "Intensity", selector: (row) => row.intensity, sortable: true },
+    { name: "Intensity", selector: (row) => row.intensity, sortable: true ,width: '90px',},
   ];
 
   function changeHandler(c, ind, event) {
@@ -443,12 +448,16 @@ function MusicWheel(props) {
     secondsToHms(totalduraion);
     props.setAllImageCount(0);
 
-    var countDown = document.getElementById("duration");
+    // var countDown = document.getElementById("duration");
 
     countDown.innerHTML = "00:00";
-    window.location.reload(false);
+    // window.location.reload(false);
   }
+function rowClick(){
+let node = document.getElementsByTagName(DataTable);
 
+alert(node[5]);
+}
   function rotationBtn(id, e) {
     var rote = 100;
 
@@ -952,15 +961,14 @@ function MusicWheel(props) {
             </table> */}
 
           {songsData && songsData.length > 0 ? (
-            <DataTable
+            <DataTable id = 'data'
               columns={columns}
               data={songsData}
               highlightOnHover
               fixedHeader
-              keyField
               className={classes.tableStyleNew}
               customStyles={customStyles}
-              getProps={() => customProps}
+              onRowClicked={rowClick}
             />
           ) : (
             "No Songs Found"
