@@ -32,9 +32,9 @@ const useStyles = makeStyles({
       margin: "15px 15px 15px 28px !important",
       height: "40vh",
     },
-    "@media (max-width:375px)": {
-      margin: "15px 15px 15px 28px !important",
-      height: "40vh",
+    "@media (max-width:700px)": {
+      margin: "10px 15px 15px 28px !important",
+      height: "25vh",
     },
   },
 });

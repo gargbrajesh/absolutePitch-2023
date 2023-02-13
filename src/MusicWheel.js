@@ -47,18 +47,40 @@ const customStyles = {
       color: "#fff",
       fontSize: "14px",
       height: "35px",
-      textAlign:'center',
-      
+      textAlign: "center",
     },
   },
+  when: (row) => row.includes(p.mp4),
+    style: {
+      backgroundColor: 'green',
+      color: 'white',
+      '&:hover': {
+        cursor: 'pointer',
+      },
+    },
   cells: {
     style: {
       paddingLeft: "8px", // override the cell padding for data cells
       paddingRight: "8px",
-      textAlign:'center',
+      textAlign: "center",
     },
   },
 };
+
+const conditionalRowStyles = [
+  {
+    when: row => row.song_name.includes("_P."),
+    style: {
+      backgroundColor: 'gray',
+      color: 'black',
+      '&$hover:hover': {
+        backgroundColor: 'green !important',
+        cursor: 'pointer',
+              },
+    },
+  },
+  // You can also pass a callback to style for additional customization
+];
 function MusicWheel(props) {
   const classes = useStyles();
   var totalduraion = 0;
@@ -223,6 +245,32 @@ function MusicWheel(props) {
     "https://mylatinhome.com/absolute/note-sound/Am.wav",
     "https://mylatinhome.com/absolute/note-sound/Ab.wav",
   ];
+
+
+  const getClassNamesFor = (id) => {
+    if (!sortConfig) {
+      return;
+    }
+    return sortConfig.key === id ? sortConfig.direction : undefined;
+  };
+
+
+  const requestSort = (key) => {
+    console.log("*** requestSort", key, sortConfig);
+    let direction = "ascending";
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === "ascending"
+    ) {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
+
+
+
+  
   // let lastInd = -1;
   const columns = [
     {
@@ -231,12 +279,22 @@ function MusicWheel(props) {
       sortable: true,
       keyField: true,
       striped: true,
-      width: '220px',
-      
+      width: "180px",
     },
     { name: "Composer", selector: (row) => row.composer, sortable: true },
     { name: "Tempo", selector: (row) => row.tempo, sortable: true },
-    { name: "Intensity", selector: (row) => row.intensity, sortable: true ,width: '90px',},
+    {
+      name: "Intensity",
+      selector: (row) => row.intensity,
+      sortable: true,
+      width: "90px",
+    },
+    {
+      name: "Note",
+      selector: (row) => row.note_or_cord,
+      sortable: true,
+      width: "70px",
+    },
   ];
 
   function changeHandler(c, ind, event) {
@@ -453,11 +511,11 @@ function MusicWheel(props) {
     countDown.innerHTML = "00:00";
     // window.location.reload(false);
   }
-function rowClick(){
-let node = document.getElementsByTagName(DataTable);
+  function rowClick() {
+    let node = document.getElementsByTagName(DataTable);
 
-alert(node[5]);
-}
+    alert(node[5]);
+  }
   function rotationBtn(id, e) {
     var rote = 100;
 
@@ -522,61 +580,76 @@ alert(node[5]);
     secondsToHms(totalduraion);
   }, 1000);
 
+
+  // const TABLE_HEADERS = [
+  //   { name: "ID Number", id: "userNumber" },
+  //   { name: "User Type", id: "userType" },
+  //   { name: "User Category", id: "errorId" },
+  //   { name: "User Interest", id: "errorCategory" }
+  // ];
+
   return (
     <div className={classes.circleCard}>
-      <Grid container spacing={2} className={classes.topButtonContainer}>
-        <Grid item xs={4} md={4}>
-          <button
-            className={`${
-              imageTypeActive == "1" ? classes.activeKey : classes.topButtons
-            }`}
-            onClick={(e) => {
-              btnHandler("Letter", e, 1);
-            }}
-          >
-            A Ab B Bb
-          </button>
+      <div className={classes.resetBtn}>
+      <Grid container spacing={1} style={{ marginTop:'15px' ,border:'none'}}>
+            <Grid item xs={3} md={4}>
+            <button
+              className={`${
+                imageTypeActive == "1" ? classes.activeKey : classes.topButtons
+              }`}
+              onClick={(e) => {
+                btnHandler("Letter", e, 1);
+              }}
+              style={{
+                background: "#fff",
+                padding: "8px",
+                borderRadius: "5px",
+              }}
+            >
+              A Ab B Bb
+            </button>
+          </Grid>
+          <Grid item xs={4} md={4}>
+            <button
+              className={`${
+                imageTypeActive == "2" ? classes.activeKey : classes.topButtons
+              }`}
+              onClick={(e) => {
+                btnHandler("Staff", e, 2);
+              }}
+              style={{
+                borderRadius: "5px",
+                width:'100%',
+                height:'30px',
+              }}
+            >
+              <Image src={staff} alt="alt"  height='24px' style={{marginTop:'-2px'}} />
+            </button>
+          </Grid>
+          <Grid item xs={4} md={4}>
+            <button
+              className={`${
+                imageTypeActive == "3" ? classes.activeKey : classes.topButtons
+              }`}
+              onClick={(e) => {
+                btnHandler("Keys", e, 3);
+              }}
+              style={{
+                borderRadius: "5px",
+                width:'100%',
+                height:'30px',
+              }}
+            >
+              <Image
+                src={keys}
+                alt="alt"
+                height='40px' 
+                style={{ maxWidth: "100%",}}
+              />
+            </button>
+          </Grid>
         </Grid>
-        <Grid item xs={4} md={4}>
-          <button
-            className={`${
-              imageTypeActive == "2" ? classes.activeKey : classes.topButtons
-            }`}
-            onClick={(e) => {
-              btnHandler("Staff", e, 2);
-            }}
-          >
-            <Image src={staff} alt="alt" height={22} />
-          </button>
-        </Grid>
-        <Grid item xs={4} md={4}>
-          <button
-            className={`${
-              imageTypeActive == "3" ? classes.activeKey : classes.topButtons
-            }`}
-            onClick={(e) => {
-              btnHandler("Keys", e, 3);
-            }}
-          >
-            <Image
-              src={keys}
-              alt="alt"
-              height={26}
-              style={{ maxWidth: "100%", maxHeight: "100%" }}
-            />
-          </button>
-        </Grid>
-        {/* <Grid item xs={3} md={3}>
-          <button
-            className={classes.resetButtons}
-            onClick={(e) => {
-              refreshPage();
-            }}
-          >
-            Reset
-          </button>
-        </Grid> */}
-      </Grid>
+      </div>
       <div style={{ marginTop: "2%", marginBottom: "5%" }}>
         <Grid container spacing={1}>
           <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
@@ -713,7 +786,6 @@ alert(node[5]);
                 btnHandler("Tempo", e);
               }}
             >
-             
               {tempoIndex == 0 ? (
                 <Image src={Tempo} alt="..." />
               ) : tempoIndex == 1 ? (
@@ -722,9 +794,9 @@ alert(node[5]);
                 <Image src={Tempo2} alt="..." />
               ) : tempoIndex == 3 ? (
                 <Image src={Tempo3} alt="..." />
-              ) :tempoIndex == 4 ? (
+              ) : tempoIndex == 4 ? (
                 <Image src={Tempo4} alt="..." />
-              ): (
+              ) : (
                 <Image src={Tempo} alt="..." />
               )}
             </button>
@@ -819,7 +891,7 @@ alert(node[5]);
 
       <div className={classes.songScrolling}>
         <Grid container spacing={2} className={classes.bottomBoxContainer}>
-          <Grid item xs={3} md={1}>
+          <Grid item xs={2} md={1}>
             <p
               className={`${classes.bottomBox}`}
               style={{
@@ -832,7 +904,7 @@ alert(node[5]);
               {props.playSongposition}/{totalSongs}
             </p>
           </Grid>
-          <Grid item xs={3} md={11}>
+          <Grid item xs={10} md={11}>
             <p
               style={{
                 width: "100%",
@@ -961,14 +1033,15 @@ alert(node[5]);
             </table> */}
 
           {songsData && songsData.length > 0 ? (
-            <DataTable id = 'data'
+            <DataTable
+              id="data"
               columns={columns}
               data={songsData}
-              highlightOnHover
               fixedHeader
               className={classes.tableStyleNew}
               customStyles={customStyles}
               onRowClicked={rowClick}
+              conditionalRowStyles={conditionalRowStyles}
             />
           ) : (
             "No Songs Found"

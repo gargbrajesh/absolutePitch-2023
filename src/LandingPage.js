@@ -21,8 +21,8 @@ const useStyles = makeStyles({
     "@media (min-width: 380px) and (max-width:425px)": {
       height: "125vh",
     },
-    "@media (max-width:375px)": {
-      height: "125vh",
+    "@media (max-width:700px)": {
+      height: "128vh",
     },
   },
   leftSection: {

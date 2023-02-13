@@ -12,6 +12,10 @@ const useStyles = makeStyles({
     minHeight: "85vh",
     marginTop: "2%",
     marginBottom: "2%",
+    "@media (max-width:700px)": {
+      marginTop: "3%",
+      
+    }
   },
 
   mainCircle: {
@@ -220,12 +224,11 @@ const useStyles = makeStyles({
     display: "flex",
   },
   topButtons: {
-    fontSize: "16px",
+    fontSize: "13px",
     fontWeight: "500",
-    width: "90%",
-    padding: "2px",
+    width: "100%",
     cursor: "pointer",
-    padding: "10px",
+    border:'none',
     justifyContent: "center",
     alignContent: "center",
     display: "flex",
@@ -308,7 +311,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     marginBottom: "10px",
     padding: "10px 15px",
-    width: "98%",
+    width: "100%",
     marginLeft: "5px",
     marginBottom: "3%",
     "@media (min-width: 1280px) and (max-width:1680px)": {
@@ -642,6 +645,11 @@ const useStyles = makeStyles({
       // marginTop: "5% !important",
       fontSize: "14px",
     },
+    "@media (max-width:700px)": {
+      // marginTop: "5% !important",
+      fontSize: "14px",
+      padding: "5px",
+    },
   },
   tableStyle: {
     //  border :'1px solid black',
@@ -671,7 +679,7 @@ const useStyles = makeStyles({
     padding: "5px 10px 0px 10px",
     lineHeight: "30px",
     marginLeft: "2px",
-    height: "150px",
+    height: "190px",
     // overflow: "scroll",
     "@media (min-width: 600px) and (max-width:768px)": {
       marginTop: "10px",
@@ -679,7 +687,16 @@ const useStyles = makeStyles({
       padding: "5px 10px 0px 10px",
       lineHeight: "30px",
       marginLeft: "8px",
-      height: "90px",
+      height: "180px",
+      // overflow: "scroll",
+    },
+    "@media (min-width: 780px) and (max-width:1200px)": {
+      marginTop: "10px",
+      width: "92%",
+      padding: "5px 10px 0px 10px",
+      lineHeight: "30px",
+      marginLeft: "8px",
+      height: "240px",
       // overflow: "scroll",
     },
   },
