@@ -282,7 +282,7 @@ function MusicWheel(props) {
       width: "180px",
     },
     { name: "Composer", selector: (row) => row.composer, sortable: true },
-    { name: "Tempo", selector: (row) => row.tempo, sortable: true },
+    { name: "Tempo", selector: (row) => row.tempo, sortable: true,width: "76px", },
     {
       name: "Intensity",
       selector: (row) => row.intensity,

@@ -458,6 +458,7 @@ li:nth-child(12) .text {
   
   .animation, .animation_layer {
     height: 1000px;
+    background-repeat: repeat-y;
   }
   
   .animation {
@@ -468,7 +469,7 @@ li:nth-child(12) .text {
   
   .animation_layer {
     background-position: bottom center;
-    background-size: auto 1050px;
+    background-size: auto 2050px;
     background-repeat: repeat-y;
     /* background-repeat:no-repeat; */
     width: 100%;
@@ -480,6 +481,10 @@ li:nth-child(12) .text {
   
   #artback {
     background-image: url(../public/HomePageBg.png);
+    max-width: 100%;
+    object-fit: cover;
+   ;
+    
     
   }
   

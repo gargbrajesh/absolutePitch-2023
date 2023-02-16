@@ -234,9 +234,9 @@ const useStyles = makeStyles({
     display: "flex",
     background: "#fff",
     "&:hover": {
-      border: "2px solid lightblue",
+      // border: "2px solid lightblue",
       transform: `rotate(-30deg) skew(25deg) tanslate(20px,-15px)`,
-      boxShadow: "-10px 10px 10px gray",
+      boxShadow: "-5px 5px 5px gray",
     },
   },
   resetButtons: {
