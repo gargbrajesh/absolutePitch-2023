@@ -85,21 +85,21 @@ function LandingPage() {
     setSongName(songsData[ind].song_name);
     setImageCount(songsData[ind].no_of_images);
     setPlaySongposition(++ind);
-    // secondsToHms(songsData[ind].duration)
+    secondsToHms(songsData[ind].duration)
     // const getNextSong = document.getElementById("childid").children[ind];
     //  getNextSong.scrollIntoView(); 
      
   }
-  // function secondsToHms(Seconds) {
-  //   let d = Number(Seconds);
-  //   var m = Math.floor((d % 3600) / 60);
-  //   var s = Math.floor((d % 3600) % 60);
+  function secondsToHms(Seconds) {
+    let d = Number(Seconds);
+    var m = Math.floor((d % 3600) / 60);
+    var s = Math.floor((d % 3600) % 60);
 
-  //   var mDisplay = m > 0 ? m : "00";
-  //   var sDisplay = s > 0 ? s : "00";
-  //   let time = m + ":" + s;
-  //   setDuration(time)
-  // }
+    var mDisplay = m > 0 ? m : "00";
+    var sDisplay = s > 0 ? s : "00";
+    let time = m + ":" + s;
+    setDuration(time)
+  }
   function totleTimeAndImage(data,index)
   {
     setImageCountLast(data[index].no_of_images);
