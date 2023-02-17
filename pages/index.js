@@ -6,7 +6,7 @@ import LandingPage from "../src/LandingPage";
 import { useEffect, useRef } from "react";
 import HomePage from "../src/Home";
 import cat from "../public/cat.gif";
-import Walking from "../public/ABSOLUTE_ASSETS/Walking.gif";
+// import Walking from "../public/ABSOLUTE_ASSETS/Walking.gif";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 // import videoUrl from '../video/homePageVideo.mp4'
@@ -34,9 +34,9 @@ export default function Home() {
           <ParallaxLayer offset={0} speed={1} factor={2}>
             <div className="animation_layer parallax" id="artback"></div>
 
-            <video width="100%" height="100%" preload="auto">
+            {/* <video width="100%" height="100%" preload="auto">
               <source src="https://pixabay.com/videos/christmas-christmas-decorations-141964/" type="video/mp4" />
-            </video>
+            </video> */}
 
           </ParallaxLayer>
 
@@ -47,15 +47,12 @@ export default function Home() {
             style={{ marginTop: "-140px" }}
           >
             <div className="animation_layer parallax" id="artback"></div>
-            {/* <div>
-              <LandingPage />
-            </div> */}
           </ParallaxLayer>
           <ParallaxLayer
             sticky={{ start: 0.5, end: 3.5 }}
             style={{ textAlign: "center" }}
           >
-            <Image src={Walking} alt=".."  height={60} width={60}/>
+            <Image src={cat} alt=".."  height={60} width={60}/>
           </ParallaxLayer>
         </Parallax>
       )}

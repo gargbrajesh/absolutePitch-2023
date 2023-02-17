@@ -84,18 +84,14 @@ function LandingPage() {
     setSongNote(songsData[ind].note_or_cord);
     setSongName(songsData[ind].song_name);
     setImageCount(songsData[ind].no_of_images);
-    // setDuration(songsData[ind].duration);
     setPlaySongposition(++ind);
     secondsToHms(songsData[ind].duration)
     // const getNextSong = document.getElementById("childid").children[ind];
     //  getNextSong.scrollIntoView(); 
      
   }
-
-
   function secondsToHms(Seconds) {
     let d = Number(Seconds);
-    console.log(Seconds, "...Secondss");
     var m = Math.floor((d % 3600) / 60);
     var s = Math.floor((d % 3600) % 60);
 

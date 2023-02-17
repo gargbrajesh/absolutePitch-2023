@@ -282,6 +282,12 @@ function MusicWheel(props) {
       width: "180px",
     },
     { name: "Composer", selector: (row) => row.composer, sortable: true },
+    {
+      name: "Note",
+      selector: (row) => row.note_or_cord,
+      sortable: true,
+      width: "70px",
+    },
     { name: "Tempo", selector: (row) => row.tempo, sortable: true,width: "76px", },
     {
       name: "Intensity",
@@ -289,12 +295,7 @@ function MusicWheel(props) {
       sortable: true,
       width: "90px",
     },
-    {
-      name: "Note",
-      selector: (row) => row.note_or_cord,
-      sortable: true,
-      width: "70px",
-    },
+   
   ];
 
   function changeHandler(c, ind, event) {
