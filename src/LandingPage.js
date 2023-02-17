@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     },
   },
   leftSection: {
-    // background: 'rgb(63, 70, 82)',
+    
     justifyContent: "center !important",
     color: "white",
     display: "flex",
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     width: "100%",
   },
   rightSection: {
-    // background: 'rgb(63, 70, 82)',
+    
     justifyContent: "center",
     color: "white",
     display: "flex",
