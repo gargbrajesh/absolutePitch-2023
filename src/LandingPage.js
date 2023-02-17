@@ -75,7 +75,6 @@ function LandingPage() {
   const [playSongposition, setPlaySongposition] = useState(0);
 
   function handleSong(songsData, ind) {
-
     setData(songsData);
     setIndex(ind);
 

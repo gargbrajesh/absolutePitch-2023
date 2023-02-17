@@ -79,7 +79,7 @@ const conditionalRowStyles = [
               },
     },
   },
-  // You can also pass a callback to style for additional customization
+  
 ];
 function MusicWheel(props) {
   const classes = useStyles();
