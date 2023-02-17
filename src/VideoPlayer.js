@@ -69,8 +69,6 @@ function VideoPlayer(prop) {
               onEnded={playNextSong}
             />
 
-            // <ShakaPlayer autoPlay src={music}   width="100%"
-            // height="95%" />
           ) : (
             <ReactPlayer
               controls
